@@ -98,6 +98,7 @@ const Header = () => {
         </CardMedia>
         {mainMenuItems.map((it) => (
           <Accordion
+            expanded="true"
             sx={{
               bgcolor: "#0277BD",
               color: "white",
