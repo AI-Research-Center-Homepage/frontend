@@ -1,28 +1,30 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SubHeader from "../components/SubHeader";
-// import { Grid, Box, Button, Typography } from "@mui/material";
-
-
-
-
 
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-// import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Zoom from '@mui/material/Zoom';
-import Fab from '@mui/material/Fab';
+
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Zoom,
+  Fab,
+  Box
+} from "@mui/material";
+
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+import { useTheme } from '@mui/material/styles';
 import { green } from '@mui/material/colors';
-import Box from '@mui/material/Box';
+
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -122,6 +124,7 @@ export default function FloatingActionButtonZoom() {
         width: 'auto',
         position: 'relative',
         minHeight: 200,
+        
       }}
     >
       <AppBar position="static" color="default">
@@ -147,22 +150,22 @@ export default function FloatingActionButtonZoom() {
         onChangeIndex={handleChangeIndex}
       > */}
         <TabPanel value={value} index={0} dir={theme.direction}>
-          CVPR 2022(컴퓨터 비전과 패턴인식 학회) 
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
           ICLR 2022 (표현 학습 국제학회)
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={1} dir={theme.direction}>
           CVPR 2022(컴퓨터 비전과 패턴인식 학회)
         </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          VLDB 2022 (거대 데이터 베이스 컨퍼런스)
+        </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          언어음성 내용
+          EMNLP 2021 (자연어처리에서의 경험적 방법론 학회)
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          로봇 내용
+          ICRA 2021 (IEEE 로봇과 자동화 국제대회)
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          플랫폼 내용
+          FAST 2021 (USENIX 파일저장기술학회)
         </TabPanel>
       {/* </SwipeableViews> */}
       {fabs.map((fab, index) => (
