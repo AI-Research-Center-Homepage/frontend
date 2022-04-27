@@ -119,7 +119,7 @@ export default function FloatingActionButtonZoom() {
     <Box
       sx={{
         bgcolor: 'background.paper',
-        width: 500,
+        width: 'auto',
         position: 'relative',
         minHeight: 200,
       }}
@@ -136,6 +136,9 @@ export default function FloatingActionButtonZoom() {
           <Tab label="머신러닝" {...a11yProps(0)} />
           <Tab label="컴퓨터 비전" {...a11yProps(1)} />
           <Tab label="데이터 지능" {...a11yProps(2)} />
+          <Tab label="언어.음성" {...a11yProps(3)} />
+          <Tab label="로봇" {...a11yProps(4)} />
+          <Tab label="플랫폼" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       {/* <SwipeableViews
@@ -151,6 +154,15 @@ export default function FloatingActionButtonZoom() {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           CVPR 2022(컴퓨터 비전과 패턴인식 학회)
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          언어음성 내용
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
+          로봇 내용
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+          플랫폼 내용
         </TabPanel>
       {/* </SwipeableViews> */}
       {fabs.map((fab, index) => (
