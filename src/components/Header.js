@@ -67,6 +67,12 @@ const Header = () => {
 
   const [collapseMenuOpen, setCollapseMenuOpen] = useState(false);
 
+  const [expandedSideMenu, setExpandedSideMenu] = useState("panel2");
+
+  const handleExpanded = (isExpanded, panel) => {
+    setExpandedSideMenu(isExpanded ? panel : false);
+  };
+
   const navigate = useNavigate();
 
   const isShowMainMenu = () => {
@@ -98,21 +104,34 @@ const Header = () => {
         </CardMedia>
         {mainMenuItems.map((it) => (
           <Accordion
-            expanded="true"
+            key={it.id}
+            /* 이것만 추가하면 collapse, expand가 안됨...*/
+            // expanded={expandedSideMenu === `panel${it.id}`}
+            // onChange={(event, isExpanded) =>
+            //   handleExpanded(isExpanded, `panel${it.id}`)
+            // }
+            disableGutters
+            square
             sx={{
               bgcolor: "#0277BD",
               color: "white",
             }}
           >
             <AccordionSummary
-              aria-controls={`content${it.title}`}
-              id={`content${it.title}-header`}
+              id={`panel${it.id}-header`}
+              aria-controls={`panel${it.id}-content`}
+              key={it.id}
             >
               <Typography variant="subtitle1">{it.title}</Typography>
             </AccordionSummary>
             {it.contents.map((content) => (
               <AccordionDetails
-                sx={{ bgcolor: "white", color: "black", pb: "8px" }}
+                key={it.id}
+                sx={{
+                  bgcolor: "white",
+                  color: "black",
+                  pb: "8px",
+                }}
               >
                 <Button
                   variant="text"
