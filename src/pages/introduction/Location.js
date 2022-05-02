@@ -5,6 +5,7 @@ import {
   Divider,
   createTheme,
   ThemeProvider,
+  Slide,
 } from "@mui/material";
 
 import Footer from "../../components/Footer";
@@ -16,7 +17,7 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 import EmailIcon from "@mui/icons-material/Email";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const customTheme = createTheme({
   components: {
@@ -41,7 +42,23 @@ const customTheme = createTheme({
 
 const Location = () => {
   // Kakao Map API 사용부분
+  const containerRef = useRef(null);
+
+  const [titleAppear, setTitleAppear] = useState(false);
+  const [contentAppear, setContentAppear] = useState(false);
+
+  const listener = (e) => {
+    if (window.scrollY > 200) {
+      setTitleAppear(true);
+    }
+    if (window.scrollY > 400) {
+      setContentAppear(true);
+    }
+  };
+
   useEffect(() => {
+    window.addEventListener("scroll", listener);
+
     let container = document.getElementById("map");
 
     let options = {
@@ -65,6 +82,10 @@ const Location = () => {
 
     marker.setMap(map);
     map.setCenter(markerPosition);
+
+    return () => {
+      window.removeEventListener("scroll", listener);
+    };
   }, []);
 
   return (
@@ -98,88 +119,109 @@ const Location = () => {
       >
         <div
           id="map"
-          style={{ width: "60%", height: "400px", marginBottom: "2%" }}
+          style={{
+            width: "60%",
+            height: "400px",
+            marginBottom: "2%",
+            borderRadius: "30px",
+          }}
         ></div>
       </div>
 
       {/* 상세 주소, 오시는 길 제목 */}
-      <Container
-        sx={{
-          width: "50%",
-          display: "flex",
-          justifyContent: "space-between",
-          my: "2%",
-        }}
-      >
-        <Box sx={{ display: "flex" }}>
-          <HomeIcon />
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: "bold", pl: "3px" }}
+      <div ref={containerRef} style={{ overflow: "hidden" }}>
+        <Slide in={titleAppear} timeout={1000} container={containerRef.current}>
+          <Container
+            sx={{
+              width: "50%",
+              display: "flex",
+              justifyContent: "space-between",
+              my: "2%",
+            }}
           >
-            주소
-          </Typography>
-        </Box>
-        <Divider orientation="vertical" flexItem />
-        <Box sx={{ display: "flex" }}>
-          <AddLocationIcon />
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: "bold", pl: "3px" }}
-          >
-            오시는 길
-          </Typography>
-        </Box>
-      </Container>
+            <Box sx={{ display: "flex" }}>
+              <HomeIcon />
+              <Typography
+                variant="subtitle1"
+                sx={{ fontWeight: "bold", pl: "3px" }}
+              >
+                주소
+              </Typography>
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <Box sx={{ display: "flex" }}>
+              <AddLocationIcon />
+              <Typography
+                variant="subtitle1"
+                sx={{ fontWeight: "bold", pl: "3px" }}
+              >
+                오시는 길
+              </Typography>
+            </Box>
+          </Container>
+        </Slide>
+      </div>
 
       {/* 상세 주소, 오시는 길 상세내용 */}
       <ThemeProvider theme={customTheme}>
-        <Container sx={{ display: "flex", width: "80%", mb: "5%" }}>
-          <Box
-            sx={{
-              width: "50%",
-              p: "3%",
-              color: "text.secondary",
-              borderTop: "0.3px solid",
-              borderBottom: "0.3px solid",
-            }}
-          >
-            <Typography>
-              <b>전북 전주시 덕진구 백제대로 567, 전북대학교 공과대학 7호관</b>
-            </Typography>
-            <Typography>&nbsp;</Typography>
-            <Typography>
-              <ul>
-                <li>교수실: 612호</li>
-                <li>행정실: 201호</li>
-                <li>학생연구실: 602호, 603호, 503호</li>
-              </ul>
-            </Typography>
-          </Box>
+        <Container
+          sx={{
+            display: "flex",
+            width: "80%",
+            mb: "5%",
+          }}
+        >
+          <Slide in={contentAppear} direction="right" timeout={1500}>
+            <Box
+              sx={{
+                width: "50%",
+                p: "3%",
+                color: "text.secondary",
+                borderTop: "0.3px solid",
+                borderBottom: "0.3px solid",
+              }}
+            >
+              <Typography>
+                <b>
+                  전북 전주시 덕진구 백제대로 567, 전북대학교 공과대학 7호관
+                </b>
+              </Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography>
+                <ul>
+                  <li>교수실: 612호</li>
+                  <li>행정실: 201호</li>
+                  <li>학생연구실: 602호, 603호, 503호</li>
+                </ul>
+              </Typography>
+            </Box>
+          </Slide>
 
-          <Box
-            sx={{
-              width: "50%",
-              p: "3%",
-              color: "text.secondary",
-              borderTop: "0.3px solid",
-              borderBottom: "0.3px solid",
-            }}
-          >
-            <Typography>
-              전북대학교 AI연구실은 <b>전북대학교 공과대학 7호관</b>에 위치하고
-              있습니다. 인근에는 글로벌인재관, 사범대학부설고등학교,
-              공과대학6호관 등이 위치하고 있습니다.
-            </Typography>
-            <Typography>&nbsp;</Typography>
-            <Typography>
-              버스 이용시 '전북대국제교류어학원'에서 하차하시면 됩니다.
-            </Typography>
-            <Typography>&nbsp;</Typography>
-            <Typography>
-              자가용 이용시 7호관 앞에 주차장이 마련되어 있습니다.
-            </Typography>
-          </Box>
+          <Slide in={contentAppear} direction="left" timeout={1500}>
+            <Box
+              sx={{
+                width: "50%",
+                p: "3%",
+                color: "text.secondary",
+                borderTop: "0.3px solid",
+                borderBottom: "0.3px solid",
+              }}
+            >
+              <Typography>
+                전북대학교 AI연구실은 <b>전북대학교 공과대학 7호관</b>에
+                위치하고 있습니다. 인근에는 글로벌인재관, 사범대학부설고등학교,
+                공과대학6호관 등이 위치하고 있습니다.
+              </Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography>
+                버스 이용시 '전북대국제교류어학원'에서 하차하시면 됩니다.
+              </Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography>
+                자가용 이용시 7호관 앞에 주차장이 마련되어 있습니다.
+              </Typography>
+            </Box>
+          </Slide>
         </Container>
       </ThemeProvider>
 
