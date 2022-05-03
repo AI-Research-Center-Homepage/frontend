@@ -42,24 +42,35 @@ const customTheme = createTheme({
 
 const Location = () => {
   const containerRef = useRef(null);
-  
+
   //스크롤의 위치에 따라 컴포넌트가 보이게 하기위해 사용한 state
   const [titleAppear, setTitleAppear] = useState(false);
   const [contentAppear, setContentAppear] = useState(false);
 
-  //스크롤의 위치가 특정 y값을 넘으면 해당되는 component를 나타나게 함
+  //스크롤의 위치를 비율로 구하여 스크롤이 특정 비율을 넘으면 컴포넌트 나타남/사라짐
   const listener = (e) => {
-    if (window.scrollY > 200) {
+    let scrollTop = window.scrollY;
+    let docHeight = document.body.offsetHeight;
+    let winHeight = window.innerHeight;
+    let scrollPercent = scrollTop / (docHeight - winHeight);
+    let scrollPercentRounded = Math.round(scrollPercent * 100);
+
+    if (scrollPercentRounded > 25) {
       setTitleAppear(true);
+    } else {
+      setTitleAppear(false);
     }
-    if (window.scrollY > 400) {
+
+    if (scrollPercentRounded > 40) {
       setContentAppear(true);
+    } else {
+      setContentAppear(false);
     }
   };
-  
+
   useEffect(() => {
     window.addEventListener("scroll", listener);
-    
+
     // Kakao Map API 사용부분
     let container = document.getElementById("map");
 
@@ -132,7 +143,7 @@ const Location = () => {
 
       {/* 상세 주소, 오시는 길 제목 */}
       <div ref={containerRef} style={{ overflow: "hidden" }}>
-        <Slide in={titleAppear} timeout={1000} container={containerRef.current}>
+        <Slide in={titleAppear} timeout={1500} container={containerRef.current}>
           <Container
             sx={{
               width: "50%",
@@ -173,7 +184,7 @@ const Location = () => {
             mb: "5%",
           }}
         >
-          <Slide in={contentAppear} direction="right" timeout={1500}>
+          <Slide in={contentAppear} direction="right" timeout={2000}>
             <Box
               sx={{
                 width: "50%",
@@ -199,7 +210,7 @@ const Location = () => {
             </Box>
           </Slide>
 
-          <Slide in={contentAppear} direction="left" timeout={1500}>
+          <Slide in={contentAppear} direction="left" timeout={2000}>
             <Box
               sx={{
                 width: "50%",
