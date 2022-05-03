@@ -5,7 +5,7 @@ import SubHeader from "../components/SubHeader";
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import { AppBar, Tabs, Tab, Typography, Zoom, Fab, Box } from "@mui/material";
+import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -99,11 +99,7 @@ export default function FloatingActionButtonZoom() {
   return (
     <div>
       <Header />
-      <SubHeader main="소식" sub="논문" />
-      <br />
-      <br />
-      <br />
-      <br />
+      <SubHeader main="연구" sub="논문" />
 
       <Box
         sx={{
@@ -111,6 +107,8 @@ export default function FloatingActionButtonZoom() {
           width: "auto",
           position: "relative",
           minHeight: 200,
+          mt: 10,
+          mx: 5,
         }}
       >
         <AppBar position="static" color="default">
@@ -130,11 +128,7 @@ export default function FloatingActionButtonZoom() {
             <Tab label="플랫폼" {...a11yProps(5)} />
           </Tabs>
         </AppBar>
-        {/* <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      > */}
+
         <TabPanel value={value} index={0} dir={theme.direction}>
           ICLR 2022 (표현 학습 국제학회)
         </TabPanel>
@@ -153,24 +147,6 @@ export default function FloatingActionButtonZoom() {
         <TabPanel value={value} index={5} dir={theme.direction}>
           FAST 2021 (USENIX 파일저장기술학회)
         </TabPanel>
-        {/* </SwipeableViews> */}
-        {fabs.map((fab, index) => (
-          <Zoom
-            key={fab.color}
-            in={value === index}
-            timeout={transitionDuration}
-            style={{
-              transitionDelay: `${
-                value === index ? transitionDuration.exit : 0
-              }ms`,
-            }}
-            unmountOnExit
-          >
-            <Fab sx={fab.sx} aria-label={fab.label} color={fab.color}>
-              {fab.icon}
-            </Fab>
-          </Zoom>
-        ))}
       </Box>
       <Footer />
     </div>
