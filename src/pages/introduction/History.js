@@ -1,11 +1,15 @@
 import * as React from "react";
+
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
+import Footer from "../../components/Footer";
+
 import {
   createTheme,
   ThemeProvider,
   experimental_sx as sx,
 } from "@mui/material/styles";
+
 import {
   Timeline,
   TimelineItem,
@@ -15,12 +19,12 @@ import {
   TimelineDot,
   TimelineOppositeContent,
 } from "@mui/lab";
+
 import { Typography, Box } from "@mui/material";
-import Footer from "../../components/Footer";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-05-17
+ *@date 2022-04-28
  *@description Timeline component를 사용하여 구현
  */
 
