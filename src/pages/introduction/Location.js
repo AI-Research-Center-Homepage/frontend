@@ -41,12 +41,13 @@ const customTheme = createTheme({
  */
 
 const Location = () => {
-  // Kakao Map API 사용부분
   const containerRef = useRef(null);
-
+  
+  //스크롤의 위치에 따라 컴포넌트가 보이게 하기위해 사용한 state
   const [titleAppear, setTitleAppear] = useState(false);
   const [contentAppear, setContentAppear] = useState(false);
 
+  //스크롤의 위치가 특정 y값을 넘으면 해당되는 component를 나타나게 함
   const listener = (e) => {
     if (window.scrollY > 200) {
       setTitleAppear(true);
@@ -55,10 +56,11 @@ const Location = () => {
       setContentAppear(true);
     }
   };
-
+  
   useEffect(() => {
     window.addEventListener("scroll", listener);
-
+    
+    // Kakao Map API 사용부분
     let container = document.getElementById("map");
 
     let options = {
