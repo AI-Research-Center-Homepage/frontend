@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -11,43 +10,46 @@ function FeaturedPost(props) {
   const { post } = props;
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} sm={6} md={4}>
       <CardActionArea component="a" href="#">
-        <Card sx={{ display: "flex" }}>
-          <CardContent sx={{ flex: 1 }}>
-            <Typography component="h2" variant="h5">
-              {post.title}
+        <Card
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CardContent sx={{ flexGrow: 1 }}>
+            <CardMedia
+              component="img"
+              sx={{
+                width: 200,
+                m: "auto",
+                display: { xs: "none", sm: "block" },
+              }}
+              image={post.image}
+              alt="random"
+            />
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                mt: 3,
+              }}
+            >
+              {post.position}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+            <Typography component="h2" variant="h5">
+              {post.name}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
-            </Typography>
-            <Typography variant="subtitle1" color="primary">
-              Continue reading...
+              {post.major}
             </Typography>
           </CardContent>
-          <CardMedia
-            component="img"
-            sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-            image={post.image}
-            alt={post.imageLabel}
-          />
         </Card>
       </CardActionArea>
     </Grid>
   );
 }
-
-FeaturedPost.propTypes = {
-  post: PropTypes.shape({
-    date: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageLabel: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default FeaturedPost;
