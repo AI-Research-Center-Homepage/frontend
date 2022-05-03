@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import FeaturedPost from "./FeaturedPost";
+import FeaturedPost from "../../components/FeaturedPost";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
