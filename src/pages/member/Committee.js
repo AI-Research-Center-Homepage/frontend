@@ -10,6 +10,9 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
+// @author BeomGi-Lee, jeongiun@naver.com
+// @date 2022-05-04
+// @description 운영위원회 dummy data
 const committee = [
   {
     position: "원장",
@@ -55,6 +58,9 @@ const committee = [
   },
 ];
 
+// @author BeomGi-Lee, jeongiun@naver.com
+// @date 2022-05-04
+// @description FeaturedPost 컴포넌트 불러서 committee data 화면에 뿌려주기
 const theme = createTheme();
 
 export default function Post() {
@@ -64,7 +70,7 @@ export default function Post() {
 
       <Header />
       <SubHeader main="구성원" sub="운영위원회" />
-
+      {/* 정렬 위아래 padding 너비 auto에 최대너비 고정 */}
       <Container
         sx={{
           py: 8,
@@ -74,7 +80,7 @@ export default function Post() {
       >
         <Grid container spacing={4}>
           {committee.map((post) => (
-            <FeaturedPost key={post.title} post={post} />
+            <FeaturedPost post={post} />
           ))}
         </Grid>
       </Container>

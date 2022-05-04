@@ -6,12 +6,17 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
+// @author BeomGi-Lee, jeongiun@naver.com
+// @date 2022-05-04
+// @description 사진이 포함된 세로 형태의 게시글 컴포넌트
+
 function FeaturedPost(props) {
   const { post } = props;
 
   return (
     <Grid item xs={12} sm={6} md={4}>
       <CardActionArea component="a" href="#">
+        {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{
             height: "100%",
@@ -20,6 +25,7 @@ function FeaturedPost(props) {
           }}
         >
           <CardContent sx={{ flexGrow: 1 }}>
+            {/* 크기 xs 일 때 none */}
             <CardMedia
               component="img"
               sx={{
