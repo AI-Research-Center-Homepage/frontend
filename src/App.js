@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Thesis from "./pages/Thesis";
+import Thesis from "./pages/research/Thesis";
 
 export const ArticleContext = createContext();
 

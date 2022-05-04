@@ -1,18 +1,13 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import SubHeader from "../components/SubHeader";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SubHeader from "../../components/SubHeader";
 
 import * as React from "react";
 import PropTypes from "prop-types";
 
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import UpIcon from "@mui/icons-material/KeyboardArrowUp";
-
 import { useTheme } from "@mui/material/styles";
-import { green } from "@mui/material/colors";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,20 +39,6 @@ function a11yProps(index) {
   };
 }
 
-const fabStyle = {
-  position: "absolute",
-  bottom: 16,
-  right: 16,
-};
-
-const fabGreenStyle = {
-  color: "common.white",
-  bgcolor: green[500],
-  "&:hover": {
-    bgcolor: green[600],
-  },
-};
-
 export default function FloatingActionButtonZoom() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -65,36 +46,6 @@ export default function FloatingActionButtonZoom() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
-
-  const fabs = [
-    {
-      color: "primary",
-      sx: fabStyle,
-      icon: <AddIcon />,
-      label: "Add",
-    },
-    {
-      color: "secondary",
-      sx: fabStyle,
-      icon: <EditIcon />,
-      label: "Edit",
-    },
-    {
-      color: "inherit",
-      sx: { ...fabStyle, ...fabGreenStyle },
-      icon: <UpIcon />,
-      label: "Expand",
-    },
-  ];
 
   return (
     <div>
