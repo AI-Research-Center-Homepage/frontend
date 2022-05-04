@@ -1,0 +1,28 @@
+/**
+  *@author Eunyoung-Jo, czen2@jbnu.ac.kr
+  *@date 2022-05-01
+  *@description 부제목에 마우스를 올릴때 형광펜 효과
+  */
+
+.light {
+  position: relative;
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0px;
+    height: 12px;
+    width: 0px;
+    transition: all 350ms ease-in-out;
+    opacity: 0.1;
+    background-color: #8f9fc9;
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+      opacity: 0.5;
+    }
+  }
+}
