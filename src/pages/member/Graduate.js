@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Stack,
   Button,
@@ -36,6 +36,11 @@ const ButtonTheme = createTheme({
           px: 6,
           py: 1,
         }),
+        root: {
+          ":hover": {
+            border: "0",
+          },
+        },
       },
     },
   },
@@ -76,6 +81,7 @@ const Graduate = () => {
           <Button
             variant="outlined"
             size="large"
+            sx={{ border: "0", boxShadow: "5" }}
             onClick={() => SetSelectedYear("all")}
           >
             ALL
@@ -83,6 +89,7 @@ const Graduate = () => {
           <Button
             variant="outlined"
             size="large"
+            sx={{ border: "0", boxShadow: "5" }}
             onClick={() => SetSelectedYear(parseInt(year))}
           >
             {year}
@@ -90,6 +97,7 @@ const Graduate = () => {
           <Button
             variant="outlined"
             size="large"
+            sx={{ border: "0", boxShadow: "5" }}
             onClick={() => SetSelectedYear(parseInt(year - 1))}
           >
             {year - 1}
@@ -111,8 +119,7 @@ const Graduate = () => {
                 <Card
                   sx={{
                     display: "flex",
-                    boxShadow: 0,
-                    border: 1,
+                    boxShadow: "5",
                     borderRadius: 0,
                   }}
                 >
@@ -131,7 +138,7 @@ const Graduate = () => {
                     <Typography
                       variant="h6"
                       sx={{
-                        border: "1px solid",
+                        boxShadow: "3",
                         height: "30%",
                         display: "flex",
                         alignItems: "center",
@@ -144,7 +151,11 @@ const Graduate = () => {
                     <Typography
                       variant="body1"
                       // 사진 크기에 따라 height percent 값을 수정해줘야함.
-                      sx={{ border: "1px solid", height: "58%", p: 1 }}
+                      sx={{
+                        height: "58%",
+                        p: 1,
+                        boxShadow: "3",
+                      }}
                     >
                       {dummy.content}
                     </Typography>
