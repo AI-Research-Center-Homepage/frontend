@@ -1,8 +1,5 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-
+import { CssBaseline, Grid, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import FeaturedPost from "../../components/FeaturedPost";
