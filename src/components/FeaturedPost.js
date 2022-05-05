@@ -8,9 +8,13 @@ import {
   CardMedia,
 } from "@mui/material";
 
-// @author BeomGi-Lee, jeongiun@naver.com
-// @date 2022-05-04
-// @description 사진이 포함된 세로 형태의 게시글 컴포넌트
+/*******************************************
+ *@author BeomGi-Lee jeongiun@naver.com
+ *@date 2022-05-04
+ *@name FeaturedPost
+ *@description
+ *    사진이 포함된 세로 형태의 게시글 컴포넌트
+ *******************************************/
 
 function FeaturedPost(props) {
   const { post } = props;
