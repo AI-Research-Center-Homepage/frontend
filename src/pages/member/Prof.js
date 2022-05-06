@@ -6,6 +6,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 // import baby from "../assets/images/baby.png";
 
+import Header from "../../components/Header";
+import SubHeader from "../../components/SubHeader";
+import Footer from "../../components/Footer";
+
 // 참여교수 데이터
 const prof = [
   {
@@ -68,6 +72,8 @@ const prof = [
 export default function Prof() {
   return (
     <div>
+      <Header />
+      <SubHeader main="구성원" sub="참여교수" />
       {prof.map((element) => (
         <Card
           sx={{
@@ -136,6 +142,7 @@ export default function Prof() {
           </Box>
         </Card>
       ))}
+      <Footer />
     </div>
   );
 }
