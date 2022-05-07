@@ -7,13 +7,13 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
-/*******************************************
+/*
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-04
  *@name committee
  *@description
  *    운영위원회 dummy data
- *******************************************/
+ */
 
 const committee = [
   {
@@ -60,13 +60,13 @@ const committee = [
   },
 ];
 
-/*******************************************
+/*
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-04
  *@name Post
  *@description
  *    FeaturedPost 컴포넌트 불러서 committee data 화면에 뿌려주기
- *******************************************/
+ */
 
 const theme = createTheme();
 
