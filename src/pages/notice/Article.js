@@ -1,5 +1,21 @@
 import * as React from "react";
+// import {
+//   Card,
+//   CardContent,
+//   CardMedia,
+//   CssBaseline,
+//   Grid,
+//   Typography,
+//   Container,
+//   CardActionArea,
+//   Divider,
+// } from "@mui/material";
 import { CssBaseline, Grid, Container } from "@mui/material";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { useNavigate } from "react-router-dom";
+// import { ArticleContext } from "../App";
+// import PageMoveButtons from "./PageMoveButtons";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import FeaturedPost from "../../components/FeaturedPost";
@@ -9,60 +25,25 @@ import Footer from "../../components/Footer";
 
 /*******************************************
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-06
+ *@date 2022-05-08
  *@name article
  *@description
  *    운영위원회 dummy data
  *******************************************/
-
-const article = [
-  {
-    position: "원장",
-    name: "김원장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
-  {
-    position: "연구부원장",
-    name: "박부원장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
-  {
-    position: "기획부원장",
-    name: "이부원장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
-  {
-    position: "플랫폼기술부장",
-    name: "최부장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
-  {
-    position: "응용기술부장",
-    name: "정부장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
-  {
-    position: "기획대외협력부장",
-    name: "부부장",
-    major: "공과대학 컴퓨터 공학부",
-    image:
-      "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
-  },
+const dummyCards = [
+  { id: 1, title: "언론보도", name: "1번 컨텐츠", major: "220322" },
+  { id: 2, title: "언론보도", name: "2번 컨텐츠", major: "220323" },
+  { id: 3, title: "언론보도", name: "3번 컨텐츠", major: "220324" },
+  { id: 4, title: "언론보도", name: "4번 컨텐츠", major: "220325" },
+  { id: 5, title: "언론보도", name: "5번 컨텐츠", major: "220326" },
+  { id: 6, title: "언론보도", name: "6번 컨텐츠", major: "220327" },
+  { id: 7, title: "언론보도", name: "7번 컨텐츠", major: "220328" },
+  { id: 8, title: "언론보도", name: "8번 컨텐츠", major: "220329" },
 ];
 
 /*******************************************
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-06
+ *@date 2022-05-08
  *@name Post
  *@description
  *    FeaturedPost 컴포넌트 불러서 article data 화면에 뿌려주기
@@ -86,7 +67,7 @@ export default function Post() {
         maxWidth="md"
       >
         <Grid container spacing={4}>
-          {committee.map((post) => (
+          {dummyCards.map((post) => (
             <FeaturedPost post={post} />
           ))}
         </Grid>
