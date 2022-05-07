@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-/***************************************************************
+/*
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-05
  *@name TabPanel
@@ -17,7 +17,7 @@ import { useTheme } from "@mui/material/styles";
  *    - hidden 속성 사용, value와 index 비교
  *    - WAI-ARIA의 aria-labelledby를 사용해 id 값을 통한 접근
  *    - TabPanel -> Tab menu 연결
- ***************************************************************/
+ */
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -58,7 +58,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-/***************************************************************
+/*
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-05
  *@name a11yProps
@@ -67,7 +67,7 @@ TabPanel.propTypes = {
  *    - 반복적으로 들어가는 index 값인 id와
  *      aria-controls를 관리하고 확장에 용이하게 함
  *    - Tab menu -> Tab Pannel 연결
- ***************************************************************/
+ */
 function a11yProps(index) {
   return {
     id: `action-tab-${index}`,
