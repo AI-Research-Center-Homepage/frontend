@@ -7,8 +7,7 @@ import Thesis from "./pages/research/Thesis";
 import Committee from "./pages/member/Committee";
 import Location from "./pages/introduction/Location";
 import History from "./pages/introduction/History";
-
-
+import Introduction from "./pages/introduction/Introduction";
 
 export const ArticleContext = createContext();
 
@@ -18,13 +17,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/thesis" element={<Thesis />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/location" element={<Location />} />
           <Route path="/history" element={<History />} />
-
-
+          <Route path="/introduction" element={<Introduction />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
