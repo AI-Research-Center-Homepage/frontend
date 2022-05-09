@@ -14,7 +14,7 @@ import MemberPost from "../../components/MemberPost";
  *@author LimEunSang, dmstkd2905@naver.com
  *@date 2022-05-09
  *@description 연구원들의 정보를 게시글 형식으로 렌더링하는 페이지
-               데이터베이스와 연동할 연구원 객체 정보는 임시로 dummydata를 사용
+ *             데이터베이스와 연동할 연구원 객체 정보는 임시로 dummydata를 사용
  */
 
 const researchs = [
