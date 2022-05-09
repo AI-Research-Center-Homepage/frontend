@@ -3,11 +3,16 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { Box, Container, Typography } from "@mui/material";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 import pdfFile from "../../assets/intro_cclab.pdf";
+
+/**
+ *@author LimEunSang, dmstkd2905@naver.com
+ *@date 2022-05-09
+ *@description 머릿말, 소개 pdf를 화면에 출력하는 기능 구현
+ */
 
 // pdf.js worker 활성화
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
