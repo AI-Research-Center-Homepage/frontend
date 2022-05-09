@@ -12,24 +12,25 @@ import {
 
 import { useMediaQuery, Pagination, CssBaseline } from "@mui/material";
 
-// DataGrid dummydata
+// DataGrid dummydata date: 00년00월00일00시00분
 const dummyRows = [
-  { id: 1, title: "제목1", date: "220404" },
-  { id: 2, title: "제목2", date: "220405" },
-  { id: 3, title: "제목3", date: "220406" },
-  { id: 4, title: "제목4", date: "220407" },
-  { id: 5, title: "제목5", date: "220408" },
-  { id: 6, title: "제목6", date: "220409" },
-  { id: 7, title: "제목7", date: "220410" },
-  { id: 8, title: "제목8", date: "220411" },
-  { id: 9, title: "제목9", date: "220412" },
-  { id: 10, title: "제목10", date: "220413" },
-  { id: 11, title: "제목11", date: "220414" },
-  { id: 12, title: "제목12", date: "220415" },
-  { id: 13, title: "제목13", date: "220416" },
-  { id: 14, title: "제목14", date: "220417" },
-  { id: 15, title: "제목15", date: "220418" },
-  { id: 16, title: "제목16", date: "220419" },
+  { id: 1, title: "제목1", date: "2204041212" },
+  { id: 2, title: "제목2", date: "2204051212" },
+  { id: 3, title: "제목3", date: "2204061212" },
+  { id: 4, title: "제목4", date: "2204071212" },
+  { id: 5, title: "제목5", date: "2204081212" },
+  { id: 6, title: "제목6", date: "2204091212" },
+  { id: 7, title: "제목7", date: "2204101212" },
+  { id: 8, title: "제목8", date: "2204111212" },
+  { id: 9, title: "제목9", date: "2204121212" },
+  { id: 10, title: "제목10", date: "2204131212" },
+  { id: 11, title: "제목11", date: "2204141212" },
+  { id: 12, title: "제목12", date: "2204151212" },
+  { id: 13, title: "제목13", date: "2204161212" },
+  { id: 14, title: "제목14", date: "2204171212" },
+  { id: 15, title: "제목15", date: "2204181212" },
+  { id: 16, title: "제목16", date: "2204191212" },
+  { id: 17, title: "제목17", date: "2204191213" },
 ];
 
 // DataGrid 속성 정의
@@ -62,6 +63,12 @@ const dummycolumns = [
     disableColumnMenu: true,
     align: "center",
     maxWidth: 100,
+    valueFormatter: (params) => {
+      return `${params.value.slice(0, 2)}-${params.value.slice(
+        2,
+        4
+      )}-${params.value.slice(4, 6)}`;
+    },
   },
 ];
 
