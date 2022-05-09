@@ -33,7 +33,7 @@ const dummyRows = [
 ];
 
 // DataGrid 속성 정의
-const dummycolumns: GridColDef[] = [
+const dummycolumns = [
   {
     field: "id",
     headerName: "번호",
