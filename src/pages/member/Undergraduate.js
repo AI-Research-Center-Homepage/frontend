@@ -44,7 +44,7 @@ const Undergraduates = () => {
     <>
       <Header />
 
-      <SubHeader main="구성원" sub="연구원" />
+      <SubHeader main="구성원" sub="학부연구원생" />
 
       {/* 연구원 정보 */}
       <Container sx={{ width: "80%", my: 6 }}>
