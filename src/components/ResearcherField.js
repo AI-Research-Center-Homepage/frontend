@@ -1,14 +1,19 @@
-import * as React from "react";
-import { Grid, Button, Stack, Divider, Typography } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { styled } from "@mui/material/styles";
-import { useState } from "react";
-import FieldTrans from "./pages/FieldTrans";
-import FieldNLP from "./pages/FieldNLP";
-import FieldML from "./pages/FieldML";
-import FieldDL from "./pages/FieldDL";
-import FieldNS from "./pages/FieldNS";
+import React, { useState } from "react";
+import {
+  Grid,
+  Button,
+  Stack,
+  Divider,
+  Typography,
+  createTheme,
+  ThemeProvider,
+  styled,
+} from "@mui/material";
+import FieldTrans from "../components/ResearchPages/FieldTrans";
+import FieldNLP from "../components/ResearchPages/FieldNLP";
+import FieldML from "../components/ResearchPages/FieldML";
+import FieldDL from "../components/ResearchPages/FieldDL";
+import FieldNS from "../components/ResearchPages/FieldNS";
 
 const theme = createTheme({
   palette: {
