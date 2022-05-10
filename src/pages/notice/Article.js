@@ -1,21 +1,6 @@
 import * as React from "react";
-// import {
-//   Card,
-//   CardContent,
-//   CardMedia,
-//   CssBaseline,
-//   Grid,
-//   Typography,
-//   Container,
-//   CardActionArea,
-//   Divider,
-// } from "@mui/material";
-import { CssBaseline, Grid, Container } from "@mui/material";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { useNavigate } from "react-router-dom";
-// import { ArticleContext } from "../App";
-// import PageMoveButtons from "./PageMoveButtons";
 
+import { CssBaseline, Grid, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import FeaturedPost from "../../components/FeaturedPost";
@@ -33,58 +18,58 @@ import Footer from "../../components/Footer";
 const dummyCards = [
   {
     id: 1,
-    title: "언론보도",
-    name: "1번 컨텐츠",
-    major: "1번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "1번 컨텐츠",
+    subtitle: "1번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 2,
-    title: "언론보도",
-    name: "2번 컨텐츠",
-    major: "2번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "2번 컨텐츠",
+    subtitle: "2번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 3,
-    title: "언론보도",
-    name: "3번 컨텐츠",
-    major: "3번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "3번 컨텐츠",
+    subtitle: "3번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 4,
-    title: "언론보도",
-    name: "4번 컨텐츠",
-    major: "4번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "4번 컨텐츠",
+    subtitle: "4번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 5,
-    title: "언론보도",
-    name: "5번 컨텐츠",
-    major: "5번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "5번 컨텐츠",
+    subtitle: "5번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 6,
-    title: "언론보도",
-    name: "6번 컨텐츠",
-    major: "6번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "6번 컨텐츠",
+    subtitle: "6번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 7,
-    title: "언론보도",
-    name: "7번 컨텐츠",
-    major: "7번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "7번 컨텐츠",
+    subtitle: "7번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
   {
     id: 8,
-    title: "언론보도",
-    name: "8번 컨텐츠",
-    major: "8번 컨텐츠 본문",
+    header_subtitle: "언론보도",
+    title: "8번 컨텐츠",
+    subtitle: "8번 컨텐츠 본문",
     image: "https://source.unsplash.com/random",
   },
 ];
