@@ -12,7 +12,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/researchField" element={<ResearchField />} />
+          <Route path="/researchfield" element={<ResearchField />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
