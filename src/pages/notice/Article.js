@@ -13,7 +13,7 @@ import Footer from "../../components/Footer";
  *@date 2022-05-08
  *@name article
  *@description
- *    운영위원회 dummy data
+ *    언론보도 dummy data
  */
 const dummyCards = [
   {
