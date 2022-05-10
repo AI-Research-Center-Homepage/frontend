@@ -17,44 +17,44 @@ import Footer from "../../components/Footer";
 
 const committee = [
   {
-    position: "원장",
-    name: "김원장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "원장",
+    title: "김원장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
   {
-    position: "연구부원장",
-    name: "박부원장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "연구부원장",
+    title: "박부원장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
   {
-    position: "기획부원장",
-    name: "이부원장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "기획부원장",
+    title: "이부원장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
   {
-    position: "플랫폼기술부장",
-    name: "최부장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "플랫폼기술부장",
+    title: "최부장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
   {
-    position: "응용기술부장",
-    name: "정부장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "응용기술부장",
+    title: "정부장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
   {
-    position: "기획대외협력부장",
-    name: "부부장",
-    major: "공과대학 컴퓨터 공학부",
+    gray_subtitle: "기획대외협력부장",
+    title: "부부장",
+    subtitle: "공과대학 컴퓨터 공학부",
     image:
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
