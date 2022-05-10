@@ -23,31 +23,79 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
-/*******************************************
+/**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-08
  *@name article
  *@description
  *    운영위원회 dummy data
- *******************************************/
+ */
 const dummyCards = [
-  { id: 1, title: "언론보도", name: "1번 컨텐츠", major: "220322" },
-  { id: 2, title: "언론보도", name: "2번 컨텐츠", major: "220323" },
-  { id: 3, title: "언론보도", name: "3번 컨텐츠", major: "220324" },
-  { id: 4, title: "언론보도", name: "4번 컨텐츠", major: "220325" },
-  { id: 5, title: "언론보도", name: "5번 컨텐츠", major: "220326" },
-  { id: 6, title: "언론보도", name: "6번 컨텐츠", major: "220327" },
-  { id: 7, title: "언론보도", name: "7번 컨텐츠", major: "220328" },
-  { id: 8, title: "언론보도", name: "8번 컨텐츠", major: "220329" },
+  {
+    id: 1,
+    title: "언론보도",
+    name: "1번 컨텐츠",
+    major: "1번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 2,
+    title: "언론보도",
+    name: "2번 컨텐츠",
+    major: "2번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 3,
+    title: "언론보도",
+    name: "3번 컨텐츠",
+    major: "3번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 4,
+    title: "언론보도",
+    name: "4번 컨텐츠",
+    major: "4번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 5,
+    title: "언론보도",
+    name: "5번 컨텐츠",
+    major: "5번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 6,
+    title: "언론보도",
+    name: "6번 컨텐츠",
+    major: "6번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 7,
+    title: "언론보도",
+    name: "7번 컨텐츠",
+    major: "7번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
+  {
+    id: 8,
+    title: "언론보도",
+    name: "8번 컨텐츠",
+    major: "8번 컨텐츠 본문",
+    image: "https://source.unsplash.com/random",
+  },
 ];
 
-/*******************************************
+/**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-08
  *@name Post
  *@description
  *    FeaturedPost 컴포넌트 불러서 article data 화면에 뿌려주기
- *******************************************/
+ */
 
 const theme = createTheme();
 

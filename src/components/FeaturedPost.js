@@ -31,6 +31,9 @@ function FeaturedPost(props) {
           }}
         >
           <CardContent sx={{ flexGrow: 1 }}>
+            <Typography variant="subtitle2" paragraph>
+              {post.title}
+            </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
               component="img"
