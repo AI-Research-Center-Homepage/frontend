@@ -90,7 +90,7 @@ export default function Post() {
       <CssBaseline />
 
       <Header />
-      <SubHeader main="구성원" sub="운영위원회" />
+      <SubHeader main="소식" sub="언론보도" />
       {/* 정렬 위아래 padding 너비 auto에 최대너비 고정 */}
       <Container
         sx={{
