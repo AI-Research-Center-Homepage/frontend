@@ -133,6 +133,7 @@ const Announcement = () => {
           sortingOrder={["desc", "asc"]}
           autoHeight
           autoPageSize
+          hideFooterSelectedRowCount
           components={{
             Pagination: CustomPagination,
           }}
