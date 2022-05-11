@@ -9,12 +9,12 @@ import Location from "./pages/introduction/Location";
 import History from "./pages/introduction/History";
 import Introduction from "./pages/introduction/Introduction";
 import Article from "./pages/notice/Article";
-import Announcement from "./pages/News/Announcement";
+import Announcement from "./pages/news/Announcement";
 import Apply from "./pages/apply/Apply";
 import OrganizationChart from "./pages/introduction/OrganizationChart";
 import Researcher from "./pages/member/Researcher";
 import Undergraduates from "./pages/member/Undergraduate";
-import InfoChannel from "./pages/notice/InfoChannel";
+import InfoChannel from "./pages/news/InfoChannel";
 
 export const ArticleContext = createContext();
 

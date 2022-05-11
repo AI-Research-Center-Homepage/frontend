@@ -81,8 +81,6 @@ const dummyCards = [
  *    FeaturedPost 컴포넌트 불러서 article data 화면에 뿌려주기
  */
 
-const theme = createTheme();
-
 export default function Post() {
   return (
     <div>
