@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { CssBaseline, Grid, Container } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import FeaturedPost from "../../components/FeaturedPost";
 import Header from "../../components/Header";
@@ -86,7 +85,7 @@ const theme = createTheme();
 
 export default function Post() {
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <CssBaseline />
 
       <Header />
@@ -107,6 +106,6 @@ export default function Post() {
       </Container>
 
       <Footer />
-    </ThemeProvider>
+    </div>
   );
 }
