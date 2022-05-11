@@ -111,58 +111,60 @@ const Header = () => {
   // 함수화 시켜서 사용하면 transition 기능이 사라짐
   // Why?????
 
-  // const SideMenu = () => {
-  //   return (
-  //     <>
-  //       <Card
-  //         sx={{
-  //           height: "100%",
-  //           width: "320px",
-  //           bgcolor: "#0277BD",
-  //           color: "white",
-  //           borderRadius: "0",
-  //         }}
-  //       >
-  //         <CardMedia sx={{ ml: "7px", my: "7px" }}>
-  //           <IconButton onClick={() => navigate("/")}>
-  //             <Home sx={{ color: "white" }} />
-  //           </IconButton>
-  //         </CardMedia>
+  /* 
+  const SideMenu = () => {
+    return (
+      <>
+        <Card
+          sx={{
+            height: "100%",
+            width: "320px",
+            bgcolor: "#0277BD",
+            color: "white",
+            borderRadius: "0",
+          }}
+        >
+          <CardMedia sx={{ ml: "7px", my: "7px" }}>
+            <IconButton onClick={() => navigate("/")}>
+              <Home sx={{ color: "white" }} />
+            </IconButton>
+          </CardMedia>
 
-  //         <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#0277BD" }}>
-  //           {mainMenuItems.map(({ key, title, contents }) => (
-  //             <div key={key}>
-  //               <ListItemButton onClick={() => handleExpanded(key)}>
-  //                 <ListItemText primary={title} />
-  //               </ListItemButton>
+          <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#0277BD" }}>
+            {mainMenuItems.map(({ key, title, contents }) => (
+              <div key={key}>
+                <ListItemButton onClick={() => handleExpanded(key)}>
+                  <ListItemText primary={title} />
+                </ListItemButton>
 
-  //               <Collapse
-  //                 in={key === expandedSideMenu}
-  //                 timeout="auto"
-  //                 unmountOnExit
-  //               >
-  //                 <List
-  //                   component="div"
-  //                   disablePadding
-  //                   sx={{ bgcolor: "white" }}
-  //                 >
-  //                   {contents.map(({ subkey, subcontent }) => (
-  //                     <ListItemButton
-  //                       sx={{ pl: 4, color: "black" }}
-  //                       key={subkey}
-  //                     >
-  //                       <ListItemText primary={subcontent} />
-  //                     </ListItemButton>
-  //                   ))}
-  //                 </List>
-  //               </Collapse>
-  //             </div>
-  //           ))}
-  //         </List>
-  //       </Card>
-  //     </>
-  //   );
-  // };
+                <Collapse
+                  in={key === expandedSideMenu}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  <List
+                    component="div"
+                    disablePadding
+                    sx={{ bgcolor: "white" }}
+                  >
+                    {contents.map(({ subkey, subcontent }) => (
+                      <ListItemButton
+                        sx={{ pl: 4, color: "black" }}
+                        key={subkey}
+                      >
+                        <ListItemText primary={subcontent} />
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Collapse>
+              </div>
+            ))}
+          </List>
+        </Card>
+      </>
+    );
+  }; 
+  */
 
   /**
    *@author Suin-Jeong, suin8@jbnu.ac.kr
