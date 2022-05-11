@@ -7,7 +7,7 @@ import Thesis from "./pages/research/Thesis";
 import Committee from "./pages/member/Committee";
 import Location from "./pages/introduction/Location";
 import History from "./pages/introduction/History";
-
+import Introduction from "./pages/introduction/Introduction";
 import Article from "./pages/notice/Article";
 import Announcement from "./pages/News/Announcement";
 import Apply from "./pages/apply/Apply";
@@ -15,7 +15,6 @@ import OrganizationChart from "./pages/introduction/OrganizationChart";
 import Researcher from "./pages/member/Researcher";
 import Undergraduates from "./pages/member/Undergraduate";
 import InfoChannel from "./pages/notice/InfoChannel";
-
 
 export const ArticleContext = createContext();
 
@@ -30,6 +29,7 @@ const App = () => {
           <Route path="/committee" element={<Committee />} />
           <Route path="/location" element={<Location />} />
           <Route path="/history" element={<History />} />
+          <Route path="/introduction" element={<Introduction />} />
           <Route path="/article" element={<Article />} />
           <Route path="/announcement" element={<Announcement />} />
           <Route path="/apply" element={<Apply />} />
