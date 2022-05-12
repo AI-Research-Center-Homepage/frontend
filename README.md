@@ -85,10 +85,26 @@ docs: Update README
 ```
 
 ## Code Convention
-Rule 5 : 기본적인 Convention은 VS Code 확장 Prettier을 사용합니다. 파일 자동 저장 시 서식이 지정되도록 Format On Save 기능을 사용해주세요.
+Rule 5 : 기본적인 Convention은 VS Code 확장 Prettier을 사용합니다.   
+	- 파일 저장 시 서식이 자동 지정되도록 Format On Save 기능을 사용해주세요.
 
 ## Code Review
 Rule 6 : PR된 Code를 Review하시고 이상 없어보이면 LGTM(Look Good To Me) 댓글을 남겨주세요.   
 Rule 7 : 더 좋은 방법이나 수정하면 좋을 것 같은 부분 댓글로 남겨주세요.   
 Rule 8 : Code에 관련된 부분만 지적하여 주세요.   
 Rule 9 : LGTM 3명 즉 3명이상의 Code Review를 통과하면 Merge합니다.   
+
+## Issue Convention   
+Rule 10 : 이슈 작성시 아래의 형식을 따라주세요.
+```
+## 📒 이슈 내용
+> "이슈 내용 작성"
+
+## 📑 상세 내용
+1. "상세 내용 1"
+2. "상세 내용 2"
+
+## ✔️ 체크리스트
+- [ ] 상세 내용 1. 
+- [ ] 상세 내용 2. 
+```
