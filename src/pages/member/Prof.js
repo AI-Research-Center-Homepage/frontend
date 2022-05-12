@@ -68,7 +68,7 @@ const prof = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-05-05
+ *@date 2022-05-12
  *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
  */
 export default function Prof() {
@@ -80,81 +80,86 @@ export default function Prof() {
       <Grid container>
         <Grid item xs={12}>
           {prof.map((element) => (
-            <Card
-              sx={{
-                display: 'flex',
-                marginTop: '1%',
-                marginBottom: '1%',
-                marginLeft: '25%',
-                marginRight: '25%',
-              }}
-            >
-              {/* 교수 사진 */}
-              <CardMedia
-                component="img"
-                sx={{
-                  maxWidth: { md: 170, xs: 150 },
-                  maxHeight: 170,
-                  padding: '1%',
-                }}
-                image={element.img}
-                alt="image"
-              />
-              {/* 텍스트 정보 */}
-              <Box
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Card
                 sx={{
                   display: 'flex',
+                  boxShadow: 5,
+                  my: '2%',
+                  width: { xs: '80%', md: '40%' },
+                  maxHeight: 200,
                 }}
               >
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                  <Typography component="div" variant="subtitle2">
-                    <strong>{element.name}</strong>
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>전공&nbsp;</strong> {element.major}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>직급&nbsp;</strong> {element.rank}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>박사학위&nbsp;</strong> {element.doctoral}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>이메일&nbsp;</strong> {element.email}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>연구실&nbsp;</strong> {element.lab}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>전화번호&nbsp;</strong> {element.number}
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+                {/* 교수 사진 */}
+                <CardMedia
+                  component="img"
+                  sx={{
+                    width: '20%',
+                    height: 'auto',
+                    padding: '1%',
+                  }}
+                  image={element.img}
+                  alt="image"
+                />
+                {/* 텍스트 정보 */}
+                <Box
+                  sx={
+                    {
+                      // display: "flex",
+                    }
+                  }
+                >
+                  <CardContent sx={{ flex: '1 0 auto' }}>
+                    <Typography component="div" variant="body1">
+                      <strong>{element.name}</strong>
+                    </Typography>
+                    <br></br>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>전공&nbsp;</strong> {element.major}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>직급&nbsp;</strong> {element.rank}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>박사학위&nbsp;</strong> {element.doctoral}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>이메일&nbsp;</strong> {element.email}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>연구실&nbsp;</strong> {element.lab}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      <strong>전화번호&nbsp;</strong> {element.number}
+                    </Typography>
+                  </CardContent>
+                </Box>
+              </Card>
+            </div>
           ))}
         </Grid>
       </Grid>
