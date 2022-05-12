@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import "../css/Field.scss";
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import '../css/Field.scss';
 
 // 연구분야-기계번역 컴포넌트
 export default function FieldTrans() {
@@ -10,17 +10,17 @@ export default function FieldTrans() {
     setPosition(window.scrollY);
   }
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('scroll', onScroll);
     }; //컴포넌트가 언마운트되기 직전에 이벤트 제거
   }, []);
 
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "auto",
+        width: '100%',
+        height: 'auto',
         // backgroundColor: "#f9f9f9"
       }}
     >
@@ -65,8 +65,8 @@ export default function FieldTrans() {
         alt="nature"
         src="./images/nature.png"
         style={{
-          width: "300px",
-          marginLeft: "50%",
+          width: '300px',
+          marginLeft: '50%',
           opacity: (position - 350) / 100,
         }}
       ></img>
