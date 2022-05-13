@@ -8,7 +8,7 @@ import Committee from "./pages/member/Committee";
 import Location from "./pages/introduction/Location";
 import History from "./pages/introduction/History";
 import Introduction from "./pages/introduction/Introduction";
-import Article from "./pages/notice/Article";
+import Article from "./pages/news/Article";
 import Announcement from "./pages/news/Announcement";
 import Apply from "./pages/apply/Apply";
 import OrganizationChart from "./pages/introduction/OrganizationChart";
