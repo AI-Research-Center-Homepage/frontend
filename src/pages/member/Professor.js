@@ -59,9 +59,19 @@ const prof = [
   },
 ];
 
+//불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
+function ProfPrint({ title, info }) {
+  return (
+    <Typography variant="body2" color="text.secondary" component="div">
+      <strong>{title}&nbsp;</strong>
+      {info}
+    </Typography>
+  );
+}
+
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-05-12
+ *@date 2022-05-16
  *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
  */
 export default function Professor() {
@@ -101,48 +111,15 @@ export default function Professor() {
                     <strong>{element.name}</strong>
                   </Typography>
                   <br></br>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>전공&nbsp;</strong> {element.major}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>직급&nbsp;</strong> {element.rank}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>박사학위&nbsp;</strong> {element.doctoral}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>이메일&nbsp;</strong> {element.email}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>연구실&nbsp;</strong> {element.lab}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    <strong>전화번호&nbsp;</strong> {element.number}
-                  </Typography>
+                  <ProfPrint title="전공" info={element.major}></ProfPrint>
+                  <ProfPrint title="직급" info={element.rank}></ProfPrint>
+                  <ProfPrint
+                    title="박사학위"
+                    info={element.doctoral}
+                  ></ProfPrint>
+                  <ProfPrint title="이메일" info={element.email}></ProfPrint>
+                  <ProfPrint title="연구실" info={element.lab}></ProfPrint>
+                  <ProfPrint title="전화번호" info={element.number}></ProfPrint>
                 </CardContent>
               </Card>
             </div>
