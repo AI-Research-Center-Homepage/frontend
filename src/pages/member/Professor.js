@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Grid,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
@@ -94,7 +87,7 @@ export default function Professor() {
                 <CardMedia
                   component="img"
                   sx={{
-                    width: "25vh",
+                    width: "150px",
                     height: "auto",
                     padding: "1%",
                   }}
@@ -102,62 +95,55 @@ export default function Professor() {
                   alt="image"
                 />
                 {/* 텍스트 정보 */}
-                <Box
-                  sx={
-                    {
-                      // display: "flex",
-                    }
-                  }
-                >
-                  <CardContent sx={{ flex: "1 0 auto" }}>
-                    <Typography component="div" variant="body1">
-                      <strong>{element.name}</strong>
-                    </Typography>
-                    <br></br>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>전공&nbsp;</strong> {element.major}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>직급&nbsp;</strong> {element.rank}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>박사학위&nbsp;</strong> {element.doctoral}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>이메일&nbsp;</strong> {element.email}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>연구실&nbsp;</strong> {element.lab}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      <strong>전화번호&nbsp;</strong> {element.number}
-                    </Typography>
-                  </CardContent>
-                </Box>
+
+                <CardContent sx={{ flex: "1 0 auto" }}>
+                  <Typography component="div" variant="body1">
+                    <strong>{element.name}</strong>
+                  </Typography>
+                  <br></br>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>전공&nbsp;</strong> {element.major}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>직급&nbsp;</strong> {element.rank}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>박사학위&nbsp;</strong> {element.doctoral}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>이메일&nbsp;</strong> {element.email}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>연구실&nbsp;</strong> {element.lab}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    <strong>전화번호&nbsp;</strong> {element.number}
+                  </Typography>
+                </CardContent>
               </Card>
             </div>
           ))}
