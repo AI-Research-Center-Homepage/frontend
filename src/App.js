@@ -1,20 +1,21 @@
-import { createContext } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import Graduate from "./pages/member/Graduate";
-import Thesis from "./pages/research/Thesis";
-import Committee from "./pages/member/Committee";
-import Location from "./pages/introduction/Location";
-import History from "./pages/introduction/History";
-import Introduction from "./pages/introduction/Introduction";
-import Article from "./pages/news/Article";
-import Announcement from "./pages/news/Announcement";
-import Apply from "./pages/apply/Apply";
-import OrganizationChart from "./pages/introduction/OrganizationChart";
-import Researcher from "./pages/member/Researcher";
-import Undergraduates from "./pages/member/Undergraduate";
-import InfoChannel from "./pages/news/InfoChannel";
+import { createContext } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import Graduate from './pages/member/Graduate';
+import Thesis from './pages/research/Thesis';
+import Committee from './pages/member/Committee';
+import Location from './pages/introduction/Location';
+import History from './pages/introduction/History';
+import Introduction from './pages/introduction/Introduction';
+import Article from './pages/news/Article';
+import Announcement from './pages/news/Announcement';
+import Apply from './pages/apply/Apply';
+import OrganizationChart from './pages/introduction/OrganizationChart';
+import Researcher from './pages/member/Researcher';
+import Undergraduates from './pages/member/Undergraduate';
+import InfoChannel from './pages/news/InfoChannel';
+import ResearchField from './pages/research/ResearchField';
 
 export const ArticleContext = createContext();
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/researcher" element={<Researcher />} />
           <Route path="/undergraduate" element={<Undergraduates />} />
           <Route path="/infochannel" element={<InfoChannel />} />
+          <Route path="/researchfield" element={<ResearchField />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
