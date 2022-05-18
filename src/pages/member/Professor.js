@@ -88,7 +88,7 @@ export default function Professor() {
                 sx={{
                   display: "flex",
                   boxShadow: 5,
-                  my: "2%",
+                  my: { md: "2%", xs: "8%" },
                   width: { xs: "80%", md: "40%" },
                   maxHeight: 200,
                 }}
