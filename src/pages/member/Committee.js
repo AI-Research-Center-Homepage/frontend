@@ -7,6 +7,8 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
+import axios from "axios";
+
 /*
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-04
@@ -59,6 +61,49 @@ const committee = [
       "https://w.namu.la/s/379ef8ae4f12fc04481c2cb7a97c2bdc901727b137c38fd652cc7aea80f74e56185fa0fd62658554fc3e6e79861aec73782db1d7ab3943275607e6623a46d09fe63412410041cd4b2b6ea4e740e6a290c8022da99c4d567b5533c100da0ed814",
   },
 ];
+
+// function axiosTest() {
+//   return axios
+//     .get("https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list")
+//     .then((response) => response.data);
+// }
+async function axiosTest() {
+  const response = await axios.get(
+    "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list"
+  );
+  // console.log(response.data);
+  return { response };
+}
+
+const result = axiosTest();
+console.log(result);
+console.log(result.data);
+
+// axios({
+//   method: "get",
+//   url: "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list",
+//   responseType: "json",
+// }).then(function (response) {
+//   // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
+//   let result = response.data;
+//   // console.log(result);
+//   // console.log(response.data);
+//   // return response.data;
+//   return result;
+// });
+
+// console.log(result);
+// console.log(axios());
+
+// const mock_committee = axios();
+
+// function getAll() {
+//   return axios.get(
+//     "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list"
+//   );
+// }
+// const _results = getAll();
+// console.log(_results);
 
 /*
  *@author BeomGi-Lee jeongiun@naver.com
