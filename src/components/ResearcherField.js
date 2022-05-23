@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from "react";
 import { Grid, Button, Stack, Divider, Typography } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
@@ -9,6 +10,24 @@ import FieldNLP from "./pages/FieldNLP";
 import FieldML from "./pages/FieldML";
 import FieldDL from "./pages/FieldDL";
 import FieldNS from "./pages/FieldNS";
+=======
+import React, { useState } from "react";
+import {
+  Grid,
+  Button,
+  Stack,
+  Divider,
+  Typography,
+  createTheme,
+  ThemeProvider,
+  styled,
+} from "@mui/material";
+import FieldTrans from "../components/ResearchPages/FieldTrans";
+import FieldNLP from "../components/ResearchPages/FieldNLP";
+import FieldML from "../components/ResearchPages/FieldML";
+import FieldDL from "../components/ResearchPages/FieldDL";
+import FieldNS from "../components/ResearchPages/FieldNS";
+>>>>>>> 06e4580bba608e8887ae1bf37a2c3be5d1d59690
 
 const theme = createTheme({
   palette: {

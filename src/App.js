@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+
 import Home from './pages/Home';
 import Graduate from './pages/member/Graduate';
 import Thesis from './pages/research/Thesis';
@@ -15,7 +16,7 @@ import OrganizationChart from './pages/introduction/OrganizationChart';
 import Researcher from './pages/member/Researcher';
 import Undergraduates from './pages/member/Undergraduate';
 import InfoChannel from './pages/news/InfoChannel';
-import ResearchField from './pages/research/ResearchField';
+import ResearchField from './components/ResearcherField';
 
 export const ArticleContext = createContext();
 
