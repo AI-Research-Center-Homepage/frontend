@@ -34,12 +34,6 @@ const theme = createTheme({
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
  *@date 2022-05-16
- *@description Box 스타일
- */
-
-/**
- **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-16
  *@description 연구분야 페이지
  */
 export default function ResearchField() {
