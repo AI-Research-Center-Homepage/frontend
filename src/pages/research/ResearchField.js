@@ -31,6 +31,7 @@ const theme = createTheme({
   },
 });
 
+// map함수에 사용되는 버튼 정보
 const FieldName = [
   { id: 0, title: '기계번역' },
   { id: 1, title: '자연언어 인터페이스' },
@@ -44,7 +45,7 @@ const FieldName = [
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-16
+ *@date 2022-05-23
  *@description 연구분야 페이지
  */
 export default function ResearchField() {
@@ -122,6 +123,7 @@ export default function ResearchField() {
             backgroundColor: '#f9f9f9',
           }}
         >
+          {/* 버튼 8개 */}
           <Grid
             container
             sx={{
