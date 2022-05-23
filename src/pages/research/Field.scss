@@ -7,7 +7,7 @@
 .light {
   position: relative;
   &::after {
-    content: "";
+    content: '';
     display: inline-block;
     position: absolute;
     left: 0;
@@ -17,7 +17,7 @@
     width: 0px;
     transition: all 350ms ease-in-out;
     opacity: 0.1;
-    background-color: #8f9fc9;
+    background-color: #0288d1;
   }
   &:hover {
     &::after {

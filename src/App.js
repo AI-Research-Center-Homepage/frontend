@@ -16,7 +16,7 @@ import OrganizationChart from './pages/introduction/OrganizationChart';
 import Researcher from './pages/member/Researcher';
 import Undergraduates from './pages/member/Undergraduate';
 import InfoChannel from './pages/news/InfoChannel';
-import ResearchField from './components/ResearcherField';
+import ResearchField from './pages/research/ResearchField';
 
 export const ArticleContext = createContext();
 
