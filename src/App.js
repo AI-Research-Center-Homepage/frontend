@@ -15,6 +15,7 @@ import OrganizationChart from "./pages/introduction/OrganizationChart";
 import Researcher from "./pages/member/Researcher";
 import Undergraduates from "./pages/member/Undergraduate";
 import InfoChannel from "./pages/news/InfoChannel";
+import Demo from "./pages/research/Demo";
 
 export const ArticleContext = createContext();
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/researcher" element={<Researcher />} />
           <Route path="/undergraduate" element={<Undergraduates />} />
           <Route path="/infochannel" element={<InfoChannel />} />
+          <Route path="/demo" element={<Demo />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
