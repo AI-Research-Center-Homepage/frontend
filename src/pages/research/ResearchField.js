@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Grid,
-  Box,
-  Typography,
-  createTheme,
-  ThemeProvider,
-} from '@mui/material';
+import { Button, Grid, Box, Typography } from '@mui/material';
 import FieldTrans from './ResearcherFieldPages/FieldTrans';
 import FieldNLP from './ResearcherFieldPages/FieldNLP';
 import FieldML from './ResearcherFieldPages/FieldML';
@@ -15,21 +8,6 @@ import FieldNS from './ResearcherFieldPages/FieldNS';
 import Header from '../../components/Header';
 import SubHeader from '../../components/SubHeader';
 import Footer from '../../components/Footer';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#ff0000',
-      danger: '#ff0000',
-    },
-    secondary: {
-      main: '#d1d1d1',
-    },
-    neutral: {
-      main: '#f9f9f9',
-    },
-  },
-});
 
 // map함수에 사용되는 버튼 정보
 const FieldName = [
@@ -45,7 +23,7 @@ const FieldName = [
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-23
+ *@date 2022-05-24
  *@description 연구분야 페이지
  */
 export default function ResearchField() {
@@ -77,14 +55,15 @@ export default function ResearchField() {
           backgroundColor: 'white',
           '&:hover': {
             backgroundColor: '#0288d1',
-            transition: '1s',
+            color: '#fafafc',
+            transition: '0.5s',
           },
         }}
         onClick={() => {
           setVisible(id);
         }}
       >
-        {title}
+        <Typography variant="button">{title}</Typography>
       </Button>
     );
   }
@@ -93,58 +72,58 @@ export default function ResearchField() {
     <div>
       <Header />
       <SubHeader main="연구" sub="AI연구분야" />
-      <ThemeProvider theme={theme}>
-        {/* 랩실 설명을 꾸며주는 기능 */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Box
-            sx={{
-              p: 2,
-              m: 2,
-              borderBottom: 1,
-              borderTop: 1,
-              borderColor: '#bdbdbd',
-              width: '40%',
-            }}
-          >
-            <Typography>{content}</Typography>
-          </Box>
-        </div>
 
+      {/* 랩실 설명을 꾸며주는 기능 */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Box
           sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '5%',
-            marginBottom: '5%',
-            width: '100%',
-            height: { xs: 300, md: 200 },
-            backgroundColor: '#f9f9f9',
+            p: 2,
+            m: 2,
+            borderBottom: 1,
+            borderTop: 1,
+            borderColor: '#bdbdbd',
+            width: '40%',
           }}
         >
-          {/* 버튼 8개 */}
-          <Grid
-            container
-            sx={{
-              width: { md: '80%', xs: '90%' },
-            }}
-          >
-            {FieldName.map((list) => (
-              <Grid item md={3} xs={6} marginBottom={0.5}>
-                <FieldPrint title={list.title} id={list.id}></FieldPrint>
-              </Grid>
-            ))}
-          </Grid>
+          <Typography>{content}</Typography>
         </Box>
+      </div>
 
-        {/* 버튼마다 다른 컴포넌트 나오게 하였음 */}
-        {visible === 0 ? <FieldTrans /> : null}
-        {visible === 1 ? <FieldNLP /> : null}
-        {visible === 2 ? <FieldML /> : null}
-        {visible === 3 ? <FieldDL /> : null}
-        {visible === 4 ? <FieldNS /> : null}
-      </ThemeProvider>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '5%',
+          marginBottom: '5%',
+          width: '100%',
+          height: { xs: 300, md: 200 },
+          backgroundColor: '#f9f9f9',
+        }}
+      >
+        {/* 버튼 8개 */}
+        <Grid
+          container
+          sx={{
+            width: { md: '80%', xs: '90%' },
+          }}
+        >
+          {FieldName.map((list) => (
+            <Grid item md={3} xs={6} marginBottom={0.5}>
+              <FieldPrint title={list.title} id={list.id}></FieldPrint>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+
+      {/* 버튼마다 다른 컴포넌트 나오게 하였음 */}
+      {visible === 0 ? <FieldTrans /> : null}
+      {visible === 1 ? <FieldNLP /> : null}
+      {visible === 2 ? <FieldML /> : null}
+      {visible === 3 ? <FieldDL /> : null}
+      {visible === 4 ? <FieldNS /> : null}
+
       <Footer />
     </div>
   );
