@@ -27,7 +27,7 @@ const FieldName = [
  *@description 연구분야 페이지
  */
 export default function ResearchField() {
-  //    랩실 설명
+  //랩실 설명
   const content = (
     <div style={{ textAlign: 'center' }}>
       <span style={{ color: '#0288d1' }}>
