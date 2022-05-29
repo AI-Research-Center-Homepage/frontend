@@ -5,10 +5,11 @@ import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 import "./Field.scss";
 
+//임시 사진 경로
 const imgUrl =
   "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080";
 
-// map함수에 사용되는 버튼 정보
+// 버튼 클릭시 나오는 화면에 대한 정보
 const FieldName = [
   {
     id: 0,
@@ -77,6 +78,7 @@ const FieldName = [
   },
 ];
 
+//버튼 클릭시 나오는 화면 함수
 function Description(props) {
   const [position, setPosition] = useState(0);
 
@@ -161,12 +163,13 @@ export default function ResearchField() {
 
   const [contents, setContents] = useState();
 
+  //클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
     const { name } = e.target;
     setContents(name);
-    console.log(name);
   };
 
+  //name값에 따라 다른 화면 출력
   const selectComponent = {
     trans: (
       <Description
@@ -234,6 +237,7 @@ export default function ResearchField() {
     ),
   };
 
+  //버튼 함수
   function FieldPrint({ title, id, engTitle }) {
     return (
       <Button
@@ -290,7 +294,7 @@ export default function ResearchField() {
           backgroundColor: "#f9f9f9",
         }}
       >
-        {/* 버튼 8개 */}
+        {/* 버튼함수인 FieldPrint를 호출하여 버튼8개를 만듦 */}
         <Grid
           container
           sx={{
