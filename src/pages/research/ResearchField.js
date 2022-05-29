@@ -257,7 +257,13 @@ export default function ResearchField() {
         key={id}
         name={engTitle}
       >
-        <Typography variant="button">{title}</Typography>
+        <Typography
+          sx={{
+            fontSize: "1.2vw",
+          }}
+        >
+          {title}
+        </Typography>
       </Button>
     );
   }
