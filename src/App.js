@@ -24,21 +24,35 @@ const App = () => {
     <ArticleContext.Provider>
       <BrowserRouter>
         <Routes>
+          {/* 홈 */}
           <Route path="/" element={<Home />} />
-          <Route path="/graduate" element={<Graduate />} />
-          <Route path="/thesis" element={<Thesis />} />
-          <Route path="/committee" element={<Committee />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/history" element={<History />} />
+
+          {/* 소개 */}
           <Route path="/introduction" element={<Introduction />} />
-          <Route path="/article" element={<Article />} />
-          <Route path="/announcement" element={<Announcement />} />
-          <Route path="/apply" element={<Apply />} />
           <Route path="/organizationchart" element={<OrganizationChart />} />
-          <Route path="/researcher" element={<Researcher />} />
-          <Route path="/undergraduate" element={<Undergraduates />} />
-          <Route path="/infochannel" element={<InfoChannel />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/location" element={<Location />} />
+
+          {/* 연구 */}
+          {/* AI연구분야 페이지 추가 예정 */}
+          {/* 연구프로젝트 페이지 추가 예정 */}
+          <Route path="/thesis" element={<Thesis />} />
           <Route path="/demo" element={<Demo />} />
+
+          {/* 구성원 */}
+          {/* 참여교수 페이지 추가 예정 */}
+          <Route path="/committee" element={<Committee />} />
+          <Route path="/graduate" element={<Graduate />} />
+          <Route path="/undergraduate" element={<Undergraduates />} />
+          <Route path="/researcher" element={<Researcher />} />
+
+          {/* 소식 */}
+          <Route path="/infochannel" element={<InfoChannel />} />
+          <Route path="/announcement" element={<Announcement />} />
+          <Route path="/article" element={<Article />} />
+
+          {/* 지원하기 */}
+          <Route path="/apply" element={<Apply />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
