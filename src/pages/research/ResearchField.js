@@ -78,7 +78,7 @@ const FieldName = [
   },
 ];
 
-//selectComponent에서 데이터를 받아와 화면을 보여줌
+//selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
   const [position, setPosition] = useState(0);
 
