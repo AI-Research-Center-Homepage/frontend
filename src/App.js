@@ -2,6 +2,7 @@ import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
+import Professor from "./pages/member/Professor";
 import Graduate from "./pages/member/Graduate";
 import Thesis from "./pages/research/Thesis";
 import Committee from "./pages/member/Committee";
@@ -40,7 +41,7 @@ const App = () => {
           <Route path="/demo" element={<Demo />} />
 
           {/* 구성원 */}
-          {/* 참여교수 페이지 추가 예정 */}
+          <Route path="/professor" element={<Professor />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/graduate" element={<Graduate />} />
           <Route path="/undergraduate" element={<Undergraduates />} />
