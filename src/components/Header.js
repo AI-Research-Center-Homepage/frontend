@@ -37,46 +37,46 @@ const mainMenuItems = [
     key: 1,
     title: "소개",
     contents: [
-      { subkey: 6, subcontent: "연구센터소개" },
-      { subkey: 7, subcontent: "조직도" },
-      { subkey: 8, subcontent: "연혁" },
-      { subkey: 9, subcontent: "센터위치" },
+      { subkey: 6, subcontent: "연구센터소개", path: "/introduction" },
+      { subkey: 7, subcontent: "조직도", path: "/organizationchart" },
+      { subkey: 8, subcontent: "연혁", path: "/history" },
+      { subkey: 9, subcontent: "센터위치", path: "/location" },
     ],
   },
   {
     key: 2,
     title: "연구",
     contents: [
-      { subkey: 10, subcontent: "AI연구분야" },
-      { subkey: 11, subcontent: "연구프로젝트" },
-      { subkey: 12, subcontent: "연구논문" },
-      { subkey: 13, subcontent: "연구결과데모" },
+      { subkey: 10, subcontent: "AI연구분야", path: "/" },
+      { subkey: 11, subcontent: "연구프로젝트", path: "/" },
+      { subkey: 12, subcontent: "연구논문", path: "/thesis" },
+      { subkey: 13, subcontent: "연구결과데모", path: "/demo" },
     ],
   },
   {
     key: 3,
     title: "구성원",
     contents: [
-      { subkey: 14, subcontent: "참여교수" },
-      { subkey: 15, subcontent: "운영위원회" },
-      { subkey: 16, subcontent: "대학원생" },
-      { subkey: 17, subcontent: "학부 연구원생" },
-      { subkey: 18, subcontent: "연구원" },
+      { subkey: 14, subcontent: "참여교수", path: "/" },
+      { subkey: 15, subcontent: "운영위원회", path: "/committee" },
+      { subkey: 16, subcontent: "대학원생", path: "/graduate" },
+      { subkey: 17, subcontent: "학부 연구원생", path: "/undergraduate" },
+      { subkey: 18, subcontent: "연구원", path: "/researcher" },
     ],
   },
   {
     key: 4,
     title: "소식",
     contents: [
-      { subkey: 19, subcontent: "소식통" },
-      { subkey: 20, subcontent: "공지사항" },
-      { subkey: 21, subcontent: "언론보도" },
+      { subkey: 19, subcontent: "소식통", path: "/infochannel" },
+      { subkey: 20, subcontent: "공지사항", path: "/announcement" },
+      { subkey: 21, subcontent: "언론보도", path: "/article" },
     ],
   },
   {
     key: 5,
     title: "지원하기",
-    contents: [{ subkey: 22, subcontent: "지원하기" }],
+    contents: [{ subkey: 22, subcontent: "지원하기", path: "/apply" }],
   },
 ];
 
@@ -344,10 +344,11 @@ const Header = () => {
                           disablePadding
                           sx={{ bgcolor: "white" }}
                         >
-                          {contents.map(({ subkey, subcontent }) => (
+                          {contents.map(({ subkey, subcontent, path }) => (
                             <ListItemButton
                               sx={{ pl: 4, color: "black" }}
                               key={subkey}
+                              onClick={() => navigate(`${path}`)}
                             >
                               <ListItemText primary={subcontent} />
                             </ListItemButton>
@@ -379,15 +380,18 @@ const Header = () => {
           <Grid item xs={1} />
           <Grid container xs={10}>
             <Grid container xs={8}>
-              {mainMenuItems.map(({ contents }) => (
+              {mainMenuItems.map((mainMenuItem) => (
                 <>
                   <Divider orientation="vertical" />
                   <Grid item xs>
                     <Stack sx={{ height: "100%" }}>
-                      {contents.map(({ subcontent }) => (
-                        <Button sx={{ height: "20%", color: "black" }}>
+                      {mainMenuItem.contents.map((content) => (
+                        <Button
+                          sx={{ height: "20%", color: "black" }}
+                          onClick={() => navigate(content.path)}
+                        >
                           <Typography variant="subtitle2">
-                            {subcontent}
+                            {content.subcontent}
                           </Typography>
                         </Button>
                       ))}
