@@ -65,7 +65,7 @@ const FieldName = [
   },
 ];
 
-//selectComponent에서 데이터를 받아와 각 화면을 보여줌
+// selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
   return (
     <Box
@@ -85,10 +85,12 @@ function Description(props) {
       >
         {props.title}
       </Typography>
+
       {/* 부제목 */}
       <Typography variant="h6" fontWeight="bold" align="center" paddingTop="3%">
         <span className="light">{props.subtitle}</span>
       </Typography>
+
       {/* 설명 */}
       <Typography
         variant="body2"
@@ -105,19 +107,19 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-30
+ *@date 2022-05-31
  *@description 프로젝트 페이지
  */
 export default function Project() {
   const [contents, setContents] = useState("trans");
 
-  //클릭한 버튼의 name값을 state에 저장
+  // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
     const { name } = e.target;
     setContents(name);
   };
 
-  //name값에 따라 다른 화면 출력
+  // name값에 따라 다른 화면 출력
   const selectComponent = {
     trans: (
       <Description
@@ -177,7 +179,7 @@ export default function Project() {
     ),
   };
 
-  //FieldName의 데이터를 받아 버튼 출력
+  // FieldName의 데이터를 받아 버튼 출력
   function FieldPrint({ title, id, engTitle }) {
     return (
       <Button
