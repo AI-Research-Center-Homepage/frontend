@@ -36,7 +36,7 @@ const App = () => {
           <Route path="/location" element={<Location />} />
 
           {/* 연구 */}
-          {/* AI연구분야 페이지 추가 예정 */}
+          <Route path="/researchfield" element={<ResearchField />} />
           {/* 연구프로젝트 페이지 추가 예정 */}
           <Route path="/thesis" element={<Thesis />} />
           <Route path="/demo" element={<Demo />} />

@@ -5,7 +5,7 @@ import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 import "./Field.scss";
 
-//임시 사진 경로
+// 임시 사진 경로
 const imgUrl =
   "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080";
 
@@ -78,7 +78,7 @@ const FieldName = [
   },
 ];
 
-//selectComponent에서 데이터를 받아와 각 화면을 보여줌
+// selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
   const [position, setPosition] = useState(0);
 
@@ -90,7 +90,7 @@ function Description(props) {
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
-    }; //컴포넌트가 언마운트되기 직전에 이벤트 제거
+    }; // 컴포넌트가 언마운트되기 직전에 이벤트 제거
   }, []);
 
   return (
@@ -111,10 +111,12 @@ function Description(props) {
       >
         {props.title}
       </Typography>
+
       {/* 부제목 */}
       <Typography variant="h6" fontWeight="bold" align="center" paddingTop="3%">
         <span className="light">{props.subtitle}</span>
       </Typography>
+
       {/* 설명 */}
       <Typography
         variant="body2"
@@ -125,6 +127,7 @@ function Description(props) {
       >
         {props.desc}
       </Typography>
+
       {/* 사진 */}
       <img
         alt="nature"
@@ -142,11 +145,12 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-29
+ *@date 2022-05-31
  *@description 연구분야 페이지
  */
+
 export default function ResearchField() {
-  //랩실 설명
+  // 랩실 설명
   const content = (
     <div style={{ textAlign: "center" }}>
       <span style={{ color: "#0288d1" }}>
@@ -163,13 +167,13 @@ export default function ResearchField() {
 
   const [contents, setContents] = useState("trans");
 
-  //클릭한 버튼의 name값을 state에 저장
+  // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
     const { name } = e.target;
     setContents(name);
   };
 
-  //name값에 따라 다른 화면 출력
+  // name값에 따라 다른 화면 출력
   const selectComponent = {
     trans: (
       <Description
@@ -237,7 +241,7 @@ export default function ResearchField() {
     ),
   };
 
-  //버튼 함수
+  // 버튼 함수
   function FieldPrint({ title, id, engTitle }) {
     return (
       <Button
@@ -267,6 +271,7 @@ export default function ResearchField() {
     <div>
       <Header />
       <SubHeader main="연구" sub="AI연구분야" />
+
       {/* 랩실 설명을 꾸며주는 기능 */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Box
