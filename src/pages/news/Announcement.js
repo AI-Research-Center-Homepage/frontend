@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SubHeader from "../../components/SubHeader";
@@ -112,6 +114,8 @@ const CustomPagination = () => {
 const Announcement = () => {
   const mediaQuery = useMediaQuery("(min-width: 1100px)");
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <CssBaseline />
@@ -151,6 +155,7 @@ const Announcement = () => {
             },
           }}
           sx={{ cursor: "pointer" }}
+          onRowClick={() => navigate("/announcement_1")}
         />
       </div>
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Grid,
@@ -7,7 +8,6 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
-
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
@@ -20,9 +20,11 @@ import {
 function FeaturedPost(props) {
   const { post } = props;
 
+  const navigate = useNavigate();
+
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" onClick={() => navigate("/article_1")}>
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{

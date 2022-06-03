@@ -17,6 +17,8 @@ import Researcher from "./pages/member/Researcher";
 import Undergraduates from "./pages/member/Undergraduate";
 import InfoChannel from "./pages/news/InfoChannel";
 import Demo from "./pages/research/Demo";
+import AnnouncementDetails from "./pages/news/view_details/AnnouncementDetails";
+import ArticleDetails from "./pages/news/view_details/ArticleDetails";
 
 export const ArticleContext = createContext();
 
@@ -51,6 +53,10 @@ const App = () => {
           <Route path="/infochannel" element={<InfoChannel />} />
           <Route path="/announcement" element={<Announcement />} />
           <Route path="/article" element={<Article />} />
+
+          {/* 소식 - 자세히 보기 */}
+          <Route path="/announcement_1" element={<AnnouncementDetails />} />
+          <Route path="/article_1" element={<ArticleDetails />} />
 
           {/* 지원하기 */}
           <Route path="/apply" element={<Apply />} />
