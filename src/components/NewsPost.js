@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography, Button } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
@@ -30,6 +32,8 @@ const AttachFile = ({ attach }) => {
  */
 
 const NewsPost = ({ post }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       {/* 자세히 보기 */}
@@ -100,6 +104,24 @@ const NewsPost = ({ post }) => {
           </Stack>
         )}
         <Divider sx={{ borderBottomWidth: 1, background: "black" }} />
+
+        {/* 목록 버튼 */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            px: "1%",
+            pt: "1%",
+          }}
+        >
+          <Button
+            onClick={() => navigate(-1)}
+            sx={{ color: "black", border: "1px solid black" }}
+            variant="outlined"
+          >
+            <ListAltIcon /> &nbsp; 목록
+          </Button>
+        </Box>
       </Box>
     </div>
   );
