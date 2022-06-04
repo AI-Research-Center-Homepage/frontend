@@ -32,7 +32,7 @@ function FeaturedPost(props) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle2" paragraph>
-              {post.news.title}
+              {post.id}
             </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
@@ -42,7 +42,7 @@ function FeaturedPost(props) {
                 m: "auto",
                 display: { xs: "none", sm: "block" },
               }}
-              image={post.news.image}
+              image={post.image}
               alt="random"
             />
             <Typography
@@ -52,13 +52,13 @@ function FeaturedPost(props) {
                 mt: 3,
               }}
             >
-              {post.news.subtitle}
+              {post.title}
             </Typography>
             <Typography component="h2" variant="h5">
-              {post.news.title}
+              {post.createdDate}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.news.subtitle}
+              {post.modifiedDate}
             </Typography>
           </CardContent>
         </Card>

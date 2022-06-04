@@ -9,6 +9,7 @@ import Footer from "../../components/Footer";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { PostAddRounded } from "@mui/icons-material";
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
@@ -85,19 +86,16 @@ import axios from "axios";
  */
 
 export default function Post() {
-  const [infoData, SetInfoData] = useState([]);
+  const [infoData, SetInfoData] = useState({ news: [] });
 
   useEffect(() => {
-    axios
-      .get(
-        "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/InfoChannelMock"
-      )
-      .then((result) => {
-        console.log(result.data);
-        SetInfoData(result.data.news);
-        console.log(infoData);
-      })
-      .catch(() => {});
+    axios({
+      method: "get",
+      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/InfoChannelMock",
+      responseType: "json",
+    }).then((response) => {
+      SetInfoData(response.data);
+    });
   }, []);
 
   return (
@@ -114,7 +112,7 @@ export default function Post() {
         maxWidth="md"
       >
         <Grid container spacing={4}>
-          {infoData.map((post) => (
+          {infoData.news.map((post) => (
             <FeaturedPost post={post} />
           ))}
         </Grid>
