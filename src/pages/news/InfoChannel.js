@@ -7,6 +7,9 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 /**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-11
@@ -14,64 +17,64 @@ import Footer from "../../components/Footer";
  *@description
  *    소식통 dummy data
  */
-const info_data = [
-  {
-    id: 1,
-    header_subtitle: "소식통",
-    title: "1번 컨텐츠",
-    subtitle: "1번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 2,
-    header_subtitle: "소식통",
-    title: "2번 컨텐츠",
-    subtitle: "2번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 3,
-    header_subtitle: "소식통",
-    title: "3번 컨텐츠",
-    subtitle: "3번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 4,
-    header_subtitle: "소식통",
-    title: "4번 컨텐츠",
-    subtitle: "4번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 5,
-    header_subtitle: "소식통",
-    title: "5번 컨텐츠",
-    subtitle: "5번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 6,
-    header_subtitle: "소식통",
-    title: "6번 컨텐츠",
-    subtitle: "6번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 7,
-    header_subtitle: "소식통",
-    title: "7번 컨텐츠",
-    subtitle: "7번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    id: 8,
-    header_subtitle: "소식통",
-    title: "8번 컨텐츠",
-    subtitle: "8번 컨텐츠 본문",
-    image: "https://source.unsplash.com/random",
-  },
-];
+// const info_data = [
+//   {
+//     id: 1,
+//     header_subtitle: "소식통",
+//     title: "1번 컨텐츠",
+//     subtitle: "1번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 2,
+//     header_subtitle: "소식통",
+//     title: "2번 컨텐츠",
+//     subtitle: "2번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 3,
+//     header_subtitle: "소식통",
+//     title: "3번 컨텐츠",
+//     subtitle: "3번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 4,
+//     header_subtitle: "소식통",
+//     title: "4번 컨텐츠",
+//     subtitle: "4번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 5,
+//     header_subtitle: "소식통",
+//     title: "5번 컨텐츠",
+//     subtitle: "5번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 6,
+//     header_subtitle: "소식통",
+//     title: "6번 컨텐츠",
+//     subtitle: "6번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 7,
+//     header_subtitle: "소식통",
+//     title: "7번 컨텐츠",
+//     subtitle: "7번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+//   {
+//     id: 8,
+//     header_subtitle: "소식통",
+//     title: "8번 컨텐츠",
+//     subtitle: "8번 컨텐츠 본문",
+//     image: "https://source.unsplash.com/random",
+//   },
+// ];
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
@@ -82,6 +85,21 @@ const info_data = [
  */
 
 export default function Post() {
+  const [infoData, SetInfoData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/InfoChannelMock"
+      )
+      .then((result) => {
+        console.log(result.data);
+        SetInfoData(result.data.news);
+        console.log(infoData);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div>
       <CssBaseline />
@@ -96,7 +114,7 @@ export default function Post() {
         maxWidth="md"
       >
         <Grid container spacing={4}>
-          {info_data.map((post) => (
+          {infoData.map((post) => (
             <FeaturedPost post={post} />
           ))}
         </Grid>

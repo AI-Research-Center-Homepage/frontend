@@ -8,7 +8,6 @@ import {
   CardMedia,
 } from "@mui/material";
 
-
 /**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-04
@@ -33,7 +32,7 @@ function FeaturedPost(props) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle2" paragraph>
-              {post.header_subtitle}
+              {post.news.title}
             </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
@@ -43,7 +42,7 @@ function FeaturedPost(props) {
                 m: "auto",
                 display: { xs: "none", sm: "block" },
               }}
-              image={post.image}
+              image={post.news.image}
               alt="random"
             />
             <Typography
@@ -53,13 +52,13 @@ function FeaturedPost(props) {
                 mt: 3,
               }}
             >
-              {post.gray_subtitle}
+              {post.news.subtitle}
             </Typography>
             <Typography component="h2" variant="h5">
-              {post.title}
+              {post.news.title}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.subtitle}
+              {post.news.subtitle}
             </Typography>
           </CardContent>
         </Card>
