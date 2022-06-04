@@ -47,8 +47,8 @@ const mainMenuItems = [
     key: 2,
     title: "연구",
     contents: [
-      { subkey: 10, subcontent: "AI연구분야", path: "/" },
-      { subkey: 11, subcontent: "연구프로젝트", path: "/" },
+      { subkey: 10, subcontent: "AI연구분야", path: "/researchField" },
+      { subkey: 11, subcontent: "연구프로젝트", path: "/project" },
       { subkey: 12, subcontent: "연구논문", path: "/thesis" },
       { subkey: 13, subcontent: "연구결과데모", path: "/demo" },
     ],
@@ -57,7 +57,7 @@ const mainMenuItems = [
     key: 3,
     title: "구성원",
     contents: [
-      { subkey: 14, subcontent: "참여교수", path: "/" },
+      { subkey: 14, subcontent: "참여교수", path: "/professor" },
       { subkey: 15, subcontent: "운영위원회", path: "/committee" },
       { subkey: 16, subcontent: "대학원생", path: "/graduate" },
       { subkey: 17, subcontent: "학부 연구원생", path: "/undergraduate" },
