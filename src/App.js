@@ -16,6 +16,7 @@ import OrganizationChart from "./pages/introduction/OrganizationChart";
 import Researcher from "./pages/member/Researcher";
 import Undergraduates from "./pages/member/Undergraduate";
 import InfoChannel from "./pages/news/InfoChannel";
+import Project from "./pages/research/Project";
 import ResearchField from "./pages/research/ResearchField";
 import Demo from "./pages/research/Demo";
 
@@ -37,10 +38,11 @@ const App = () => {
 
           {/* 연구 */}
           <Route path="/researchfield" element={<ResearchField />} />
-          {/* 연구프로젝트 페이지 추가 예정 */}
+          <Route path="/project" element={<Project />} />
           <Route path="/thesis" element={<Thesis />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/researchfield" element={<ResearchField />} />
+
 
           {/* 구성원 */}
           <Route path="/professor" element={<Professor />} />

@@ -1,61 +1,61 @@
-import * as React from "react";
-import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import * as React from 'react';
+import { Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
 
-import Header from "../../components/Header";
-import SubHeader from "../../components/SubHeader";
-import Footer from "../../components/Footer";
+import Header from '../../components/Header';
+import SubHeader from '../../components/SubHeader';
+import Footer from '../../components/Footer';
 
 // 참여교수 데이터
 const prof = [
   {
-    name: "김토토",
-    major: "컴퓨터공학",
-    rank: "조교수",
-    doctoral: "인공지능",
-    email: "cheetah@jbnu.ac.kr",
-    lab: "101호",
-    number: "010-1111-1111",
-    img: "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080",
+    name: '김토토',
+    major: '컴퓨터공학',
+    rank: '조교수',
+    doctoral: '인공지능',
+    email: 'cheetah@jbnu.ac.kr',
+    lab: '101호',
+    number: '010-1111-1111',
+    img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
   },
   {
-    name: "치타리",
-    major: "컴퓨터공학",
-    rank: "부교수",
-    doctoral: "인공지능",
-    email: "cheetahLee@jbnu.ac.kr",
-    lab: "202호",
-    number: "010-1111-1111",
-    img: "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080",
+    name: '치타리',
+    major: '컴퓨터공학',
+    rank: '부교수',
+    doctoral: '인공지능',
+    email: 'cheetahLee@jbnu.ac.kr',
+    lab: '202호',
+    number: '010-1111-1111',
+    img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
   },
   {
-    name: "무민",
-    major: "컴퓨터공학",
-    rank: "정교수",
-    doctoral: "인공지능",
-    email: "moomin@jbnu.ac.kr",
-    lab: "203호",
-    number: "010-1111-1111",
-    img: "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080",
+    name: '무민',
+    major: '컴퓨터공학',
+    rank: '정교수',
+    doctoral: '인공지능',
+    email: 'moomin@jbnu.ac.kr',
+    lab: '203호',
+    number: '010-1111-1111',
+    img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
   },
   {
-    name: "에펠탑",
-    major: "컴퓨터공학",
-    rank: "조교수",
-    doctoral: "인공지능",
-    email: "paris@jbnu.ac.kr",
-    lab: "101호",
-    number: "010-1111-1111",
-    img: "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080",
+    name: '에펠탑',
+    major: '컴퓨터공학',
+    rank: '조교수',
+    doctoral: '인공지능',
+    email: 'paris@jbnu.ac.kr',
+    lab: '101호',
+    number: '010-1111-1111',
+    img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
   },
   {
-    name: "냉면",
-    major: "컴퓨터공학",
-    rank: "조교수",
-    doctoral: "인공지능",
-    email: "good@jbnu.ac.kr",
-    lab: "301호",
-    number: "010-1111-1111",
-    img: "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080",
+    name: '냉면',
+    major: '컴퓨터공학',
+    rank: '조교수',
+    doctoral: '인공지능',
+    email: 'good@jbnu.ac.kr',
+    lab: '301호',
+    number: '010-1111-1111',
+    img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
   },
 ];
 
@@ -83,13 +83,13 @@ export default function Professor() {
       <Grid container>
         <Grid item xs={12}>
           {prof.map((element) => (
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Card
                 sx={{
-                  display: "flex",
+                  display: 'flex',
                   boxShadow: 5,
                   my: 1,
-                  width: { xs: "80%", md: "40%" },
+                  width: { xs: '80%', md: '40%' },
                   maxHeight: 200,
                 }}
               >
@@ -97,16 +97,16 @@ export default function Professor() {
                 <CardMedia
                   component="img"
                   sx={{
-                    width: "150px",
-                    height: "auto",
-                    padding: "1%",
+                    width: '150px',
+                    height: 'auto',
+                    padding: '1%',
                   }}
                   image={element.img}
                   alt="image"
                 />
                 {/* 텍스트 정보 */}
 
-                <CardContent sx={{ flex: "1 0 auto" }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
                   <Typography component="div" variant="body1">
                     <strong>{element.name}</strong>
                   </Typography>
