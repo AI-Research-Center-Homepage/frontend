@@ -8,6 +8,7 @@ import {
   CardMedia,
 } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
@@ -18,11 +19,22 @@ import {
  */
 
 function FeaturedPost(props) {
+  const navigate = useNavigate();
   const { post } = props;
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea
+        component="a"
+        onClick={() => {
+          navigate("/toast", {
+            state: {
+              main: props.main,
+              sub: props.sub,
+            },
+          });
+        }}
+      >
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{

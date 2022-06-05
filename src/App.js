@@ -20,6 +20,8 @@ import Project from "./pages/research/Project";
 import ResearchField from "./pages/research/ResearchField";
 import Demo from "./pages/research/Demo";
 
+import Toast from "./pages/Toast";
+
 export const ArticleContext = createContext();
 
 const App = () => {
@@ -43,7 +45,6 @@ const App = () => {
           <Route path="/demo" element={<Demo />} />
           <Route path="/researchfield" element={<ResearchField />} />
 
-
           {/* 구성원 */}
           <Route path="/professor" element={<Professor />} />
           <Route path="/committee" element={<Committee />} />
@@ -58,6 +59,9 @@ const App = () => {
 
           {/* 지원하기 */}
           <Route path="/apply" element={<Apply />} />
+
+          {/* toastUI */}
+          <Route path="/toast" element={<Toast />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>

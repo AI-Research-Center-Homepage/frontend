@@ -98,7 +98,7 @@ export default function Post() {
       >
         <Grid container spacing={4}>
           {dummyCards.map((post) => (
-            <FeaturedPost post={post} />
+            <FeaturedPost post={post} main="소식" sub="언론보도" />
           ))}
         </Grid>
       </Container>
