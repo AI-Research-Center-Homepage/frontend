@@ -27,8 +27,6 @@ function ProfPrint({ title, info }) {
  *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
  */
 export default function Professor() {
-  // let prof = GetProfessor();
-
   const [prof, setProf] = useState([]);
 
   useEffect(() => {
