@@ -9,7 +9,6 @@ import Footer from "../../components/Footer";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { PostAddRounded } from "@mui/icons-material";
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
@@ -86,7 +85,7 @@ import { PostAddRounded } from "@mui/icons-material";
  */
 
 export default function Post() {
-  const [infoData, SetInfoData] = useState({ news: [] });
+  const [infoData, SetInfoData] = useState({ info: [] });
 
   useEffect(() => {
     axios({
@@ -112,8 +111,8 @@ export default function Post() {
         maxWidth="md"
       >
         <Grid container spacing={4}>
-          {infoData.news.map((post) => (
-            <FeaturedPost post={post} />
+          {infoData.info.map((post) => (
+            <FeaturedPost post={post} boardName="소식통" />
           ))}
         </Grid>
       </Container>
