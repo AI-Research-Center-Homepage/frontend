@@ -72,14 +72,14 @@ export default function Professor() {
                   </Typography>
                   <br></br>
                   <ProfPrint title="전공" info={element.major}></ProfPrint>
-                  {/* <ProfPrint title="직급" info={element.rank}></ProfPrint>
+
                   <ProfPrint
                     title="박사학위"
-                    info={element.doctoral}
+                    info={element.doctorate}
                   ></ProfPrint>
-                  <ProfPrint title="이메일" info={element.email}></ProfPrint> */}
+                  <ProfPrint title="이메일" info={element.email}></ProfPrint>
                   <ProfPrint title="연구실" info={element.location}></ProfPrint>
-                  {/* <ProfPrint title="전화번호" info={element.number}></ProfPrint> */}
+                  <ProfPrint title="전화번호" info={element.number}></ProfPrint>
                 </CardContent>
               </Card>
             </div>
