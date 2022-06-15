@@ -155,7 +155,7 @@ const Announcement = () => {
             },
           }}
           sx={{ cursor: "pointer" }}
-          onRowClick={() => navigate("/announcement_1")}
+          onRowClick={() => navigate(`/announcement/${dummyRows.id}`)} // 수정 필요!!!
         />
       </div>
 

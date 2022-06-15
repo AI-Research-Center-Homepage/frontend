@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import SubHeader from "../../../components/SubHeader";
@@ -30,7 +31,11 @@ const post = {
  *@description 공지사항 자세히 보기 페이지 구현
  */
 
-const AnnouncementViewDetails = () => {
+const AnnouncementPost = () => {
+  // 게시물 id를 url로부터 저장
+  const { id } = useParams();
+  // 이후에 id에 해당하는 게시물 데이터를 요청하도록 코드 작성
+
   return (
     <div>
       <Header />
@@ -41,4 +46,4 @@ const AnnouncementViewDetails = () => {
   );
 };
 
-export default AnnouncementViewDetails;
+export default AnnouncementPost;
