@@ -8,10 +8,10 @@ import Footer from "../../components/Footer";
 
 import axios from "axios";
 
-//postman url
+// postman url
 const url = "https://b9e0dff8-478c-4ad0-b398-b6f944cbfa81.mock.pstmn.io";
 
-//불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
+// 불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
 function ProfPrint({ title, info }) {
   return (
     <Typography variant="body2" color="text.secondary" component="div">
@@ -27,8 +27,10 @@ function ProfPrint({ title, info }) {
  *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
  */
 export default function Professor() {
+  //API로 받아온 정보 저장
   const [prof, setProf] = useState([]);
 
+  //API로 정보 받기
   useEffect(() => {
     axios.get(url + "/professor").then((response) => {
       setProf(response.data.professor);
@@ -39,7 +41,6 @@ export default function Professor() {
     <div>
       <Header />
       <SubHeader main="구성원" sub="참여교수" />
-
       <Grid container>
         <Grid item xs={12}>
           {prof.map((element) => (
@@ -64,15 +65,14 @@ export default function Professor() {
                   image={element.image}
                   alt="image"
                 />
-                {/* 텍스트 정보 */}
 
+                {/* 텍스트 정보 */}
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography component="div" variant="body1">
                     <strong>{element.name}</strong>
                   </Typography>
                   <br></br>
                   <ProfPrint title="전공" info={element.major}></ProfPrint>
-
                   <ProfPrint
                     title="박사학위"
                     info={element.doctorate}
@@ -86,7 +86,6 @@ export default function Professor() {
           ))}
         </Grid>
       </Grid>
-
       <Footer />
     </div>
   );
