@@ -11,6 +11,60 @@ import axios from "axios";
 // postman url
 const url = "https://b9e0dff8-478c-4ad0-b398-b6f944cbfa81.mock.pstmn.io";
 
+// 더미데이터
+// const prof = [
+//   {
+//     name: '김토토',
+//     major: '컴퓨터공학',
+//     rank: '조교수',
+//     doctoral: '인공지능',
+//     email: 'cheetah@jbnu.ac.kr',
+//     lab: '101호',
+//     number: '010-1111-1111',
+//     img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
+//   },
+//   {
+//     name: '치타리',
+//     major: '컴퓨터공학',
+//     rank: '부교수',
+//     doctoral: '인공지능',
+//     email: 'cheetahLee@jbnu.ac.kr',
+//     lab: '202호',
+//     number: '010-1111-1111',
+//     img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
+//   },
+//   {
+//     name: '무민',
+//     major: '컴퓨터공학',
+//     rank: '정교수',
+//     doctoral: '인공지능',
+//     email: 'moomin@jbnu.ac.kr',
+//     lab: '203호',
+//     number: '010-1111-1111',
+//     img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
+//   },
+//   {
+//     name: '에펠탑',
+//     major: '컴퓨터공학',
+//     rank: '조교수',
+//     doctoral: '인공지능',
+//     email: 'paris@jbnu.ac.kr',
+//     lab: '101호',
+//     number: '010-1111-1111',
+//     img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
+//   },
+//   {
+//     name: '냉면',
+//     major: '컴퓨터공학',
+//     rank: '조교수',
+//     doctoral: '인공지능',
+//     email: 'good@jbnu.ac.kr',
+//     lab: '301호',
+//     number: '010-1111-1111',
+//     img: 'https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080',
+//   },
+// ];
+
 // 불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
 function ProfPrint({ title, info }) {
   return (
@@ -27,10 +81,10 @@ function ProfPrint({ title, info }) {
  *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
  */
 export default function Professor() {
-  //API로 받아온 정보 저장
+  // API로 받아온 정보 저장
   const [prof, setProf] = useState([]);
 
-  //API로 정보 받기
+  // API로 정보 받기
   useEffect(() => {
     axios.get(url + "/professor").then((response) => {
       setProf(response.data.professor);
