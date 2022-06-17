@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Typography,
   Grid,
@@ -8,7 +10,6 @@ import {
   CardMedia,
 } from "@mui/material";
 
-
 /**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-04
@@ -17,12 +18,15 @@ import {
  *    사진이 포함된 세로 형태의 게시글 컴포넌트
  */
 
-function FeaturedPost(props) {
-  const { post } = props;
+function FeaturedPost({ post }) {
+  const navigate = useNavigate();
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea
+        component="a"
+        onClick={() => navigate(`/article/${post.id}`)}
+      >
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{
