@@ -156,7 +156,8 @@ export default function FloatingActionButtonZoom() {
         setThesis(response.data);
       });
   }, []);
-  console.log(thesis);
+  // console.log(thesis_data);
+  console.log(thesis.ML.thesis[0].koName);
   return (
     <div>
       <Header />
@@ -196,7 +197,9 @@ export default function FloatingActionButtonZoom() {
           {thesis_data[0].ML.thesis[0].koName}
           {thesis_data[0].ML.thesis[0].enName}
           {thesis_data[0].ML.thesis[0].PublishDate}
-          {thesis[0].ML.thesis[0].title}
+          {/* {thesis[0].ML.thesis[0].title} */}
+          <br />
+          {thesis.ML.thesis[0].koName}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           CVPR 2022(컴퓨터 비전과 패턴인식 학회)
