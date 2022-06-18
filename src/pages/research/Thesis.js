@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // import 7개까지 각 한줄로 분리 가능
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Login } from "@mui/icons-material";
+// import { Login } from "@mui/icons-material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -139,6 +139,7 @@ function a11yProps(index) {
 }
 
 export default function FloatingActionButtonZoom() {
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -155,7 +156,7 @@ export default function FloatingActionButtonZoom() {
         setThesis(response.data);
       });
   }, []);
-
+  console.log(thesis);
   return (
     <div>
       <Header />
@@ -190,7 +191,12 @@ export default function FloatingActionButtonZoom() {
         </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {thesis}
+          {thesis_data[0].ML.thesis[0].title}
+          {thesis_data[0].ML.thesis[0].journal}
+          {thesis_data[0].ML.thesis[0].koName}
+          {thesis_data[0].ML.thesis[0].enName}
+          {thesis_data[0].ML.thesis[0].PublishDate}
+          {thesis[0].ML.thesis[0].title}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           CVPR 2022(컴퓨터 비전과 패턴인식 학회)
