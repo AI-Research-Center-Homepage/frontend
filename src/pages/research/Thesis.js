@@ -8,6 +8,62 @@ import PropTypes from "prop-types";
 // import 7개까지 각 한줄로 분리 가능
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { Login } from "@mui/icons-material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const thesis_data = [
+  {
+    ML: {
+      thesis: [
+        {
+          id: 1,
+          field: "ML",
+          title: "A",
+          koName: "Kim",
+          enName: "김",
+          journal: "ABC",
+          PublishDate: 20220202,
+          url: "www.naver.com",
+        },
+        {
+          id: 2,
+          field: "ML",
+          title: "B",
+          koName: "Lee",
+          enName: "이",
+          journal: "ABC",
+          PublishDate: 20220202,
+          url: "www.naver.com",
+        },
+      ],
+    },
+    Vision: {
+      thesis: [
+        {
+          id: 3,
+          field: "Vision",
+          title: "C",
+          koName: "Park",
+          enName: "박",
+          journal: "ABC",
+          PublishDate: 20220202,
+          url: "www.naver.com",
+        },
+        {
+          id: 4,
+          field: "Vision",
+          title: "D",
+          koName: "Choi",
+          enName: "최",
+          journal: "ABC",
+          PublishDate: 20220202,
+          url: "www.naver.com",
+        },
+      ],
+    },
+  },
+];
 
 /*
  *@author BeomGi-Lee jeongiun@naver.com
@@ -83,12 +139,22 @@ function a11yProps(index) {
 }
 
 export default function FloatingActionButtonZoom() {
-  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [thesis, setThesis] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis"
+      )
+      .then((response) => {
+        setThesis(response.data);
+      });
+  }, []);
 
   return (
     <div>
@@ -124,7 +190,7 @@ export default function FloatingActionButtonZoom() {
         </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          ICLR 2022 (표현 학습 국제학회)
+          {thesis}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           CVPR 2022(컴퓨터 비전과 패턴인식 학회)
@@ -142,6 +208,7 @@ export default function FloatingActionButtonZoom() {
           FAST 2021 (USENIX 파일저장기술학회)
         </TabPanel>
       </Box>
+
       <Footer />
     </div>
   );

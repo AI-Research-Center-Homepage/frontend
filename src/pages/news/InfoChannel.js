@@ -7,6 +7,9 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 /**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-05-11
@@ -82,6 +85,16 @@ const info_data = [
  */
 
 export default function Post() {
+  const [info, setInfo] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/article"
+      )
+      .then((response) => {
+        setInfo(response.data);
+      });
+  }, []);
   return (
     <div>
       <CssBaseline />
@@ -96,7 +109,7 @@ export default function Post() {
         maxWidth="md"
       >
         <Grid container spacing={4}>
-          {info_data.map((post) => (
+          {info.map((post) => (
             <FeaturedPost post={post} />
           ))}
         </Grid>
