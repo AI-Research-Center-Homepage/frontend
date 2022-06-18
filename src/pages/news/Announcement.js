@@ -77,6 +77,7 @@ const dummycolumns = [
     headerName: "조회수",
     flex: 1,
     sortable: false,
+    disableColumnMenu: true,
     headerAlign: "center",
     align: "center",
     maxWidth: 100,
