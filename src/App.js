@@ -22,6 +22,7 @@ import Demo from "./pages/research/Demo";
 import AnnouncementPost from "./pages/news/view_post/AnnouncementPost";
 import ArticlePost from "./pages/news/view_post/ArticlePost";
 import InfoChannelPost from "./pages/news/view_post/InfoChannelPost";
+import AdminHeader from "./components/AdminHeader";
 
 export const ArticleContext = createContext();
 
@@ -46,7 +47,6 @@ const App = () => {
           <Route path="/demo" element={<Demo />} />
           <Route path="/researchfield" element={<ResearchField />} />
 
-
           {/* 구성원 */}
           <Route path="/professor" element={<Professor />} />
           <Route path="/committee" element={<Committee />} />
@@ -66,6 +66,10 @@ const App = () => {
 
           {/* 지원하기 */}
           <Route path="/apply" element={<Apply />} />
+
+          {/* 관리자 */}
+          {/* 추후 admin 페이지에 통합 필요 구현을 위해 잠시 이용 */}
+          <Route path="/admin" element={<AdminHeader />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
