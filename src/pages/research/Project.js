@@ -111,28 +111,30 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-31
+ *@date 2022-06-19
  *@description 프로젝트 페이지
  */
 export default function Project() {
   const [contents, setContents] = useState("기계번역");
   const [objects, setObjects] = useState({});
 
+  // mock api 데이터를 받아옴
   useEffect(() => {
     axios.get(url + "/project").then((response) => {
       setObjects(response.data);
     });
   }, []);
 
+  // title만 모아 map으로 FieldPrint 함수에 전달하기 위한 배열
   let fieldName = [
-    objects.trans.projects[0].title,
-    objects.qaa.projects[0].title,
-    objects.exobrain.projects[0].title,
-    objects.natural.projects[0].title,
-    objects.first_null.projects[0].title,
-    objects.second_null.projects[0].title,
-    objects.third_null.projects[0].title,
-    objects.fourth_null.projects[0].title,
+    objects.trans?.projects[0].title,
+    objects.qaa?.projects[0].title,
+    objects.exobrain?.projects[0].title,
+    objects.natural?.projects[0].title,
+    objects.first_null?.projects[0].title,
+    objects.second_null?.projects[0].title,
+    objects.third_null?.projects[0].title,
+    objects.fourth_null?.projects[0].title,
   ];
 
   // 클릭한 버튼의 name값을 state에 저장
@@ -145,58 +147,58 @@ export default function Project() {
   const selectComponent = {
     기계번역: (
       <Description
-        title={objects.trans.projects[0].title}
-        participants={objects.trans.projects[0].participants}
-        desc={objects.trans.projects[0].description}
+        title={objects.trans?.projects[0].title}
+        participants={objects.trans?.projects[0].participants}
+        desc={objects.trans?.projects[0].description}
       />
     ),
     질의응답: (
       <Description
-        title={objects.qaa.projects[0].title}
-        participants={objects.qaa.projects[0].participants}
-        desc={objects.qaa.projects[0].description}
+        title={objects.qaa?.projects[0].title}
+        participants={objects.qaa?.projects[0].participants}
+        desc={objects.qaa?.projects[0].description}
       />
     ),
     "엑소 브레인": (
       <Description
-        title={objects.exobrain.projects[0].title}
-        participants={objects.exobrain.projects[0].participants}
-        desc={objects.exobrain.projects[0].description}
+        title={objects.exobrain?.projects[0].title}
+        participants={objects.exobrain?.projects[0].participants}
+        desc={objects.exobrain?.projects[0].description}
       />
     ),
     "자연어 처리": (
       <Description
-        title={objects.natural.projects[0].title}
-        participants={objects.natural.projects[0].participants}
-        desc={objects.natural.projects[0].description}
+        title={objects.natural?.projects[0].title}
+        participants={objects.natural?.projects[0].participants}
+        desc={objects.natural?.projects[0].description}
       />
     ),
     빈칸1: (
       <Description
-        title={objects.first_null.projects[0].title}
-        participants={objects.first_null.projects[0].participants}
-        desc={objects.first_null.projects[0].description}
+        title={objects.first_null?.projects[0].title}
+        participants={objects.first_null?.projects[0].participants}
+        desc={objects.first_null?.projects[0].description}
       />
     ),
     빈칸2: (
       <Description
-        title={objects.second_null.projects[0].title}
-        participants={objects.second_null.projects[0].participants}
-        desc={objects.second_null.projects[0].description}
+        title={objects.second_null?.projects[0].title}
+        participants={objects.second_null?.projects[0].participants}
+        desc={objects.second_null?.projects[0].description}
       />
     ),
     빈칸3: (
       <Description
-        title={objects.third_null.projects[0].title}
-        participants={objects.third_null.projects[0].participants}
-        desc={objects.third_null.projects[0].description}
+        title={objects.third_null?.projects[0].title}
+        participants={objects.third_null?.projects[0].participants}
+        desc={objects.third_null?.projects[0].description}
       />
     ),
     빈칸4: (
       <Description
-        title={objects.fourth_null.projects[0].title}
-        participants={objects.fourth_null.projects[0].participants}
-        desc={objects.fourth_null.projects[0].description}
+        title={objects.fourth_null?.projects[0].title}
+        participants={objects.fourth_null?.projects[0].participants}
+        desc={objects.fourth_null?.projects[0].description}
       />
     ),
   };
