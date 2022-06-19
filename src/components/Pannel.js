@@ -10,13 +10,13 @@ import {
 /**
  *@author BeomGi-Lee jeongiun@naver.com
  *@date 2022-06-20
- *@name PannelPost
+ *@name Pannel
  *@description
- *    논문 데이터에 맞게 제작한 컴포넌트
- *    koName, enName이 하나일 때
+ *    논문 데이터에 맞게 제작한 컴포넌트2
+ *    members 안에 koName, enName이 여러 개 일 때
  */
 
-function PannelPost(props) {
+function Pannel(props) {
   const { post } = props;
 
   return (
@@ -44,8 +44,14 @@ function PannelPost(props) {
             <Typography component="h2" variant="h5">
               {post.title}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
-              {post.koName} {post.enName}
+            {/* <Typography component="h2" variant="h5">
+              {post.members}
+            </Typography> */}
+            <Typography variant="subtitle1">
+              {post.members.map((data) => data.enName)}
+            </Typography>
+            <Typography variant="subtitle1">
+              {post.members.map((data) => data.koName)}
             </Typography>
             <Typography variant="overline" paragraph>
               {post.PublishDate}
@@ -57,4 +63,4 @@ function PannelPost(props) {
   );
 }
 
-export default PannelPost;
+export default Pannel;

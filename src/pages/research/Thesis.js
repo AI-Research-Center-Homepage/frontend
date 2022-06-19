@@ -13,59 +13,60 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import PannelPost from "../../components/PannelPost";
+import Pannel from "../../components/Pannel";
 
-const thesis_data = [
-  {
-    ML: {
-      thesis: [
-        {
-          id: 1,
-          field: "ML",
-          title: "A",
-          koName: "Kim",
-          enName: "김",
-          journal: "ABC",
-          PublishDate: 20220202,
-          url: "www.naver.com",
-        },
-        {
-          id: 2,
-          field: "ML",
-          title: "B",
-          koName: "Lee",
-          enName: "이",
-          journal: "ABC",
-          PublishDate: 20220202,
-          url: "www.naver.com",
-        },
-      ],
-    },
-    Vision: {
-      thesis: [
-        {
-          id: 3,
-          field: "Vision",
-          title: "C",
-          koName: "Park",
-          enName: "박",
-          journal: "ABC",
-          PublishDate: 20220202,
-          url: "www.naver.com",
-        },
-        {
-          id: 4,
-          field: "Vision",
-          title: "D",
-          koName: "Choi",
-          enName: "최",
-          journal: "ABC",
-          PublishDate: 20220202,
-          url: "www.naver.com",
-        },
-      ],
-    },
-  },
-];
+// const thesis_data = [
+//   {
+//     ML: {
+//       thesis: [
+//         {
+//           id: 1,
+//           field: "ML",
+//           title: "A",
+//           koName: "Kim",
+//           enName: "김",
+//           journal: "ABC",
+//           PublishDate: 20220202,
+//           url: "www.naver.com",
+//         },
+//         {
+//           id: 2,
+//           field: "ML",
+//           title: "B",
+//           koName: "Lee",
+//           enName: "이",
+//           journal: "ABC",
+//           PublishDate: 20220202,
+//           url: "www.naver.com",
+//         },
+//       ],
+//     },
+//     Vision: {
+//       thesis: [
+//         {
+//           id: 3,
+//           field: "Vision",
+//           title: "C",
+//           koName: "Park",
+//           enName: "박",
+//           journal: "ABC",
+//           PublishDate: 20220202,
+//           url: "www.naver.com",
+//         },
+//         {
+//           id: 4,
+//           field: "Vision",
+//           title: "D",
+//           koName: "Choi",
+//           enName: "최",
+//           journal: "ABC",
+//           PublishDate: 20220202,
+//           url: "www.naver.com",
+//         },
+//       ],
+//     },
+//   },
+// ];
 
 /*
  *@author BeomGi-Lee jeongiun@naver.com
@@ -152,14 +153,13 @@ export default function FloatingActionButtonZoom() {
   useEffect(() => {
     axios
       .get(
-        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis"
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis2"
       )
       .then((response) => {
         setTheses(response.data);
       });
   }, []);
-  // console.log(thesis_data);
-  // console.log(thesis.ML.thesis[0].koName);
+
   return (
     <div>
       <Header />
@@ -195,7 +195,7 @@ export default function FloatingActionButtonZoom() {
 
         <TabPanel value={value} index={0} dir={theme.direction}>
           {theses.ML?.thesis.map((post) => (
-            <PannelPost post={post} />
+            <Pannel post={post} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -204,7 +204,9 @@ export default function FloatingActionButtonZoom() {
           ))}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          VLDB 2022 (거대 데이터 베이스 컨퍼런스)
+          {theses.DataIntelli?.thesis.map((post) => (
+            <PannelPost post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           EMNLP 2021 (자연어처리에서의 경험적 방법론 학회)
