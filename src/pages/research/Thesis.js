@@ -12,6 +12,8 @@ import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import PannelPost from "../../components/PannelPost";
+
 const thesis_data = [
   {
     ML: {
@@ -146,18 +148,18 @@ export default function FloatingActionButtonZoom() {
     setValue(newValue);
   };
 
-  const [thesis, setThesis] = useState([]);
+  const [theses, setTheses] = useState([]);
   useEffect(() => {
     axios
       .get(
         "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis"
       )
       .then((response) => {
-        setThesis(response.data);
+        setTheses(response.data);
       });
   }, []);
   // console.log(thesis_data);
-  console.log(thesis.ML.thesis[0].koName);
+  // console.log(thesis.ML.thesis[0].koName);
   return (
     <div>
       <Header />
@@ -192,17 +194,14 @@ export default function FloatingActionButtonZoom() {
         </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {thesis_data[0].ML.thesis[0].title}
-          {thesis_data[0].ML.thesis[0].journal}
-          {thesis_data[0].ML.thesis[0].koName}
-          {thesis_data[0].ML.thesis[0].enName}
-          {thesis_data[0].ML.thesis[0].PublishDate}
-          {/* {thesis[0].ML.thesis[0].title} */}
-          <br />
-          {thesis.ML.thesis[0].koName}
+          {theses.ML?.thesis.map((post) => (
+            <PannelPost post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          CVPR 2022(컴퓨터 비전과 패턴인식 학회)
+          {theses.Vision?.thesis.map((post) => (
+            <PannelPost post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           VLDB 2022 (거대 데이터 베이스 컨퍼런스)
