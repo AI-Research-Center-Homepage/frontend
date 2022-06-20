@@ -17,36 +17,36 @@ import axios from "axios";
  *@description
  *    언론보도 dummy data
  */
-const dummyCards = [
-  {
-    id: 1,
-    title: "1번 컨텐츠",
-    image: "https://source.unsplash.com/random",
-    createdDate: "2022-01-01'T'00:00:00",
-    modifiedDate: "2022-01-02'T'00:00:00",
-  },
-  {
-    id: 2,
-    title: "2번 컨텐츠",
-    image: "https://source.unsplash.com/random",
-    createdDate: "2022-01-03'T'00:00:00",
-    modifiedDate: "2022-01-04'T'00:00:00",
-  },
-  {
-    id: 3,
-    title: "3번 컨텐츠",
-    image: "https://source.unsplash.com/random",
-    createdDate: "2022-01-05'T'00:00:00",
-    modifiedDate: "2022-01-06'T'00:00:00",
-  },
-  {
-    id: 4,
-    title: "4번 컨텐츠",
-    image: "https://source.unsplash.com/random",
-    createdDate: "2022-01-07'T'00:00:00",
-    modifiedDate: "2022-01-08'T'00:00:00",
-  },
-];
+// const dummyCards = [
+//   {
+//     id: 1,
+//     title: "1번 컨텐츠",
+//     image: "https://source.unsplash.com/random",
+//     createdDate: "2022-01-01'T'00:00:00",
+//     modifiedDate: "2022-01-02'T'00:00:00",
+//   },
+//   {
+//     id: 2,
+//     title: "2번 컨텐츠",
+//     image: "https://source.unsplash.com/random",
+//     createdDate: "2022-01-03'T'00:00:00",
+//     modifiedDate: "2022-01-04'T'00:00:00",
+//   },
+//   {
+//     id: 3,
+//     title: "3번 컨텐츠",
+//     image: "https://source.unsplash.com/random",
+//     createdDate: "2022-01-05'T'00:00:00",
+//     modifiedDate: "2022-01-06'T'00:00:00",
+//   },
+//   {
+//     id: 4,
+//     title: "4번 컨텐츠",
+//     image: "https://source.unsplash.com/random",
+//     createdDate: "2022-01-07'T'00:00:00",
+//     modifiedDate: "2022-01-08'T'00:00:00",
+//   },
+// ];
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
