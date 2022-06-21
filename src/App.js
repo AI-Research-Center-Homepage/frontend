@@ -23,6 +23,7 @@ import AnnouncementPost from "./pages/news/view_post/AnnouncementPost";
 import ArticlePost from "./pages/news/view_post/ArticlePost";
 import InfoChannelPost from "./pages/news/view_post/InfoChannelPost";
 import AdminHeader from "./components/AdminHeader";
+import AdminInfoChannel from "./admin/pages/news/AdminInfoChannel";
 
 export const ArticleContext = createContext();
 
@@ -70,6 +71,10 @@ const App = () => {
           {/* 관리자 */}
           {/* 추후 admin 페이지에 통합 필요 구현을 위해 잠시 이용 */}
           <Route path="/admin" element={<AdminHeader />} />
+          <Route
+            path="/admin/news/infochannel"
+            element={<AdminInfoChannel />}
+          />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
