@@ -9,6 +9,7 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
+  Button,
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -30,7 +31,7 @@ const adminHeaderItems = [
   },
   {
     key: 2,
-    title: "게시판",
+    title: "소식",
     contents: [
       { subkey: 9, subcontent: "소식통", path: "" },
       { subkey: 10, subcontent: "공지사항", path: "" },
@@ -49,12 +50,17 @@ const adminHeaderItems = [
   },
 ];
 
+/**
+ *@author Suin-Jeong, suin8@jbnu.ac.kr
+ *@date 2022-06-21
+ *@description 관리자 페이지 왼쪽, 상단에 고정적으로 위치하는 메뉴
+ */
+
 const AdminHeader = () => {
   const navigate = useNavigate();
 
   const [expandedSideMenu, setExpandedSideMenu] = useState(1);
-  const [mainText, setMainText] = useState("구성원");
-  const [subText, setSubText] = useState(" > 교수");
+  const [mainText, setMainText] = useState("구성원 > 교수");
   const [isSelected, setIsSelected] = useState(4);
 
   const handleSelectedColor = (key) => {
@@ -85,27 +91,29 @@ const AdminHeader = () => {
             {/* logo */}
             <Card
               sx={{
-                minWidth: "70px",
-                maxWidth: "70px",
-                ml: "15px",
-                cursor: "pointer",
                 boxShadow: "none",
+                display: "flex",
+                justifyContent: "space-between",
               }}
               onClick={() => navigate("/admin")}
             >
-              <CardMedia component="img" image={jbnu} alt="jbnu logo" />
+              <CardMedia
+                sx={{ maxWidth: "70px", ml: "15px", cursor: "pointer" }}
+                component="img"
+                image={jbnu}
+                alt="jbnu logo"
+              />
             </Card>
 
             <Divider flexItem sx={{ alignSelf: "stretch", height: "auto" }} />
 
+            {/* Collapse Menu */}
             {adminHeaderItems.map(({ key, title, contents }) => (
               <div key={key}>
                 <ListItemButton
                   sx={{ py: 1.5 }}
                   onClick={() => {
                     handleExpanded(key);
-                    setMainText(title);
-                    setSubText("");
                   }}
                 >
                   <ListItemText primary={title} />
@@ -132,7 +140,7 @@ const AdminHeader = () => {
                         }}
                         key={subkey}
                         onClick={() => {
-                          setSubText(" > " + subcontent);
+                          setMainText(title + " > " + subcontent);
                           handleSelectedColor(subkey);
                           navigate(`${path}`);
                         }}
@@ -145,11 +153,6 @@ const AdminHeader = () => {
                 </Collapse>
               </div>
             ))}
-            <ListItemButton
-              sx={{ position: "absolute", bottom: "0px", width: "100%" }}
-            >
-              <ListItemText primary="Log Out" />
-            </ListItemButton>
           </List>
         </Grid>
 
@@ -162,12 +165,13 @@ const AdminHeader = () => {
               minHeight: "70px",
               alignItems: "center",
               pl: "3%",
+              justifyContent: "space-between",
             }}
           >
-            <Typography variant="h5">
-              {mainText}
-              {subText}
-            </Typography>
+            <Typography variant="h5">{mainText}</Typography>
+            <Button variant="text" size="large" sx={{ mr: "3%" }}>
+              로그아웃
+            </Button>
           </Box>
           <Divider flexitem />
         </Grid>
