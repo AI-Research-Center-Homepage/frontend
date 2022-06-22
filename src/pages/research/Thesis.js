@@ -15,15 +15,21 @@ import { useEffect, useState } from "react";
 import PannelPost from "../../components/PannelPost";
 import Pannel from "../../components/Pannel";
 
-// 멤버가 하나인 PannelPost용 데이터
+// 적용된 논문 데이터
 // {
 // 	"ML": {
 // 		"thesis": [{
 // 				"id": 1,
 // 				"field": "ML",
 // 				"title": "Frustratingly Easy System Combination for Grammatical Error Correction",
-// 				"koName": "Seung-Hoon Na",
-// 				"enName": "나승훈",
+// 				"enName": [
+//                     "Seung-Hoon Na",
+//                     "Seonhoon Kim"
+//                 ],
+// 				"koName": [
+//                     "나승훈",
+//                     "김선훈"
+//                 ],
 // 				"journal": "NAACL",
 // 				"PublishDate": 20220202,
 // 				"url": "www.naver.com"
@@ -32,8 +38,14 @@ import Pannel from "../../components/Pannel";
 // 				"id": 2,
 // 				"field": "ML",
 // 				"title": "LM-BFF-MS: Improving Few-Shot Fine-tuning of Language Models based on Multiple Soft Demonstration Memory",
-// 				"koName": "Donghyeon Jeon",
-// 				"enName": "전동현",
+// 				"enName": [
+//                     "Donghyeon Jeon",
+//                     "Inho Kang"
+//                 ],
+// 				"koName": [
+//                     "전동현",
+//                     "강인호"
+//                 ],
 // 				"journal": "ACL",
 // 				"PublishDate": 20220202,
 // 				"url": "www.naver.com"
@@ -45,8 +57,14 @@ import Pannel from "../../components/Pannel";
 // 				"id": 3,
 // 				"field": "Vision",
 // 				"title": "Impact of Sentence Representation Matching in Neural Machine Translation",
-// 				"koName": "Kangil Kim",
-// 				"enName": "김강일",
+// 				"enName": [
+//                     "Kangil Kim",
+//                     "Sangkeun Jung"
+//                 ],
+// 				"koName": [
+//                     "김강일",
+//                     "정상근"
+//                 ],
 // 				"journal": "Applied Sciences",
 // 				"PublishDate": 20220202,
 // 				"url": "www.naver.com"
@@ -55,144 +73,17 @@ import Pannel from "../../components/Pannel";
 // 				"id": 4,
 // 				"field": "Vision",
 // 				"title": "A Comparison of Speech Features between Mild Cognitive Impairment and Healthy Aging Groups",
-// 				"koName": "Ko Woon Kim",
-// 				"enName": "김고운",
+// 				"enName": [
+//                     "Ko Woon Kim",
+//                     "Sangin Woo"
+//                 ],
+// 				"koName": [
+//                     "김고운",
+//                     "우상인"
+//                 ],
 // 				"journal": "Dementia and Neurocognitive Disorder",
 // 				"PublishDate": 20220202,
 // 				"url": "www.naver.com"
-// 			}
-// 		]
-// 	}
-// }
-
-// 멤버가 여러개인 Pannel용 데이터
-// {
-// 	"ML": {
-// 		"thesis": [{
-// 				"id": 1,
-// 				"field": "ML",
-// 				"title": "Frustratingly Easy System Combination for Grammatical Error Correction",
-// 				"journal": "NAACL",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 1,
-//                         "koName": "나승훈",
-//                         "enName": "Seung-Hoon Na"
-//                     },
-//                     {
-//                         "id": 2,
-//                         "koName": "김선훈",
-//                         "enName": "Seonhoon Kim"
-//                     }
-//                 ]
-// 			},
-// 			{
-// 				"id": 2,
-// 				"field": "ML",
-// 				"title": "LM-BFF-MS: Improving Few-Shot Fine-tuning of Language Models based on Multiple Soft Demonstration Memory",
-// 				"journal": "ACL",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 3,
-//                         "koName": "전동현",
-//                         "enName": "Donghyeon Jeon"
-//                     },
-//                     {
-//                         "id": 4,
-//                         "koName": "강인호",
-//                         "enName": "Inho Kang"
-//                     }
-//                 ]
-// 			}
-// 		]
-// 	},
-// 	"Vision": {
-// 		"thesis": [{
-// 				"id": 3,
-// 				"field": "Vision",
-// 				"title": "Impact of Sentence Representation Matching in Neural Machine Translation",
-// 				"journal": "Applied Sciences",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 5,
-//                         "koName": "김강일",
-//                         "enName": "Kangil Kim"
-//                     },
-//                     {
-//                         "id": 6,
-//                         "koName": "정상근",
-//                         "enName": "Sangkeun Jung"
-//                     }
-//                 ]
-// 			},
-// 			{
-// 				"id": 4,
-// 				"field": "Vision",
-// 				"title": "A Comparison of Speech Features between Mild Cognitive Impairment and Healthy Aging Groups",
-// 				"journal": "Dementia and Neurocognitive Disorder",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 7,
-//                         "koName": "김고운",
-//                         "enName": "Ko Woon Kim"
-//                     },
-//                     {
-//                         "id": 8,
-//                         "koName": "우상인",
-//                         "enName": "Sangin Woo"
-//                     }
-//                 ]
-// 			}
-// 		]
-// 	},
-//     "DataIntelli": {
-// 		"thesis": [{
-// 				"id": 1,
-// 				"field": "ML",
-// 				"title": "Frustratingly Easy System Combination for Grammatical Error Correction",
-// 				"journal": "NAACL",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 1,
-//                         "koName": "나승훈",
-//                         "enName": "Seung-Hoon Na"
-//                     },
-//                     {
-//                         "id": 2,
-//                         "koName": "김선훈",
-//                         "enName": "Seonhoon Kim"
-//                     }
-//                 ]
-// 			},
-// 			{
-// 				"id": 2,
-// 				"field": "ML",
-// 				"title": "LM-BFF-MS: Improving Few-Shot Fine-tuning of Language Models based on Multiple Soft Demonstration Memory",
-// 				"journal": "ACL",
-// 				"PublishDate": 20220202,
-// 				"url": "www.naver.com",
-//                 "members":[
-//                     {
-//                         "id": 3,
-//                         "koName": "전동현",
-//                         "enName": "Donghyeon Jeon"
-//                     },
-//                     {
-//                         "id": 4,
-//                         "koName": "강인호",
-//                         "enName": "Inho Kang"
-//                     }
-//                 ]
 // 			}
 // 		]
 // 	}
@@ -283,7 +174,7 @@ export default function FloatingActionButtonZoom() {
   useEffect(() => {
     axios
       .get(
-        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis2"
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis3"
       )
       .then((response) => {
         setTheses(response.data);
@@ -330,7 +221,7 @@ export default function FloatingActionButtonZoom() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           {theses.Vision?.thesis.map((post) => (
-            <PannelPost post={post} />
+            <Pannel post={post} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>

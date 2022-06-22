@@ -45,10 +45,10 @@ function Pannel(props) {
               {post.title}
             </Typography>
             <Typography variant="subtitle1">
-              {post.members.map((data) => data.enName + " ")}
+              {post.enName.map((data) => data + " ")}
             </Typography>
             <Typography variant="subtitle1">
-              {post.members.map((data) => data.koName + " ")}
+              {post.koName.map((data) => data + " ")}
             </Typography>
             <Typography variant="overline" paragraph>
               {post.PublishDate}
