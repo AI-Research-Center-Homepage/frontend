@@ -7,24 +7,6 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import { useEffect, useState } from "react";
 
-// const dummyRows = [
-//   { id: 1, title: "데모1" },
-//   { id: 2, title: "데모2" },
-//   { id: 3, title: "데모3" },
-//   { id: 4, title: "데모4" },
-//   { id: 5, title: "데모5" },
-//   { id: 6, title: "데모6" },
-//   { id: 7, title: "데모7" },
-//   { id: 8, title: "데모8" },
-//   { id: 9, title: "데모9" },
-//   { id: 10, title: "데모10" },
-//   { id: 11, title: "데모11" },
-//   { id: 12, title: "데모12" },
-//   { id: 13, title: "데모13" },
-//   { id: 14, title: "데모14" },
-//   { id: 15, title: "데모15" },
-// ];
-
 // DataGrid 속성 정의
 const dummycolumns = [
   {
