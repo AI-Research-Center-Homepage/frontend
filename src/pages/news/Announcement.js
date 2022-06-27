@@ -17,27 +17,6 @@ import {
 import { useMediaQuery, Pagination, CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 
-// DataGrid dummydata date: 00년00월00일00시00분
-// const dummyRows = [
-//   { id: 1, title: "제목1", date: "2204041212" },
-//   { id: 2, title: "제목2", date: "2204051212" },
-//   { id: 3, title: "제목3", date: "2204061212" },
-//   { id: 4, title: "제목4", date: "2204071212" },
-//   { id: 5, title: "제목5", date: "2204081212" },
-//   { id: 6, title: "제목6", date: "2204091212" },
-//   { id: 7, title: "제목7", date: "2204101212" },
-//   { id: 8, title: "제목8", date: "2204111212" },
-//   { id: 9, title: "제목9", date: "2204121212" },
-//   { id: 10, title: "제목10", date: "2204131212" },
-//   { id: 11, title: "제목11", date: "2204141212" },
-//   { id: 12, title: "제목12", date: "2204151212" },
-//   { id: 13, title: "제목13", date: "2204161212" },
-//   { id: 14, title: "제목14", date: "2204171212" },
-//   { id: 15, title: "제목15", date: "2204181212" },
-//   { id: 16, title: "제목16", date: "2204191212" },
-//   { id: 17, title: "제목17", date: "2204191213" },
-// ];
-
 // DataGrid 속성 정의
 const dummycolumns = [
   {
@@ -60,7 +39,7 @@ const dummycolumns = [
     sortable: false,
   },
   {
-    field: "modifiedDate",
+    field: "createdDate",
     headerName: "작성일",
     flex: 1.5,
     sortable: true,
@@ -84,16 +63,6 @@ const dummycolumns = [
   },
 ];
 
-/**
- *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-06-18
- *@description 공지사항 하단 page 변환부
- *             Pagination 컴포넌트를 이용하여 구현
- *             숫자를 클릭하여 페이지 이동이 가능하고
- *             한번에 맨 앞, 맨 뒤 페이지로 이동 가능
- *             hook을 이용하여 정보를 받아와 페이지수 결정
- */
-
 const CustomPagination = () => {
   const apiRef = useGridApiContext();
   const page = useGridSelector(apiRef, gridPageSelector);
@@ -113,7 +82,7 @@ const CustomPagination = () => {
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-05-08
+ *@date 2022-06-18
  *@description 공지사항 페이지
  *             DataGrid를 이용하여 구현
  *             MeduaQuery를 이용하여 1100px이하일 때
