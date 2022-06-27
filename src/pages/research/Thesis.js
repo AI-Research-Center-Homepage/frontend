@@ -8,6 +8,86 @@ import PropTypes from "prop-types";
 // import 7개까지 각 한줄로 분리 가능
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+// import { Login } from "@mui/icons-material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+import PannelPost from "../../components/PannelPost";
+import Pannel from "../../components/Pannel";
+
+// 적용된 논문 데이터
+// {
+// 	"ML": {
+// 		"thesis": [{
+// 				"id": 1,
+// 				"field": "ML",
+// 				"title": "Frustratingly Easy System Combination for Grammatical Error Correction",
+// 				"enName": [
+//                     "Seung-Hoon Na",
+//                     "Seonhoon Kim"
+//                 ],
+// 				"koName": [
+//                     "나승훈",
+//                     "김선훈"
+//                 ],
+// 				"journal": "NAACL",
+// 				"PublishDate": 20220202,
+// 				"url": "www.naver.com"
+// 			},
+// 			{
+// 				"id": 2,
+// 				"field": "ML",
+// 				"title": "LM-BFF-MS: Improving Few-Shot Fine-tuning of Language Models based on Multiple Soft Demonstration Memory",
+// 				"enName": [
+//                     "Donghyeon Jeon",
+//                     "Inho Kang"
+//                 ],
+// 				"koName": [
+//                     "전동현",
+//                     "강인호"
+//                 ],
+// 				"journal": "ACL",
+// 				"PublishDate": 20220202,
+// 				"url": "www.naver.com"
+// 			}
+// 		]
+// 	},
+// 	"Vision": {
+// 		"thesis": [{
+// 				"id": 3,
+// 				"field": "Vision",
+// 				"title": "Impact of Sentence Representation Matching in Neural Machine Translation",
+// 				"enName": [
+//                     "Kangil Kim",
+//                     "Sangkeun Jung"
+//                 ],
+// 				"koName": [
+//                     "김강일",
+//                     "정상근"
+//                 ],
+// 				"journal": "Applied Sciences",
+// 				"PublishDate": 20220202,
+// 				"url": "www.naver.com"
+// 			},
+// 			{
+// 				"id": 4,
+// 				"field": "Vision",
+// 				"title": "A Comparison of Speech Features between Mild Cognitive Impairment and Healthy Aging Groups",
+// 				"enName": [
+//                     "Ko Woon Kim",
+//                     "Sangin Woo"
+//                 ],
+// 				"koName": [
+//                     "김고운",
+//                     "우상인"
+//                 ],
+// 				"journal": "Dementia and Neurocognitive Disorder",
+// 				"PublishDate": 20220202,
+// 				"url": "www.naver.com"
+// 			}
+// 		]
+// 	}
+// }
 
 /*
  *@author BeomGi-Lee jeongiun@naver.com
@@ -90,6 +170,17 @@ export default function FloatingActionButtonZoom() {
     setValue(newValue);
   };
 
+  const [theses, setTheses] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis3"
+      )
+      .then((response) => {
+        setTheses(response.data);
+      });
+  }, []);
+
   return (
     <div>
       <Header />
@@ -124,13 +215,19 @@ export default function FloatingActionButtonZoom() {
         </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          ICLR 2022 (표현 학습 국제학회)
+          {theses.ML?.thesis.map((post) => (
+            <Pannel post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          CVPR 2022(컴퓨터 비전과 패턴인식 학회)
+          {theses.Vision?.thesis.map((post) => (
+            <Pannel post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          VLDB 2022 (거대 데이터 베이스 컨퍼런스)
+          {theses.DataIntelli?.thesis.map((post) => (
+            <PannelPost post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           EMNLP 2021 (자연어처리에서의 경험적 방법론 학회)
@@ -142,6 +239,7 @@ export default function FloatingActionButtonZoom() {
           FAST 2021 (USENIX 파일저장기술학회)
         </TabPanel>
       </Box>
+
       <Footer />
     </div>
   );
