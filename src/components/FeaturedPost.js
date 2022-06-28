@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Grid,
@@ -16,12 +17,15 @@ import {
  *    사진이 포함된 세로 형태의 게시글 컴포넌트
  */
 
-function FeaturedPost(props) {
-  const { post } = props;
+function FeaturedPost({ post }) {
+  const navigate = useNavigate();
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea
+        component="a"
+        onClick={() => navigate(`/article/${post.id}`)}
+      >
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{
@@ -45,15 +49,6 @@ function FeaturedPost(props) {
               image={post.image}
               alt="random"
             />
-            {/* <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              sx={{
-                mt: 3,
-              }}
-            >
-              
-            </Typography> */}
             <Typography component="h2" variant="h5" sx={{ mt: 3 }}>
               {post.title}
             </Typography>
