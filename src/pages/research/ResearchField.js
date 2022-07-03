@@ -4,79 +4,10 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
 import "./Field.scss";
+import axios from "axios";
 
-// 임시 사진 경로
-const imgUrl =
-  "https://images.unsplash.com/photo-1645148100502-418e89bf99c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjEwNzU1Mw&ixlib=rb-1.2.1&q=80&w=1080";
-
-// 버튼 클릭시 나오는 화면에 대한 정보
-const FieldName = [
-  {
-    id: 0,
-    engTitle: "trans",
-    title: "기계번역",
-    subtitle: "한 언어에서 다른 언어로 텍스트 또는 음성 자동 번역",
-    desc: "통계방식의 기계번역이 도입된 이후, 언어 데이터를 다루는 검색 엔진 기업 등의 글로벌 IT 기업들이 기계 번역 개발에 뛰어들 수 있게 됐다. <br /> 최근에는 규칙기반 기계번역도 통계기반 기술을 함께 사용하는 하이브리드 방식으로 진화 중이다.",
-    image: { imgUrl },
-  },
-  {
-    id: 1,
-    engTitle: "natural",
-    title: "자연언어 인터페이스",
-    subtitle: "지능형 개인 비서",
-    desc: "자연어 사용자 인터페이스를 사용하여 질문에 답변하고, 권장 사항을 제시하며, 요청을 웹 서비스 집합에 위임하여 작업을 수행한다.",
-    image: { imgUrl },
-  },
-  {
-    id: 2,
-    engTitle: "machine",
-    title: "기계학습 & 데이터마이닝",
-    subtitle: "데이터를 학습하고 예측할 수 있는 알고리즘의 구성과 연구를 탐구",
-    desc: "컴퓨터가 학습할 수 있도록 하는 알고리즘과 기술을 개발하고 통계적 규칙이나 패턴을 분석하여 가치있는 정보를 추출한다.",
-    image: { imgUrl },
-  },
-  {
-    id: 3,
-    engTitle: "deepLearning",
-    title: "딥러닝 뉴럴 기계번역",
-    subtitle:
-      "인코더 – 디코더 아키텍처를 사용하는 반복 신경망을 기반으로 한다.",
-    desc: "일련의 단어의 가능성을 예측하기 위해 인공 신경망을 사용하는 기계 번역 접근 방법으로, 일반적으로 하나의 통합 모델에 문장들 전체를 모델링한다.",
-    image: { imgUrl },
-  },
-  {
-    id: 4,
-    engTitle: "neuro",
-    title: "뉴로 심볼릭",
-    subtitle: "기계 학습기반 인공지능의 한계를 해결하는 기술이다.",
-    desc: " 비교적 소규모의 데이터로 학습해 대상의 속성을 도출한 다음 사람이 제공한 규칙에 근거해 답을 찾아 나간다. 단계별로 기계 학습 방식과 전문가 방식을 적절하게 결합해 사용한다.",
-    image: { imgUrl },
-  },
-  {
-    id: 5,
-    engTitle: "first_null",
-    title: "빈칸",
-    subtitle: "내용없음",
-    desc: "내용없음",
-    image: { imgUrl },
-  },
-  {
-    id: 6,
-    engTitle: "second_null",
-    title: "빈칸",
-    subtitle: "내용없음",
-    desc: "내용없음",
-    image: { imgUrl },
-  },
-  {
-    id: 7,
-    engTitle: "third_null",
-    title: "빈칸",
-    subtitle: "내용없음",
-    desc: "내용없음",
-    image: { imgUrl },
-  },
-];
+//mock api url
+const url = "https://fff2349a-733d-4c0e-bb44-455e017469c0.mock.pstmn.io";
 
 // selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
@@ -112,11 +43,6 @@ function Description(props) {
         {props.title}
       </Typography>
 
-      {/* 부제목 */}
-      <Typography variant="h6" fontWeight="bold" align="center" paddingTop="3%">
-        <span className="light">{props.subtitle}</span>
-      </Typography>
-
       {/* 설명 */}
       <Typography
         variant="body2"
@@ -127,18 +53,6 @@ function Description(props) {
       >
         {props.desc}
       </Typography>
-
-      {/* 사진 */}
-      <img
-        alt="nature"
-        src={props.image}
-        style={{
-          height: "30vw",
-          marginLeft: "70%",
-          marginTop: "2%",
-          opacity: (position - position / 1.3) / 100,
-        }}
-      ></img>
     </Box>
   );
 }
@@ -150,6 +64,15 @@ function Description(props) {
  */
 
 export default function ResearchField() {
+  const [apiList, setAPIList] = useState({});
+
+  // API로 정보 받기
+  useEffect(() => {
+    axios.get(url + "/field").then((response) => {
+      setAPIList(response.data);
+    });
+  }, []);
+
   // 랩실 설명
   const content = (
     <div style={{ textAlign: "center" }}>
@@ -165,7 +88,15 @@ export default function ResearchField() {
     </div>
   );
 
-  const [contents, setContents] = useState("trans");
+  console.log(apiList); //undefined
+
+  let FieldName = [];
+  FieldName = apiList?.fields.map((list) => list.fieldName);
+
+  let FieldDesc = [];
+  FieldDesc = apiList?.fields.map((list) => list.description);
+
+  const [contents, setContents] = useState();
 
   // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
@@ -175,74 +106,18 @@ export default function ResearchField() {
 
   // name값에 따라 다른 화면 출력
   const selectComponent = {
-    trans: (
-      <Description
-        title={FieldName[0].title}
-        subtitle={FieldName[0].subtitle}
-        desc={FieldName[0].desc}
-        image={imgUrl}
-      />
-    ),
-    natural: (
-      <Description
-        title={FieldName[1].title}
-        subtitle={FieldName[1].subtitle}
-        desc={FieldName[1].desc}
-        image={imgUrl}
-      />
-    ),
-    machine: (
-      <Description
-        title={FieldName[2].title}
-        subtitle={FieldName[2].subtitle}
-        desc={FieldName[2].desc}
-        image={imgUrl}
-      />
-    ),
-    deepLearning: (
-      <Description
-        title={FieldName[3].title}
-        subtitle={FieldName[3].subtitle}
-        desc={FieldName[3].desc}
-        image={imgUrl}
-      />
-    ),
-    neuro: (
-      <Description
-        title={FieldName[4].title}
-        subtitle={FieldName[4].subtitle}
-        desc={FieldName[4].desc}
-        image={imgUrl}
-      />
-    ),
-    first_null: (
-      <Description
-        title={FieldName[5].title}
-        subtitle={FieldName[5].subtitle}
-        desc={FieldName[5].desc}
-        image={imgUrl}
-      />
-    ),
-    second_null: (
-      <Description
-        title={FieldName[6].title}
-        subtitle={FieldName[6].subtitle}
-        desc={FieldName[6].desc}
-        image={imgUrl}
-      />
-    ),
-    third_null: (
-      <Description
-        title={FieldName[7].title}
-        subtitle={FieldName[7].subtitle}
-        desc={FieldName[7].desc}
-        image={imgUrl}
-      />
-    ),
+    [FieldName[0]]: <Description title={FieldName[0]} desc={FieldDesc[0]} />,
+    [FieldName[1]]: <Description title={FieldName[1]} desc={FieldDesc[1]} />,
+    [FieldName[2]]: <Description title={FieldName[2]} desc={FieldDesc[2]} />,
+    [FieldName[3]]: <Description title={FieldName[3]} desc={FieldDesc[3]} />,
+    [FieldName[4]]: <Description title={FieldName[4]} desc={FieldDesc[4]} />,
+    [FieldName[5]]: <Description title={FieldName[5]} desc={FieldDesc[5]} />,
+    [FieldName[6]]: <Description title={FieldName[6]} desc={FieldDesc[6]} />,
+    [FieldName[7]]: <Description title={FieldName[7]} desc={FieldDesc[7]} />,
   };
 
   // 버튼 함수
-  function FieldPrint({ title, id, engTitle }) {
+  function FieldPrint({ title }) {
     return (
       <Button
         variant="contained"
@@ -259,8 +134,7 @@ export default function ResearchField() {
           },
         }}
         onClick={buttonValueSetting}
-        key={id}
-        name={engTitle}
+        name={title}
       >
         {title}
       </Button>
@@ -307,13 +181,9 @@ export default function ResearchField() {
             width: { md: "80%", xs: "90%" },
           }}
         >
-          {FieldName.map((list) => (
+          {apiList?.fields.map((list) => (
             <Grid item md={3} xs={6} marginBottom={0.5}>
-              <FieldPrint
-                title={list.title}
-                id={list.id}
-                engTitle={list.engTitle}
-              ></FieldPrint>
+              <FieldPrint title={list.fieldName}></FieldPrint>
             </Grid>
           ))}
         </Grid>
