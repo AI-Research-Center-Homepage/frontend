@@ -59,11 +59,12 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-05-31
+ *@date 2022-07-05
  *@description 연구분야 페이지
  */
 
 export default function ResearchField() {
+  //API를 통해 받아온 값 저장
   const [apiList, setAPIList] = useState({});
 
   // API로 정보 받기
@@ -90,9 +91,11 @@ export default function ResearchField() {
 
   console.log(apiList); //undefined
 
+  //api 항목 중에서 fieldName만 저장하는 배열
   let FieldName = [];
   FieldName = apiList?.fields.map((list) => list.fieldName);
 
+  //api 항목 중에서 description만 저장하는 배열
   let FieldDesc = [];
   FieldDesc = apiList?.fields.map((list) => list.description);
 
