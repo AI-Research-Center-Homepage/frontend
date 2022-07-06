@@ -11,10 +11,11 @@ import {
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-04
+ *@date 2022-07-06
  *@name FeaturedPost
  *@description
  *    사진이 포함된 세로 형태의 게시글 컴포넌트
+ *    info channel과 article 페이지에 적용
  */
 
 function FeaturedPost({ post }) {
