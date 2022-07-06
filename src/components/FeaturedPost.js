@@ -36,7 +36,7 @@ function FeaturedPost({ post }) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle2" paragraph>
-              {props.boardName}
+              {post.boardName}
             </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
