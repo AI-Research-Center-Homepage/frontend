@@ -65,8 +65,10 @@ const adminHeaderItems = [
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-06-21
- *@description 관리자 페이지 왼쪽, 상단에 고정적으로 위치하는 메뉴
+ *@date 2022-07-12
+ *@description 관리자 페이지의 메인화면
+ *             상단, 좌측 메뉴 포함
+ *             중첩 라우팅으로 컴포넌트를 불러오는 방식 이용
  */
 
 const AdminMain = () => {

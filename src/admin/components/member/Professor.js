@@ -94,6 +94,7 @@ const dummycolumns = [
   },
 ];
 
+// 추후 삭제 예정 - virtualization로 바꿀것
 const CustomPagination = () => {
   const apiRef = useGridApiContext();
   const page = useGridSelector(apiRef, gridPageSelector);
@@ -110,6 +111,13 @@ const CustomPagination = () => {
     />
   );
 };
+
+/**
+ *@author Suin-Jeong suin8@jbnu.ac.kr
+ *@date 2022-07-12
+ *@description Admin Professor 페이지
+ *             DataGrid 이용
+ */
 
 const Professor = () => {
   return (
