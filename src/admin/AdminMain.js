@@ -56,7 +56,7 @@ const adminHeaderItems = [
  *@description 관리자 페이지 왼쪽, 상단에 고정적으로 위치하는 메뉴
  */
 
-const AdminHeader = () => {
+const AdminMain = () => {
   const navigate = useNavigate();
 
   const [expandedSideMenu, setExpandedSideMenu] = useState(1);
@@ -180,4 +180,4 @@ const AdminHeader = () => {
   );
 };
 
-export default AdminHeader;
+export default AdminMain;
