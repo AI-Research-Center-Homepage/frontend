@@ -73,7 +73,7 @@ const App = () => {
 
           {/* 관리자 */}
           {/* 추후 admin 페이지에 통합 필요 구현을 위해 잠시 이용 */}
-          <Route path="/admin" element={<AdminMain />} />
+          <Route path="/admin/*" element={<AdminMain />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>

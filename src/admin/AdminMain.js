@@ -12,40 +12,53 @@ import {
   Button,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import jbnu from "../assets/images/jbnu.png";
+
+import Professor from "./components/member/Professor";
+import Researcher from "./components/member/Researcher";
+import Committee from "./components/member/Committee";
+import Graduate from "./components/member/Graduate";
+import Undergraduate from "./components/member/Undergraduate";
+import Announcement from "./components/news/Announcement";
+import Article from "./components/news/Article";
+import InfoChannel from "./components/news/InfoChannel";
+import Demo from "./components/research/Demo";
+import Project from "./components/research/Project";
+import ResearchField from "./components/research/ResearchField";
+import Thesis from "./components/research/Thesis";
 
 const adminHeaderItems = [
   {
     key: 1,
     title: "구성원",
     contents: [
-      { subkey: 4, subcontent: "교수", path: "" },
-      { subkey: 5, subcontent: "연구원", path: "" },
-      { subkey: 6, subcontent: "석사", path: "" },
-      { subkey: 7, subcontent: "학사", path: "" },
-      { subkey: 8, subcontent: "운영위원회", path: "" },
+      { subkey: 4, subcontent: "교수", path: "professor" },
+      { subkey: 5, subcontent: "연구원", path: "researcher" },
+      { subkey: 6, subcontent: "석사", path: "graduate" },
+      { subkey: 7, subcontent: "학사", path: "undergraduate" },
+      { subkey: 8, subcontent: "운영위원회", path: "committee" },
     ],
   },
   {
     key: 2,
     title: "소식",
     contents: [
-      { subkey: 9, subcontent: "소식통", path: "" },
-      { subkey: 10, subcontent: "공지사항", path: "" },
-      { subkey: 11, subcontent: "언론보도", path: "" },
+      { subkey: 9, subcontent: "소식통", path: "infochannel" },
+      { subkey: 10, subcontent: "공지사항", path: "announcement" },
+      { subkey: 11, subcontent: "언론보도", path: "article" },
     ],
   },
   {
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "" },
-      { subkey: 13, subcontent: "논문", path: "" },
-      { subkey: 14, subcontent: "프로젝트", path: "" },
-      { subkey: 15, subcontent: "데모", path: "" },
+      { subkey: 12, subcontent: "연구분야", path: "researchfield" },
+      { subkey: 13, subcontent: "논문", path: "thesis" },
+      { subkey: 14, subcontent: "프로젝트", path: "project" },
+      { subkey: 15, subcontent: "데모", path: "demo" },
     ],
   },
 ];
@@ -174,6 +187,27 @@ const AdminMain = () => {
             </Button>
           </Box>
           <Divider flexitem />
+
+          {/* MainContent */}
+          <Routes>
+            {/* Member */}
+            <Route path="professor" element={<Professor />} />
+            <Route path="researcher" element={<Researcher />} />
+            <Route path="committee" element={<Committee />} />
+            <Route path="graduate" element={<Graduate />} />
+            <Route path="undergraduate" element={<Undergraduate />} />
+
+            {/* News */}
+            <Route path="announcement" element={<Announcement />} />
+            <Route path="article" element={<Article />} />
+            <Route path="infochannel" element={<InfoChannel />} />
+
+            {/* Research */}
+            <Route path="demo" element={<Demo />} />
+            <Route path="project" element={<Project />} />
+            <Route path="researchfield" element={<ResearchField />} />
+            <Route path="thesis" element={<Thesis />} />
+          </Routes>
         </Grid>
       </Grid>
     </Box>
