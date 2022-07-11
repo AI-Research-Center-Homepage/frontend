@@ -182,7 +182,7 @@ const AdminMain = () => {
             }}
           >
             <Typography variant="h5">{mainText}</Typography>
-            <Button variant="text" size="large" sx={{ mr: "3%" }}>
+            <Button variant="contained" size="large" sx={{ mr: "3%" }}>
               로그아웃
             </Button>
           </Box>
