@@ -111,7 +111,7 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-06-19
+ *@date 2022-07-11
  *@description 프로젝트 페이지
  */
 export default function Project() {
@@ -145,56 +145,56 @@ export default function Project() {
 
   // name값에 따라 다른 화면 출력
   const selectComponent = {
-    기계번역: (
+    [fieldName[0]]: (
       <Description
         title={objects.trans?.projects[0].title}
         participants={objects.trans?.projects[0].participants}
         desc={objects.trans?.projects[0].description}
       />
     ),
-    질의응답: (
+    [fieldName[1]]: (
       <Description
         title={objects.qaa?.projects[0].title}
         participants={objects.qaa?.projects[0].participants}
         desc={objects.qaa?.projects[0].description}
       />
     ),
-    "엑소 브레인": (
+    [fieldName[2]]: (
       <Description
         title={objects.exobrain?.projects[0].title}
         participants={objects.exobrain?.projects[0].participants}
         desc={objects.exobrain?.projects[0].description}
       />
     ),
-    "자연어 처리": (
+    [fieldName[3]]: (
       <Description
         title={objects.natural?.projects[0].title}
         participants={objects.natural?.projects[0].participants}
         desc={objects.natural?.projects[0].description}
       />
     ),
-    빈칸1: (
+    [fieldName[4]]: (
       <Description
         title={objects.first_null?.projects[0].title}
         participants={objects.first_null?.projects[0].participants}
         desc={objects.first_null?.projects[0].description}
       />
     ),
-    빈칸2: (
+    [fieldName[5]]: (
       <Description
         title={objects.second_null?.projects[0].title}
         participants={objects.second_null?.projects[0].participants}
         desc={objects.second_null?.projects[0].description}
       />
     ),
-    빈칸3: (
+    [fieldName[6]]: (
       <Description
         title={objects.third_null?.projects[0].title}
         participants={objects.third_null?.projects[0].participants}
         desc={objects.third_null?.projects[0].description}
       />
     ),
-    빈칸4: (
+    [fieldName[7]]: (
       <Description
         title={objects.fourth_null?.projects[0].title}
         participants={objects.fourth_null?.projects[0].participants}
