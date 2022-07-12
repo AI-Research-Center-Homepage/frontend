@@ -7,67 +7,7 @@ import "./Field.scss";
 import axios from "axios";
 
 // postman url
-const url = "https://a84a481a-47f6-4c36-ab58-950a84e6604d.mock.pstmn.io";
-
-// map함수에 사용되는 더미데이터
-// const FieldName = [
-//   {
-//     id: 0,
-//     engTitle: "trans",
-//     title: "기계번역",
-//     participants: "기계번역의 부제목..",
-//     desc: "인간이 사용하는 자연 언어를 컴퓨터를 사용하여 다른 언어로 번역한다.{' '} 최근 딥러닝 알고리즘을 통해 수준 높은 기계번역을 할 수 있게 되었다. 연구실에서 무슨 프로젝트를 어떻게 하고있고 어쩌구",
-//   },
-//   {
-//     id: 1,
-//     engTitle: "qaa",
-//     title: "질의응답",
-//     participants: "질의응답의 부제목..",
-//     desc: "사용자의 질의에 대한 답변이 될 수 있는 정답을 문서 집합내에서 탐색하여 사용자에게 제시해주는 시스템이다. 일반적으로 질의응답 시스템은 사용자의 질의에 관련된 문서를 검색하는 후보검색 단계 (candidate retrieval phase) 와 검색된 문서 내에서 정답을 생성하는 정답추출 단계 (answer extraction phase) 로 구성된다. 연구실에서 무슨 프로젝트를 어떻게 하고있고 어쩌구",
-//   },
-//   {
-//     id: 2,
-//     engTitle: "exobrain",
-//     title: "엑소 브레인",
-//     participants: "엑소브레인의 부제목..",
-//     desc: "인간의 지적 노동을 보조할 수 있는 언어처리 분야의 AI 기술개발을 위해, 전문직 종사자의 조사·분석 등의 지식노동을 보조 가능한 기술 개발 및 국내외 표준화를 통해 핵심 IPR을 확보하는 우리나라 대표 인공지능 국가 R&D 프로젝트이다. 연구실에서 무슨 프로젝트를 어떻게 하고있고 어쩌구",
-//   },
-//   {
-//     id: 3,
-//     engTitle: "natural",
-//     title: "자연어 처리",
-//     participants: "자연어 처리의 부제목..",
-//     desc: "인간의 언어 현상을 컴퓨터와 같은 기계를 이용해서 묘사할 수 있도록 연구하고 이를 구현한다. <br></br>NLP에는 인간의 의사 소통 방식과 컴퓨터의.이해력의 간극을 메우기 위해 컴퓨터 과학이나 전산 언어학 등 많은 분야가 동원된다. <br></br>무슨 프로젝트를 어떻게 하고있고 어쩌구",
-//   },
-//   {
-//     id: 4,
-//     engTitle: "first_null",
-//     title: "빈칸1",
-//     participants: "내용없음",
-//     desc: "내용없음",
-//   },
-//   {
-//     id: 5,
-//     engTitle: "second_null",
-//     title: "빈칸2",
-//     participants: "내용없음",
-//     desc: "내용없음",
-//   },
-//   {
-//     id: 6,
-//     engTitle: "third_null",
-//     title: "빈칸3",
-//     participants: "내용없음",
-//     desc: "내용없음",
-//   },
-//   {
-//     id: 7,
-//     engTitle: "fourth_null",
-//     title: "빈칸4",
-//     participants: "내용없음",
-//     desc: "내용없음",
-//   },
-// ];
+const url = "https://a4149427-81af-4b54-9358-9e16682d2eb5.mock.pstmn.io";
 
 // selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
@@ -92,7 +32,7 @@ function Description(props) {
 
       {/* 부제목 */}
       <Typography variant="h6" fontWeight="bold" align="center" paddingTop="3%">
-        <span className="light">{props.participants}</span>
+        <span className="light">{props.desc}</span>
       </Typography>
 
       {/* 설명 */}
@@ -103,7 +43,7 @@ function Description(props) {
         paddingTop="2%"
         paddingBottom="10%"
       >
-        {props.desc}
+        {props.contents}
       </Typography>
     </Box>
   );
@@ -111,11 +51,11 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-07-11
+ *@date 2022-07-12
  *@description 프로젝트 페이지
  */
 export default function Project() {
-  const [contents, setContents] = useState("기계번역");
+  const [titles, setTitles] = useState();
   const [objects, setObjects] = useState({});
 
   // mock api 데이터를 받아옴
@@ -125,82 +65,90 @@ export default function Project() {
     });
   }, []);
 
-  // title만 모아 map으로 FieldPrint 함수에 전달하기 위한 배열
-  let fieldName = [
-    objects.trans?.projects[0].title,
-    objects.qaa?.projects[0].title,
-    objects.exobrain?.projects[0].title,
-    objects.natural?.projects[0].title,
-    objects.first_null?.projects[0].title,
-    objects.second_null?.projects[0].title,
-    objects.third_null?.projects[0].title,
-    objects.fourth_null?.projects[0].title,
-  ];
+  const Data = objects?.projects;
+  console.log(Data);
+  const fieldName = Data && Data.map((data) => data.fieldName);
+  const firstField = Data[0].projects;
+  const secondField = Data[1].projects;
+  const thirdField = Data[2].projects;
+  const fourthField = Data[3].projects;
+  const fifthField = Data[4].projects;
+  const sixthField = Data[5].projects;
+  const seventhField = Data[6].projects;
+  const eighthField = Data[7].projects;
 
   // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
     const { name } = e.target;
-    setContents(name);
+    setTitles(name);
   };
 
   // name값에 따라 다른 화면 출력
   const selectComponent = {
-    [fieldName[0]]: (
+    [fieldName[0]]: firstField.map((data) => (
       <Description
-        title={objects.trans?.projects[0].title}
-        participants={objects.trans?.projects[0].participants}
-        desc={objects.trans?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[1]]: (
+    )),
+    [fieldName[1]]: secondField.map((data) => (
       <Description
-        title={objects.qaa?.projects[0].title}
-        participants={objects.qaa?.projects[0].participants}
-        desc={objects.qaa?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[2]]: (
+    )),
+    [fieldName[2]]: thirdField.map((data) => (
       <Description
-        title={objects.exobrain?.projects[0].title}
-        participants={objects.exobrain?.projects[0].participants}
-        desc={objects.exobrain?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[3]]: (
+    )),
+    [fieldName[3]]: fourthField.map((data) => (
       <Description
-        title={objects.natural?.projects[0].title}
-        participants={objects.natural?.projects[0].participants}
-        desc={objects.natural?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[4]]: (
+    )),
+    [fieldName[4]]: fifthField.map((data) => (
       <Description
-        title={objects.first_null?.projects[0].title}
-        participants={objects.first_null?.projects[0].participants}
-        desc={objects.first_null?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[5]]: (
+    )),
+    [fieldName[5]]: sixthField.map((data) => (
       <Description
-        title={objects.second_null?.projects[0].title}
-        participants={objects.second_null?.projects[0].participants}
-        desc={objects.second_null?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[6]]: (
+    )),
+    [fieldName[6]]: seventhField.map((data) => (
       <Description
-        title={objects.third_null?.projects[0].title}
-        participants={objects.third_null?.projects[0].participants}
-        desc={objects.third_null?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
-    [fieldName[7]]: (
+    )),
+    [fieldName[7]]: eighthField.map((data) => (
       <Description
-        title={objects.fourth_null?.projects[0].title}
-        participants={objects.fourth_null?.projects[0].participants}
-        desc={objects.fourth_null?.projects[0].description}
+        title={data.title}
+        participants={data.participants}
+        desc={data.description}
+        contents={data.content}
       />
-    ),
+    )),
   };
 
   // FieldName의 데이터를 받아 버튼 출력
@@ -253,16 +201,17 @@ export default function Project() {
             width: { md: "80%", xs: "90%" },
           }}
         >
-          {fieldName.map((title) => (
-            <Grid item md={3} xs={6} marginBottom={0.5}>
-              <FieldPrint title={title}></FieldPrint>
-            </Grid>
-          ))}
+          {Data &&
+            Data.map((data) => (
+              <Grid item md={3} xs={6} marginBottom={0.5}>
+                <FieldPrint title={data.fieldName}></FieldPrint>
+              </Grid>
+            ))}
         </Grid>
       </Box>
 
       {/* 버튼마다 다른 컴포넌트 나오게 하였음 */}
-      {contents && selectComponent[contents]}
+      {titles && selectComponent[titles]}
       <Footer />
     </div>
   );
