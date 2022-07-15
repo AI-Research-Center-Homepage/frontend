@@ -7,7 +7,7 @@ import "./Field.scss";
 import axios from "axios";
 
 //mock api url
-const url = "https://fff2349a-733d-4c0e-bb44-455e017469c0.mock.pstmn.io";
+const url = "https://7b43b435-ee12-4547-ad13-92731ac451e9.mock.pstmn.io";
 
 // selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
@@ -31,14 +31,18 @@ function Description(props) {
       </Typography>
 
       {/* 설명 */}
-      <Typography
-        variant="body2"
-        color="#757575"
-        align="center"
-        paddingTop="2%"
-      >
-        {props.desc}
-      </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            width: { md: "80%", xs: "40%" },
+            marginBottom: 10,
+          }}
+        >
+          <Typography variant="body2" color="#757575" paddingTop="2%">
+            {props.desc}
+          </Typography>
+        </Box>
+      </div>
     </Box>
   );
 }
