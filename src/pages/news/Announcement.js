@@ -28,7 +28,6 @@ const dummycolumns = [
     sortable: false,
     align: "center",
     maxWidth: 100,
-    disableSelectionOnClick: true,
   },
   {
     field: "title",
@@ -82,7 +81,7 @@ const CustomPagination = () => {
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-06-18
+ *@date 2022-07-15
  *@description 공지사항 페이지
  *             DataGrid를 이용하여 구현
  *             MeduaQuery를 이용하여 1100px이하일 때
@@ -146,7 +145,7 @@ const Announcement = () => {
             },
           }}
           sx={{ cursor: "pointer" }}
-          onRowClick={() => navigate(`/announcement/${data.notice.id}`)} // 수정 필요!!!
+          onRowClick={(param) => navigate(`${param.row.id}`)}
         />
       </div>
 
