@@ -11,19 +11,6 @@ const url = "https://fff2349a-733d-4c0e-bb44-455e017469c0.mock.pstmn.io";
 
 // selectComponent에서 데이터를 받아와 각 화면을 보여줌
 function Description(props) {
-  const [position, setPosition] = useState(0);
-
-  function onScroll() {
-    setPosition(window.scrollY);
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    }; // 컴포넌트가 언마운트되기 직전에 이벤트 제거
-  }, []);
-
   return (
     <Box
       sx={{
@@ -49,7 +36,6 @@ function Description(props) {
         color="#757575"
         align="center"
         paddingTop="2%"
-        style={{ opacity: (position - position / 1.8) / 100 }}
       >
         {props.desc}
       </Typography>
@@ -64,8 +50,11 @@ function Description(props) {
  */
 
 export default function ResearchField() {
-  //API를 통해 받아온 값 저장
-  const [apiList, setAPIList] = useState({});
+  // API를 통해 받아온 값 저장
+  const [apiList, setAPIList] = useState({ fields: [] });
+
+  // 버튼의 name값을 저장
+  const [contents, setContents] = useState();
 
   // API로 정보 받기
   useEffect(() => {
@@ -89,17 +78,13 @@ export default function ResearchField() {
     </div>
   );
 
-  console.log(apiList); //undefined
-
-  //api 항목 중에서 fieldName만 저장하는 배열
+  // api 항목 중에서 fieldName만 저장하는 배열
   let FieldName = [];
   FieldName = apiList?.fields.map((list) => list.fieldName);
 
-  //api 항목 중에서 description만 저장하는 배열
+  // api 항목 중에서 description만 저장하는 배열
   let FieldDesc = [];
   FieldDesc = apiList?.fields.map((list) => list.description);
-
-  const [contents, setContents] = useState();
 
   // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
