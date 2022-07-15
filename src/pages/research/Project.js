@@ -56,7 +56,7 @@ function Description(props) {
  */
 export default function Project() {
   const [titles, setTitles] = useState();
-  const [objects, setObjects] = useState({});
+  const [objects, setObjects] = useState({ projects: [] });
 
   // mock api 데이터를 받아옴
   useEffect(() => {
@@ -65,17 +65,18 @@ export default function Project() {
     });
   }, []);
 
-  const Data = objects?.projects;
-  console.log(Data);
-  const fieldName = Data && Data.map((data) => data.fieldName);
-  const firstField = Data[0].projects;
-  const secondField = Data[1].projects;
-  const thirdField = Data[2].projects;
-  const fourthField = Data[3].projects;
-  const fifthField = Data[4].projects;
-  const sixthField = Data[5].projects;
-  const seventhField = Data[6].projects;
-  const eighthField = Data[7].projects;
+  let nameList = [];
+  nameList = objects.projects.map((data) => data.fieldName);
+  console.log(nameList);
+
+  const firstField = objects[0].projects;
+  const secondField = objects[1].projects;
+  const thirdField = objects[2].projects;
+  const fourthField = objects[3].projects;
+  const fifthField = objects[4].projects;
+  const sixthField = objects[5].projects;
+  const seventhField = objects[6].projects;
+  const eighthField = objects[7].projects;
 
   // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
@@ -85,7 +86,7 @@ export default function Project() {
 
   // name값에 따라 다른 화면 출력
   const selectComponent = {
-    [fieldName[0]]: firstField.map((data) => (
+    [nameList[0]]: firstField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -93,7 +94,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[1]]: secondField.map((data) => (
+    [nameList[1]]: secondField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -101,7 +102,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[2]]: thirdField.map((data) => (
+    [nameList[2]]: thirdField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -109,7 +110,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[3]]: fourthField.map((data) => (
+    [nameList[3]]: fourthField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -117,7 +118,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[4]]: fifthField.map((data) => (
+    [nameList[4]]: fifthField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -125,7 +126,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[5]]: sixthField.map((data) => (
+    [nameList[5]]: sixthField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -133,7 +134,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[6]]: seventhField.map((data) => (
+    [nameList[6]]: seventhField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -141,7 +142,7 @@ export default function Project() {
         contents={data.content}
       />
     )),
-    [fieldName[7]]: eighthField.map((data) => (
+    [nameList[7]]: eighthField.map((data) => (
       <Description
         title={data.title}
         participants={data.participants}
@@ -201,12 +202,11 @@ export default function Project() {
             width: { md: "80%", xs: "90%" },
           }}
         >
-          {Data &&
-            Data.map((data) => (
-              <Grid item md={3} xs={6} marginBottom={0.5}>
-                <FieldPrint title={data.fieldName}></FieldPrint>
-              </Grid>
-            ))}
+          {objects.projects.map((data) => (
+            <Grid item md={3} xs={6} marginBottom={0.5}>
+              <FieldPrint title={data.fieldName}></FieldPrint>
+            </Grid>
+          ))}
         </Grid>
       </Box>
 
