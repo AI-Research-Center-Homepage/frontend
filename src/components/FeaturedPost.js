@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Grid,
@@ -18,15 +17,10 @@ import {
  *    info channel과 article 페이지에 적용
  */
 
-function FeaturedPost({ post }) {
-  const navigate = useNavigate();
-
+function FeaturedPost({ post, onClick }) {
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea
-        component="a"
-        onClick={() => navigate(`/article/${post.id}`)}
-      >
+      <CardActionArea component="a" onClick={onClick}>
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{

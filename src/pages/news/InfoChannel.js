@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CssBaseline, Grid, Container } from "@mui/material";
 
@@ -19,6 +20,8 @@ import axios from "axios";
  */
 
 export default function Post() {
+  const navigate = useNavigate();
+
   const [infoData, SetInfoData] = useState({ info: [] });
 
   useEffect(() => {
@@ -46,7 +49,11 @@ export default function Post() {
       >
         <Grid container spacing={4}>
           {infoData.info.map((post) => (
-            <FeaturedPost post={post} boardName="소식통" />
+            <FeaturedPost
+              post={post}
+              onClick={() => navigate(`/infochannel/${post.id}`)}
+              boardName="소식통"
+            />
           ))}
         </Grid>
       </Container>

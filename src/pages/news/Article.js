@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CssBaseline, Grid, Container } from "@mui/material";
 
@@ -19,6 +20,8 @@ import axios from "axios";
  */
 
 export default function Post() {
+  const navigate = useNavigate();
+
   const [articleData, setArticle] = useState({ article: [] });
   useEffect(() => {
     axios
@@ -47,7 +50,10 @@ export default function Post() {
       >
         <Grid container spacing={4}>
           {articleData.article.map((post) => (
-            <FeaturedPost post={post} />
+            <FeaturedPost
+              post={post}
+              onClick={() => navigate(`/article/${post.id}`)}
+            />
           ))}
         </Grid>
       </Container>
