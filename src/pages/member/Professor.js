@@ -24,8 +24,9 @@ function ProfPrint({ title, info }) {
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
  *@date 2022-07-15
- *@description 참여교수 사진, 이름, 전공, 직급, 박사학위, 이메일, 연구실, 전화번호를 보여줌
+ *@description 참여교수 사진, 이름, 전공, 박사학위, 연구실, 전화번호를 보여줌
  */
+
 export default function Professor() {
   // API로 받아온 정보 저장
   const [prof, setProf] = useState([]);
