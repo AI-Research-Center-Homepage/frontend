@@ -1589,7 +1589,7 @@
     "@emotion/cache" "^11.7.1"
     "prop-types" "^15.7.2"
 
-"@mui/system@^5.2.3", "@mui/system@^5.2.8", "@mui/system@^5.6.1", "@mui/system@^5.6.3":
+"@mui/system@^5.6.1", "@mui/system@^5.6.3":
   "integrity" "sha512-4SRi52a4ttZ2S4EHEDE8arVNuKqyQLTYUTF80WAZ0tQwnG20qwlBtzcrywCGItmVAMl7RUaYopyWOx3yVPvrmQ=="
   "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.6.3.tgz"
   "version" "5.6.3"
@@ -4644,6 +4644,8 @@
     "minimatch" "~3.0.2"
 
 "graceful-fs@^4.1.2", "graceful-fs@^4.1.6", "graceful-fs@^4.2.0", "graceful-fs@^4.2.4", "graceful-fs@^4.2.6", "graceful-fs@^4.2.9":
+  "integrity" "sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA=="
+  "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz"
   "version" "4.2.10"
 
 "gzip-size@^6.0.0":
@@ -6970,7 +6972,7 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-"react-dom@^16.3.0 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
+"react-dom@^18.0.0":
   "integrity" "sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.1.0.tgz"
   "version" "18.1.0"
@@ -7080,6 +7082,8 @@
     "prop-types" "^15.6.2"
 
 "react@^18.0.0":
+  "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
+  "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
   dependencies:
     "loose-envify" "^1.1.0"
@@ -8100,11 +8104,6 @@
   dependencies:
     "is-typedarray" "^1.0.0"
 
-"typescript@^3.2.1 || ^4", "typescript@>= 2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
-  "integrity" "sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg=="
-  "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.2.4.tgz"
-  "version" "4.2.4"
-
 "unbox-primitive@^1.0.1":
   "version" "1.0.1"
   dependencies:
@@ -8631,4 +8630,3 @@
 
 "yocto-queue@^0.1.0":
   "version" "0.1.0"
- 
