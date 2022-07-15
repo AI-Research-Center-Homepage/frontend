@@ -81,7 +81,7 @@ const CustomPagination = () => {
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-06-18
+ *@date 2022-07-15
  *@description 공지사항 페이지
  *             DataGrid를 이용하여 구현
  *             MeduaQuery를 이용하여 1100px이하일 때
@@ -105,10 +105,6 @@ const Announcement = () => {
   const mediaQuery = useMediaQuery("(min-width: 1100px)");
 
   const navigate = useNavigate();
-
-  const handleRowClick = (rowData) => {
-    return navigate(`${rowData.id}`);
-  };
 
   return (
     <div>
@@ -149,7 +145,7 @@ const Announcement = () => {
             },
           }}
           sx={{ cursor: "pointer" }}
-          onRowClick={(param) => handleRowClick(param.row)}
+          onRowClick={(param) => navigate(`${param.row.id}`)}
         />
       </div>
 
