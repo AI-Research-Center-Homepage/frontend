@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   Typography,
   Grid,
@@ -12,10 +11,11 @@ import {
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-04
+ *@date 2022-07-06
  *@name FeaturedPost
  *@description
  *    사진이 포함된 세로 형태의 게시글 컴포넌트
+ *    info channel과 article 페이지에 적용
  */
 
 function FeaturedPost({ post }) {
@@ -37,7 +37,7 @@ function FeaturedPost({ post }) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle2" paragraph>
-              {post.header_subtitle}
+              {post.boardName}
             </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
@@ -50,20 +50,11 @@ function FeaturedPost({ post }) {
               image={post.image}
               alt="random"
             />
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              sx={{
-                mt: 3,
-              }}
-            >
-              {post.gray_subtitle}
-            </Typography>
-            <Typography component="h2" variant="h5">
+            <Typography component="h2" variant="h5" sx={{ mt: 3 }}>
               {post.title}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
-              {post.subtitle}
+            <Typography variant="subtitle1" color="text.secondary">
+              {post.modifiedDate.slice(0, 10)}
             </Typography>
           </CardContent>
         </Card>
