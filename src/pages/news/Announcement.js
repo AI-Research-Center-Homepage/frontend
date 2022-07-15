@@ -28,7 +28,6 @@ const dummycolumns = [
     sortable: false,
     align: "center",
     maxWidth: 100,
-    disableSelectionOnClick: true,
   },
   {
     field: "title",
@@ -107,6 +106,10 @@ const Announcement = () => {
 
   const navigate = useNavigate();
 
+  const handleRowClick = (rowData) => {
+    return navigate(`${rowData.id}`);
+  };
+
   return (
     <div>
       <CssBaseline />
@@ -146,7 +149,7 @@ const Announcement = () => {
             },
           }}
           sx={{ cursor: "pointer" }}
-          onRowClick={() => navigate(`/announcement/${data.notice.id}`)} // 수정 필요!!!
+          onRowClick={(param) => handleRowClick(param.row)}
         />
       </div>
 
