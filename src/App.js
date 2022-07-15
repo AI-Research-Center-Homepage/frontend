@@ -1,6 +1,8 @@
 import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+
+// User Pages
 import Home from "./pages/Home";
 import Professor from "./pages/member/Professor";
 import Graduate from "./pages/member/Graduate";
@@ -22,6 +24,9 @@ import Demo from "./pages/research/Demo";
 import AnnouncementPost from "./pages/news/view_post/AnnouncementPost";
 import ArticlePost from "./pages/news/view_post/ArticlePost";
 import InfoChannelPost from "./pages/news/view_post/InfoChannelPost";
+
+// Admin Pages
+import AdminMain from "./admin/AdminMain";
 
 export const ArticleContext = createContext();
 
@@ -46,7 +51,6 @@ const App = () => {
           <Route path="/demo" element={<Demo />} />
           <Route path="/researchfield" element={<ResearchField />} />
 
-
           {/* 구성원 */}
           <Route path="/professor" element={<Professor />} />
           <Route path="/committee" element={<Committee />} />
@@ -66,6 +70,10 @@ const App = () => {
 
           {/* 지원하기 */}
           <Route path="/apply" element={<Apply />} />
+
+          {/* 관리자 */}
+          {/* 추후 admin 페이지에 통합 필요 구현을 위해 잠시 이용 */}
+          <Route path="/admin/*" element={<AdminMain />} />
         </Routes>
       </BrowserRouter>
     </ArticleContext.Provider>
