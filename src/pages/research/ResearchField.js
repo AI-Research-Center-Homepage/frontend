@@ -3,10 +3,9 @@ import { Button, Grid, Box, Typography } from "@mui/material";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
-import "./Field.scss";
 import axios from "axios";
 
-//mock api url
+// mock api url
 const url = "https://7b43b435-ee12-4547-ad13-92731ac451e9.mock.pstmn.io";
 
 // selectComponent에서 데이터를 받아와 각 화면을 보여줌
@@ -49,7 +48,7 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-07-05
+ *@date 2022-07-15
  *@description 연구분야 페이지
  */
 
