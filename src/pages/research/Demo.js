@@ -47,7 +47,7 @@ const Demo = () => {
   return (
     <div>
       <Header />
-      <SubHeader main="소식" sub="공지사항" />
+      <SubHeader main="연구" sub="연구결과데모" />
 
       <div
         style={{
