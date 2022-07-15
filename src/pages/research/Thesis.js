@@ -12,7 +12,7 @@ import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import PannelPost from "../../components/PannelPost";
+// import PannelPost from "../../components/PannelPost";
 import Pannel from "../../components/Pannel";
 
 // 적용된 논문 데이터
@@ -205,38 +205,44 @@ export default function FloatingActionButtonZoom() {
             variant="fullWidth"
             aria-label="action tabs example"
           >
-            <Tab label="머신러닝" {...a11yProps(0)} />
-            <Tab label="컴퓨터 비전" {...a11yProps(1)} />
-            <Tab label="데이터 지능" {...a11yProps(2)} />
-            <Tab label="언어.음성" {...a11yProps(3)} />
-            <Tab label="로봇" {...a11yProps(4)} />
-            <Tab label="플랫폼" {...a11yProps(5)} />
+            <Tab label="Natural Language Processing" {...a11yProps(0)} />
+            <Tab label="Deep Learning" {...a11yProps(1)} />
+            <Tab label="Decision Support" {...a11yProps(2)} />
+            <Tab label="Information Retrieval" {...a11yProps(3)} />
+            <Tab label="Data Mining" {...a11yProps(4)} />
+            <Tab label="Machine Learning" {...a11yProps(5)} />
           </Tabs>
         </AppBar>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {theses.ML?.thesis.map((post) => (
+          {theses.NLP?.thesis.map((post) => (
             <Pannel post={post} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          {theses.Vision?.thesis.map((post) => (
+          {theses.DeepLearning?.thesis.map((post) => (
             <Pannel post={post} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          {theses.DataIntelli?.thesis.map((post) => (
-            <PannelPost post={post} />
+          {theses.DecisionSupport?.thesis.map((post) => (
+            <Pannel post={post} />
           ))}
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          EMNLP 2021 (자연어처리에서의 경험적 방법론 학회)
+          {theses.InformationRetrieval?.thesis.map((post) => (
+            <Pannel post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          ICRA 2021 (IEEE 로봇과 자동화 국제대회)
+          {theses.DataMining?.thesis.map((post) => (
+            <Pannel post={post} />
+          ))}
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          FAST 2021 (USENIX 파일저장기술학회)
+          {theses.ML?.thesis.map((post) => (
+            <Pannel post={post} />
+          ))}
         </TabPanel>
       </Box>
 
