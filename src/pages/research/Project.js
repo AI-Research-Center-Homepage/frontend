@@ -69,9 +69,10 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-07-12
+ *@date 2022-07-16
  *@description 프로젝트 페이지
  */
+
 export default function Project() {
   const [titles, setTitles] = useState();
   const [objects, setObjects] = useState({ projects: [] });
@@ -83,9 +84,11 @@ export default function Project() {
     });
   }, []);
 
+  // 배열에 프로젝트 분야를 저장
   let nameList = [];
   nameList = objects.projects.map((data) => data.fieldName);
 
+  // 각 분야의 정보 저장
   const firstField = objects.projects[0];
   const secondField = objects.projects[1];
   const thirdField = objects.projects[2];
@@ -214,7 +217,6 @@ export default function Project() {
     <div>
       <Header />
       <SubHeader main="연구" sub="연구 프로젝트" />
-
       <Box
         sx={{
           display: "flex",
