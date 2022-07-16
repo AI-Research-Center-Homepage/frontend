@@ -67,16 +67,15 @@ export default function Project() {
 
   let nameList = [];
   nameList = objects.projects.map((data) => data.fieldName);
-  console.log(nameList);
 
-  const firstField = objects[0].projects;
-  const secondField = objects[1].projects;
-  const thirdField = objects[2].projects;
-  const fourthField = objects[3].projects;
-  const fifthField = objects[4].projects;
-  const sixthField = objects[5].projects;
-  const seventhField = objects[6].projects;
-  const eighthField = objects[7].projects;
+  const firstField = objects.projects[0];
+  const secondField = objects.projects[1];
+  const thirdField = objects.projects[2];
+  const fourthField = objects.projects[3];
+  const fifthField = objects.projects[4];
+  const sixthField = objects.projects[5];
+  const seventhField = objects.projects[6];
+  const eighthField = objects.projects[7];
 
   // 클릭한 버튼의 name값을 state에 저장
   const buttonValueSetting = (e) => {
@@ -86,70 +85,86 @@ export default function Project() {
 
   // name값에 따라 다른 화면 출력
   const selectComponent = {
-    [nameList[0]]: firstField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[1]]: secondField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[2]]: thirdField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[3]]: fourthField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[4]]: fifthField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[5]]: sixthField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[6]]: seventhField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
-    [nameList[7]]: eighthField.map((data) => (
-      <Description
-        title={data.title}
-        participants={data.participants}
-        desc={data.description}
-        contents={data.content}
-      />
-    )),
+    [nameList[0]]:
+      firstField &&
+      firstField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[1]]:
+      secondField &&
+      secondField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[2]]:
+      thirdField &&
+      thirdField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[3]]:
+      fourthField &&
+      fourthField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[4]]:
+      fifthField &&
+      fifthField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[5]]:
+      sixthField &&
+      sixthField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[6]]:
+      seventhField &&
+      seventhField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
+    [nameList[7]]:
+      eighthField &&
+      eighthField.projects.map((data) => (
+        <Description
+          title={data.title}
+          participants={data.participants}
+          desc={data.description}
+          contents={data.content}
+        />
+      )),
   };
 
   // FieldName의 데이터를 받아 버튼 출력
