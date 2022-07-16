@@ -16,6 +16,7 @@ function Description(props) {
       sx={{
         width: "100%",
         height: "auto",
+        marginBottom: 10,
       }}
     >
       {/* 큰 제목 */}
@@ -36,15 +37,32 @@ function Description(props) {
       </Typography>
 
       {/* 설명 */}
-      <Typography
-        variant="body2"
-        color="#757575"
-        align="center"
-        paddingTop="2%"
-        paddingBottom="10%"
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ width: { md: "80%", xs: "40%" } }}>
+          <Typography
+            variant="body2"
+            color="#757575"
+            align="center"
+            paddingTop="2%"
+            paddingBottom="10%"
+          >
+            {props.contents}
+          </Typography>
+        </Box>
+      </div>
+
+      {/* 참여자 */}
+      <Box
+        sx={{
+          p: 2,
+          m: 2,
+          borderBottom: 2,
+          borderTop: 1,
+          borderTopColor: "#bdbdbd",
+        }}
       >
-        {props.contents}
-      </Typography>
+        <Typography>{props.participants}</Typography>
+      </Box>
     </Box>
   );
 }
