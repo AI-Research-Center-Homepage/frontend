@@ -45,11 +45,10 @@ const App = () => {
           <Route path="/location" element={<Location />} />
 
           {/* 연구 */}
-          <Route path="/researchfield" element={<ResearchField />} />
+          <Route path="/field" element={<ResearchField />} />
           <Route path="/project" element={<Project />} />
           <Route path="/thesis" element={<Thesis />} />
           <Route path="/demo" element={<Demo />} />
-          <Route path="/researchfield" element={<ResearchField />} />
 
           {/* 구성원 */}
           <Route path="/professor" element={<Professor />} />
