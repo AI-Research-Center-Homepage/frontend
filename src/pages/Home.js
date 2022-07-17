@@ -94,16 +94,16 @@ const Home = () => {
                 }}
               >
                 <Button sx={{ width: "21%", ml: "8%", fontWeight: "bold" }}>
-                  title 1
+                  연구센터 소개
                 </Button>
                 <Button sx={{ width: "21%", fontWeight: "bold" }}>
-                  title 2
+                  연구분야
                 </Button>
                 <Button sx={{ width: "21%", fontWeight: "bold" }}>
-                  title 3
+                  참여교수
                 </Button>
                 <Button sx={{ width: "21%", mr: "8%", fontWeight: "bold" }}>
-                  title 4
+                  지원하기
                 </Button>
               </ButtonGroup>
             </Box>
