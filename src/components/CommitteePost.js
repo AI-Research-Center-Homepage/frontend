@@ -8,19 +8,20 @@ import {
   CardMedia,
 } from "@mui/material";
 
-/**
+/*
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-07-06
- *@name FeaturedPost
+ *@date 2022-07-15
+ *@name CommitteePost
  *@description
  *    사진이 포함된 세로 형태의 게시글 컴포넌트
- *    info channel과 article 페이지에 적용
  */
 
-function FeaturedPost({ post, onClick }) {
+function CommitteePost(props) {
+  const { post } = props;
+
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <CardActionArea component="a" onClick={onClick}>
+      <CardActionArea component="a" href="#">
         {/* flexDirection 기준을 column으로 배열 */}
         <Card
           sx={{
@@ -30,9 +31,6 @@ function FeaturedPost({ post, onClick }) {
           }}
         >
           <CardContent sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle2" paragraph>
-              {post.boardName}
-            </Typography>
             {/* 크기 xs 일 때 none */}
             <CardMedia
               component="img"
@@ -44,11 +42,20 @@ function FeaturedPost({ post, onClick }) {
               image={post.image}
               alt="random"
             />
-            <Typography component="h2" variant="h5" sx={{ mt: 3 }}>
-              {post.title}
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                mt: 3,
+              }}
+            >
+              {post.position}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {post.modifiedDate.slice(0, 10)}
+            <Typography component="h2" variant="h5">
+              {post.name}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {post.major}
             </Typography>
           </CardContent>
         </Card>
@@ -57,4 +64,4 @@ function FeaturedPost({ post, onClick }) {
   );
 }
 
-export default FeaturedPost;
+export default CommitteePost;
