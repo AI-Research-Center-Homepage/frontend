@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Stack, Button, Grid, Container } from "@mui/material";
 import {
   createTheme,
@@ -12,7 +13,7 @@ import MemberPost from "../../components/MemberPost";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-05-02
+ *@date 2022-07-17
  *@description 년도(올해, 작년)를 선택하여
  *             해당하는 년도에 입학한 대학원생을 랜더링
  */
@@ -38,39 +39,6 @@ const ButtonTheme = createTheme({
   },
 });
 
-const graduates = [
-  {
-    name: "이름1",
-    content: "분야 및 상세 설명1",
-    year: 2022,
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름2",
-    content: "분야 및 상세 설명2",
-    year: 2022,
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름3",
-    content: "분야 및 상세 설명3",
-    year: 2022,
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름4",
-    content: "분야 및 상세 설명4",
-    year: 2021,
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름5",
-    content: "분야 및 상세 설명5",
-    year: 2021,
-    image: "https://source.unsplash.com/random",
-  },
-];
-
 const getStringYear = (date) => {
   let year = date.getFullYear();
   return `${year}`;
@@ -78,15 +46,24 @@ const getStringYear = (date) => {
 
 const Graduate = () => {
   const [selectedYear, SetSelectedYear] = useState("all");
+  const [graduatesData, setGraduatesData] = useState({ graduate: [] });
 
   let year = getStringYear(new Date());
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/graduates"
+      )
+      .then((response) => {
+        setGraduatesData(response.data);
+      });
+  }, []);
 
   return (
     <>
       <Header />
-
       <SubHeader main="구성원" sub="대학원생" />
-
       {/* 년도 선택 버튼 그룹 */}
       <ThemeProvider theme={ButtonTheme}>
         <Stack
@@ -118,22 +95,20 @@ const Graduate = () => {
           </Button>
         </Stack>
       </ThemeProvider>
-
       {/* 대학원생 정보 */}
       <Container sx={{ width: "80%", my: 6 }}>
-        <Grid container spacing={2}>
-          {graduates
+        <Grid container spacing={6}>
+          {graduatesData.graduate
             .filter((graduate) => {
-              if (selectedYear === "all" || selectedYear === graduate.year)
+              if (selectedYear === "all" || selectedYear === graduate.admission)
                 return true;
               return false;
             })
             .map((graduate) => (
-              <MemberPost post={graduate} />
+              <MemberPost post={graduate} key={graduate.id} />
             ))}
         </Grid>
       </Container>
-
       <Footer />
     </>
   );

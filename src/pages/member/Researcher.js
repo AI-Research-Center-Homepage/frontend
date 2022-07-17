@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Grid, Container } from "@mui/material";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
@@ -7,40 +8,23 @@ import MemberPost from "../../components/MemberPost";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-05-09
+ *@date 2022-07-17
  *@description 연구원들의 정보를 게시글 형식으로 렌더링하는 페이지
- *             데이터베이스와 연동할 연구원 객체 정보는 임시로 dummydata를 사용
  */
 
-const researchs = [
-  {
-    name: "이름1",
-    content: "분야 및 상세 설명1",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름2",
-    content: "분야 및 상세 설명2",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름3",
-    content: "분야 및 상세 설명3",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름4",
-    content: "분야 및 상세 설명4",
-    image: "https://source.unsplash.com/random",
-  },
-  {
-    name: "이름5",
-    content: "분야 및 상세 설명5",
-    image: "https://source.unsplash.com/random",
-  },
-];
-
 const Researcher = () => {
+  const [researchersData, setResearchersData] = useState({ researcher: [] });
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/researchers"
+      )
+      .then((response) => {
+        setResearchersData(response.data);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -49,9 +33,9 @@ const Researcher = () => {
 
       {/* 연구원 정보 */}
       <Container sx={{ width: "80%", my: 6 }}>
-        <Grid container spacing={2}>
-          {researchs.map((research) => (
-            <MemberPost post={research} />
+        <Grid container spacing={6}>
+          {researchersData.researcher.map((researcher) => (
+            <MemberPost post={researcher} key={researcher.id} />
           ))}
         </Grid>
       </Container>
