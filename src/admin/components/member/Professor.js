@@ -8,43 +8,8 @@ import {
 
 import { Button, Pagination, TextField, Box } from "@mui/material";
 
-const dummyRows = [
-  {
-    id: 1,
-    name: "나승훈",
-    position: "교수",
-    major: "인공지능",
-    email: "nsh@gmail.com",
-  },
-  {
-    id: 2,
-    name: "나훈승",
-    position: "교수",
-    major: "인공지능",
-    email: "nhs@gmail.com",
-  },
-  {
-    id: 3,
-    name: "승훈나",
-    position: "교수",
-    major: "인공지능",
-    email: "shn@gmail.com",
-  },
-  {
-    id: 4,
-    name: "승나훈",
-    position: "교수",
-    major: "인공지능",
-    email: "snh@gmail.com",
-  },
-  {
-    id: 5,
-    name: "훈승나",
-    position: "교수",
-    major: "인공지능",
-    email: "hsn@gmail.com",
-  },
-];
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const dummycolumns = [
   {
@@ -73,6 +38,9 @@ const dummycolumns = [
     headerAlign: "center",
     disableColumnMenu: true,
     align: "center",
+    valueFormatter: (params) => {
+      return "교수";
+    },
   },
   {
     field: "major",
@@ -120,6 +88,18 @@ const CustomPagination = () => {
  */
 
 const Professor = () => {
+  const [data, setData] = useState({ position: "", members: [] });
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/AdminProfessor",
+      responseType: "json",
+    }).then((response) => {
+      setData(response.data);
+    });
+  }, []);
+
   return (
     <div
       style={{
@@ -146,7 +126,7 @@ const Professor = () => {
         </Button>
       </Box>
       <DataGrid
-        rows={dummyRows}
+        rows={data.members}
         columns={dummycolumns}
         pageSize={15}
         sortingOrder={["desc", "asc"]}
