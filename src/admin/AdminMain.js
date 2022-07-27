@@ -29,6 +29,7 @@ import Demo from "./components/research/Demo";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
+import MemberNew from "./components/member/MemberNew";
 
 const adminHeaderItems = [
   {
@@ -198,6 +199,8 @@ const AdminMain = () => {
             <Route path="committee" element={<Committee />} />
             <Route path="graduate" element={<Graduate />} />
             <Route path="undergraduate" element={<Undergraduate />} />
+
+            <Route path="members/professor/new" element={<MemberNew />} />
 
             {/* News */}
             <Route path="announcement" element={<Announcement />} />
