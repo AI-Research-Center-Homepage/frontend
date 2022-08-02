@@ -87,13 +87,13 @@ const CustomPagination = () => {
 };
 
 /**
- *@author Suin-Jeong suin8@jbnu.ac.kr
- *@date 2022-07-12
- *@description Admin Professor 페이지
+ *@author BumKi Lee
+ *@date 2022-08-02
+ *@description Admin Infochannel
  *             DataGrid 이용
  */
 
-const Professor = () => {
+const Infochannel = () => {
   const [data, setData] = useState({ position: "", source: [] });
 
   useEffect(() => {
@@ -150,4 +150,4 @@ const Professor = () => {
   );
 };
 
-export default Professor;
+export default Infochannel;

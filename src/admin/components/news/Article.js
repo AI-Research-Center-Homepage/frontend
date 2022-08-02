@@ -22,38 +22,44 @@ const dummycolumns = [
     align: "center",
   },
   {
-    field: "name",
-    headerName: "이름",
-    flex: 3,
+    field: "title",
+    headerName: "제목",
+    flex: 4,
     disableColumnMenu: true,
     headerAlign: "center",
     sortable: true,
     align: "center",
   },
   {
-    field: "position",
-    headerName: "직책",
-    flex: 3,
-    sortable: true,
-    headerAlign: "center",
-    disableColumnMenu: true,
-    align: "center",
-    valueFormatter: (params) => {
-      return "교수";
-    },
-  },
-  {
-    field: "major",
-    headerName: "전공",
-    flex: 3,
+    field: "author",
+    headerName: "작성자",
+    flex: 2,
     sortable: true,
     headerAlign: "center",
     disableColumnMenu: true,
     align: "center",
   },
   {
-    field: "email",
-    headerName: "이메일",
+    field: "viewNum",
+    headerName: "조회수",
+    flex: 1,
+    sortable: true,
+    headerAlign: "center",
+    disableColumnMenu: true,
+    align: "center",
+  },
+  {
+    field: "createdDate",
+    headerName: "작성일시",
+    sortable: true,
+    flex: 3,
+    headerAlign: "center",
+    disableColumnMenu: true,
+    align: "center",
+  },
+  {
+    field: "modifiedDate",
+    headerName: "수정일시",
     sortable: true,
     flex: 3,
     headerAlign: "center",
@@ -81,19 +87,19 @@ const CustomPagination = () => {
 };
 
 /**
- *@author Suin-Jeong suin8@jbnu.ac.kr
- *@date 2022-07-12
- *@description Admin Professor 페이지
+ *@author BumKi Lee
+ *@date 2022-08-02
+ *@description Admin Article
  *             DataGrid 이용
  */
 
-const Professor = () => {
-  const [data, setData] = useState({ position: "", members: [] });
+const Article = () => {
+  const [data, setData] = useState({ position: "", news: [] });
 
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/professor",
+      url: "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/news",
       responseType: "json",
     }).then((response) => {
       setData(response.data);
@@ -126,7 +132,7 @@ const Professor = () => {
         </Button>
       </Box>
       <DataGrid
-        rows={data.members}
+        rows={data.news}
         columns={dummycolumns}
         pageSize={15}
         sortingOrder={["desc", "asc"]}
@@ -144,4 +150,4 @@ const Professor = () => {
   );
 };
 
-export default Professor;
+export default Article;
