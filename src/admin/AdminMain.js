@@ -47,7 +47,7 @@ const adminHeaderItems = [
     title: "소식",
     contents: [
       { subkey: 9, subcontent: "소식통", path: "posts/source" },
-      { subkey: 10, subcontent: "공지사항", path: "announcement" },
+      { subkey: 10, subcontent: "공지사항", path: "posts/notice" },
       { subkey: 11, subcontent: "언론보도", path: "posts/news" },
     ],
   },
@@ -200,7 +200,7 @@ const AdminMain = () => {
             <Route path="undergraduate" element={<Undergraduate />} />
 
             {/* News */}
-            <Route path="announcement" element={<Announcement />} />
+            <Route path="posts/notice" element={<Announcement />} />
             <Route path="posts/news" element={<Article />} />
             <Route path="posts/source" element={<InfoChannel />} />
 
