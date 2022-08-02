@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -8,37 +9,36 @@ import {
   Stack,
   Box,
   TextField,
+  CardActionArea,
 } from "@mui/material";
+import axios from "axios";
 
-const Field = [
-  {
-    fieldName: "연구분야1",
-    description: "설명1",
-  },
-  {
-    fieldName: "연구분야2",
-    description: "설명2",
-  },
-  {
-    fieldName: "연구분야3",
-    description: "설명3",
-  },
-  {
-    fieldName: "연구분야4",
-    description: "설명4",
-  },
-  {
-    fieldName: "연구분야5",
-    description: "설명5",
-  },
-];
+// mock api URL
+const url = "https://f87d90da-75da-46d6-8ba4-9b4325601a9e.mock.pstmn.io";
+
+/**
+ *@author Eunyoung-Jo, czne2@jbnu.ac.kr
+ *@date 2022-08-02
+ *@description 연구분야를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
+ */
 
 const ResearchField = () => {
+  // mock api의 데이터를 받는 변수
+  const [fieldData, setFieldData] = useState([]);
+
+  useEffect(() => {
+    axios.get(url + "/fields").then((response) => {
+      setFieldData(response.data.fields);
+    });
+  }, []);
+
+  console.log(fieldData);
+
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sx={{ mt: 3 }}>
-          {Field.map((element) => (
+          {fieldData.map((element) => (
             <Box>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Card
@@ -50,14 +50,16 @@ const ResearchField = () => {
                     maxHeight: 200,
                   }}
                 >
-                  {/* 텍스트 정보 */}
-                  <CardContent sx={{ flex: "1 0 auto" }}>
-                    <Typography component="div" variant="body1">
-                      <strong>{element.fieldName}</strong>
-                    </Typography>
-                    <br></br>
-                    <Typography>{element.description}</Typography>
-                  </CardContent>
+                  <CardActionArea>
+                    {/* 텍스트 정보 */}
+                    <CardContent sx={{ flex: "1 0 auto" }}>
+                      <Typography component="div" variant="body1" multiline>
+                        <strong>{element.fieldName}</strong>
+                      </Typography>
+                      <br></br>
+                      <Typography multiline>{element.description}</Typography>
+                    </CardContent>
+                  </CardActionArea>
                 </Card>
                 <Stack spacing={2} direction="column" sx={{ my: 3, ml: 1 }}>
                   <Button variant="contained">수정</Button>
