@@ -27,49 +27,53 @@ const rows = [
     journal: "나승훈 나승훈 나승훈 나승훈",
     publishDate: 20220330,
   },
-  { id: 1, title: "논문1", journal: "나승훈", publishDate: 20190101 },
+  { id: 4, title: "논문1", journal: "나승훈", publishDate: 20190101 },
   {
-    id: 2,
+    id: 5,
     title: "논문2",
     journal: "나승훈 나승훈 나승훈",
     publishDate: 20200218,
   },
   {
-    id: 3,
+    id: 6,
     title: "논문3",
     journal: "나승훈 나승훈 나승훈 나승훈",
     publishDate: 20220330,
   },
 ];
 
-function DataGridPrint() {
-  return (
-    <Grid item xs={6}>
-      <div style={{ height: 200, width: "40%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </div>
-    </Grid>
-  );
-}
+// function DataGridPrint() {
+//   return (
+//     <Grid item xs={6}>
+//       <div style={{ height: 200, width: "40%" }}>
+//         <DataGrid
+//           rows={rows}
+//           columns={columns}
+//           pageSize={5}
+//           rowsPerPageOptions={[5]}
+//         />
+//       </div>
+//     </Grid>
+//   );
+// }
 
 export default function Thesis() {
-  const [thesisData, setThesisData] = useState([]);
+  const [thesisData, setThesisData] = useState({ theses: [] });
 
   useEffect(() => {
     axios.get(url + "/thesis").then((response) => {
-      setThesisData(response.data.theses);
+      setThesisData(response.data);
     });
   }, []);
+
+  let List = [];
+  List = thesisData.theses.map((data) => data.fieldName);
+  console.log(List);
 
   return (
     <Grid>
       <Grid item xs={6}>
-        <div style={{ height: 200, width: "40%" }}>
+        <div style={{ height: 200, width: "80%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -79,36 +83,44 @@ export default function Thesis() {
         </div>
       </Grid>
       <Grid item xs={6}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
+        <div style={{ height: 200, width: "80%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
       </Grid>
       <Grid item xs={6}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
+        <div style={{ height: 200, width: "80%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
       </Grid>
       <Grid item xs={6}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
+        <div style={{ height: 200, width: "80%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
       </Grid>
       <Grid item xs={6}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
+        <div style={{ height: 200, width: "80%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
       </Grid>
     </Grid>
   );

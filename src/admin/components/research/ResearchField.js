@@ -32,8 +32,6 @@ const ResearchField = () => {
     });
   }, []);
 
-  console.log(fieldData);
-
   return (
     <div>
       <Grid container>
