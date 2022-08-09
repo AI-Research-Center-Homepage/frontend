@@ -38,7 +38,12 @@ const ResearchField = () => {
         <Grid item xs={12} sx={{ mt: 3 }}>
           {fieldData.map((element) => (
             <Box>
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <Card
                   sx={{
                     display: "flex",
@@ -46,6 +51,7 @@ const ResearchField = () => {
                     my: 1,
                     width: { xs: "70%", md: "60%" },
                     maxHeight: 200,
+                    overflowY: "auto",
                   }}
                 >
                   <CardActionArea>
