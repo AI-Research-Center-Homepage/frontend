@@ -37,9 +37,9 @@ const adminHeaderItems = [
     contents: [
       { subkey: 4, subcontent: "교수", path: "members/professor" },
       { subkey: 5, subcontent: "연구원", path: "members/researcher" },
-      { subkey: 6, subcontent: "석사", path: "graduate" },
-      { subkey: 7, subcontent: "학사", path: "undergraduate" },
-      { subkey: 8, subcontent: "운영위원회", path: "committee" },
+      { subkey: 6, subcontent: "석사", path: "members/graduate" },
+      { subkey: 7, subcontent: "학사", path: "members/undergraduate" },
+      { subkey: 8, subcontent: "운영위원회", path: "members/committee" },
     ],
   },
   {
@@ -195,9 +195,9 @@ const AdminMain = () => {
             {/* Member */}
             <Route path="members/professor" element={<Professor />} />
             <Route path="members/researcher" element={<Researcher />} />
-            <Route path="committee" element={<Committee />} />
-            <Route path="graduate" element={<Graduate />} />
-            <Route path="undergraduate" element={<Undergraduate />} />
+            <Route path="members/committee" element={<Committee />} />
+            <Route path="members/graduate" element={<Graduate />} />
+            <Route path="members/undergraduate" element={<Undergraduate />} />
 
             {/* News */}
             <Route path="announcement" element={<Announcement />} />
