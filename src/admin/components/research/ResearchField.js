@@ -65,7 +65,13 @@ const ResearchField = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-                <Stack spacing={2} direction="column" sx={{ my: 3, ml: 1 }}>
+                <Stack
+                  spacing={2}
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{ ml: 3 }}
+                >
                   <Button variant="contained">수정</Button>
                   <Button variant="outlined">삭제</Button>
                 </Stack>

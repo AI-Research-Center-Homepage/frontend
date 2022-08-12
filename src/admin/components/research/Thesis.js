@@ -1,6 +1,14 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Grid } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Box,
+  Button,
+  TableHead,
+  TableRow,
+  TableCell,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -37,39 +45,6 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, title: "논문1", journal: "나승훈", publishDate: 20190101 },
-  {
-    id: 2,
-    title: "논문2",
-    journal: "나승훈 나승훈 나승훈",
-    publishDate: 20200218,
-  },
-  {
-    id: 3,
-    title: "논문3",
-    journal: "나승훈 나승훈 나승훈 나승훈",
-    publishDate: 20220330,
-  },
-  { id: 4, title: "논문1", journal: "나승훈", publishDate: 20190101 },
-  { id: 5, title: "논문1", journal: "나승훈", publishDate: 20190101 },
-];
-
-function DataGridPrint(props) {
-  return (
-    <Grid item xs={6}>
-      <div style={{ height: 300, width: "90%", margin: 30 }}>
-        <DataGrid
-          rows={props}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </div>
-    </Grid>
-  );
-}
-
 export default function Thesis() {
   const [thesisData, setThesisData] = useState({ theses: [] });
 
@@ -82,64 +57,63 @@ export default function Thesis() {
   let List = [];
   List = thesisData.theses.map((data) => data.fieldName);
 
-  const firstField = thesisData.theses[0];
-  const secondField = thesisData.theses[1];
-  const thirdField = thesisData.theses[2];
-  const fourthField = thesisData.theses[3];
+  const rows = [];
+  thesisData.theses.forEach((ele) => {
+    ele.theses.forEach((element) => {
+      rows.push(element);
+    });
+  });
 
   return (
-    // <div>
-    //   {firstField.theses.map((list) => (
-    //     <h1>{list.title}</h1>
-    //   ))}
-    // </div>
-
-    <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item xs={6}>
-        <div style={{ height: 300, width: "90%", margin: 40 }}>
-          <DataGrid
-            // rows={firstField?.theses}
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            // onRowClick={(param) => navigate(`${param.row.id}`)}
-          />
-        </div>
+    <div>
+      <Box
+        width="100%"
+        justifyContent="flex-end"
+        alignItems="center"
+        display="flex"
+        mt={3}
+      >
+        <Button variant="contained" sx={{ mr: 3, height: 55 }}>
+          등록하기
+        </Button>
+        <TextField
+          id="outlined-search"
+          label="Search field"
+          type="search"
+          sx={{ mr: 7, width: "30%" }}
+        />
+      </Box>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        {thesisData &&
+          thesisData.theses.map((data) => (
+            <Grid item xs={6}>
+              <div style={{ height: 300, width: "90%", margin: 40 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center" colSpan={2}>
+                      {data.fieldName}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <DataGrid
+                  // rows={firstField.theses}
+                  rows={rows}
+                  columns={columns}
+                  pageSize={5}
+                  rowsPerPageOptions={[5]}
+                  hideFooterSelectedRowCount
+                  autoPageSize
+                  // onRowClick={(param) => navigate(`${param.row.id}`)}
+                />
+              </div>
+            </Grid>
+          ))}
       </Grid>
-      <Grid item xs={6}>
-        <div style={{ height: 300, width: "90%", margin: 30 }}>
-          <DataGrid
-            // rows={secondField?.theses}
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
-      </Grid>
-      <Grid item xs={6}>
-        <div style={{ height: 300, width: "90%", margin: 30 }}>
-          <DataGrid
-            // rows={thirdField?.theses}
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
-      </Grid>
-      <Grid item xs={6}>
-        <div style={{ height: 300, width: "90%", margin: 30 }}>
-          <DataGrid
-            // rows={fourthField?.theses}
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
-      </Grid>
-    </Grid>
+    </div>
   );
 }
