@@ -29,6 +29,7 @@ import Demo from "./components/research/Demo";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
+import Project_new from "./components/research/research_page/Project_new";
 
 const adminHeaderItems = [
   {
@@ -207,6 +208,7 @@ const AdminMain = () => {
             {/* Research */}
             <Route path="demo" element={<Demo />} />
             <Route path="project" element={<Project />} />
+            <Route path="project/new" element={<Project_new />} />
             <Route path="researchfield" element={<ResearchField />} />
             <Route path="thesis" element={<Thesis />} />
           </Routes>

@@ -31,16 +31,9 @@ const columns = [
     align: "center",
   },
   {
-    field: "journal",
-    headerName: "journal",
+    field: "description",
+    headerName: "description",
     width: 300,
-    headerAlign: "center",
-    align: "center",
-  },
-  {
-    field: "publishDate",
-    headerName: "publishDate",
-    width: 130,
     headerAlign: "center",
     align: "center",
   },
@@ -75,7 +68,11 @@ export default function Project() {
         display="flex"
         mt={3}
       >
-        <Button variant="contained" sx={{ mr: 3, height: 55 }}>
+        <Button
+          variant="contained"
+          sx={{ mr: 3, height: 55 }}
+          onClick={() => navigate("./new")}
+        >
           등록하기
         </Button>
         <TextField

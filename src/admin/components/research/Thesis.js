@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   TextField,
@@ -46,6 +47,7 @@ const columns = [
 ];
 
 export default function Thesis() {
+  const navigate = useNavigate();
   const [thesisData, setThesisData] = useState({ theses: [] });
 
   useEffect(() => {
@@ -73,7 +75,11 @@ export default function Thesis() {
         display="flex"
         mt={3}
       >
-        <Button variant="contained" sx={{ mr: 3, height: 55 }}>
+        <Button
+          variant="contained"
+          sx={{ mr: 3, height: 55 }}
+          onClick={() => navigate("./new")}
+        >
           등록하기
         </Button>
         <TextField
@@ -101,14 +107,13 @@ export default function Thesis() {
                   </TableRow>
                 </TableHead>
                 <DataGrid
-                  // rows={firstField.theses}
                   rows={rows}
                   columns={columns}
                   pageSize={5}
                   rowsPerPageOptions={[5]}
                   hideFooterSelectedRowCount
                   autoPageSize
-                  // onRowClick={(param) => navigate(`${param.row.id}`)}
+                  onRowClick={(param) => navigate(`${param.row.id}`)}
                 />
               </div>
             </Grid>
