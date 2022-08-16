@@ -26,10 +26,15 @@ import Announcement from "./components/news/Announcement";
 import Article from "./components/news/Article";
 import InfoChannel from "./components/news/InfoChannel";
 import Demo from "./components/research/Demo";
+import DemoNew from "./components/research/research_page/DemoNew";
+import DemoDetail from "./components/research/research_page/DemoDetail";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
-import Project_new from "./components/research/research_page/Project_new";
+import ProjectNew from "./components/research/research_page/ProjectNew";
+import ProjectDetail from "./components/research/research_page/ProjectDetail";
+import ThesisNew from "./components/research/research_page/ThesisNew";
+import ThesisDetail from "./components/research/research_page/ThesisDetail";
 
 const adminHeaderItems = [
   {
@@ -207,10 +212,15 @@ const AdminMain = () => {
 
             {/* Research */}
             <Route path="demo" element={<Demo />} />
+            <Route path="demo/new" element={<DemoNew />} />
+            <Route path="demo/:id" element={<DemoDetail />} />
             <Route path="project" element={<Project />} />
-            <Route path="project/new" element={<Project_new />} />
+            <Route path="project/new" element={<ProjectNew />} />
+            <Route path="project/:id" element={<ProjectDetail />} />
             <Route path="researchfield" element={<ResearchField />} />
             <Route path="thesis" element={<Thesis />} />
+            <Route path="thesis/new" element={<ThesisNew />} />
+            <Route path="thesis/:id" element={<ThesisDetail />} />
           </Routes>
         </Grid>
       </Grid>

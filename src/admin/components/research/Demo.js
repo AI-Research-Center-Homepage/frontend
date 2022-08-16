@@ -11,7 +11,6 @@ import {
   Box,
   TextField,
   CardActionArea,
-  Link,
 } from "@mui/material";
 import axios from "axios";
 
@@ -78,9 +77,12 @@ const Demo = () => {
                     overflowY: "auto",
                   }}
                 >
-                  <CardActionArea onClick={(param) => navigate(`${param.id}`)}>
+                  <CardActionArea>
                     {/* 텍스트 정보 */}
-                    <CardContent sx={{ flex: "1 0 auto" }}>
+                    <CardContent
+                      sx={{ flex: "1 0 auto" }}
+                      onClick={() => navigate(`${element.id}`)}
+                    >
                       <Typography component="div" variant="body1" multiline>
                         <strong>{element.title}</strong>
                       </Typography>
