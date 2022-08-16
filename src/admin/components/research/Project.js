@@ -49,15 +49,14 @@ export default function Project() {
     });
   }, []);
 
-  let List = [];
-  List = projectData.projects.map((data) => data.fieldName);
-
   const rows = [];
   projectData.projects.forEach((ele) => {
     ele.projects.forEach((element) => {
       rows.push(element);
     });
   });
+
+  console.log(rows);
 
   return (
     <div>
