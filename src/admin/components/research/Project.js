@@ -41,22 +41,13 @@ const columns = [
 
 export default function Project() {
   const navigate = useNavigate();
-  const [projectData, setProjectData] = useState({ projects: [] });
+  const [projectData, setProjectData] = useState([]);
 
   useEffect(() => {
     axios.get(url + "/project").then((response) => {
-      setProjectData(response.data);
+      setProjectData(response.data.projects);
     });
   }, []);
-
-  const rows = [];
-  projectData.projects.forEach((ele) => {
-    ele.projects.forEach((element) => {
-      rows.push(element);
-    });
-  });
-
-  console.log(rows);
 
   return (
     <div>
@@ -88,7 +79,7 @@ export default function Project() {
         alignItems="center"
       >
         {projectData &&
-          projectData.projects.map((data) => (
+          projectData.map((data) => (
             <Grid item xs={6}>
               <div style={{ height: 300, width: "90%", margin: 40 }}>
                 <TableHead>
@@ -99,7 +90,7 @@ export default function Project() {
                   </TableRow>
                 </TableHead>
                 <DataGrid
-                  rows={rows}
+                  rows={data.projects}
                   columns={columns}
                   pageSize={5}
                   rowsPerPageOptions={[5]}

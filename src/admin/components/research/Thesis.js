@@ -48,23 +48,13 @@ const columns = [
 
 export default function Thesis() {
   const navigate = useNavigate();
-  const [thesisData, setThesisData] = useState({ theses: [] });
+  const [thesisData, setThesisData] = useState([]);
 
   useEffect(() => {
     axios.get(url + "/thesis").then((response) => {
-      setThesisData(response.data);
+      setThesisData(response.data.theses);
     });
   }, []);
-
-  let List = [];
-  List = thesisData.theses.map((data) => data.fieldName);
-
-  const rows = [];
-  thesisData.theses.forEach((ele) => {
-    ele.theses.forEach((element) => {
-      rows.push(element);
-    });
-  });
 
   return (
     <div>
@@ -96,7 +86,7 @@ export default function Thesis() {
         alignItems="center"
       >
         {thesisData &&
-          thesisData.theses.map((data) => (
+          thesisData.map((data) => (
             <Grid item xs={6}>
               <div style={{ height: 300, width: "90%", margin: 40 }}>
                 <TableHead>
@@ -107,7 +97,7 @@ export default function Thesis() {
                   </TableRow>
                 </TableHead>
                 <DataGrid
-                  rows={rows}
+                  rows={data.theses}
                   columns={columns}
                   pageSize={5}
                   rowsPerPageOptions={[5]}
