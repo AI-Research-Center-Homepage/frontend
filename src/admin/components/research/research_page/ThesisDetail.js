@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   InputLabel,
   MenuItem,
@@ -11,28 +12,37 @@ import {
   Grid,
 } from "@mui/material";
 
+// 가상의 연구분야 목록
 const fieldSelect = [
   { id: 10, fieldName: "연구분야1" },
   { id: 20, fieldName: "연구분야2" },
   { id: 30, fieldName: "연구분야3" },
 ];
 
+// 가상의 참여자 목록
 const members = [
   { id: 10, name: "참여자1" },
   { id: 20, name: "참여자2" },
   { id: 30, name: "참여자3" },
 ];
 
+/**
+ *@author Eunyoung-Jo, czne2@jbnu.ac.kr
+ *@date 2022-08-16
+ *@description 논문 자세히보기 및 수정, 삭제가 가능함
+ */
+
 export default function ThesisDetail() {
   const navigate = useNavigate();
-  const [field, setField] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [krName, setKrName] = React.useState("");
-  const [enName, setEnName] = React.useState("");
-  const [urls, setUrl] = React.useState("");
-  const [journals, setJournals] = React.useState("");
-  const [date, setDate] = React.useState("");
-  const [participant, setParticipant] = React.useState("");
+
+  const [field, setField] = useState("");
+  const [title, setTitle] = useState("");
+  const [krName, setKrName] = useState("");
+  const [enName, setEnName] = useState("");
+  const [urls, setUrl] = useState("");
+  const [journals, setJournals] = useState("");
+  const [date, setDate] = useState("");
+  const [participant, setParticipant] = useState("");
 
   const titleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -75,6 +85,7 @@ export default function ThesisDetail() {
         alignItems="center"
         mt={15}
       >
+        {/* 연구분야, 제목, 참여자 등 자세한 정보를 출력함 */}
         <Grid item sx={{ width: { xs: "90%", md: "80%" } }}>
           <FormControl fullWidth>
             <InputLabel id="fieldSelect-label">연구분야</InputLabel>
@@ -154,6 +165,8 @@ export default function ThesisDetail() {
           </FormControl>
         </Grid>
       </Grid>
+
+      {/* 취소, 수정, 삭제 버튼. 취소 버튼을 누르면 이전 페이지로 이동 */}
       <Grid container justifyContent="flex-end" alignItems="center" mt={10}>
         <Grid item>
           <Button

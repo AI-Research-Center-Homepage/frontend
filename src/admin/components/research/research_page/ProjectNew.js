@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   InputLabel,
   MenuItem,
@@ -11,19 +12,28 @@ import {
   Grid,
 } from "@mui/material";
 
+// 가상의 연구분야 리스트
 const fieldSelect = [
   { id: 10, fieldName: "연구분야1" },
   { id: 20, fieldName: "연구분야2" },
   { id: 30, fieldName: "연구분야3" },
 ];
 
+/**
+ *@author Eunyoung-Jo, czne2@jbnu.ac.kr
+ *@date 2022-08-16
+ *@description 프로젝트를 추가하는 등록창
+ */
+
 export default function ProjectNew() {
   const navigate = useNavigate();
-  const [field, setField] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [contents, setContents] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [member, setMember] = React.useState("");
+
+  // 프로젝트 분야, 제목, 내용, 요약, 참여멤버 변수
+  const [field, setField] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const [description, setDescription] = useState("");
+  const [member, setMember] = useState("");
 
   const titleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -54,6 +64,7 @@ export default function ProjectNew() {
         alignItems="center"
         mt={15}
       >
+        {/* 분야, 제목, 내용, 요약, 참여자를 추가하는 부분 */}
         <Grid item sx={{ width: { xs: "90%", md: "80%" } }}>
           <FormControl fullWidth>
             <InputLabel id="fieldSelect-label">연구분야</InputLabel>
@@ -103,6 +114,8 @@ export default function ProjectNew() {
           />
         </Grid>
       </Grid>
+
+      {/* 취소, 등록버튼. 취소 버튼을 누르면 이전 페이지로 이동함 */}
       <Grid container justifyContent="flex-end" alignItems="center" mt={10}>
         <Grid item>
           <Button

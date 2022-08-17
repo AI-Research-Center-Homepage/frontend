@@ -43,6 +43,7 @@ const Demo = () => {
         display="flex"
         mt={3}
       >
+        {/* 클릭시 등록창으로 넘어가는 버튼 */}
         <Button
           variant="contained"
           sx={{ mr: 3, height: 55 }}
@@ -78,7 +79,7 @@ const Demo = () => {
                   }}
                 >
                   <CardActionArea>
-                    {/* 텍스트 정보 */}
+                    {/* 데모 제목, url 정보 */}
                     <CardContent
                       sx={{ flex: "1 0 auto" }}
                       onClick={() => navigate(`${element.id}`)}
@@ -94,6 +95,8 @@ const Demo = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
+
+                {/* 수정, 삭제 버튼 */}
                 <Stack
                   spacing={2}
                   direction="column"
@@ -107,33 +110,6 @@ const Demo = () => {
               </div>
             </Box>
           ))}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <TextField
-              id="outlined-multiline-static"
-              label="연구분야"
-              multiline
-              rows={2}
-              sx={{ mt: 2, mb: 3, width: { md: "15%", xs: "25%" } }}
-            />
-            <TextField
-              id="outlined-multiline-static"
-              label="설명"
-              multiline
-              rows={2}
-              sx={{ mt: 2, mb: 3, ml: 2, width: { md: "45%", xs: "40%" } }}
-            />
-            <Button
-              variant="contained"
-              sx={{ height: "100%", mt: 4.5, ml: 1, mb: 3 }}
-            >
-              저장
-            </Button>
-          </div>
         </Grid>
       </Grid>
     </div>

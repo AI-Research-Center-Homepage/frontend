@@ -55,7 +55,7 @@ const ResearchField = () => {
                   }}
                 >
                   <CardActionArea>
-                    {/* 텍스트 정보 */}
+                    {/* 연구분야와 설명을 보여줌 */}
                     <CardContent sx={{ flex: "1 0 auto" }}>
                       <Typography component="div" variant="body1" multiline>
                         <strong>{element.fieldName}</strong>
@@ -65,6 +65,8 @@ const ResearchField = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
+
+                {/* 수정, 삭제 버튼 */}
                 <Stack
                   spacing={2}
                   direction="column"
@@ -84,6 +86,7 @@ const ResearchField = () => {
               justifyContent: "center",
             }}
           >
+            {/* 새 연구분야를 등록할 수 있는 TextField. 분야 이름을 작성하는 칸과 설명을 작성하는 칸 */}
             <TextField
               id="outlined-multiline-static"
               label="연구분야"

@@ -18,8 +18,16 @@ const fieldSelect = [
   { id: 30, fieldName: "연구분야3" },
 ];
 
+/**
+ *@author Eunyoung-Jo, czne2@jbnu.ac.kr
+ *@date 2022-08-12
+ *@description 프로젝트 자세히 보기 페이지
+ */
+
 export default function ProjectDetail() {
   const navigate = useNavigate();
+
+  // 분야, 제목, 내용, 요약, 참여자 변수
   const [field, setField] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
@@ -48,6 +56,7 @@ export default function ProjectDetail() {
 
   return (
     <div>
+      {/* 분야, 내용 등 자세한 정보를 볼 수 있는 창 */}
       <Grid
         container
         direction="column"
@@ -104,6 +113,8 @@ export default function ProjectDetail() {
           />
         </Grid>
       </Grid>
+
+      {/* 취소, 수정, 삭제 버튼 */}
       <Grid container justifyContent="flex-end" alignItems="center" mt={10}>
         <Grid item>
           <Button

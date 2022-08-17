@@ -1,14 +1,23 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Grid } from "@mui/material";
+import { useState } from "react";
+
+/**
+ *@author Eunyoung-Jo, czne2@jbnu.ac.kr
+ *@date 2022-08-16
+ *@description 데모를 추가하는 등록창
+ */
 
 export default function DemoNew() {
   const navigate = useNavigate();
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [content, setContents] = React.useState("");
-  const [urls, setUrl] = React.useState("");
-  const [participants, setparticipants] = React.useState("");
+
+  // 제목, 요약, 내용, url, 참여자 변수
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [content, setContents] = useState("");
+  const [urls, setUrl] = useState("");
+  const [participants, setparticipants] = useState("");
 
   const nameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -29,6 +38,7 @@ export default function DemoNew() {
 
   return (
     <div>
+      {/* 제목, 요약, 내용, url, 참여자를 입력할 수 있는 TextField */}
       <Grid
         container
         direction="column"
@@ -80,6 +90,8 @@ export default function DemoNew() {
           />
         </Grid>
       </Grid>
+
+      {/* 취소, 등록 버튼. 취소 버튼을 누르면 이전 페이지로 돌아감 */}
       <Grid container justifyContent="flex-end" alignItems="center" mt={10}>
         <Grid item>
           <Button
