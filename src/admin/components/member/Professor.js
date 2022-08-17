@@ -88,7 +88,7 @@ const CustomPagination = () => {
  *             DataGrid 이용
  */
 
-const Professor = () => {
+const Professor = ({ addMainText }) => {
   const [data, setData] = useState({ position: "", members: [] });
   const navigate = useNavigate();
 
@@ -126,7 +126,10 @@ const Professor = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => navigate(`./new`)}
+          onClick={() => {
+            addMainText("등록하기");
+            navigate(`./new`);
+          }}
         >
           등록하기
         </Button>

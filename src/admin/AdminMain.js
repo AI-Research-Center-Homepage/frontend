@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import jbnu from "../assets/images/jbnu.png";
 
@@ -79,21 +79,26 @@ const AdminMain = () => {
   const [mainText, setMainText] = useState("구성원 > 교수");
   const [isSelected, setIsSelected] = useState(4);
 
-  const handleSelectedColor = (key) => {
-    if (isSelected === key) {
-      setIsSelected();
-    } else {
-      setIsSelected(key);
-    }
+  const addMainText = (text) => {
+    setMainText(mainText + " > " + text);
   };
 
-  const handleExpanded = (key) => {
-    if (expandedSideMenu === key) {
-      setExpandedSideMenu("");
-    } else {
-      setExpandedSideMenu(key);
-    }
-  };
+  useEffect(() => {
+    setExpandedSideMenu(window.sessionStorage.getItem("expandedSideMenu"));
+    setMainText(window.sessionStorage.getItem("mainText"));
+    setIsSelected(window.sessionStorage.getItem("isSelected"));
+
+    // 뒤로가기 방지 클릭시 자동으로 admin 메인페이지로 이동
+    window.onpopstate = () => {
+      navigate("/admin");
+    };
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem("expandedSideMenu", expandedSideMenu);
+    window.sessionStorage.setItem("mainText", mainText);
+    window.sessionStorage.setItem("isSelected", isSelected);
+  }, [expandedSideMenu, mainText, isSelected]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -129,18 +134,14 @@ const AdminMain = () => {
                 <ListItemButton
                   sx={{ py: 1.5 }}
                   onClick={() => {
-                    handleExpanded(key);
+                    if (key !== isSelected) setExpandedSideMenu(key);
                   }}
                 >
                   <ListItemText primary={title} />
                 </ListItemButton>
                 <Divider flexItem />
 
-                <Collapse
-                  in={key === expandedSideMenu}
-                  timeout="auto"
-                  unmountOnExit
-                >
+                <Collapse in={key === expandedSideMenu} timeout="auto">
                   <List component="div" disablePadding>
                     {contents.map(({ subkey, subcontent, path }) => (
                       <ListItemButton
@@ -157,7 +158,7 @@ const AdminMain = () => {
                         key={subkey}
                         onClick={() => {
                           setMainText(title + " > " + subcontent);
-                          handleSelectedColor(subkey);
+                          if (subkey !== isSelected) setIsSelected(subkey);
                           navigate(`${path}`);
                         }}
                       >
@@ -194,7 +195,10 @@ const AdminMain = () => {
           {/* MainContent */}
           <Routes>
             {/* Member */}
-            <Route path="members/professor" element={<Professor />} />
+            <Route
+              path="members/professor"
+              element={<Professor addMainText={addMainText} />}
+            />
             <Route path="members/researcher" element={<Researcher />} />
             <Route path="committee" element={<Committee />} />
             <Route path="graduate" element={<Graduate />} />
