@@ -173,7 +173,7 @@ export default function ThesisDetail() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate(-1);
+              navigate("/admin/thesis");
             }}
           >
             취소

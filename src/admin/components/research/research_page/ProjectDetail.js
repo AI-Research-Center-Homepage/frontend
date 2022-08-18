@@ -121,7 +121,7 @@ export default function ProjectDetail() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate(-1);
+              navigate("/admin/project");
             }}
           >
             취소
