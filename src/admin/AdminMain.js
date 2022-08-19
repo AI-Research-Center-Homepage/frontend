@@ -29,7 +29,7 @@ import Demo from "./components/research/Demo";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
-import MemberNew from "./components/member/MemberNew";
+import ProfessorNew from "./components/member/ProfessorNew";
 
 const adminHeaderItems = [
   {
@@ -81,6 +81,10 @@ const AdminMain = () => {
 
   const addMainText = (text) => {
     setMainText(mainText + " > " + text);
+  };
+
+  const delMainText = () => {
+    setMainText(mainText.slice(0, mainText.length - 6));
   };
 
   useEffect(() => {
@@ -204,7 +208,10 @@ const AdminMain = () => {
             <Route path="graduate" element={<Graduate />} />
             <Route path="undergraduate" element={<Undergraduate />} />
 
-            <Route path="members/professor/new" element={<MemberNew />} />
+            <Route
+              path="members/professor/new"
+              element={<ProfessorNew delMainText={delMainText} />}
+            />
 
             {/* News */}
             <Route path="announcement" element={<Announcement />} />
