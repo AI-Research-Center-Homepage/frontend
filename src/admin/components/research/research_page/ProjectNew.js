@@ -35,23 +35,23 @@ export default function ProjectNew() {
   const [description, setDescription] = useState("");
   const [member, setMember] = useState("");
 
-  const titleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const titleChange = (event) => {
     setTitle(event.target.value);
   };
 
-  const contentsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const contentsChange = (event) => {
     setContents(event.target.value);
   };
 
-  const descriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const descriptionChange = (event) => {
     setDescription(event.target.value);
   };
 
-  const participantsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const participantsChange = (event) => {
     setMember(event.target.value);
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event) => {
     setField(event.target.value);
   };
 

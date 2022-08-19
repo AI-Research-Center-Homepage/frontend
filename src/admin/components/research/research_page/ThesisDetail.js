@@ -7,7 +7,6 @@ import {
   FormControl,
   TextField,
   Select,
-  SelectChangeEvent,
   Button,
   Grid,
 } from "@mui/material";
@@ -44,35 +43,35 @@ export default function ThesisDetail() {
   const [date, setDate] = useState("");
   const [participant, setParticipant] = useState("");
 
-  const titleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const titleChange = (event) => {
     setTitle(event.target.value);
   };
 
-  const krNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const krNameChange = (event) => {
     setKrName(event.target.value);
   };
 
-  const enNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const enNameChange = (event) => {
     setEnName(event.target.value);
   };
 
-  const urlsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const urlsChange = (event) => {
     setUrl(event.target.value);
   };
 
-  const journalsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const journalsChange = (event) => {
     setJournals(event.target.value);
   };
 
-  const dateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const dateChange = (event) => {
     setDate(event.target.value);
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event) => {
     setField(event.target.value);
   };
 
-  const memberChange = (event: SelectChangeEvent) => {
+  const memberChange = (event) => {
     setParticipant(event.target.value);
   };
 

@@ -34,7 +34,7 @@ export default function ProjectDetail() {
   const [description, setDescription] = useState("");
   const [member, setMember] = useState("");
 
-  const titleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const titleChange = (event) => {
     setTitle(event.target.value);
   };
 

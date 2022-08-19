@@ -19,20 +19,20 @@ export default function DemoNew() {
   const [urls, setUrl] = useState("");
   const [participants, setparticipants] = useState("");
 
-  const nameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const nameChange = (event) => {
     setName(event.target.value);
   };
-  const descriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const descriptionChange = (event) => {
     setDescription(event.target.value);
   };
-  const contentsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const contentsChange = (event) => {
     setContents(event.target.value);
   };
-  const urlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const urlChange = (event) => {
     setUrl(event.target.value);
   };
 
-  const participantsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const participantsChange = (event) => {
     setparticipants(event.target.value);
   };
 

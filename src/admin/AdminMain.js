@@ -61,7 +61,7 @@ const adminHeaderItems = [
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "researchfield" },
+      { subkey: 12, subcontent: "연구분야", path: "fields" },
       { subkey: 13, subcontent: "논문", path: "thesis" },
       { subkey: 14, subcontent: "프로젝트", path: "project" },
       { subkey: 15, subcontent: "데모", path: "demo" },
@@ -217,7 +217,7 @@ const AdminMain = () => {
             <Route path="project" element={<Project />} />
             <Route path="project/new" element={<ProjectNew />} />
             <Route path="project/:id" element={<ProjectDetail />} />
-            <Route path="researchfield" element={<ResearchField />} />
+            <Route path="fields" element={<ResearchField />} />
             <Route path="thesis" element={<Thesis />} />
             <Route path="thesis/new" element={<ThesisNew />} />
             <Route path="thesis/:id" element={<ThesisDetail />} />
