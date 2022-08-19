@@ -7,7 +7,6 @@ import {
   FormControl,
   TextField,
   Select,
-  SelectChangeEvent,
   Button,
   Grid,
 } from "@mui/material";
@@ -29,11 +28,11 @@ export default function ProjectNew() {
   const navigate = useNavigate();
 
   // 프로젝트 분야, 제목, 내용, 요약, 참여멤버 변수
-  const [field, setField] = useState("");
+  const [fieldName, setField] = useState("");
   const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
+  const [content, setContents] = useState("");
   const [description, setDescription] = useState("");
-  const [member, setMember] = useState("");
+  const [participants, setParticipant] = useState("");
 
   const titleChange = (event) => {
     setTitle(event.target.value);
@@ -48,15 +47,34 @@ export default function ProjectNew() {
   };
 
   const participantsChange = (event) => {
-    setMember(event.target.value);
+    setParticipant(event.target.value);
   };
 
   const handleChange = (event) => {
     setField(event.target.value);
   };
 
+  // 제출 기능. state값을 body로 모아서 post를 날린다.
+  // const Submit = (event) => {
+  //   event.preventDefault();
+
+  //   let body = {
+  //     fieldName: fieldName,
+  //     title: title,
+  //     content: content,
+  //     description: description,
+  //     url: url
+  //     participants: participants
+  //   };
+
+  //   axios
+  //     .post("http://localhost:3000/admin/project/new", body)
+  //     .then((res) => console.log(res));
+  // };
+
   return (
     <div>
+      {/* <form onSubmit={Submit}> */}
       <Grid
         container
         direction="column"
@@ -71,7 +89,7 @@ export default function ProjectNew() {
             <Select
               labelId="fieldSelect-label"
               id="select"
-              value={field}
+              value={fieldName}
               label="field"
               onChange={handleChange}
             >
@@ -93,7 +111,7 @@ export default function ProjectNew() {
             label="내용"
             multiline
             maxRows={4}
-            value={contents}
+            value={content}
             onChange={contentsChange}
           />
           <TextField
@@ -109,7 +127,7 @@ export default function ProjectNew() {
             label="참여자"
             multiline
             maxRows={4}
-            value={member}
+            value={participants}
             onChange={participantsChange}
           />
         </Grid>
@@ -127,11 +145,12 @@ export default function ProjectNew() {
           >
             취소
           </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }}>
+          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
             등록
           </Button>
         </Grid>
       </Grid>
+      {/* </form> */}
     </div>
   );
 }

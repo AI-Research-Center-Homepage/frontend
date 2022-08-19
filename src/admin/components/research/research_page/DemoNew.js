@@ -16,7 +16,7 @@ export default function DemoNew() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContents] = useState("");
-  const [urls, setUrl] = useState("");
+  const [url, setUrl] = useState("");
   const [participants, setparticipants] = useState("");
 
   const nameChange = (event) => {
@@ -36,8 +36,26 @@ export default function DemoNew() {
     setparticipants(event.target.value);
   };
 
+  // 제출 기능. state값을 body로 모아서 post를 날린다.
+  // const Submit = (event) => {
+  //   event.preventDefault();
+
+  //   let body = {
+  //     name: name,
+  //     description: description,
+  //     content: content,
+  //     url: url
+  //     participants: participants
+  //   };
+
+  //   axios
+  //     .post("http://localhost:3000/admin/demo/new", body)
+  //     .then((res) => console.log(res));
+  // };
+
   return (
     <div>
+      {/* <form onSubmit={Submit}> */}
       {/* 제목, 요약, 내용, url, 참여자를 입력할 수 있는 TextField */}
       <Grid
         container
@@ -77,7 +95,7 @@ export default function DemoNew() {
             label="url"
             multiline
             maxRows={4}
-            value={urls}
+            value={url}
             onChange={urlChange}
           />
           <TextField
@@ -103,11 +121,12 @@ export default function DemoNew() {
           >
             취소
           </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }}>
+          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
             등록
           </Button>
         </Grid>
       </Grid>
+      {/* </form> */}
     </div>
   );
 }

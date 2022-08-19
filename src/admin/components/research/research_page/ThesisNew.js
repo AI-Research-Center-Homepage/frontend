@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import {
   InputLabel,
   MenuItem,
@@ -35,21 +36,21 @@ export default function ThesisNew() {
   const navigate = useNavigate();
 
   // 분야, 제목, 한글이름, 영어이름, url, 저자, 날짜, 참여자 변수
-  const [field, setField] = useState("");
+  const [fieldName, setFieldName] = useState("");
   const [title, setTitle] = useState("");
-  const [krName, setKrName] = useState("");
+  const [koName, setKoName] = useState("");
   const [enName, setEnName] = useState("");
-  const [urls, setUrl] = useState("");
-  const [journals, setJournals] = useState("");
-  const [date, setDate] = useState("");
+  const [url, setUrl] = useState("");
+  const [journal, setJournals] = useState("");
+  const [publishDate, setDate] = useState("");
   const [participant, setParticipant] = useState("");
 
   const titleChange = (event) => {
     setTitle(event.target.value);
   };
 
-  const krNameChange = (event) => {
-    setKrName(event.target.value);
+  const koNameChange = (event) => {
+    setKoName(event.target.value);
   };
 
   const enNameChange = (event) => {
@@ -69,15 +70,41 @@ export default function ThesisNew() {
   };
 
   const handleChange = (event) => {
-    setField(event.target.value);
+    setFieldName(event.target.value);
   };
 
   const memberChange = (event) => {
     setParticipant(event.target.value);
   };
 
+  // 제출 기능. state값을 body로 모아서 post를 날린다.
+  // const Submit = (event) => {
+  //   event.preventDefault();
+
+  //   let body = {
+  //     fieldName: fieldName,
+  //     title: title,
+  //     koName: koName,
+  //     enName: enName,
+  //     journal: journal,
+  //     publishDate: publishDate,
+  //     url: url
+  //     members:[ //수정필요
+  //       {
+  //         id:
+  //         name:
+  //       }
+  //     ]
+  //   };
+
+  //   axios
+  //     .post("http://localhost:3000/admin/thesis/new", body)
+  //     .then((res) => console.log(res));
+  // };
+
   return (
     <div>
+      {/* <form onSubmit={Submit}> */}
       <Grid
         container
         direction="column"
@@ -92,7 +119,7 @@ export default function ThesisNew() {
             <Select
               labelId="fieldSelect-label"
               id="select"
-              value={field}
+              value={fieldName}
               label="field"
               onChange={handleChange}
             >
@@ -103,6 +130,7 @@ export default function ThesisNew() {
           </FormControl>
 
           {/* 제목, 한글이름, 영문 이름 등 필요한 정보를 작성하는 TextField */}
+
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
             label="제목"
@@ -116,8 +144,8 @@ export default function ThesisNew() {
             label="한글이름"
             multiline
             maxRows={4}
-            value={krName}
-            onChange={krNameChange}
+            value={koName}
+            onChange={koNameChange}
           />
           <TextField
             sx={{ width: "50%", marginTop: 1 }}
@@ -132,7 +160,7 @@ export default function ThesisNew() {
             label="저널"
             multiline
             maxRows={4}
-            value={journals}
+            value={journal}
             onChange={journalsChange}
           />
           <TextField
@@ -140,7 +168,7 @@ export default function ThesisNew() {
             label="출판일"
             multiline
             maxRows={4}
-            value={date}
+            value={publishDate}
             onChange={dateChange}
           />
           <TextField
@@ -148,7 +176,7 @@ export default function ThesisNew() {
             label="url"
             multiline
             maxRows={4}
-            value={urls}
+            value={url}
             onChange={urlsChange}
           />
 
@@ -182,11 +210,12 @@ export default function ThesisNew() {
           >
             취소
           </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }}>
+          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
             등록
           </Button>
         </Grid>
       </Grid>
+      {/* </form> */}
     </div>
   );
 }
