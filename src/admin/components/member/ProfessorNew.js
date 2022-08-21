@@ -86,13 +86,6 @@ const ProfessorNew = ({ delMainText }) => {
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
-            label="박사학위"
-            multiline
-            maxRows={4}
-            onChange={doctorateChange}
-          />
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
             label="위치"
             multiline
             maxRows={4}
