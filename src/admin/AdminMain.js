@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import jbnu from "../assets/images/jbnu.png";
 
@@ -31,6 +31,7 @@ import DemoDetail from "./components/research/research_page/DemoDetail";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
+import ProfessorNew from "./components/member/ProfessorNew";
 import ProjectNew from "./components/research/research_page/ProjectNew";
 import ProjectDetail from "./components/research/research_page/ProjectDetail";
 import ThesisNew from "./components/research/research_page/ThesisNew";
@@ -84,21 +85,30 @@ const AdminMain = () => {
   const [mainText, setMainText] = useState("구성원 > 교수");
   const [isSelected, setIsSelected] = useState(4);
 
-  const handleSelectedColor = (key) => {
-    if (isSelected === key) {
-      setIsSelected();
-    } else {
-      setIsSelected(key);
-    }
+  const addMainText = (text) => {
+    setMainText(mainText + " > " + text);
   };
 
-  const handleExpanded = (key) => {
-    if (expandedSideMenu === key) {
-      setExpandedSideMenu("");
-    } else {
-      setExpandedSideMenu(key);
-    }
+  const delMainText = () => {
+    setMainText(mainText.slice(0, mainText.length - 6));
   };
+
+  useEffect(() => {
+    setExpandedSideMenu(window.sessionStorage.getItem("expandedSideMenu"));
+    setMainText(window.sessionStorage.getItem("mainText"));
+    setIsSelected(window.sessionStorage.getItem("isSelected"));
+
+    // 뒤로가기 방지 클릭시 자동으로 admin 메인페이지로 이동
+    window.onpopstate = () => {
+      navigate("/admin");
+    };
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem("expandedSideMenu", expandedSideMenu);
+    window.sessionStorage.setItem("mainText", mainText);
+    window.sessionStorage.setItem("isSelected", isSelected);
+  }, [expandedSideMenu, mainText, isSelected]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -134,18 +144,14 @@ const AdminMain = () => {
                 <ListItemButton
                   sx={{ py: 1.5 }}
                   onClick={() => {
-                    handleExpanded(key);
+                    if (key !== isSelected) setExpandedSideMenu(key);
                   }}
                 >
                   <ListItemText primary={title} />
                 </ListItemButton>
                 <Divider flexItem />
 
-                <Collapse
-                  in={key === expandedSideMenu}
-                  timeout="auto"
-                  unmountOnExit
-                >
+                <Collapse in={key === expandedSideMenu} timeout="auto">
                   <List component="div" disablePadding>
                     {contents.map(({ subkey, subcontent, path }) => (
                       <ListItemButton
@@ -162,7 +168,7 @@ const AdminMain = () => {
                         key={subkey}
                         onClick={() => {
                           setMainText(title + " > " + subcontent);
-                          handleSelectedColor(subkey);
+                          if (subkey !== isSelected) setIsSelected(subkey);
                           navigate(`${path}`);
                         }}
                       >
@@ -199,11 +205,19 @@ const AdminMain = () => {
           {/* MainContent */}
           <Routes>
             {/* Member */}
-            <Route path="members/professor" element={<Professor />} />
+            <Route
+              path="members/professor"
+              element={<Professor addMainText={addMainText} />}
+            />
             <Route path="members/researcher" element={<Researcher />} />
             <Route path="members/committee" element={<Committee />} />
             <Route path="members/graduate" element={<Graduate />} />
             <Route path="members/undergraduate" element={<Undergraduate />} />
+
+            <Route
+              path="members/professor/new"
+              element={<ProfessorNew delMainText={delMainText} />}
+            />
 
             {/* News */}
             <Route path="posts/notice" element={<Announcement />} />

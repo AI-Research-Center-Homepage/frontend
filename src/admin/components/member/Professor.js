@@ -5,11 +5,12 @@ import {
   useGridApiContext,
   useGridSelector,
 } from "@mui/x-data-grid";
-
 import { Button, Pagination, TextField, Box } from "@mui/material";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 const dummycolumns = [
   {
@@ -87,8 +88,9 @@ const CustomPagination = () => {
  *             DataGrid 이용
  */
 
-const Professor = () => {
+const Professor = ({ addMainText }) => {
   const [data, setData] = useState({ position: "", members: [] });
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios({
@@ -121,7 +123,14 @@ const Professor = () => {
             mr: "3%",
           }}
         />
-        <Button variant="contained" size="large">
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => {
+            addMainText("등록하기");
+            navigate(`./new`);
+          }}
+        >
           등록하기
         </Button>
       </Box>
