@@ -26,10 +26,16 @@ import Announcement from "./components/news/Announcement";
 import Article from "./components/news/Article";
 import InfoChannel from "./components/news/InfoChannel";
 import Demo from "./components/research/Demo";
+import DemoNew from "./components/research/research_page/DemoNew";
+import DemoDetail from "./components/research/research_page/DemoDetail";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
 import ProfessorNew from "./components/member/ProfessorNew";
+import ProjectNew from "./components/research/research_page/ProjectNew";
+import ProjectDetail from "./components/research/research_page/ProjectDetail";
+import ThesisNew from "./components/research/research_page/ThesisNew";
+import ThesisDetail from "./components/research/research_page/ThesisDetail";
 
 const adminHeaderItems = [
   {
@@ -38,25 +44,25 @@ const adminHeaderItems = [
     contents: [
       { subkey: 4, subcontent: "교수", path: "members/professor" },
       { subkey: 5, subcontent: "연구원", path: "members/researcher" },
-      { subkey: 6, subcontent: "석사", path: "graduate" },
-      { subkey: 7, subcontent: "학사", path: "undergraduate" },
-      { subkey: 8, subcontent: "운영위원회", path: "committee" },
+      { subkey: 6, subcontent: "석사", path: "members/graduate" },
+      { subkey: 7, subcontent: "학사", path: "members/undergraduate" },
+      { subkey: 8, subcontent: "운영위원회", path: "members/committee" },
     ],
   },
   {
     key: 2,
     title: "소식",
     contents: [
-      { subkey: 9, subcontent: "소식통", path: "infochannel" },
-      { subkey: 10, subcontent: "공지사항", path: "announcement" },
-      { subkey: 11, subcontent: "언론보도", path: "article" },
+      { subkey: 9, subcontent: "소식통", path: "posts/source" },
+      { subkey: 10, subcontent: "공지사항", path: "posts/notice" },
+      { subkey: 11, subcontent: "언론보도", path: "posts/news" },
     ],
   },
   {
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "researchfield" },
+      { subkey: 12, subcontent: "연구분야", path: "fields" },
       { subkey: 13, subcontent: "논문", path: "thesis" },
       { subkey: 14, subcontent: "프로젝트", path: "project" },
       { subkey: 15, subcontent: "데모", path: "demo" },
@@ -204,9 +210,9 @@ const AdminMain = () => {
               element={<Professor addMainText={addMainText} />}
             />
             <Route path="members/researcher" element={<Researcher />} />
-            <Route path="committee" element={<Committee />} />
-            <Route path="graduate" element={<Graduate />} />
-            <Route path="undergraduate" element={<Undergraduate />} />
+            <Route path="members/committee" element={<Committee />} />
+            <Route path="members/graduate" element={<Graduate />} />
+            <Route path="members/undergraduate" element={<Undergraduate />} />
 
             <Route
               path="members/professor/new"
@@ -214,15 +220,21 @@ const AdminMain = () => {
             />
 
             {/* News */}
-            <Route path="announcement" element={<Announcement />} />
-            <Route path="article" element={<Article />} />
-            <Route path="infochannel" element={<InfoChannel />} />
+            <Route path="posts/notice" element={<Announcement />} />
+            <Route path="posts/news" element={<Article />} />
+            <Route path="posts/source" element={<InfoChannel />} />
 
             {/* Research */}
             <Route path="demo" element={<Demo />} />
+            <Route path="demo/new" element={<DemoNew />} />
+            <Route path="demo/:id" element={<DemoDetail />} />
             <Route path="project" element={<Project />} />
-            <Route path="researchfield" element={<ResearchField />} />
+            <Route path="project/new" element={<ProjectNew />} />
+            <Route path="project/:id" element={<ProjectDetail />} />
+            <Route path="fields" element={<ResearchField />} />
             <Route path="thesis" element={<Thesis />} />
+            <Route path="thesis/new" element={<ThesisNew />} />
+            <Route path="thesis/:id" element={<ThesisDetail />} />
           </Routes>
         </Grid>
       </Grid>

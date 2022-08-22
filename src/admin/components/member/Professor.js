@@ -95,7 +95,7 @@ const Professor = ({ addMainText }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/AdminProfessor",
+      url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/professor",
       responseType: "json",
     }).then((response) => {
       setData(response.data);
@@ -146,7 +146,8 @@ const Professor = ({ addMainText }) => {
           Pagination: CustomPagination,
         }}
         sx={{ cursor: "pointer" }}
-        //onRowClick={() => navigate(`/professor/${dummyRows.id}`)} // 수정 필요!!!
+        // 자세히 보기 페이지 이동 경로
+        // onRowClick={(param) => navigate(`${param.row.id}`)}
       />
     </div>
   );
