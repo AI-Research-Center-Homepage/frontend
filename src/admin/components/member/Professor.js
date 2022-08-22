@@ -146,8 +146,10 @@ const Professor = ({ addMainText }) => {
           Pagination: CustomPagination,
         }}
         sx={{ cursor: "pointer" }}
-        // 자세히 보기 페이지 이동 경로
-        // onRowClick={(param) => navigate(`${param.row.id}`)}
+        onRowClick={(param) => {
+          addMainText("상세보기");
+          navigate(`${param.row.id}`);
+        }}
       />
     </div>
   );

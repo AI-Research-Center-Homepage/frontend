@@ -3,15 +3,20 @@ import { TextField, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProfessorNew = ({ delMainText }) => {
+/**
+ *@author Suin-Jeong, suin8@jbnu.ac.kr
+ *@date 2022-08-22
+ *@description 운영위원회 등록하기 페이지
+ *             사용자로부터 데이터를 입력받아 등록
+ */
+
+const CommitteeNew = ({ delMainText }) => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [major, setMajor] = useState("");
   const [email, setEmail] = useState("");
-  const [doctorate, setDoctorate] = useState("");
-  const [location, setLocation] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
+  const [position, setPosition] = useState("");
   const [ID, setID] = useState("");
   const [password, setPassword] = useState("");
   const [img, setImg] = useState("");
@@ -25,14 +30,8 @@ const ProfessorNew = ({ delMainText }) => {
   const emailChange = (event) => {
     setEmail(event.target.value);
   };
-  const doctorateChange = (event) => {
-    setDoctorate(event.target.value);
-  };
-  const locationChange = (event) => {
-    setLocation(event.target.value);
-  };
-  const phoneNumChange = (event) => {
-    setPhoneNum(event.target.value);
+  const positionChange = (event) => {
+    setPosition(event.target.value);
   };
   const IDChange = (event) => {
     setID(event.target.value);
@@ -62,6 +61,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
+            value={name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -69,6 +69,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
+            value={major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -76,27 +77,15 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
+            value={email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
-            label="박사학위"
+            label="직책"
             multiline
             maxRows={4}
-            onChange={doctorateChange}
-          />
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="위치"
-            multiline
-            maxRows={4}
-            onChange={locationChange}
-          />
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="전화번호"
-            multiline
-            maxRows={4}
-            onChange={phoneNumChange}
+            onChange={positionChange}
+            value={position}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -104,6 +93,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
+            value={ID}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -111,6 +101,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
+            value={password}
           />
           <TextField
             disabled
@@ -125,6 +116,7 @@ const ProfessorNew = ({ delMainText }) => {
                 </Button>
               ),
             }}
+            value={img}
           />
         </Grid>
       </Grid>
@@ -137,7 +129,7 @@ const ProfessorNew = ({ delMainText }) => {
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
               delMainText();
-              navigate("/admin/members/professor");
+              navigate("/admin/members/committee");
             }}
           >
             취소
@@ -152,4 +144,4 @@ const ProfessorNew = ({ delMainText }) => {
   );
 };
 
-export default ProfessorNew;
+export default CommitteeNew;

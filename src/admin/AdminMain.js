@@ -31,11 +31,20 @@ import DemoDetail from "./components/research/research_page/DemoDetail";
 import Project from "./components/research/Project";
 import ResearchField from "./components/research/ResearchField";
 import Thesis from "./components/research/Thesis";
-import ProfessorNew from "./components/member/ProfessorNew";
+import ProfessorNew from "./components/member/member_page/ProfessorNew";
 import ProjectNew from "./components/research/research_page/ProjectNew";
 import ProjectDetail from "./components/research/research_page/ProjectDetail";
 import ThesisNew from "./components/research/research_page/ThesisNew";
 import ThesisDetail from "./components/research/research_page/ThesisDetail";
+import ProfessorDetail from "./components/member/member_page/ProfessorDetail";
+import ResearcherDetail from "./components/member/member_page/ResearcherDetail";
+import ResearchNew from "./components/member/member_page/ResearcherNew";
+import GraduateNew from "./components/member/member_page/GraduateNew";
+import GraduateDetail from "./components/member/member_page/GraduateDetail";
+import UndergraduateNew from "./components/member/member_page/UndergraduateNew";
+import UndergraduateDetail from "./components/member/member_page/UndergraduateDetail";
+import CommitteeNew from "./components/member/member_page/CommitteeNew";
+import CommitteeDetail from "./components/member/member_page/CommitteeDetail";
 
 const adminHeaderItems = [
   {
@@ -209,14 +218,65 @@ const AdminMain = () => {
               path="members/professor"
               element={<Professor addMainText={addMainText} />}
             />
-            <Route path="members/researcher" element={<Researcher />} />
-            <Route path="members/committee" element={<Committee />} />
-            <Route path="members/graduate" element={<Graduate />} />
-            <Route path="members/undergraduate" element={<Undergraduate />} />
-
             <Route
               path="members/professor/new"
               element={<ProfessorNew delMainText={delMainText} />}
+            />
+            <Route
+              path="members/professor/:id"
+              element={<ProfessorDetail delMainText={delMainText} />}
+            />
+
+            <Route
+              path="members/researcher"
+              element={<Researcher addMainText={addMainText} />}
+            />
+            <Route
+              path="members/researcher/new"
+              element={<ResearchNew delMainText={delMainText} />}
+            />
+            <Route
+              path="members/researcher/:id"
+              element={<ResearcherDetail delMainText={delMainText} />}
+            />
+
+            <Route
+              path="members/graduate"
+              element={<Graduate addMainText={addMainText} />}
+            />
+            <Route
+              path="members/graduate/new"
+              element={<GraduateNew delMainText={delMainText} />}
+            />
+            <Route
+              path="members/graduate/:id"
+              element={<GraduateDetail delMainText={delMainText} />}
+            />
+
+            <Route
+              path="members/committee"
+              element={<Committee addMainText={addMainText} />}
+            />
+            <Route
+              path="members/committee/new"
+              element={<CommitteeNew delMainText={delMainText} />}
+            />
+            <Route
+              path="members/committee/:id"
+              element={<CommitteeDetail delMainText={delMainText} />}
+            />
+
+            <Route
+              path="members/undergraduate"
+              element={<Undergraduate addMainText={addMainText} />}
+            />
+            <Route
+              path="members/undergraduate/new"
+              element={<UndergraduateNew delMainText={delMainText} />}
+            />
+            <Route
+              path="members/undergraduate/:id"
+              element={<UndergraduateDetail delMainText={delMainText} />}
             />
 
             {/* News */}
