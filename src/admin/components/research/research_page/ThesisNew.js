@@ -205,7 +205,7 @@ export default function ThesisNew() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/thesis");
+              navigate("/admin/research/thesis");
             }}
           >
             취소

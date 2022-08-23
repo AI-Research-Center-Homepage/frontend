@@ -61,10 +61,10 @@ const adminHeaderItems = [
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "fields" },
-      { subkey: 13, subcontent: "논문", path: "thesis" },
-      { subkey: 14, subcontent: "프로젝트", path: "project" },
-      { subkey: 15, subcontent: "데모", path: "demo" },
+      { subkey: 12, subcontent: "연구분야", path: "research/fields" },
+      { subkey: 13, subcontent: "논문", path: "research/thesis" },
+      { subkey: 14, subcontent: "프로젝트", path: "research/project" },
+      { subkey: 15, subcontent: "데모", path: "research/demo" },
     ],
   },
 ];
@@ -211,16 +211,16 @@ const AdminMain = () => {
             <Route path="infochannel" element={<InfoChannel />} />
 
             {/* Research */}
-            <Route path="demo" element={<Demo />} />
-            <Route path="demo/new" element={<DemoNew />} />
-            <Route path="demo/:id" element={<DemoDetail />} />
-            <Route path="project" element={<Project />} />
-            <Route path="project/new" element={<ProjectNew />} />
-            <Route path="project/:id" element={<ProjectDetail />} />
-            <Route path="fields" element={<ResearchField />} />
-            <Route path="thesis" element={<Thesis />} />
-            <Route path="thesis/new" element={<ThesisNew />} />
-            <Route path="thesis/:id" element={<ThesisDetail />} />
+            <Route path="research/demo" element={<Demo />} />
+            <Route path="research/demo/new" element={<DemoNew />} />
+            <Route path="research/demo/:id" element={<DemoDetail />} />
+            <Route path="research/project" element={<Project />} />
+            <Route path="research/project/new" element={<ProjectNew />} />
+            <Route path="research/project/:id" element={<ProjectDetail />} />
+            <Route path="research/fields" element={<ResearchField />} />
+            <Route path="research/thesis" element={<Thesis />} />
+            <Route path="research/thesis/new" element={<ThesisNew />} />
+            <Route path="research/thesis/:id" element={<ThesisDetail />} />
           </Routes>
         </Grid>
       </Grid>

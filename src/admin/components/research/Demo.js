@@ -29,7 +29,7 @@ const Demo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(url + "/demo").then((response) => {
+    axios.get(url + "/research/demo").then((response) => {
       setDemoData(response.data.demos);
     });
   }, []);

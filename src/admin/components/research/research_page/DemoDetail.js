@@ -98,7 +98,7 @@ export default function DemoNew() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/demo");
+              navigate("/admin/research/demo");
             }}
           >
             취소

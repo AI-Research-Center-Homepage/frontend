@@ -51,7 +51,7 @@ const ResearchField = () => {
   const [fieldData, setFieldData] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/fields").then((response) => {
+    axios.get(url + "/research/fields").then((response) => {
       setFieldData(response.data.fields);
     });
   }, []);

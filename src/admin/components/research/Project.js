@@ -52,7 +52,7 @@ export default function Project() {
   const [projectData, setProjectData] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/project").then((response) => {
+    axios.get(url + "/research/project").then((response) => {
       setProjectData(response.data.projects);
     });
   }, []);

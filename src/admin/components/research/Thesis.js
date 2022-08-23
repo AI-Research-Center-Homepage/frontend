@@ -59,7 +59,7 @@ export default function Thesis() {
   const [thesisData, setThesisData] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/thesis").then((response) => {
+    axios.get(url + "/research/thesis").then((response) => {
       setThesisData(response.data.theses);
     });
   }, []);
