@@ -36,45 +36,84 @@ export default function ThesisNew() {
   const navigate = useNavigate();
 
   // 분야, 제목, 한글이름, 영어이름, url, 저자, 날짜, 참여자 변수
-  const [fieldName, setFieldName] = useState("");
-  const [title, setTitle] = useState("");
-  const [koName, setKoName] = useState("");
-  const [enName, setEnName] = useState("");
-  const [url, setUrl] = useState("");
-  const [journal, setJournals] = useState("");
-  const [publishDate, setDate] = useState("");
-  const [participant, setParticipant] = useState("");
+  const [thesis, setThesis] = useState({
+    fieldName: "",
+    title: "",
+    koName: "",
+    enName: "",
+    url: "",
+    journal: "",
+    publishDate: "",
+    members: [
+      {
+        id: "",
+        name: "",
+      },
+    ],
+  });
 
   const titleChange = (event) => {
-    setTitle(event.target.value);
+    setThesis((cur) => {
+      let newTitle = { ...cur };
+      newTitle.title = event.target.value;
+      return newTitle;
+    });
   };
 
   const koNameChange = (event) => {
-    setKoName(event.target.value);
+    setThesis((cur) => {
+      let newKoName = { ...cur };
+      newKoName.koName = event.target.value;
+      return newKoName;
+    });
   };
 
   const enNameChange = (event) => {
-    setEnName(event.target.value);
+    setThesis((cur) => {
+      let newEnName = { ...cur };
+      newEnName.enName = event.target.value;
+      return newEnName;
+    });
   };
 
   const urlsChange = (event) => {
-    setUrl(event.target.value);
+    setThesis((cur) => {
+      let newUrl = { ...cur };
+      newUrl.url = event.target.value;
+      return newUrl;
+    });
   };
 
   const journalsChange = (event) => {
-    setJournals(event.target.value);
+    setThesis((cur) => {
+      let newJournal = { ...cur };
+      newJournal.journal = event.target.value;
+      return newJournal;
+    });
   };
 
   const dateChange = (event) => {
-    setDate(event.target.value);
+    setThesis((cur) => {
+      let newDate = { ...cur };
+      newDate.publishDate = event.target.value;
+      return newDate;
+    });
   };
 
   const handleChange = (event) => {
-    setFieldName(event.target.value);
+    setThesis((cur) => {
+      let newFieldName = { ...cur };
+      newFieldName.fieldName = event.target.value;
+      return newFieldName;
+    });
   };
 
   const memberChange = (event) => {
-    setParticipant(event.target.value);
+    setThesis((cur) => {
+      let newMember = { ...cur };
+      newMember.members.name = event.target.value;
+      return newMember;
+    });
   };
 
   // 제출 기능. state값을 body로 모아서 post를 날린다.
@@ -119,7 +158,7 @@ export default function ThesisNew() {
             <Select
               labelId="fieldSelect-label"
               id="select"
-              value={fieldName}
+              value={thesis.fieldName}
               label="field"
               onChange={handleChange}
             >
@@ -136,7 +175,7 @@ export default function ThesisNew() {
             label="제목"
             multiline
             maxRows={4}
-            value={title}
+            value={thesis.title}
             onChange={titleChange}
           />
           <TextField
@@ -144,7 +183,7 @@ export default function ThesisNew() {
             label="한글이름"
             multiline
             maxRows={4}
-            value={koName}
+            value={thesis.koName}
             onChange={koNameChange}
           />
           <TextField
@@ -152,7 +191,7 @@ export default function ThesisNew() {
             label="영문이름"
             multiline
             maxRows={4}
-            value={enName}
+            value={thesis.enName}
             onChange={enNameChange}
           />
           <TextField
@@ -160,7 +199,7 @@ export default function ThesisNew() {
             label="저널"
             multiline
             maxRows={4}
-            value={journal}
+            value={thesis.journal}
             onChange={journalsChange}
           />
           <TextField
@@ -168,7 +207,7 @@ export default function ThesisNew() {
             label="출판일"
             multiline
             maxRows={4}
-            value={publishDate}
+            value={thesis.publishDate}
             onChange={dateChange}
           />
           <TextField
@@ -176,7 +215,7 @@ export default function ThesisNew() {
             label="url"
             multiline
             maxRows={4}
-            value={url}
+            value={thesis.url}
             onChange={urlsChange}
           />
 
@@ -186,7 +225,7 @@ export default function ThesisNew() {
             <Select
               labelId="members-label"
               id="memberSelect"
-              value={participant}
+              value={thesis.members.name}
               label="participants"
               onChange={memberChange}
             >

@@ -27,30 +27,52 @@ export default function ProjectDetail() {
   const navigate = useNavigate();
 
   // 분야, 제목, 내용, 요약, 참여자 변수
-  const [field, setField] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [description, setDescription] = useState("");
-  const [member, setMember] = useState("");
+  const [project, setProject] = useState({
+    fieldName: "",
+    title: "",
+    content: "",
+    description: "",
+    participants: "",
+  });
 
   const titleChange = (event) => {
-    setTitle(event.target.value);
+    setProject((cur) => {
+      let newTitle = { ...cur };
+      newTitle.title = event.target.value;
+      return newTitle;
+    });
   };
 
   const contentsChange = (event) => {
-    setContents(event.target.value);
+    setProject((cur) => {
+      let newContent = { ...cur };
+      newContent.content = event.target.value;
+      return newContent;
+    });
   };
 
   const descriptionChange = (event) => {
-    setDescription(event.target.value);
+    setProject((cur) => {
+      let newDescription = { ...cur };
+      newDescription.description = event.target.value;
+      return newDescription;
+    });
   };
 
   const participantsChange = (event) => {
-    setMember(event.target.value);
+    setProject((cur) => {
+      let newParticipants = { ...cur };
+      newParticipants.participants = event.target.value;
+      return newParticipants;
+    });
   };
 
   const handleChange = (event) => {
-    setField(event.target.value);
+    setProject((cur) => {
+      let newFieldName = { ...cur };
+      newFieldName.fieldName = event.target.value;
+      return newFieldName;
+    });
   };
 
   return (
@@ -69,7 +91,7 @@ export default function ProjectDetail() {
             <Select
               labelId="fieldSelect-label"
               id="select"
-              value={field}
+              value={project.fieldName}
               label="field"
               onChange={handleChange}
             >
@@ -83,7 +105,7 @@ export default function ProjectDetail() {
             label="제목"
             multiline
             maxRows={4}
-            value={title}
+            value={project.title}
             onChange={titleChange}
           />
           <TextField
@@ -91,7 +113,7 @@ export default function ProjectDetail() {
             label="내용"
             multiline
             maxRows={4}
-            value={contents}
+            value={project.contents}
             onChange={contentsChange}
           />
           <TextField
@@ -99,7 +121,7 @@ export default function ProjectDetail() {
             label="요약"
             multiline
             maxRows={4}
-            value={description}
+            value={project.description}
             onChange={descriptionChange}
           />
           <TextField
@@ -107,7 +129,7 @@ export default function ProjectDetail() {
             label="참여자"
             multiline
             maxRows={4}
-            value={member}
+            value={project.participants}
             onChange={participantsChange}
           />
         </Grid>

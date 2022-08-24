@@ -28,30 +28,52 @@ export default function ProjectNew() {
   const navigate = useNavigate();
 
   // 프로젝트 분야, 제목, 내용, 요약, 참여멤버 변수
-  const [fieldName, setField] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContents] = useState("");
-  const [description, setDescription] = useState("");
-  const [participants, setParticipant] = useState("");
+  const [project, setProject] = useState({
+    fieldName: "",
+    title: "",
+    content: "",
+    description: "",
+    participants: "",
+  });
 
   const titleChange = (event) => {
-    setTitle(event.target.value);
+    setProject((cur) => {
+      let newTitle = { ...cur };
+      newTitle.title = event.target.value;
+      return newTitle;
+    });
   };
 
   const contentsChange = (event) => {
-    setContents(event.target.value);
+    setProject((cur) => {
+      let newContent = { ...cur };
+      newContent.content = event.target.value;
+      return newContent;
+    });
   };
 
   const descriptionChange = (event) => {
-    setDescription(event.target.value);
+    setProject((cur) => {
+      let newDescription = { ...cur };
+      newDescription.description = event.target.value;
+      return newDescription;
+    });
   };
 
   const participantsChange = (event) => {
-    setParticipant(event.target.value);
+    setProject((cur) => {
+      let newParticipants = { ...cur };
+      newParticipants.participants = event.target.value;
+      return newParticipants;
+    });
   };
 
   const handleChange = (event) => {
-    setField(event.target.value);
+    setProject((cur) => {
+      let newFieldName = { ...cur };
+      newFieldName.fieldName = event.target.value;
+      return newFieldName;
+    });
   };
 
   // 제출 기능. state값을 body로 모아서 post를 날린다.
@@ -89,7 +111,7 @@ export default function ProjectNew() {
             <Select
               labelId="fieldSelect-label"
               id="select"
-              value={fieldName}
+              value={project.fieldName}
               label="field"
               onChange={handleChange}
             >
@@ -103,7 +125,7 @@ export default function ProjectNew() {
             label="제목"
             multiline
             maxRows={4}
-            value={title}
+            value={project.title}
             onChange={titleChange}
           />
           <TextField
@@ -111,7 +133,7 @@ export default function ProjectNew() {
             label="내용"
             multiline
             maxRows={4}
-            value={content}
+            value={project.content}
             onChange={contentsChange}
           />
           <TextField
@@ -119,7 +141,7 @@ export default function ProjectNew() {
             label="요약"
             multiline
             maxRows={4}
-            value={description}
+            value={project.description}
             onChange={descriptionChange}
           />
           <TextField
@@ -127,7 +149,7 @@ export default function ProjectNew() {
             label="참여자"
             multiline
             maxRows={4}
-            value={participants}
+            value={project.participants}
             onChange={participantsChange}
           />
         </Grid>

@@ -13,27 +13,49 @@ export default function DemoNew() {
   const navigate = useNavigate();
 
   // 이름, 요약, 설명, url, 참여자 변수
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [content, setContents] = useState("");
-  const [urls, setUrl] = useState("");
-  const [participants, setparticipants] = useState("");
+  const [demo, setDemo] = useState({
+    name: "",
+    description: "",
+    content: "",
+    url: "",
+    participants: "",
+  });
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setDemo((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const descriptionChange = (event) => {
-    setDescription(event.target.value);
+    setDemo((cur) => {
+      let newDescription = { ...cur };
+      newDescription.description = event.target.value;
+      return newDescription;
+    });
   };
   const contentsChange = (event) => {
-    setContents(event.target.value);
+    setDemo((cur) => {
+      let newContent = { ...cur };
+      newContent.content = event.target.value;
+      return newContent;
+    });
   };
   const urlChange = (event) => {
-    setUrl(event.target.value);
+    setDemo((cur) => {
+      let newUrl = { ...cur };
+      newUrl.url = event.target.value;
+      return newUrl;
+    });
   };
 
   const participantsChange = (event) => {
-    setparticipants(event.target.value);
+    setDemo((cur) => {
+      let newParticipants = { ...cur };
+      newParticipants.participants = event.target.value;
+      return newParticipants;
+    });
   };
 
   return (
@@ -52,7 +74,7 @@ export default function DemoNew() {
             label="제목"
             multiline
             maxRows={4}
-            value={name}
+            value={demo.name}
             onChange={nameChange}
           />
 
@@ -61,7 +83,7 @@ export default function DemoNew() {
             label="요약"
             multiline
             maxRows={4}
-            value={description}
+            value={demo.description}
             onChange={descriptionChange}
           />
           <TextField
@@ -69,7 +91,7 @@ export default function DemoNew() {
             label="내용"
             multiline
             maxRows={4}
-            value={content}
+            value={demo.content}
             onChange={contentsChange}
           />
           <TextField
@@ -77,7 +99,7 @@ export default function DemoNew() {
             label="url"
             multiline
             maxRows={4}
-            value={urls}
+            value={demo.urls}
             onChange={urlChange}
           />
           <TextField
@@ -85,7 +107,7 @@ export default function DemoNew() {
             label="참여자"
             multiline
             maxRows={4}
-            value={participants}
+            value={demo.participants}
             onChange={participantsChange}
           />
         </Grid>
