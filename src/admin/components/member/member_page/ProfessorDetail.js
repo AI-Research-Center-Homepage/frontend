@@ -15,61 +15,108 @@ const ProfessorDetail = ({ delMainText }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [major, setMajor] = useState("");
-  const [email, setEmail] = useState("");
-  const [doctorate, setDoctorate] = useState("");
-  const [location, setLocation] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [ID, setID] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "",
+    doctorate: "",
+    location: "",
+    number: "",
+    adminDto: {
+      loginId: "",
+      password: "",
+    },
+  });
+
+  let dummy = {
+    name: "1",
+    major: "2",
+    email: "3",
+    image: "4",
+    doctorate: "5",
+    location: "6",
+    number: "7",
+    adminDto: {
+      loginId: "8",
+      password: "9",
+    },
+  };
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setPost((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const majorChange = (event) => {
-    setMajor(event.target.value);
+    setPost((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
   };
   const emailChange = (event) => {
-    setEmail(event.target.value);
+    setPost((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
   };
   const doctorateChange = (event) => {
-    setDoctorate(event.target.value);
+    setPost((cur) => {
+      let newDoctorate = { ...cur };
+      newDoctorate.doctorate = event.target.value;
+      return newDoctorate;
+    });
   };
   const locationChange = (event) => {
-    setLocation(event.target.value);
+    setPost((cur) => {
+      let newLocation = { ...cur };
+      newLocation.location = event.target.value;
+      return newLocation;
+    });
   };
   const phoneNumChange = (event) => {
-    setPhoneNum(event.target.value);
+    setPost((cur) => {
+      let newphoneNum = { ...cur };
+      newphoneNum.number = event.target.value;
+      return newphoneNum;
+    });
   };
   const IDChange = (event) => {
-    setID(event.target.value);
+    setPost((cur) => {
+      let newID = { ...cur };
+      newID.adminDto.loginId = event.target.value;
+      return newID;
+    });
   };
   const passwordChange = (event) => {
-    setPassword(event.target.value);
+    setPost((cur) => {
+      let newPassword = { ...cur };
+      newPassword.adminDto.password = event.target.value;
+      return newPassword;
+    });
   };
   const imgChange = (event) => {
-    setImg(event.target.value);
+    setPost((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
   };
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
-      responseType: "json",
-    }).then((response) => {
-      setName(response.data.name);
-      setMajor(response.data.major);
-      setEmail(response.data.email);
-      setDoctorate(response.data.doctorate);
-      setLocation(response.data.location);
-      setPhoneNum(response.data.number);
-      setID(response.data.adminDto.loginId);
-      setPassword(response.data.adminDto.password);
-      setImg(response.data.image);
-    });
-  });
+    // axios({
+    //   method: "get",
+    //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
+    //   responseType: "json",
+    // }).then((response) => {
+    //   setPost(response.data);
+    // });
+    setPost(dummy);
+  }, []);
 
   return (
     <div>
@@ -89,7 +136,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
-            value={name}
+            value={post.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -97,7 +144,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
-            value={major}
+            value={post.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -105,7 +152,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
-            value={email}
+            value={post.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -113,7 +160,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={doctorateChange}
-            value={doctorate}
+            value={post.doctorate}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -121,7 +168,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={locationChange}
-            value={location}
+            value={post.location}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -129,7 +176,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={phoneNumChange}
-            value={phoneNum}
+            value={post.number}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -137,7 +184,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
-            value={ID}
+            value={post.adminDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -145,7 +192,7 @@ const ProfessorDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
-            value={password}
+            value={post.adminDto.password}
           />
           <TextField
             disabled
@@ -160,7 +207,7 @@ const ProfessorDetail = ({ delMainText }) => {
                 </Button>
               ),
             }}
-            value={img}
+            value={post.image}
           />
         </Grid>
       </Grid>

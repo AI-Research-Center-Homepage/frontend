@@ -15,34 +15,66 @@ const UndergraduateDetail = ({ delMainText }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [major, setMajor] = useState("");
-  const [email, setEmail] = useState("");
-  const [admission, setAdmission] = useState("");
-  const [ID, setID] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "",
+    admission: "",
+    adminDto: {
+      loginId: "",
+      password: "",
+    },
+  });
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setPost((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const majorChange = (event) => {
-    setMajor(event.target.value);
+    setPost((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
   };
   const emailChange = (event) => {
-    setEmail(event.target.value);
+    setPost((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
   };
   const admissionChange = (event) => {
-    setAdmission(event.target.value);
+    setPost((cur) => {
+      let newAdmission = { ...cur };
+      newAdmission.admission = event.target.value;
+      return newAdmission;
+    });
   };
   const IDChange = (event) => {
-    setID(event.target.value);
+    setPost((cur) => {
+      let newID = { ...cur };
+      newID.adminDto.loginId = event.target.value;
+      return newID;
+    });
   };
   const passwordChange = (event) => {
-    setPassword(event.target.value);
+    setPost((cur) => {
+      let newPassword = { ...cur };
+      newPassword.adminDto.password = event.target.value;
+      return newPassword;
+    });
   };
   const imgChange = (event) => {
-    setImg(event.target.value);
+    setPost((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
   };
 
   // Mock서버 한계로 학사는 Mock서버에 등록해놓지 않음
@@ -53,15 +85,9 @@ const UndergraduateDetail = ({ delMainText }) => {
     //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
     //   responseType: "json",
     // }).then((response) => {
-    //   setName(response.data.name);
-    //   setMajor(response.data.major);
-    //   setEmail(response.data.email);
-    //   setAdmission(response.data.admission);
-    //   setID(response.data.adminDto.loginId);
-    //   setPassword(response.data.adminDto.password);
-    //   setImg(response.data.image);
+    //   setPost(response.data);
     // });
-  });
+  }, []);
 
   return (
     <div>
@@ -81,7 +107,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
-            value={name}
+            value={post.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -89,7 +115,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
-            value={major}
+            value={post.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -97,7 +123,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
-            value={email}
+            value={post.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -105,7 +131,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={admissionChange}
-            value={admission}
+            value={post.admission}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -113,7 +139,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
-            value={ID}
+            value={post.adminDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -121,7 +147,7 @@ const UndergraduateDetail = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
-            value={password}
+            value={post.adminDto.password}
           />
           <TextField
             disabled
@@ -136,7 +162,7 @@ const UndergraduateDetail = ({ delMainText }) => {
                 </Button>
               ),
             }}
-            value={img}
+            value={post.image}
           />
         </Grid>
       </Grid>

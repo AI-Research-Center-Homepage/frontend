@@ -13,34 +13,66 @@ import { useNavigate } from "react-router-dom";
 const CommitteeNew = ({ delMainText }) => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [major, setMajor] = useState("");
-  const [email, setEmail] = useState("");
-  const [position, setPosition] = useState("");
-  const [ID, setID] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "",
+    position: "",
+    adminDto: {
+      loginId: "",
+      password: "",
+    },
+  });
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setPost((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const majorChange = (event) => {
-    setMajor(event.target.value);
+    setPost((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
   };
   const emailChange = (event) => {
-    setEmail(event.target.value);
+    setPost((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
   };
   const positionChange = (event) => {
-    setPosition(event.target.value);
+    setPost((cur) => {
+      let newPosition = { ...cur };
+      newPosition.position = event.target.value;
+      return newPosition;
+    });
   };
   const IDChange = (event) => {
-    setID(event.target.value);
+    setPost((cur) => {
+      let newID = { ...cur };
+      newID.adminDto.loginId = event.target.value;
+      return newID;
+    });
   };
   const passwordChange = (event) => {
-    setPassword(event.target.value);
+    setPost((cur) => {
+      let newPassword = { ...cur };
+      newPassword.adminDto.password = event.target.value;
+      return newPassword;
+    });
   };
   const imgChange = (event) => {
-    setImg(event.target.value);
+    setPost((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
   };
 
   return (
@@ -61,7 +93,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
-            value={name}
+            value={post.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -69,7 +101,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
-            value={major}
+            value={post.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -77,7 +109,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
-            value={email}
+            value={post.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -85,7 +117,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={positionChange}
-            value={position}
+            value={post.position}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -93,7 +125,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
-            value={ID}
+            value={post.adminDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -101,7 +133,7 @@ const CommitteeNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
-            value={password}
+            value={post.adminDto.password}
           />
           <TextField
             disabled
@@ -116,7 +148,7 @@ const CommitteeNew = ({ delMainText }) => {
                 </Button>
               ),
             }}
-            value={img}
+            value={post.img}
           />
         </Grid>
       </Grid>

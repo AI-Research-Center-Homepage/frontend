@@ -13,30 +13,58 @@ import { useNavigate } from "react-router-dom";
 const ResearchNew = ({ delMainText }) => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [major, setMajor] = useState("");
-  const [email, setEmail] = useState("");
-  const [ID, setID] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "",
+    adminDto: {
+      loginId: "",
+      password: "",
+    },
+  });
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setPost((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const majorChange = (event) => {
-    setMajor(event.target.value);
+    setPost((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
   };
   const emailChange = (event) => {
-    setEmail(event.target.value);
+    setPost((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
   };
   const IDChange = (event) => {
-    setID(event.target.value);
+    setPost((cur) => {
+      let newID = { ...cur };
+      newID.adminDto.loginId = event.target.value;
+      return newID;
+    });
   };
   const passwordChange = (event) => {
-    setPassword(event.target.value);
+    setPost((cur) => {
+      let newPassword = { ...cur };
+      newPassword.adminDto.password = event.target.value;
+      return newPassword;
+    });
   };
   const imgChange = (event) => {
-    setImg(event.target.value);
+    setPost((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
   };
 
   return (
@@ -57,7 +85,7 @@ const ResearchNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
-            value={name}
+            value={post.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -65,7 +93,7 @@ const ResearchNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
-            value={major}
+            value={post.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -73,7 +101,7 @@ const ResearchNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
-            value={email}
+            value={post.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -81,7 +109,7 @@ const ResearchNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
-            value={ID}
+            value={post.adminDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -89,7 +117,7 @@ const ResearchNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
-            value={password}
+            value={post.adminDto.password}
           />
           <TextField
             disabled
@@ -104,7 +132,7 @@ const ResearchNew = ({ delMainText }) => {
                 </Button>
               ),
             }}
-            value={img}
+            value={post.image}
           />
         </Grid>
       </Grid>
