@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 const dummycolumns = [
   {
@@ -2553,7 +2554,7 @@ const Professor = ({ addMainText }) => {
           등록하기
         </Button>
       </Box>
-      <div style={{ height: "70vh" }}>
+      <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
           rows={data.members}
           columns={dummycolumns}
