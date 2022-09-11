@@ -36,6 +36,7 @@ import ProjectNew from "./components/research/research_page/ProjectNew";
 import ProjectDetail from "./components/research/research_page/ProjectDetail";
 import ThesisNew from "./components/research/research_page/ThesisNew";
 import ThesisDetail from "./components/research/research_page/ThesisDetail";
+import AdminSignIn from "./AdminSignIn";
 
 const adminHeaderItems = [
   {
@@ -204,6 +205,9 @@ const AdminMain = () => {
 
           {/* MainContent */}
           <Routes>
+            {/* LogIn */}
+            <Route path="signin" element={<AdminSignIn />} />
+
             {/* Member */}
             <Route
               path="members/professor"
