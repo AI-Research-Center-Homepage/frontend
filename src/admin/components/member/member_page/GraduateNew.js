@@ -3,45 +3,76 @@ import { TextField, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProfessorNew = ({ delMainText }) => {
+/**
+ *@author Suin-Jeong, suin8@jbnu.ac.kr
+ *@date 2022-08-22
+ *@description 석사 등록하기 페이지
+ *             사용자로부터 데이터를 입력받아 등록
+ */
+
+const GraduateNew = ({ delMainText }) => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [major, setMajor] = useState("");
-  const [email, setEmail] = useState("");
-  const [doctorate, setDoctorate] = useState("");
-  const [location, setLocation] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [ID, setID] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "",
+    admission: "",
+    adminDto: {
+      loginId: "",
+      password: "",
+    },
+  });
 
   const nameChange = (event) => {
-    setName(event.target.value);
+    setPost((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
   };
   const majorChange = (event) => {
-    setMajor(event.target.value);
+    setPost((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
   };
   const emailChange = (event) => {
-    setEmail(event.target.value);
+    setPost((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
   };
-  const doctorateChange = (event) => {
-    setDoctorate(event.target.value);
-  };
-  const locationChange = (event) => {
-    setLocation(event.target.value);
-  };
-  const phoneNumChange = (event) => {
-    setPhoneNum(event.target.value);
+  const admissionChange = (event) => {
+    setPost((cur) => {
+      let newAdmission = { ...cur };
+      newAdmission.admission = event.target.value;
+      return newAdmission;
+    });
   };
   const IDChange = (event) => {
-    setID(event.target.value);
+    setPost((cur) => {
+      let newID = { ...cur };
+      newID.adminDto.loginId = event.target.value;
+      return newID;
+    });
   };
   const passwordChange = (event) => {
-    setPassword(event.target.value);
+    setPost((cur) => {
+      let newPassword = { ...cur };
+      newPassword.adminDto.password = event.target.value;
+      return newPassword;
+    });
   };
   const imgChange = (event) => {
-    setImg(event.target.value);
+    setPost((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
   };
 
   return (
@@ -62,6 +93,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={nameChange}
+            value={post.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -69,6 +101,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={majorChange}
+            value={post.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -76,27 +109,15 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={emailChange}
+            value={post.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
-            label="박사학위"
+            label="입학년도"
             multiline
             maxRows={4}
-            onChange={doctorateChange}
-          />
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="위치"
-            multiline
-            maxRows={4}
-            onChange={locationChange}
-          />
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="전화번호"
-            multiline
-            maxRows={4}
-            onChange={phoneNumChange}
+            onChange={admissionChange}
+            value={post.admission}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -104,6 +125,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={IDChange}
+            value={post.adminDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -111,6 +133,7 @@ const ProfessorNew = ({ delMainText }) => {
             multiline
             maxRows={4}
             onChange={passwordChange}
+            value={post.adminDto.password}
           />
           <TextField
             disabled
@@ -125,6 +148,7 @@ const ProfessorNew = ({ delMainText }) => {
                 </Button>
               ),
             }}
+            value={post.image}
           />
         </Grid>
       </Grid>
@@ -137,7 +161,7 @@ const ProfessorNew = ({ delMainText }) => {
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
               delMainText();
-              navigate("/admin/members/professor");
+              navigate("/admin/members/graduate");
             }}
           >
             취소
@@ -152,4 +176,4 @@ const ProfessorNew = ({ delMainText }) => {
   );
 };
 
-export default ProfessorNew;
+export default GraduateNew;
