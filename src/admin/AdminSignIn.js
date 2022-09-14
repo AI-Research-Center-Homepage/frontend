@@ -1,9 +1,9 @@
-import { Button, TextField, Typography, Icon } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const AdminSignIn = () => {
+const AdminSignIn = ({ setMainTxt }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
@@ -24,6 +24,11 @@ const AdminSignIn = () => {
       setIsError(true);
     }
   };
+
+  useEffect(() => {
+    console.log("123");
+    setMainTxt("로그인");
+  }, []);
 
   return (
     <div

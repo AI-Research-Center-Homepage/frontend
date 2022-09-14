@@ -73,7 +73,7 @@ const adminHeaderItems = [
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-07-12
+ *@date 2022-09-12
  *@description 관리자 페이지의 메인화면
  *             상단, 좌측 메뉴 포함
  *             중첩 라우팅으로 컴포넌트를 불러오는 방식 이용
@@ -94,10 +94,23 @@ const AdminMain = () => {
     setMainText(mainText.slice(0, mainText.length - 6));
   };
 
+  const setMainTxt = (text) => {
+    console.log(text);
+    console.log("1234");
+    setMainText(text);
+
+    console.log(mainText);
+  };
+
   useEffect(() => {
-    setExpandedSideMenu(window.sessionStorage.getItem("expandedSideMenu"));
-    setMainText(window.sessionStorage.getItem("mainText"));
-    setIsSelected(window.sessionStorage.getItem("isSelected"));
+    // 첫 접근 시 상단 텍스트를 메인화면으로 표시한다
+    if (window.sessionStorage.getItem("mainText") == null) {
+      setMainText("메인화면");
+    } else {
+      setExpandedSideMenu(window.sessionStorage.getItem("expandedSideMenu"));
+      setMainText(window.sessionStorage.getItem("mainText"));
+      setIsSelected(window.sessionStorage.getItem("isSelected"));
+    }
 
     // 뒤로가기 방지 클릭시 자동으로 admin 메인페이지로 이동
     window.onpopstate = () => {
@@ -106,6 +119,7 @@ const AdminMain = () => {
   }, []);
 
   useEffect(() => {
+    console.log("바뀜 : " + mainText);
     window.sessionStorage.setItem("expandedSideMenu", expandedSideMenu);
     window.sessionStorage.setItem("mainText", mainText);
     window.sessionStorage.setItem("isSelected", isSelected);
@@ -206,7 +220,10 @@ const AdminMain = () => {
           {/* MainContent */}
           <Routes>
             {/* LogIn */}
-            <Route path="signin" element={<AdminSignIn />} />
+            <Route
+              path="signin"
+              element={<AdminSignIn setMainTxt={setMainTxt} />}
+            />
 
             {/* Member */}
             <Route
