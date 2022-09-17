@@ -1,12 +1,25 @@
 import { Button, TextField, Typography } from "@mui/material";
 
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-const AdminSignIn = ({ setMainTxt }) => {
+import { changeMainTextContext } from "./AdminMain";
+
+/**
+ *@author Suin-Jeong, suin8@jbnu.ac.kr
+ *@date 2022-09-17
+ *@description 관리자 로그인 페이지
+ *             로그인시 성공 여부를 sessionStorage에 가짐
+ *             정규표현식을 이용하여 유효성검사
+ */
+
+const AdminSignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
+  const { changeMainText } = useContext(changeMainTextContext);
+  const navigate = useNavigate();
 
   const idChange = (e) => {
     setId(e.target.value);
@@ -26,8 +39,7 @@ const AdminSignIn = ({ setMainTxt }) => {
   };
 
   useEffect(() => {
-    console.log("123");
-    setMainTxt("로그인");
+    changeMainText("로그인");
   }, []);
 
   return (
@@ -72,7 +84,13 @@ const AdminSignIn = ({ setMainTxt }) => {
           variant="contained"
           size="large"
           sx={{ mt: 4, width: "100%" }}
-          onClick={checkValue}
+          onClick={() => {
+            checkValue();
+            // 우선 임시로 유효성만 통과하면 로그인되도록 함
+            sessionStorage.setItem("isSignedIn", "true");
+            alert("로그인 되었습니다.");
+            navigate("/admin/main");
+          }}
         >
           Log In
         </Button>

@@ -7,10 +7,11 @@ import {
 } from "@mui/x-data-grid";
 
 import { Button, Pagination, TextField, Box } from "@mui/material";
-
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { changeMainTextContext } from "../../AdminMain";
+
+import axios from "axios";
 
 const dummycolumns = [
   {
@@ -51,43 +52,31 @@ const dummycolumns = [
   },
 ];
 
-// 추후 삭제 예정 - virtualization로 바꿀것
-const CustomPagination = () => {
-  const apiRef = useGridApiContext();
-  const page = useGridSelector(apiRef, gridPageSelector);
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-  return (
-    <Pagination
-      color="primary"
-      count={pageCount}
-      page={page + 1}
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
-      showLastButton
-      showFirstButton
-    />
-  );
-};
-
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-08-01
+ *@date 2022-09-17
  *@description Admin Undergraduate 페이지
  *             DataGrid 이용
  */
 
-const Undergraduate = ({ addMainText }) => {
+const Undergraduate = () => {
   const [data, setData] = useState({ position: "", members: [] });
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainTextContext);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/undergraduate"
-      )
-      .then((response) => {
-        setData(response.data);
-      });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 학사");
+      axios
+        .get(
+          "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/undergraduate"
+        )
+        .then((response) => {
+          setData(response.data);
+        });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -115,30 +104,24 @@ const Undergraduate = ({ addMainText }) => {
           variant="contained"
           size="large"
           onClick={() => {
-            addMainText("등록하기");
-            navigate(`./new`);
+            navigate(`new`);
           }}
         >
           등록하기
         </Button>
       </Box>
-      <DataGrid
-        rows={data.members}
-        columns={dummycolumns}
-        pageSize={15}
-        sortingOrder={["desc", "asc"]}
-        autoHeight
-        autoPageSize
-        hideFooterSelectedRowCount
-        components={{
-          Pagination: CustomPagination,
-        }}
-        sx={{ cursor: "pointer" }}
-        onRowClick={(param) => {
-          addMainText("상세보기");
-          navigate(`${param.row.id}`);
-        }}
-      />
+      <div style={{ height: "calc(200px + 40vh)" }}>
+        <DataGrid
+          rows={data.members}
+          columns={dummycolumns}
+          sortingOrder={["desc", "asc"]}
+          hideFooterSelectedRowCount
+          sx={{ cursor: "pointer" }}
+          onRowClick={(param) => {
+            navigate(`${param.row.id}`);
+          }}
+        />
+      </div>
     </div>
   );
 };

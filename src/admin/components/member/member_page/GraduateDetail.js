@@ -1,6 +1,9 @@
 import { TextField, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { changeMainTextContext } from "../../../AdminMain";
+
 import axios from "axios";
 
 /**
@@ -11,9 +14,10 @@ import axios from "axios";
  *             GraduateNew와 다르게 전달받은 데이터를 미리 보여줌
  */
 
-const GraduateDetail = ({ delMainText }) => {
+const GraduateDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainTextContext);
 
   const [post, setPost] = useState({
     name: "",
@@ -80,13 +84,18 @@ const GraduateDetail = ({ delMainText }) => {
   // Mock서버 한계로 석사는 Mock서버에 등록해놓지 않음
   // 단 교수와 구현은 동일하다
   useEffect(() => {
-    // axios({
-    //   method: "get",
-    //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
-    //   responseType: "json",
-    // }).then((response) => {
-    //   setPost(response.data);
-    // });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 석사 > 상세보기");
+      // axios({
+      //   method: "get",
+      //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
+      //   responseType: "json",
+      // }).then((response) => {
+      //   setPost(response.data);
+      // });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -174,7 +183,6 @@ const GraduateDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/graduate");
             }}
           >
@@ -185,14 +193,10 @@ const GraduateDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/graduate");
             }}
           >
             탈퇴
-          </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
-            등록
           </Button>
         </Grid>
       </Grid>

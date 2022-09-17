@@ -1,19 +1,22 @@
 import { TextField, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+import { changeMainTextContext } from "../../../AdminMain";
+
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-08-22
+ *@date 2022-09-17
  *@description 교수 상세보기 페이지
  *             useParams로 id값을 받아와 그 값으로 다시 데이터 요청
  *             ProfessorNew와 다르게 전달받은 데이터를 미리 보여줌
  */
 
-const ProfessorDetail = ({ delMainText }) => {
+const ProfessorDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainTextContext);
 
   const [post, setPost] = useState({
     name: "",
@@ -108,14 +111,21 @@ const ProfessorDetail = ({ delMainText }) => {
   };
 
   useEffect(() => {
-    // axios({
-    //   method: "get",
-    //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
-    //   responseType: "json",
-    // }).then((response) => {
-    //   setPost(response.data);
-    // });
+    // 확인을 위한 더미데이터 추후 삭제
     setPost(dummy);
+
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 교수 > 상세보기");
+      // axios({
+      //   method: "get",
+      //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
+      //   responseType: "json",
+      // }).then((response) => {
+      //   setPost(response.data);
+      // });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -219,7 +229,6 @@ const ProfessorDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/professor");
             }}
           >
@@ -230,14 +239,10 @@ const ProfessorDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/professor");
             }}
           >
             탈퇴
-          </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
-            등록
           </Button>
         </Grid>
       </Grid>

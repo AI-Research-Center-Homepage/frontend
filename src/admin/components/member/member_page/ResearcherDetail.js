@@ -1,7 +1,9 @@
 import { TextField, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+
+import { changeMainTextContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -11,9 +13,10 @@ import axios from "axios";
  *             ResearcherNew와 다르게 전달받은 데이터를 미리 보여줌
  */
 
-const ResearcherDetail = ({ delMainText }) => {
+const ResearcherDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainTextContext);
 
   const [post, setPost] = useState({
     name: "",
@@ -72,13 +75,18 @@ const ResearcherDetail = ({ delMainText }) => {
   // Mock서버 한계로 연구원은 Mock서버에 등록해놓지 않음
   // 단 교수와 구현은 동일하다
   useEffect(() => {
-    // axios({
-    //   method: "get",
-    //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
-    //   responseType: "json",
-    // }).then((response) => {
-    //   setPost(response.data);
-    // });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 연구원 > 상세보기");
+      // axios({
+      //   method: "get",
+      //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
+      //   responseType: "json",
+      // }).then((response) => {
+      //   setPost(response.data);
+      // });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -158,7 +166,6 @@ const ResearcherDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/researcher");
             }}
           >
@@ -169,14 +176,10 @@ const ResearcherDetail = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
               navigate("/admin/members/researcher");
             }}
           >
             탈퇴
-          </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
-            등록
           </Button>
         </Grid>
       </Grid>
