@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
-import { changeMainTextContext } from "./AdminMain";
+import { changeMainHeaderContext } from "./AdminMain";
 import { useNavigate } from "react-router-dom";
 
 const AdminMainContents = () => {
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {

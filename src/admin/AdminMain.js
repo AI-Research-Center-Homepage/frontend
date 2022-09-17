@@ -73,10 +73,10 @@ const adminHeaderItems = [
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "fields" },
-      { subkey: 13, subcontent: "논문", path: "thesis" },
-      { subkey: 14, subcontent: "프로젝트", path: "project" },
-      { subkey: 15, subcontent: "데모", path: "demo" },
+      { subkey: 12, subcontent: "연구분야", path: "research/fields" },
+      { subkey: 13, subcontent: "논문", path: "research/thesis" },
+      { subkey: 14, subcontent: "프로젝트", path: "research/project" },
+      { subkey: 15, subcontent: "데모", path: "research/demo" },
     ],
   },
 ];
@@ -90,40 +90,30 @@ const adminHeaderItems = [
  *             Context를 이용하여 상단 MainText 바꾸는 방식 사용
  */
 
-export const changeMainTextContext = createContext();
+export const changeMainHeaderContext = createContext();
 
 const AdminMain = () => {
   const navigate = useNavigate();
 
-  const [expandedSideMenu, setExpandedSideMenu] = useState(1);
-  const [mainText, setMainText] = useState("메인화면");
-  const [isSelected, setIsSelected] = useState(4);
+  const [expandedSideMenu, setExpandedSideMenu] = useState();
+  const [mainText, setMainText] = useState();
+  const [isSelected, setIsSelected] = useState();
 
   const changeMainText = (text) => {
     setMainText(text);
   };
 
+  const changeMainMenu = (expand, select) => {
+    setExpandedSideMenu(expand);
+    setIsSelected(select);
+  };
+
   useEffect(() => {
     // 로그인 상태인 경우 Main화면을
-    if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("메인화면");
-    } else {
-      // 아니라면 로그인화면으로 강제 redirection
+    if (window.sessionStorage.getItem("isSignedIn") !== "true") {
       navigate("/admin/signin");
     }
   }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem("expandedSideMenu", expandedSideMenu);
-  }, [expandedSideMenu]);
-
-  useEffect(() => {
-    window.sessionStorage.setItem("mainText", mainText);
-  }, [mainText]);
-
-  useEffect(() => {
-    window.sessionStorage.setItem("isSelected", isSelected);
-  }, [isSelected]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -225,7 +215,9 @@ const AdminMain = () => {
           </Box>
           <Divider flexitem />
           {/* MainContent */}
-          <changeMainTextContext.Provider value={{ changeMainText }}>
+          <changeMainHeaderContext.Provider
+            value={{ changeMainText, changeMainMenu }}
+          >
             <Routes>
               <Route path="main" element={<AdminMainContents />} />
 
@@ -274,18 +266,18 @@ const AdminMain = () => {
               <Route path="posts/source" element={<InfoChannel />} />
 
               {/* Research */}
-              <Route path="demo" element={<Demo />} />
-              <Route path="demo/new" element={<DemoNew />} />
-              <Route path="demo/:id" element={<DemoDetail />} />
-              <Route path="project" element={<Project />} />
-              <Route path="project/new" element={<ProjectNew />} />
-              <Route path="project/:id" element={<ProjectDetail />} />
-              <Route path="fields" element={<ResearchField />} />
-              <Route path="thesis" element={<Thesis />} />
-              <Route path="thesis/new" element={<ThesisNew />} />
-              <Route path="thesis/:id" element={<ThesisDetail />} />
+              <Route path="research/demo" element={<Demo />} />
+              <Route path="research/demo/new" element={<DemoNew />} />
+              <Route path="research/demo/:id" element={<DemoDetail />} />
+              <Route path="research/project" element={<Project />} />
+              <Route path="research/project/new" element={<ProjectNew />} />
+              <Route path="research/project/:id" element={<ProjectDetail />} />
+              <Route path="research/fields" element={<ResearchField />} />
+              <Route path="research/thesis" element={<Thesis />} />
+              <Route path="research/thesis/new" element={<ThesisNew />} />
+              <Route path="research/thesis/:id" element={<ThesisDetail />} />
             </Routes>
-          </changeMainTextContext.Provider>
+          </changeMainHeaderContext.Provider>
         </Grid>
       </Grid>
     </Box>

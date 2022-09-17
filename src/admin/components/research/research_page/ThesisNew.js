@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   InputLabel,
@@ -11,6 +11,8 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 // 가상의 연구분야 목록
 const fieldSelect = [
@@ -28,12 +30,13 @@ const members = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-16
+ *@date 2022-09-17
  *@description 논문을 추가하는 등록창
  */
 
 export default function ThesisNew() {
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   // 분야, 제목, 한글이름, 영어이름, url, 저자, 날짜, 참여자 변수
   const [fieldName, setFieldName] = useState("");
@@ -76,6 +79,14 @@ export default function ThesisNew() {
   const memberChange = (event) => {
     setParticipant(event.target.value);
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 논문 > 신규등록");
+    } else {
+      navigate("/admin/signin");
+    }
+  });
 
   // 제출 기능. state값을 body로 모아서 post를 날린다.
   // const Submit = (event) => {
@@ -205,7 +216,7 @@ export default function ThesisNew() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/thesis");
+              navigate("./..");
             }}
           >
             취소

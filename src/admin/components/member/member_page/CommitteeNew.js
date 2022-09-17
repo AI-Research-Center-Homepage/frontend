@@ -3,7 +3,7 @@ import { TextField, Button, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { changeMainTextContext } from "../../../AdminMain";
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -14,7 +14,7 @@ import { changeMainTextContext } from "../../../AdminMain";
 
 const CommitteeNew = () => {
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   const [post, setPost] = useState({
     name: "",
@@ -171,7 +171,7 @@ const CommitteeNew = () => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/members/committee");
+              navigate("./..");
             }}
           >
             취소

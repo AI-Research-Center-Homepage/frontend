@@ -1,14 +1,10 @@
-import {
-  DataGrid,
-  gridPageCountSelector,
-  gridPageSelector,
-  useGridApiContext,
-  useGridSelector,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
-import { Button, Pagination, TextField, Box } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
 
 const dummycolumns = [
@@ -68,42 +64,34 @@ const dummycolumns = [
   },
 ];
 
-// 추후 삭제 예정 - virtualization로 바꿀것
-const CustomPagination = () => {
-  const apiRef = useGridApiContext();
-  const page = useGridSelector(apiRef, gridPageSelector);
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-  return (
-    <Pagination
-      color="primary"
-      count={pageCount}
-      page={page + 1}
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
-      showLastButton
-      showFirstButton
-    />
-  );
-};
-
 /**
  *@author BumKi Lee
- *@date 2022-08-02
+ *@date 2022-09-17
  *@description Admin Article
  *             DataGrid 이용
  */
 
 const Article = () => {
   const [data, setData] = useState({ position: "", news: [] });
+  const navigate = useNavigate();
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/news",
-      responseType: "json",
-    }).then((response) => {
-      setData(response.data);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("소식 > 언론보도");
+      changeMainMenu(2, 11);
+      axios({
+        method: "get",
+        url: "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/news",
+        responseType: "json",
+      }).then((response) => {
+        setData(response.data);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -131,21 +119,18 @@ const Article = () => {
           등록하기
         </Button>
       </Box>
-      <DataGrid
-        rows={data.news}
-        columns={dummycolumns}
-        pageSize={15}
-        sortingOrder={["desc", "asc"]}
-        autoHeight
-        autoPageSize
-        hideFooterSelectedRowCount
-        components={{
-          Pagination: CustomPagination,
-        }}
-        sx={{ cursor: "pointer" }}
-        // 자세히 보기 페이지 이동 경로
-        // onRowClick={(param) => navigate(`${param.row.id}`)}
-      />
+      <div style={{ height: "calc(200px + 40vh)" }}>
+        <DataGrid
+          rows={data.news}
+          columns={dummycolumns}
+          sortingOrder={["desc", "asc"]}
+          hideFooterSelectedRowCount
+          sx={{ cursor: "pointer" }}
+          onRowClick={(param) => {
+            navigate(`${param.row.id}`);
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { TextField, Button, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { changeMainTextContext } from "../../../AdminMain";
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -14,7 +14,7 @@ import { changeMainTextContext } from "../../../AdminMain";
 
 const UndergraduateNew = () => {
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
@@ -171,7 +171,7 @@ const UndergraduateNew = () => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/members/undergraduate");
+              navigate("./..");
             }}
           >
             취소

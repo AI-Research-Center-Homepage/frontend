@@ -1,16 +1,20 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { TextField, Button, Grid } from "@mui/material";
+
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-17
- *@description 논문을 추가하는 등록창
+ *@date 2022-09-17
+ *@description 데모 상세보기 페이지
  */
 
 export default function DemoNew() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   // 이름, 요약, 설명, url, 참여자 변수
   const [name, setName] = useState("");
@@ -31,10 +35,17 @@ export default function DemoNew() {
   const urlChange = (event) => {
     setUrl(event.target.value);
   };
-
   const participantsChange = (event) => {
     setparticipants(event.target.value);
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 데모 > 상세보기");
+    } else {
+      navigate("/admin/signin");
+    }
+  });
 
   return (
     <div>
@@ -98,7 +109,7 @@ export default function DemoNew() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/demo");
+              navigate("./..");
             }}
           >
             취소

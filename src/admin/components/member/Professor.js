@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { changeMainTextContext } from "../../AdminMain";
+import { changeMainHeaderContext } from "../../AdminMain";
 
 const dummycolumns = [
   {
@@ -105,7 +105,9 @@ const dummy = {
 const Professor = () => {
   const [data, setData] = useState({ position: "", members: [] });
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
     // backend 연결 전 간단한 출력을 위함
@@ -114,6 +116,7 @@ const Professor = () => {
 
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("구성원 > 교수");
+      changeMainMenu(1, 4);
       // axios({
       //   method: "get",
       //   url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/professor",

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   InputLabel,
   MenuItem,
@@ -11,6 +11,8 @@ import {
   Grid,
 } from "@mui/material";
 
+import { changeMainHeaderContext } from "../../../AdminMain";
+
 // 가상의 연구분야 리스트
 const fieldSelect = [
   { id: 10, fieldName: "연구분야1" },
@@ -20,12 +22,13 @@ const fieldSelect = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-16
+ *@date 2022-09-17
  *@description 프로젝트를 추가하는 등록창
  */
 
 export default function ProjectNew() {
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   // 프로젝트 분야, 제목, 내용, 요약, 참여멤버 변수
   const [fieldName, setField] = useState("");
@@ -53,6 +56,14 @@ export default function ProjectNew() {
   const handleChange = (event) => {
     setField(event.target.value);
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 프로젝트 > 신규등록");
+    } else {
+      navigate("/admin/signin");
+    }
+  });
 
   // 제출 기능. state값을 body로 모아서 post를 날린다.
   // const Submit = (event) => {
@@ -140,7 +151,7 @@ export default function ProjectNew() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/project");
+              navigate("./..");
             }}
           >
             취소

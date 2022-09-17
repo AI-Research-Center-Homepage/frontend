@@ -10,7 +10,8 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
 
 // mock api url
@@ -43,18 +44,27 @@ const columns = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-16
+ *@date 2022-09-17
  *@description 프로젝트를 조회하는 메인페이지
  */
 
 export default function Project() {
   const navigate = useNavigate();
   const [projectData, setProjectData] = useState([]);
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
-    axios.get(url + "/project").then((response) => {
-      setProjectData(response.data.projects);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 프로젝트");
+      changeMainMenu(3, 14);
+      axios.get(url + "/project").then((response) => {
+        setProjectData(response.data.projects);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (

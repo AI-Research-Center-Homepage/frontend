@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -11,6 +12,7 @@ import {
   TextField,
   CardActionArea,
 } from "@mui/material";
+import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
 
 // mock api URL
@@ -18,7 +20,7 @@ const url = "https://f87d90da-75da-46d6-8ba4-9b4325601a9e.mock.pstmn.io";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-19
+ *@date 2022-09-17
  *@description 연구분야를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
  */
 
@@ -30,6 +32,11 @@ const ResearchField = () => {
   // 연구분야, 설명 내용 변경을 위한 함수
   const descriptionChange = ({ target: { value } }) => setDescription(value);
   const fieldNameChange = ({ target: { value } }) => setFieldName(value);
+
+  const navigate = useNavigate();
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   // 제출 기능. state값을 body로 모아서 post를 날린다.
   // const Submit = (event) => {
@@ -51,9 +58,15 @@ const ResearchField = () => {
   const [fieldData, setFieldData] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/fields").then((response) => {
-      setFieldData(response.data.fields);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 연구분야");
+      changeMainMenu(3, 12);
+      axios.get(url + "/fields").then((response) => {
+        setFieldData(response.data.fields);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (

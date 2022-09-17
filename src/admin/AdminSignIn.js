@@ -4,7 +4,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { changeMainTextContext } from "./AdminMain";
+import { changeMainHeaderContext } from "./AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -18,7 +18,7 @@ const AdminSignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText } = useContext(changeMainHeaderContext);
   const navigate = useNavigate();
 
   const idChange = (e) => {

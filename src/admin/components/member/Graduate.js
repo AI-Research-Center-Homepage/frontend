@@ -1,18 +1,12 @@
-import {
-  DataGrid,
-  gridPageCountSelector,
-  gridPageSelector,
-  useGridApiContext,
-  useGridSelector,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
-import { Button, Pagination, TextField, Box } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { changeMainTextContext } from "../../AdminMain";
+import { changeMainHeaderContext } from "../../AdminMain";
 
 const dummycolumns = [
   {
@@ -63,11 +57,14 @@ const dummycolumns = [
 const Graduate = () => {
   const [data, setData] = useState({ position: "", members: [] });
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("구성원 > 석사");
+      changeMainMenu(1, 6);
       axios
         .get(
           "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/graduate"

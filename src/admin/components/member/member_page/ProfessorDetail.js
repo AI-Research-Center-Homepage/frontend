@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-import { changeMainTextContext } from "../../../AdminMain";
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -16,7 +16,7 @@ import { changeMainTextContext } from "../../../AdminMain";
 const ProfessorDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { changeMainText } = useContext(changeMainTextContext);
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   const [post, setPost] = useState({
     name: "",
@@ -229,7 +229,7 @@ const ProfessorDetail = () => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/members/professor");
+              navigate("./..");
             }}
           >
             취소
@@ -239,7 +239,7 @@ const ProfessorDetail = () => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/members/professor");
+              navigate("./..");
             }}
           >
             탈퇴
