@@ -47,6 +47,12 @@ import UndergraduateDetail from "./components/member/member_page/UndergraduateDe
 import CommitteeNew from "./components/member/member_page/CommitteeNew";
 import CommitteeDetail from "./components/member/member_page/CommitteeDetail";
 import AdminMainContents from "./AdminMainContents";
+import AnnouncementNew from "./components/news/news_page/AnnouncementNew";
+import AnnouncementDetail from "./components/news/news_page/AnnouncementDetail";
+import ArticleNew from "./components/news/news_page/ArticleNew";
+import ArticleDetail from "./components/news/news_page/ArticleDetail";
+import InfochannelNew from "./components/news/news_page/InfoChannelNew";
+import InfochannelDetail from "./components/news/news_page/InfoChannelDetail";
 
 const adminHeaderItems = [
   {
@@ -64,9 +70,9 @@ const adminHeaderItems = [
     key: 2,
     title: "소식",
     contents: [
-      { subkey: 9, subcontent: "소식통", path: "posts/source" },
-      { subkey: 10, subcontent: "공지사항", path: "posts/notice" },
-      { subkey: 11, subcontent: "언론보도", path: "posts/news" },
+      { subkey: 9, subcontent: "소식통", path: "news/article" },
+      { subkey: 10, subcontent: "공지사항", path: "news/announcement" },
+      { subkey: 11, subcontent: "언론보도", path: "news/infochannel" },
     ],
   },
   {
@@ -261,9 +267,26 @@ const AdminMain = () => {
               />
 
               {/* News */}
-              <Route path="posts/notice" element={<Announcement />} />
-              <Route path="posts/news" element={<Article />} />
-              <Route path="posts/source" element={<InfoChannel />} />
+              <Route path="news/announcement" element={<Announcement />} />
+              <Route
+                path="news/announcement/new"
+                element={<AnnouncementNew />}
+              />
+              <Route
+                path="news/announcement/:id"
+                element={<AnnouncementDetail />}
+              />
+
+              <Route path="news/article" element={<Article />} />
+              <Route path="news/article/new" element={<ArticleNew />} />
+              <Route path="news/article/:id" element={<ArticleDetail />} />
+
+              <Route path="news/infochannel" element={<InfoChannel />} />
+              <Route path="news/infochannel/new" element={<InfochannelNew />} />
+              <Route
+                path="news/infochannel/:id"
+                element={<InfochannelDetail />}
+              />
 
               {/* Research */}
               <Route path="research/demo" element={<Demo />} />

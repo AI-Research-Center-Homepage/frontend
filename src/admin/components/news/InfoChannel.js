@@ -115,7 +115,13 @@ const Infochannel = () => {
             mr: "3%",
           }}
         />
-        <Button variant="contained" size="large">
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => {
+            navigate("./new");
+          }}
+        >
           등록하기
         </Button>
       </Box>
