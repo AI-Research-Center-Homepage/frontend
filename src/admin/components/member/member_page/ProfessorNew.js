@@ -1,17 +1,28 @@
 import { TextField, Button, Grid } from "@mui/material";
 
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-08-22
+ *@date 2022-09-17
  *@description 교수 등록하기 페이지
  *             사용자로부터 데이터를 입력받아 등록
  */
 
-const ProfessorNew = ({ delMainText }) => {
+const ProfessorNew = () => {
   const navigate = useNavigate();
+  const { changeMainText } = useContext(changeMainHeaderContext);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 교수 > 신규등록");
+    } else {
+      navigate("/admin/signin");
+    }
+  }, []);
 
   const [post, setPost] = useState({
     name: "",
@@ -192,8 +203,7 @@ const ProfessorNew = ({ delMainText }) => {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              delMainText();
-              navigate("/admin/members/professor");
+              navigate("./..");
             }}
           >
             취소

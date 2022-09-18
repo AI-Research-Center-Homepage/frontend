@@ -10,7 +10,8 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
 
 // mock api url
@@ -50,18 +51,27 @@ const columns = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-17
+ *@date 2022-09-17
  *@description 분야별 논문 리스트를 보여주는 논문 메인페이지
  */
 
 export default function Thesis() {
   const navigate = useNavigate();
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
   const [thesisData, setThesisData] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/thesis").then((response) => {
-      setThesisData(response.data.theses);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 논문");
+      changeMainMenu(3, 13);
+      axios.get(url + "/thesis").then((response) => {
+        setThesisData(response.data.theses);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import {
   InputLabel,
   MenuItem,
@@ -11,6 +11,8 @@ import {
   Grid,
 } from "@mui/material";
 
+import { changeMainHeaderContext } from "../../../AdminMain";
+
 const fieldSelect = [
   { id: 10, fieldName: "연구분야1" },
   { id: 20, fieldName: "연구분야2" },
@@ -19,12 +21,14 @@ const fieldSelect = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-12
+ *@date 2022-09-17
  *@description 프로젝트 자세히 보기 페이지
  */
 
 export default function ProjectDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   // 분야, 제목, 내용, 요약, 참여자 변수
   const [field, setField] = useState("");
@@ -52,6 +56,14 @@ export default function ProjectDetail() {
   const handleChange = (event) => {
     setField(event.target.value);
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 프로젝트 > 상세보기");
+    } else {
+      navigate("/admin/signin");
+    }
+  });
 
   return (
     <div>
@@ -120,7 +132,7 @@ export default function ProjectDetail() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/project");
+              navigate("./..");
             }}
           >
             취소

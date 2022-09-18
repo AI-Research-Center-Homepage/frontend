@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import {
   InputLabel,
   MenuItem,
@@ -10,6 +10,8 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+
+import { changeMainHeaderContext } from "../../../AdminMain";
 
 // 가상의 연구분야 목록
 const fieldSelect = [
@@ -27,12 +29,14 @@ const members = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-16
+ *@date 2022-09-17
  *@description 논문 자세히보기 및 수정, 삭제가 가능함
  */
 
 export default function ThesisDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { changeMainText } = useContext(changeMainHeaderContext);
 
   const [field, setField] = useState("");
   const [title, setTitle] = useState("");
@@ -74,6 +78,14 @@ export default function ThesisDetail() {
   const memberChange = (event) => {
     setParticipant(event.target.value);
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 논문 > 상세보기");
+    } else {
+      navigate("/admin/signin");
+    }
+  });
 
   return (
     <div>
@@ -172,7 +184,7 @@ export default function ThesisDetail() {
             variant="contained"
             sx={{ mr: 3, height: 55 }}
             onClick={() => {
-              navigate("/admin/thesis");
+              navigate("./..");
             }}
           >
             취소

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { changeMainHeaderContext } from "../../AdminMain";
 import {
   Card,
   CardContent,
@@ -19,7 +20,7 @@ const url = "https://7fe4e807-7f98-44a0-8eff-03534b5964f9.mock.pstmn.io";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-08-13
+ *@date 2022-09-17
  *@description 데모를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
  */
 
@@ -27,11 +28,20 @@ const Demo = () => {
   // mock api의 데이터를 받는 변수
   const [demoData, setDemoData] = useState([]);
   const navigate = useNavigate();
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
-    axios.get(url + "/demo").then((response) => {
-      setDemoData(response.data.demos);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("연구 > 데모");
+      changeMainMenu(3, 15);
+      axios.get(url + "/demo").then((response) => {
+        setDemoData(response.data.demos);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (

@@ -1,16 +1,12 @@
-import {
-  DataGrid,
-  gridPageCountSelector,
-  gridPageSelector,
-  useGridApiContext,
-  useGridSelector,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
-import { Button, Pagination, TextField, Box } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import { changeMainHeaderContext } from "../../AdminMain";
 
 const dummycolumns = [
   {
@@ -63,43 +59,34 @@ const dummycolumns = [
   },
 ];
 
-// 추후 삭제 예정 - virtualization로 바꿀것
-const CustomPagination = () => {
-  const apiRef = useGridApiContext();
-  const page = useGridSelector(apiRef, gridPageSelector);
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-  return (
-    <Pagination
-      color="primary"
-      count={pageCount}
-      page={page + 1}
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
-      showLastButton
-      showFirstButton
-    />
-  );
-};
-
 /**
  *@author Suin-Jeong suin8@jbnu.ac.kr
- *@date 2022-07-25
+ *@date 2022-09-17
  *@description Admin Researcher 페이지
  *             DataGrid 이용
  */
 
-const Researcher = ({ addMainText }) => {
+const Researcher = () => {
   const [data, setData] = useState({ position: "", members: [] });
   const navigate = useNavigate();
+  const { changeMainText, changeMainMenu } = useContext(
+    changeMainHeaderContext
+  );
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/researcher",
-      responseType: "json",
-    }).then((response) => {
-      setData(response.data);
-    });
+    if (window.sessionStorage.getItem("isSignedIn") === "true") {
+      changeMainText("구성원 > 연구원");
+      changeMainMenu(1, 5);
+      axios({
+        method: "get",
+        url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/researcher",
+        responseType: "json",
+      }).then((response) => {
+        setData(response.data);
+      });
+    } else {
+      navigate("/admin/signin");
+    }
   }, []);
 
   return (
@@ -127,30 +114,24 @@ const Researcher = ({ addMainText }) => {
           variant="contained"
           size="large"
           onClick={() => {
-            addMainText("등록하기");
             navigate(`./new`);
           }}
         >
           등록하기
         </Button>
       </Box>
-      <DataGrid
-        rows={data.members}
-        columns={dummycolumns}
-        pageSize={15}
-        sortingOrder={["desc", "asc"]}
-        autoHeight
-        autoPageSize
-        hideFooterSelectedRowCount
-        components={{
-          Pagination: CustomPagination,
-        }}
-        sx={{ cursor: "pointer" }}
-        onRowClick={(param) => {
-          addMainText("상세보기");
-          navigate(`${param.row.id}`);
-        }}
-      />
+      <div style={{ height: "calc(200px + 40vh)" }}>
+        <DataGrid
+          rows={data.members}
+          columns={dummycolumns}
+          sortingOrder={["desc", "asc"]}
+          hideFooterSelectedRowCount
+          sx={{ cursor: "pointer" }}
+          onRowClick={(param) => {
+            navigate(`${param.row.id}`);
+          }}
+        />
+      </div>
     </div>
   );
 };

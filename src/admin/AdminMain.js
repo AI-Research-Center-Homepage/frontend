@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 
 import jbnu from "../assets/images/jbnu.png";
 
@@ -36,6 +36,7 @@ import ProjectNew from "./components/research/research_page/ProjectNew";
 import ProjectDetail from "./components/research/research_page/ProjectDetail";
 import ThesisNew from "./components/research/research_page/ThesisNew";
 import ThesisDetail from "./components/research/research_page/ThesisDetail";
+import AdminSignIn from "./AdminSignIn";
 import ProfessorDetail from "./components/member/member_page/ProfessorDetail";
 import ResearcherDetail from "./components/member/member_page/ResearcherDetail";
 import ResearchNew from "./components/member/member_page/ResearcherNew";
@@ -45,6 +46,7 @@ import UndergraduateNew from "./components/member/member_page/UndergraduateNew";
 import UndergraduateDetail from "./components/member/member_page/UndergraduateDetail";
 import CommitteeNew from "./components/member/member_page/CommitteeNew";
 import CommitteeDetail from "./components/member/member_page/CommitteeDetail";
+import AdminMainContents from "./AdminMainContents";
 
 const adminHeaderItems = [
   {
@@ -71,53 +73,47 @@ const adminHeaderItems = [
     key: 3,
     title: "연구",
     contents: [
-      { subkey: 12, subcontent: "연구분야", path: "fields" },
-      { subkey: 13, subcontent: "논문", path: "thesis" },
-      { subkey: 14, subcontent: "프로젝트", path: "project" },
-      { subkey: 15, subcontent: "데모", path: "demo" },
+      { subkey: 12, subcontent: "연구분야", path: "research/fields" },
+      { subkey: 13, subcontent: "논문", path: "research/thesis" },
+      { subkey: 14, subcontent: "프로젝트", path: "research/project" },
+      { subkey: 15, subcontent: "데모", path: "research/demo" },
     ],
   },
 ];
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-07-12
+ *@date 2022-09-17
  *@description 관리자 페이지의 메인화면
  *             상단, 좌측 메뉴 포함
  *             중첩 라우팅으로 컴포넌트를 불러오는 방식 이용
+ *             Context를 이용하여 상단 MainText 바꾸는 방식 사용
  */
+
+export const changeMainHeaderContext = createContext();
 
 const AdminMain = () => {
   const navigate = useNavigate();
 
-  const [expandedSideMenu, setExpandedSideMenu] = useState(1);
-  const [mainText, setMainText] = useState("구성원 > 교수");
-  const [isSelected, setIsSelected] = useState(4);
+  const [expandedSideMenu, setExpandedSideMenu] = useState();
+  const [mainText, setMainText] = useState();
+  const [isSelected, setIsSelected] = useState();
 
-  const addMainText = (text) => {
-    setMainText(mainText + " > " + text);
+  const changeMainText = (text) => {
+    setMainText(text);
   };
 
-  const delMainText = () => {
-    setMainText(mainText.slice(0, mainText.length - 6));
+  const changeMainMenu = (expand, select) => {
+    setExpandedSideMenu(expand);
+    setIsSelected(select);
   };
 
   useEffect(() => {
-    setExpandedSideMenu(window.sessionStorage.getItem("expandedSideMenu"));
-    setMainText(window.sessionStorage.getItem("mainText"));
-    setIsSelected(window.sessionStorage.getItem("isSelected"));
-
-    // 뒤로가기 방지 클릭시 자동으로 admin 메인페이지로 이동
-    window.onpopstate = () => {
-      navigate("/admin");
-    };
+    // 로그인 상태인 경우 Main화면을
+    if (window.sessionStorage.getItem("isSignedIn") !== "true") {
+      navigate("/admin/signin");
+    }
   }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem("expandedSideMenu", expandedSideMenu);
-    window.sessionStorage.setItem("mainText", mainText);
-    window.sessionStorage.setItem("isSelected", isSelected);
-  }, [expandedSideMenu, mainText, isSelected]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -135,7 +131,10 @@ const AdminMain = () => {
                 display: "flex",
                 justifyContent: "space-between",
               }}
-              onClick={() => navigate("/admin")}
+              onClick={() => {
+                setMainText("메인화면");
+                navigate("/admin/main");
+              }}
             >
               <CardMedia
                 sx={{ maxWidth: "70px", ml: "15px", cursor: "pointer" }}
@@ -144,9 +143,7 @@ const AdminMain = () => {
                 alt="jbnu logo"
               />
             </Card>
-
             <Divider flexItem sx={{ alignSelf: "stretch", height: "auto" }} />
-
             {/* Collapse Menu */}
             {adminHeaderItems.map(({ key, title, contents }) => (
               <div key={key}>
@@ -176,7 +173,6 @@ const AdminMain = () => {
                         }}
                         key={subkey}
                         onClick={() => {
-                          setMainText(title + " > " + subcontent);
                           if (subkey !== isSelected) setIsSelected(subkey);
                           navigate(`${path}`);
                         }}
@@ -191,7 +187,6 @@ const AdminMain = () => {
             ))}
           </List>
         </Grid>
-
         {/* Content */}
         <Grid item xs={10}>
           {/* Content Header */}
@@ -205,97 +200,84 @@ const AdminMain = () => {
             }}
           >
             <Typography variant="h5">{mainText}</Typography>
-            <Button variant="contained" size="large" sx={{ mr: "3%" }}>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{ mr: "3%" }}
+              onClick={() => {
+                sessionStorage.removeItem("isSignedIn");
+                alert("로그아웃 되었습니다.");
+                navigate("/admin/signin");
+              }}
+            >
               로그아웃
             </Button>
           </Box>
           <Divider flexitem />
-
           {/* MainContent */}
-          <Routes>
-            {/* Member */}
-            <Route
-              path="members/professor"
-              element={<Professor addMainText={addMainText} />}
-            />
-            <Route
-              path="members/professor/new"
-              element={<ProfessorNew delMainText={delMainText} />}
-            />
-            <Route
-              path="members/professor/:id"
-              element={<ProfessorDetail delMainText={delMainText} />}
-            />
+          <changeMainHeaderContext.Provider
+            value={{ changeMainText, changeMainMenu }}
+          >
+            <Routes>
+              <Route path="main" element={<AdminMainContents />} />
 
-            <Route
-              path="members/researcher"
-              element={<Researcher addMainText={addMainText} />}
-            />
-            <Route
-              path="members/researcher/new"
-              element={<ResearchNew delMainText={delMainText} />}
-            />
-            <Route
-              path="members/researcher/:id"
-              element={<ResearcherDetail delMainText={delMainText} />}
-            />
+              {/* LogIn */}
+              <Route path="signin" element={<AdminSignIn />} />
 
-            <Route
-              path="members/graduate"
-              element={<Graduate addMainText={addMainText} />}
-            />
-            <Route
-              path="members/graduate/new"
-              element={<GraduateNew delMainText={delMainText} />}
-            />
-            <Route
-              path="members/graduate/:id"
-              element={<GraduateDetail delMainText={delMainText} />}
-            />
+              {/* Member */}
+              <Route path="members/professor" element={<Professor />} />
+              <Route path="members/professor/new" element={<ProfessorNew />} />
+              <Route
+                path="members/professor/:id"
+                element={<ProfessorDetail />}
+              />
 
-            <Route
-              path="members/committee"
-              element={<Committee addMainText={addMainText} />}
-            />
-            <Route
-              path="members/committee/new"
-              element={<CommitteeNew delMainText={delMainText} />}
-            />
-            <Route
-              path="members/committee/:id"
-              element={<CommitteeDetail delMainText={delMainText} />}
-            />
+              <Route path="members/researcher" element={<Researcher />} />
+              <Route path="members/researcher/new" element={<ResearchNew />} />
+              <Route
+                path="members/researcher/:id"
+                element={<ResearcherDetail />}
+              />
 
-            <Route
-              path="members/undergraduate"
-              element={<Undergraduate addMainText={addMainText} />}
-            />
-            <Route
-              path="members/undergraduate/new"
-              element={<UndergraduateNew delMainText={delMainText} />}
-            />
-            <Route
-              path="members/undergraduate/:id"
-              element={<UndergraduateDetail delMainText={delMainText} />}
-            />
+              <Route path="members/graduate" element={<Graduate />} />
+              <Route path="members/graduate/new" element={<GraduateNew />} />
+              <Route path="members/graduate/:id" element={<GraduateDetail />} />
 
-            {/* News */}
-            <Route path="posts/notice" element={<Announcement />} />
-            <Route path="posts/news" element={<Article />} />
-            <Route path="posts/source" element={<InfoChannel />} />
+              <Route path="members/committee" element={<Committee />} />
+              <Route path="members/committee/new" element={<CommitteeNew />} />
+              <Route
+                path="members/committee/:id"
+                element={<CommitteeDetail />}
+              />
 
-            {/* Research */}
-            <Route path="demo" element={<Demo />} />
-            <Route path="demo/new" element={<DemoNew />} />
-            <Route path="demo/:id" element={<DemoDetail />} />
-            <Route path="project" element={<Project />} />
-            <Route path="project/new" element={<ProjectNew />} />
-            <Route path="project/:id" element={<ProjectDetail />} />
-            <Route path="fields" element={<ResearchField />} />
-            <Route path="thesis" element={<Thesis />} />
-            <Route path="thesis/new" element={<ThesisNew />} />
-            <Route path="thesis/:id" element={<ThesisDetail />} />
-          </Routes>
+              <Route path="members/undergraduate" element={<Undergraduate />} />
+              <Route
+                path="members/undergraduate/new"
+                element={<UndergraduateNew />}
+              />
+              <Route
+                path="members/undergraduate/:id"
+                element={<UndergraduateDetail />}
+              />
+
+              {/* News */}
+              <Route path="posts/notice" element={<Announcement />} />
+              <Route path="posts/news" element={<Article />} />
+              <Route path="posts/source" element={<InfoChannel />} />
+
+              {/* Research */}
+              <Route path="research/demo" element={<Demo />} />
+              <Route path="research/demo/new" element={<DemoNew />} />
+              <Route path="research/demo/:id" element={<DemoDetail />} />
+              <Route path="research/project" element={<Project />} />
+              <Route path="research/project/new" element={<ProjectNew />} />
+              <Route path="research/project/:id" element={<ProjectDetail />} />
+              <Route path="research/fields" element={<ResearchField />} />
+              <Route path="research/thesis" element={<Thesis />} />
+              <Route path="research/thesis/new" element={<ThesisNew />} />
+              <Route path="research/thesis/:id" element={<ThesisDetail />} />
+            </Routes>
+          </changeMainHeaderContext.Provider>
         </Grid>
       </Grid>
     </Box>
