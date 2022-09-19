@@ -1,4 +1,4 @@
-import { TextField, Button, Grid, Box } from "@mui/material";
+import { TextField, Button, Grid, Box, Typography, Stack } from "@mui/material";
 
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ import TitleTextField from "../../TitleTextField";
 const AnnouncementNew = () => {
   const navigate = useNavigate();
   const editorRef = useRef(); // Editor DOM 선택용
-  const fileInput = useRef(null);
+  const fileInput = useRef(null); // 첨부파일 업로드
   const { changeMainText } = useContext(changeMainHeaderContext);
 
   const [post, setPost] = useState({
@@ -28,11 +28,11 @@ const AnnouncementNew = () => {
     content: "",
     author: "",
     images: [],
-    admission: "",
-    attach: [],
   });
 
-  // 등록 버튼 핸들러
+  const [attaches, setAttaches] = useState([]);
+
+  // toast-ui-editor 등록 버튼 핸들러
   const handleRegisterButton = () => {
     // 입력창에 입력한 내용을 HTML 태그 형태로 취득
     console.log(editorRef.current?.getInstance().getHTML());
@@ -41,11 +41,16 @@ const AnnouncementNew = () => {
   };
 
   const handleButtonClick = (e) => {
-    fileInput.current.cilck();
+    fileInput.current.click();
   };
 
   const handleChange = (e) => {
     console.log(e.target.files[0]);
+    const newAttach = {
+      fileName: e.target.files[0].name,
+      filePath: "",
+    };
+    setAttaches([...attaches, newAttach]);
   };
 
   const titleChange = (event) => {
@@ -102,14 +107,27 @@ const AnnouncementNew = () => {
       ></Editor>
 
       {/* 첨부파일 등록 */}
-      <Box sx={{ my: "2%" }}>
-        <Button onClick={handleButtonClick}>파일 업로드</Button>
+      <Box sx={{ my: "2%", display: "flex" }}>
+        <Button variant="contained" size="large" onClick={handleButtonClick}>
+          파일 업로드
+        </Button>
         <input
           type="file"
           ref={fileInput}
           onChange={handleChange}
           style={{ display: "none" }}
         />
+
+        <Stack
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          sx={{ mx: "2%" }}
+        >
+          {attaches.map((attach) => (
+            <Typography>{attach.fileName}</Typography>
+          ))}
+        </Stack>
       </Box>
 
       <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
