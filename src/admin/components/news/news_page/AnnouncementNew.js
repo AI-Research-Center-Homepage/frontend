@@ -1,4 +1,6 @@
-import { TextField, Button, Grid, Box, Typography, Stack } from "@mui/material";
+import { Button, Box, Typography, Stack } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,11 +19,15 @@ import TitleTextField from "../../TitleTextField";
  */
 
 const AnnouncementNew = () => {
-  const navigate = useNavigate();
-  const editorRef = useRef(); // Editor DOM 선택용
-  const fileInput = useRef(null); // 첨부파일 업로드
   const { changeMainText } = useContext(changeMainHeaderContext);
 
+  const navigate = useNavigate();
+
+  /* useRef */
+  const editorRef = useRef(); // Editor DOM 선택용
+  const fileInput = useRef(null); // 첨부파일 업로드
+
+  /* useState */
   const [post, setPost] = useState({
     boardName: "",
     title: "",
@@ -32,6 +38,7 @@ const AnnouncementNew = () => {
 
   const [attaches, setAttaches] = useState([]);
 
+  /* function */
   // toast-ui-editor 등록 버튼 핸들러
   const handleRegisterButton = () => {
     // 입력창에 입력한 내용을 HTML 태그 형태로 취득
@@ -40,17 +47,21 @@ const AnnouncementNew = () => {
     console.log(editorRef.current?.getInstance().getMarkdown());
   };
 
-  const handleButtonClick = (e) => {
+  const handleFileUploadButtonClick = (e) => {
     fileInput.current.click();
   };
 
-  const handleChange = (e) => {
+  const handleFileUploadChange = (e) => {
     console.log(e.target.files[0]);
     const newAttach = {
       fileName: e.target.files[0].name,
       filePath: "",
     };
     setAttaches([...attaches, newAttach]);
+  };
+
+  const attachRemove = (fileName) => {
+    setAttaches(attaches.filter((attach) => attach.fileName !== fileName));
   };
 
   const titleChange = (event) => {
@@ -60,6 +71,7 @@ const AnnouncementNew = () => {
       return newTitle;
     });
   };
+
   const contentChange = (event) => {
     setPost((cur) => {
       let newContent = { ...cur };
@@ -68,6 +80,7 @@ const AnnouncementNew = () => {
     });
   };
 
+  /* useEffect */
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 소식통 > 등록하기");
@@ -108,24 +121,45 @@ const AnnouncementNew = () => {
 
       {/* 첨부파일 등록 */}
       <Box sx={{ my: "2%", display: "flex" }}>
-        <Button variant="contained" size="large" onClick={handleButtonClick}>
-          파일 업로드
-        </Button>
-        <input
-          type="file"
-          ref={fileInput}
-          onChange={handleChange}
-          style={{ display: "none" }}
-        />
+        {/* 파일 업로드 버튼 */}
+        <Box sx={{ width: "10%" }}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleFileUploadButtonClick}
+          >
+            파일 업로드
+          </Button>
+          <input
+            type="file"
+            ref={fileInput}
+            onChange={handleFileUploadChange}
+            style={{ display: "none" }}
+          />
+        </Box>
 
+        {/* 첨부파일 Stack */}
         <Stack
-          direction="row"
-          spacing={2}
-          alignItems="center"
-          sx={{ mx: "2%" }}
+          direction="column"
+          spacing={1}
+          sx={{
+            mx: "2%",
+            width: "90%",
+            alignItems: "flex-start",
+            display: "flex",
+          }}
         >
           {attaches.map((attach) => (
-            <Typography>{attach.fileName}</Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography>{attach.fileName}</Typography>
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={() => attachRemove(attach.fileName)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </Box>
           ))}
         </Stack>
       </Box>
