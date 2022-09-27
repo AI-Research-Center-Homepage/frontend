@@ -13,7 +13,7 @@ import TitleTextField from "../../TitleTextField";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-09-19
+ *@date 2022-09-28
  *@description 공지사항 등록하기 페이지
  *             사용자로부터 데이터를 입력받아 등록
  */
@@ -29,11 +29,12 @@ const AnnouncementNew = () => {
 
   /* useState */
   const [post, setPost] = useState({
-    boardName: "",
+    boardName: "announcement",
     title: "",
     content: "",
-    author: "",
+    author: "관리자",
     images: [],
+    attach: [],
   });
 
   const [attaches, setAttaches] = useState([]);
@@ -42,9 +43,19 @@ const AnnouncementNew = () => {
   // toast-ui-editor 등록 버튼 핸들러
   const handleRegisterButton = () => {
     // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    console.log(editorRef.current?.getInstance().getHTML());
+    // console.log(editorRef.current?.getInstance().getHTML());
     // 입력창에 입력한 내용을 MarkDown 형태로 취득
-    console.log(editorRef.current?.getInstance().getMarkdown());
+    // console.log(editorRef.current?.getInstance().getMarkdown());
+
+    setPost({
+      ...post,
+      content: editorRef.current?.getInstance().getMarkdown(),
+      attach: attaches,
+    });
+
+    console.log(post);
+
+    // post 객체를 전송하는 코드
   };
 
   const handleFileUploadButtonClick = (e) => {
@@ -57,7 +68,14 @@ const AnnouncementNew = () => {
       fileName: e.target.files[0].name,
       filePath: "",
     };
-    setAttaches([...attaches, newAttach]);
+
+    // 이미 첨부하지 않은 파일일 때만 추가
+    if (
+      attaches.filter((attach) => attach.fileName === newAttach.fileName)
+        .length === 0
+    ) {
+      setAttaches([...attaches, newAttach]);
+    }
   };
 
   const attachRemove = (fileName) => {
@@ -65,18 +83,9 @@ const AnnouncementNew = () => {
   };
 
   const titleChange = (event) => {
-    setPost((cur) => {
-      let newTitle = { ...cur };
-      newTitle.title = event.target.value;
-      return newTitle;
-    });
-  };
-
-  const contentChange = (event) => {
-    setPost((cur) => {
-      let newContent = { ...cur };
-      newContent.content = event.target.value;
-      return newContent;
+    setPost({
+      ...post,
+      title: event.target.value,
     });
   };
 
@@ -151,7 +160,10 @@ const AnnouncementNew = () => {
         >
           {attaches.map((attach) => (
             <Box sx={{ display: "flex", alignItems: "center" }}>
+              {/* 파일명 */}
               <Typography>{attach.fileName}</Typography>
+
+              {/* 삭제버튼 */}
               <IconButton
                 aria-label="delete"
                 size="small"
