@@ -9,7 +9,6 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
-  Button,
 } from "@mui/material";
 
 import { useNavigate, Routes, Route } from "react-router-dom";
@@ -53,6 +52,7 @@ import ArticleNew from "./pages/news/new/ArticleNew";
 import ArticleDetail from "./pages/news/detail/ArticleDetail";
 import InfochannelNew from "./pages/news/new/InfoChannelNew";
 import InfochannelDetail from "./pages/news/detail/InfoChannelDetail";
+import CommonButton from "./components/CommonButton";
 
 const adminHeaderItems = [
   {
@@ -206,18 +206,15 @@ const AdminMain = () => {
             }}
           >
             <Typography variant="h5">{mainText}</Typography>
-            <Button
-              variant="contained"
-              size="large"
+            <CommonButton
+              content="로그아웃"
               sx={{ mr: "3%" }}
               onClick={() => {
                 sessionStorage.removeItem("isSignedIn");
                 alert("로그아웃 되었습니다.");
                 navigate("/admin/signin");
               }}
-            >
-              로그아웃
-            </Button>
+            />
           </Box>
           <Divider flexitem />
           {/* MainContent */}

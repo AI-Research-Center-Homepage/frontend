@@ -1,12 +1,14 @@
 import { DataGrid } from "@mui/x-data-grid";
-
-import { Button, TextField, Box } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 import { changeMainHeaderContext } from "../../AdminMain";
+
+import CommonButton from "../../components/CommonButton";
 
 const dummycolumns = [
   {
@@ -98,15 +100,12 @@ const Graduate = () => {
             mr: "3%",
           }}
         />
-        <Button
-          variant="contained"
-          size="large"
+        <CommonButton
+          content="등록하기"
           onClick={() => {
             navigate(`./new`);
           }}
-        >
-          등록하기
-        </Button>
+        />
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
