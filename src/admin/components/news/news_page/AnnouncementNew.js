@@ -152,16 +152,25 @@ const AnnouncementNew = () => {
           direction="column"
           spacing={1}
           sx={{
-            mx: "2%",
+            ml: "1%",
             width: "90%",
             alignItems: "flex-start",
             display: "flex",
+            border: "1px solid #D3D3D3",
+            borderRadius: "10px",
           }}
         >
           {attaches.map((attach) => (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               {/* 파일명 */}
-              <Typography>{attach.fileName}</Typography>
+              <Typography sx={{ ml: "1%" }}>{attach.fileName}</Typography>
 
               {/* 삭제버튼 */}
               <IconButton
