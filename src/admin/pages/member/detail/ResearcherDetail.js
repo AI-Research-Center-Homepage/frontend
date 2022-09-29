@@ -76,7 +76,7 @@ const ResearcherDetail = () => {
   // 단 교수와 구현은 동일하다
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("구성원 > 연구원 > 상세보기");
+      changeMainText("구성원 > 연구원 > 상세정보");
       // axios({
       //   method: "get",
       //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,

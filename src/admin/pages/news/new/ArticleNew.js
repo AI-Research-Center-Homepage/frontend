@@ -55,7 +55,7 @@ const ArticleNew = () => {
 
   const signedInCheck = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("소식 > 언론보도 > 등록하기");
+      changeMainText("소식 > 언론보도 > 신규등록");
     } else {
       navigate("/admin/signin");
     }

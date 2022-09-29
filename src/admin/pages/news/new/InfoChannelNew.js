@@ -55,7 +55,7 @@ const InfoChannelNew = () => {
 
   const signedInCheck = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("소식 > 소식통 > 등록하기");
+      changeMainText("소식 > 소식통 > 신규등록");
     } else {
       navigate("/admin/signin");
     }

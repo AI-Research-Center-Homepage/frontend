@@ -115,7 +115,7 @@ const ProfessorDetail = () => {
     setPost(dummy);
 
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("구성원 > 교수 > 상세보기");
+      changeMainText("구성원 > 교수 > 상세정보");
       // axios({
       //   method: "get",
       //   url: `https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io//members/${id}`,
