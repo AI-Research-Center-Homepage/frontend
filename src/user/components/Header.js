@@ -22,7 +22,7 @@ import {
 import { Home } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import jbnu from "../assets/images/jbnu.png";
+import jbnu from "../../assets/images/jbnu.png";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr

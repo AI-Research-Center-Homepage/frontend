@@ -5,18 +5,18 @@ import { useNavigate } from "react-router-dom";
 
 import { changeMainHeaderContext } from "../../../AdminMain";
 
-import TitleTextField from "../../TitleTextField";
-import PostEditor from "../../PostEditor";
-import CommonButton from "../../CommonButton";
+import TitleTextField from "../../../components/TitleTextField";
+import PostEditor from "../../../components/PostEditor";
+import CommonButton from "../../../components/CommonButton";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
  *@date 2022-09-29
- *@description 소식통 등록하기 페이지
+ *@description 언론보도 등록하기 페이지
  *             사용자로부터 데이터를 입력받아 등록
  */
 
-const InfoChannelNew = () => {
+const ArticleNew = () => {
   const { changeMainText } = useContext(changeMainHeaderContext);
 
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const InfoChannelNew = () => {
 
   /* useState */
   const [post, setPost] = useState({
-    boardName: "announcement",
+    boardName: "article",
     title: "",
     content: "",
     author: "관리자",
@@ -55,7 +55,7 @@ const InfoChannelNew = () => {
 
   const signedInCheck = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("소식 > 소식통 > 등록하기");
+      changeMainText("소식 > 언론보도 > 등록하기");
     } else {
       navigate("/admin/signin");
     }
@@ -86,4 +86,4 @@ const InfoChannelNew = () => {
   );
 };
 
-export default InfoChannelNew;
+export default ArticleNew;

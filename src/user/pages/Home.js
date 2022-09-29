@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import MainImage from "../assets/images/MainImage.jpg";
+import MainImage from "../../assets/images/MainImage.jpg";
 
 // 테마 변경
 const customTheme = createTheme({

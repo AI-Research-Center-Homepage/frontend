@@ -3,27 +3,27 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // User Pages
-import Home from "./pages/Home";
-import Professor from "./pages/member/Professor";
-import Graduate from "./pages/member/Graduate";
-import Thesis from "./pages/research/Thesis";
-import Committee from "./pages/member/Committee";
-import Location from "./pages/introduction/Location";
-import History from "./pages/introduction/History";
-import Introduction from "./pages/introduction/Introduction";
-import Article from "./pages/news/Article";
-import Announcement from "./pages/news/Announcement";
-import Apply from "./pages/apply/Apply";
-import OrganizationChart from "./pages/introduction/OrganizationChart";
-import Researcher from "./pages/member/Researcher";
-import Undergraduates from "./pages/member/Undergraduate";
-import InfoChannel from "./pages/news/InfoChannel";
-import Project from "./pages/research/Project";
-import ResearchField from "./pages/research/ResearchField";
-import Demo from "./pages/research/Demo";
-import AnnouncementPost from "./pages/news/view_post/AnnouncementPost";
-import ArticlePost from "./pages/news/view_post/ArticlePost";
-import InfoChannelPost from "./pages/news/view_post/InfoChannelPost";
+import Home from "./user/pages/Home";
+import Professor from "./user/pages/member/Professor";
+import Graduate from "./user/pages/member/Graduate";
+import Thesis from "./user/pages/research/Thesis";
+import Committee from "./user/pages/member/Committee";
+import Location from "./user/pages/introduction/Location";
+import History from "./user/pages/introduction/History";
+import Introduction from "./user/pages/introduction/Introduction";
+import Article from "./user/pages/news/Article";
+import Announcement from "./user/pages/news/Announcement";
+import Apply from "./user/pages/apply/Apply";
+import OrganizationChart from "./user/pages/introduction/OrganizationChart";
+import Researcher from "./user/pages/member/Researcher";
+import Undergraduates from "./user/pages/member/Undergraduate";
+import InfoChannel from "./user/pages/news/InfoChannel";
+import Project from "./user/pages/research/Project";
+import ResearchField from "./user/pages/research/ResearchField";
+import Demo from "./user/pages/research/Demo";
+import AnnouncementPost from "./user/pages/news/post/AnnouncementPost";
+import ArticlePost from "./user/pages/news/post/ArticlePost";
+import InfoChannelPost from "./user/pages/news/post/InfoChannelPost";
 
 // Admin Pages
 import AdminMain from "./admin/AdminMain";

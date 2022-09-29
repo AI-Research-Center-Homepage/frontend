@@ -5,7 +5,7 @@ import { Viewer } from "@toast-ui/react-editor";
 import { Box, Divider, Stack, Typography, Button } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { getFullDate } from "../utils/date";
+import { getFullDate } from "../../utils/date";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com

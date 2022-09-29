@@ -6,7 +6,7 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Footer from "../../components/Footer";
-import pdfFile from "../../assets/intro_cclab.pdf";
+import pdfFile from "../../../assets/intro_cclab.pdf";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com

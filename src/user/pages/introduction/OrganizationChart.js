@@ -2,7 +2,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 
-import chart from "../../assets/images/chart.png";
+import chart from "../../../assets/images/chart.png";
 
 import { Card, CardMedia, CssBaseline } from "@mui/material";
 

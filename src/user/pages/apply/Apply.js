@@ -12,7 +12,7 @@ import {
   CardMedia,
 } from "@mui/material";
 
-import introImage from "../../assets/images/introImage.jpg";
+import introImage from "../../../assets/images/introImage.jpg";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr

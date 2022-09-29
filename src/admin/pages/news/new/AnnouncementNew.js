@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 import { changeMainHeaderContext } from "../../../AdminMain";
 
-import TitleTextField from "../../TitleTextField";
-import PostEditor from "../../PostEditor";
-import CommonButton from "../../CommonButton";
+import TitleTextField from "../../../components/TitleTextField";
+import PostEditor from "../../../components/PostEditor";
+import CommonButton from "../../../components/CommonButton";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
@@ -123,7 +123,6 @@ const AnnouncementNew = () => {
         {/* 첨부파일 Stack */}
         <Stack
           direction="column"
-          spacing={1}
           sx={{
             ml: "1%",
             width: "90%",
