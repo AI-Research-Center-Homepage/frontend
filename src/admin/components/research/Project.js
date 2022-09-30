@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // mock api url
-const url = "https://a4149427-81af-4b54-9358-9e16682d2eb5.mock.pstmn.io";
+const url = "https://8ed00c51-c471-467b-9742-8416c3e43077.mock.pstmn.io";
 
 // DataGrid column에 들어가는 요소
 const columns = [
