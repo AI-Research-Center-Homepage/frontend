@@ -9,7 +9,6 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
-  Button,
 } from "@mui/material";
 
 import { useNavigate, Routes, Route } from "react-router-dom";
@@ -17,36 +16,43 @@ import { useState, useEffect, createContext } from "react";
 
 import jbnu from "../assets/images/jbnu.png";
 
-import Professor from "./components/member/Professor";
-import Researcher from "./components/member/Researcher";
-import Committee from "./components/member/Committee";
-import Graduate from "./components/member/Graduate";
-import Undergraduate from "./components/member/Undergraduate";
-import Announcement from "./components/news/Announcement";
-import Article from "./components/news/Article";
-import InfoChannel from "./components/news/InfoChannel";
-import Demo from "./components/research/Demo";
-import DemoNew from "./components/research/research_page/DemoNew";
-import DemoDetail from "./components/research/research_page/DemoDetail";
-import Project from "./components/research/Project";
-import ResearchField from "./components/research/ResearchField";
-import Thesis from "./components/research/Thesis";
-import ProfessorNew from "./components/member/member_page/ProfessorNew";
-import ProjectNew from "./components/research/research_page/ProjectNew";
-import ProjectDetail from "./components/research/research_page/ProjectDetail";
-import ThesisNew from "./components/research/research_page/ThesisNew";
-import ThesisDetail from "./components/research/research_page/ThesisDetail";
+import Professor from "./pages/member/Professor";
+import Researcher from "./pages/member/Researcher";
+import Committee from "./pages/member/Committee";
+import Graduate from "./pages/member/Graduate";
+import Undergraduate from "./pages/member/Undergraduate";
+import Announcement from "./pages/news/Announcement";
+import Article from "./pages/news/Article";
+import InfoChannel from "./pages/news/InfoChannel";
+import Demo from "./pages/research/Demo";
+import DemoNew from "./pages/research/new/DemoNew";
+import DemoDetail from "./pages/research/detail/DemoDetail";
+import Project from "./pages/research/Project";
+import ResearchField from "./pages/research/ResearchField";
+import Thesis from "./pages/research/Thesis";
+import ProfessorNew from "./pages/member/new/ProfessorNew";
+import ProjectNew from "./pages/research/new/ProjectNew";
+import ProjectDetail from "./pages/research/detail/ProjectDetail";
+import ThesisNew from "./pages/research/new/ThesisNew";
+import ThesisDetail from "./pages/research/detail/ThesisDetail";
 import AdminSignIn from "./AdminSignIn";
-import ProfessorDetail from "./components/member/member_page/ProfessorDetail";
-import ResearcherDetail from "./components/member/member_page/ResearcherDetail";
-import ResearchNew from "./components/member/member_page/ResearcherNew";
-import GraduateNew from "./components/member/member_page/GraduateNew";
-import GraduateDetail from "./components/member/member_page/GraduateDetail";
-import UndergraduateNew from "./components/member/member_page/UndergraduateNew";
-import UndergraduateDetail from "./components/member/member_page/UndergraduateDetail";
-import CommitteeNew from "./components/member/member_page/CommitteeNew";
-import CommitteeDetail from "./components/member/member_page/CommitteeDetail";
+import ProfessorDetail from "./pages/member/detail/ProfessorDetail";
+import ResearcherDetail from "./pages/member/detail/ResearcherDetail";
+import ResearchNew from "./pages/member/new/ResearcherNew";
+import GraduateNew from "./pages/member/new/GraduateNew";
+import GraduateDetail from "./pages/member/detail/GraduateDetail";
+import UndergraduateNew from "./pages/member/new/UndergraduateNew";
+import UndergraduateDetail from "./pages/member/detail/UndergraduateDetail";
+import CommitteeNew from "./pages/member/new/CommitteeNew";
+import CommitteeDetail from "./pages/member/detail/CommitteeDetail";
 import AdminMainContents from "./AdminMainContents";
+import AnnouncementNew from "./pages/news/new/AnnouncementNew";
+import AnnouncementDetail from "./pages/news/detail/AnnouncementDetail";
+import ArticleNew from "./pages/news/new/ArticleNew";
+import ArticleDetail from "./pages/news/detail/ArticleDetail";
+import InfochannelNew from "./pages/news/new/InfoChannelNew";
+import InfochannelDetail from "./pages/news/detail/InfoChannelDetail";
+import CommonButton from "./components/CommonButton";
 
 const adminHeaderItems = [
   {
@@ -64,9 +70,9 @@ const adminHeaderItems = [
     key: 2,
     title: "소식",
     contents: [
-      { subkey: 9, subcontent: "소식통", path: "posts/source" },
-      { subkey: 10, subcontent: "공지사항", path: "posts/notice" },
-      { subkey: 11, subcontent: "언론보도", path: "posts/news" },
+      { subkey: 9, subcontent: "소식통", path: "news/infochannel" },
+      { subkey: 10, subcontent: "공지사항", path: "news/announcement" },
+      { subkey: 11, subcontent: "언론보도", path: "news/article" },
     ],
   },
   {
@@ -200,18 +206,15 @@ const AdminMain = () => {
             }}
           >
             <Typography variant="h5">{mainText}</Typography>
-            <Button
-              variant="contained"
-              size="large"
+            <CommonButton
+              content="로그아웃"
               sx={{ mr: "3%" }}
               onClick={() => {
                 sessionStorage.removeItem("isSignedIn");
                 alert("로그아웃 되었습니다.");
                 navigate("/admin/signin");
               }}
-            >
-              로그아웃
-            </Button>
+            />
           </Box>
           <Divider flexitem />
           {/* MainContent */}
@@ -261,9 +264,26 @@ const AdminMain = () => {
               />
 
               {/* News */}
-              <Route path="posts/notice" element={<Announcement />} />
-              <Route path="posts/news" element={<Article />} />
-              <Route path="posts/source" element={<InfoChannel />} />
+              <Route path="news/announcement" element={<Announcement />} />
+              <Route
+                path="news/announcement/new"
+                element={<AnnouncementNew />}
+              />
+              <Route
+                path="news/announcement/:id"
+                element={<AnnouncementDetail />}
+              />
+
+              <Route path="news/article" element={<Article />} />
+              <Route path="news/article/new" element={<ArticleNew />} />
+              <Route path="news/article/:id" element={<ArticleDetail />} />
+
+              <Route path="news/infochannel" element={<InfoChannel />} />
+              <Route path="news/infochannel/new" element={<InfochannelNew />} />
+              <Route
+                path="news/infochannel/:id"
+                element={<InfochannelDetail />}
+              />
 
               {/* Research */}
               <Route path="research/demo" element={<Demo />} />
