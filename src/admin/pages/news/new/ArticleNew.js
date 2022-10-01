@@ -53,7 +53,7 @@ const ArticleNew = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 언론보도 > 신규등록");
     } else {
@@ -63,7 +63,7 @@ const ArticleNew = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (

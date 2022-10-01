@@ -88,7 +88,7 @@ const AnnouncementDetail = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 공지사항 > 상세정보");
     } else {
@@ -98,7 +98,7 @@ const AnnouncementDetail = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (

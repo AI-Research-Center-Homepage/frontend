@@ -58,7 +58,7 @@ const ArticleDetail = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 언론보도 > 상세정보");
     } else {
@@ -68,7 +68,7 @@ const ArticleDetail = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (

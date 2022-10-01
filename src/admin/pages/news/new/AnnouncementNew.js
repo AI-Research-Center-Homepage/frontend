@@ -83,7 +83,7 @@ const AnnouncementNew = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 공지사항 > 신규등록");
     } else {
@@ -93,7 +93,7 @@ const AnnouncementNew = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (

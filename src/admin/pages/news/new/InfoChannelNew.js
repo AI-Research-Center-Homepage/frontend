@@ -53,7 +53,7 @@ const InfoChannelNew = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 소식통 > 신규등록");
     } else {
@@ -63,7 +63,7 @@ const InfoChannelNew = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (

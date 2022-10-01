@@ -58,7 +58,7 @@ const InfoChannelDetail = () => {
     });
   };
 
-  const signedInCheck = () => {
+  const checkSignedIn = () => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 소식통 > 상세정보");
     } else {
@@ -68,7 +68,7 @@ const InfoChannelDetail = () => {
 
   /* useEffect */
   useEffect(() => {
-    signedInCheck();
+    checkSignedIn();
   }, []);
 
   return (
