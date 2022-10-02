@@ -81,7 +81,7 @@ const CustomPagination = () => {
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-07-15
+ *@date 2022-10-02
  *@description 공지사항 페이지
  *             DataGrid를 이용하여 구현
  *             MeduaQuery를 이용하여 1100px이하일 때
@@ -95,7 +95,8 @@ const Announcement = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/Announcement",
+      //url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/Announcement",
+      url: "/api/notice",
       responseType: "json",
     }).then((response) => {
       setData(response.data);

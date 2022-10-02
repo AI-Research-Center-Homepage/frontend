@@ -9,7 +9,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 
 // postman url
-const url = "https://42ecb7f8-87bd-492c-85c5-6afd35141b40.mock.pstmn.io";
+// const url = "https://42ecb7f8-87bd-492c-85c5-6afd35141b40.mock.pstmn.io";
 
 // 불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
 function ProfPrint({ title, info }) {
@@ -23,7 +23,7 @@ function ProfPrint({ title, info }) {
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-07-15
+ *@date 2022-10-02
  *@description 참여교수 사진, 이름, 전공, 박사학위, 연구실, 전화번호를 보여줌
  */
 
@@ -33,7 +33,8 @@ export default function Professor() {
 
   // API로 정보 받기
   useEffect(() => {
-    axios.get(url + "/professor").then((response) => {
+    // url + "/professor"
+    axios.get("/api/professor").then((response) => {
       setProf(response.data.professor);
     });
   }, []);

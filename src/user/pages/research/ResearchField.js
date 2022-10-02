@@ -48,7 +48,7 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-07-15
+ *@date 2022-10-02
  *@description 연구분야 페이지
  */
 
@@ -61,9 +61,14 @@ export default function ResearchField() {
 
   // API로 정보 받기
   useEffect(() => {
-    axios.get(url + "/field").then((response) => {
-      setAPIList(response.data);
-    });
+    axios
+      .get(
+        //url + "/field"
+        "/api/field"
+      )
+      .then((response) => {
+        setAPIList(response.data);
+      });
   }, []);
 
   // 랩실 설명

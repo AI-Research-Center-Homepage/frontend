@@ -13,7 +13,7 @@ import axios from "axios";
 
 /**
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-11
+ *@date 2022-10-02
  *@name Post
  *@description
  *    FeaturedPost 컴포넌트 불러서 info data 화면에 뿌려주기
@@ -27,7 +27,8 @@ export default function Post() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/InfoChannelMock",
+      //.url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/InfoChannelMock",
+      url: "/api/info",
       responseType: "json",
     }).then((response) => {
       SetInfoData(response.data);

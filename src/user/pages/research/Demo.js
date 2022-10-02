@@ -27,7 +27,7 @@ const dummycolumns = [
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-06-18
+ *@date 2022-10-02
  *@description Demo Page
  */
 
@@ -37,7 +37,8 @@ const Demo = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/Demo",
+      //url: "https://4051bb99-f161-4f6e-8c33-dd389141803f.mock.pstmn.io/Demo",
+      url: "/api/demo",
       responseType: "json",
     }).then((response) => {
       setData(response.data);

@@ -13,7 +13,7 @@ import MemberPost from "../../components/MemberPost";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-07-17
+ *@date 2022-10-02
  *@description 년도(올해, 작년)를 선택하여
  *             해당하는 년도에 입학한 대학원생을 랜더링
  */
@@ -53,7 +53,8 @@ const Graduate = () => {
   useEffect(() => {
     axios
       .get(
-        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/graduates"
+        //"https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/graduates"
+        "/api/graduate"
       )
       .then((response) => {
         setGraduatesData(response.data);

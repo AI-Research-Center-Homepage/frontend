@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 // import 7개까지 각 한줄로 분리 가능
 import { AppBar, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-// import { Login } from "@mui/icons-material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -91,7 +90,7 @@ import Pannel from "../../components/Pannel";
 
 /*
  *@author BeomGi-Lee jeongiun@naver.com
- *@date 2022-05-05
+ *@date 2022-10-02
  *@name TabPanel
  *@description
  *    - hidden 속성 사용, value와 index 비교
@@ -174,7 +173,8 @@ export default function FloatingActionButtonZoom() {
   useEffect(() => {
     axios
       .get(
-        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis3"
+        //"https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/thesis3"
+        "/api/thesis"
       )
       .then((response) => {
         setTheses(response.data);

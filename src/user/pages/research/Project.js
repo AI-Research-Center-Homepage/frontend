@@ -69,7 +69,7 @@ function Description(props) {
 
 /**
  **@author Eunyoung-Jo, czen2@jbnu.ac.kr
- *@date 2022-07-16
+ *@date 2022-10-02
  *@description 프로젝트 페이지
  */
 
@@ -79,9 +79,14 @@ export default function Project() {
 
   // mock api 데이터를 받아옴
   useEffect(() => {
-    axios.get(url + "/project").then((response) => {
-      setObjects(response.data);
-    });
+    axios
+      .get(
+        // url + "/project"
+        "/api/project"
+      )
+      .then((response) => {
+        setObjects(response.data);
+      });
   }, []);
 
   // 배열에 프로젝트 분야를 저장

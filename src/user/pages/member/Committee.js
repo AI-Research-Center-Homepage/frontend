@@ -30,7 +30,6 @@ export default function Post() {
       });
   }, []);
 
-  console.log(committeeData);
   return (
     <div>
       <CssBaseline />
