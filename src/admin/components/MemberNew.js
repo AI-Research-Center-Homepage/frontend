@@ -12,7 +12,7 @@ import GeneralButton from "./GeneralButton";
  *@description 멤버 등록하기, 자세히보기 페이지 양식
  */
 
-const MemberNew = ({ memberData, memberType }) => {
+const MemberNew = ({ memberData, memberType, isDetailPage = false }) => {
   const navigate = useNavigate();
 
   // 멤버 정보 관리 객체
@@ -261,6 +261,13 @@ const MemberNew = ({ memberData, memberType }) => {
           onClick={() => navigate("./../")}
           sx={{ mx: "1%" }}
         />
+        {isDetailPage && (
+          <GeneralButton
+            content="탈퇴하기"
+            onClick={() => {}}
+            sx={{ mx: "1%" }}
+          />
+        )}
         <GeneralButton content="등록하기" onClick={handleRegisterButton} />
       </Box>
     </Box>
