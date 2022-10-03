@@ -9,7 +9,7 @@ import { changeMainHeaderContext } from "../../../AdminMain";
 
 import TitleTextField from "../../../components/TitleTextField";
 import PostEditor from "../../../components/PostEditor";
-import CommonButton from "../../../components/CommonButton";
+import GeneralButton from "../../../components/GeneralButton";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
@@ -108,7 +108,7 @@ const AnnouncementNew = () => {
       <Box sx={{ my: "2%", display: "flex" }}>
         {/* 파일 업로드 버튼 */}
         <Box sx={{ width: "10%" }}>
-          <CommonButton
+          <GeneralButton
             content="파일 업로드"
             onClick={handleFileUploadButtonClick}
           />
@@ -158,12 +158,12 @@ const AnnouncementNew = () => {
       </Box>
 
       <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
-        <CommonButton
+        <GeneralButton
           content="취소하기"
           onClick={() => navigate("./../")}
           sx={{ mx: "1%" }}
         />
-        <CommonButton content="등록하기" onClick={handleRegisterButton} />
+        <GeneralButton content="등록하기" onClick={handleRegisterButton} />
       </Box>
     </Box>
   );

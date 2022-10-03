@@ -1,9 +1,10 @@
-import { TextField, Button, Grid } from "@mui/material";
+import { TextField, Button, Grid, Box } from "@mui/material";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import GeneralButton from "./GeneralButton";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
@@ -137,157 +138,132 @@ const MemberNew = ({ memberData, memberType }) => {
   }, []);
 
   return (
-    <div>
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        mt={10}
-      >
-        {/* 정보 입력 */}
-        <Grid item sx={{ width: { xs: "90%", md: "80%" } }}>
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="이름"
-            multiline
-            maxRows={4}
-            onChange={nameChange}
-            value={member.name}
-          />
+    <Box sx={{ py: "3%", px: "7.5%" }}>
+      <TextField
+        sx={{ width: "100%", marginTop: 1 }}
+        label="이름"
+        multiline
+        maxRows={4}
+        onChange={nameChange}
+        value={member.name}
+      />
 
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="전공"
-            multiline
-            maxRows={4}
-            onChange={majorChange}
-            value={member.major}
-          />
+      <TextField
+        sx={{ width: "100%", marginTop: 1 }}
+        label="전공"
+        multiline
+        maxRows={4}
+        onChange={majorChange}
+        value={member.major}
+      />
 
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="이메일"
-            multiline
-            maxRows={4}
-            onChange={emailChange}
-            value={member.email}
-          />
+      <TextField
+        sx={{ width: "100%", marginTop: 1 }}
+        label="이메일"
+        multiline
+        maxRows={4}
+        onChange={emailChange}
+        value={member.email}
+      />
 
-          <TextField
-            disabled
-            sx={{ width: "100%", marginTop: 1 }}
-            label="이미지"
-            multiline
-            maxRows={4}
-            InputProps={{
-              endAdornment: (
-                <Button variant="contained" size="small">
-                  업로드
-                </Button>
-              ),
-            }}
-            value={member.img}
-          />
+      <TextField
+        disabled
+        sx={{ width: "100%", marginTop: 1 }}
+        label="이미지"
+        multiline
+        maxRows={4}
+        InputProps={{
+          endAdornment: (
+            <Button variant="contained" size="small">
+              업로드
+            </Button>
+          ),
+        }}
+        value={member.img}
+      />
 
-          {memberType === "professor" && (
-            <TextField
-              sx={{ width: "100%", marginTop: 1 }}
-              label="학위"
-              multiline
-              maxRows={4}
-              onChange={doctorateChange}
-              value={member.doctorate}
-            />
-          )}
+      {memberType === "professor" && (
+        <TextField
+          sx={{ width: "100%", marginTop: 1 }}
+          label="학위"
+          multiline
+          maxRows={4}
+          onChange={doctorateChange}
+          value={member.doctorate}
+        />
+      )}
 
-          {memberType === "professor" && (
-            <TextField
-              sx={{ width: "100%", marginTop: 1 }}
-              label="위치"
-              multiline
-              maxRows={4}
-              onChange={locationChange}
-              value={member.location}
-            />
-          )}
+      {memberType === "professor" && (
+        <TextField
+          sx={{ width: "100%", marginTop: 1 }}
+          label="위치"
+          multiline
+          maxRows={4}
+          onChange={locationChange}
+          value={member.location}
+        />
+      )}
 
-          {memberType === "professor" && (
-            <TextField
-              sx={{ width: "100%", marginTop: 1 }}
-              label="전화번호"
-              multiline
-              maxRows={4}
-              onChange={numberChange}
-              value={member.number}
-            />
-          )}
+      {memberType === "professor" && (
+        <TextField
+          sx={{ width: "100%", marginTop: 1 }}
+          label="전화번호"
+          multiline
+          maxRows={4}
+          onChange={numberChange}
+          value={member.number}
+        />
+      )}
 
-          {(memberType === "graduate" || memberType === "undergraduate") && (
-            <TextField
-              sx={{ width: "100%", marginTop: 1 }}
-              label="입학년도"
-              multiline
-              maxRows={4}
-              onChange={admissionChange}
-              value={member.admission}
-            />
-          )}
+      {(memberType === "graduate" || memberType === "undergraduate") && (
+        <TextField
+          sx={{ width: "100%", marginTop: 1 }}
+          label="입학년도"
+          multiline
+          maxRows={4}
+          onChange={admissionChange}
+          value={member.admission}
+        />
+      )}
 
-          {memberType === "committee" && (
-            <TextField
-              sx={{ width: "100%", marginTop: 1 }}
-              label="직책"
-              multiline
-              maxRows={4}
-              onChange={positionChange}
-              value={member.position}
-            />
-          )}
+      {memberType === "committee" && (
+        <TextField
+          sx={{ width: "100%", marginTop: 1 }}
+          label="직책"
+          multiline
+          maxRows={4}
+          onChange={positionChange}
+          value={member.position}
+        />
+      )}
 
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="아이디"
-            multiline
-            maxRows={4}
-            onChange={IDChange}
-            value={member.loginDto.loginId}
-          />
+      <TextField
+        sx={{ width: "100%", marginTop: 1 }}
+        label="아이디"
+        multiline
+        maxRows={4}
+        onChange={IDChange}
+        value={member.loginDto.loginId}
+      />
 
-          <TextField
-            sx={{ width: "100%", marginTop: 1 }}
-            label="패스워드"
-            multiline
-            maxRows={4}
-            onChange={passwordChange}
-            value={member.loginDto.loginPw}
-          />
-        </Grid>
-      </Grid>
+      <TextField
+        sx={{ width: "100%", marginTop: 1 }}
+        label="패스워드"
+        multiline
+        maxRows={4}
+        onChange={passwordChange}
+        value={member.loginDto.loginPw}
+      />
 
-      {/* 취소, 등록 버튼. 취소 버튼을 누르면 이전 페이지로 이동함 */}
-      <Grid container justifyContent="flex-end" alignItems="center" my={5}>
-        <Grid item>
-          <Button
-            variant="contained"
-            sx={{ mr: 3, height: 55 }}
-            onClick={() => {
-              navigate("./..");
-            }}
-          >
-            취소
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{ mr: 3, height: 55 }}
-            type="submit"
-            onClick={handleRegisterButton}
-          >
-            등록
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+      <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
+        <GeneralButton
+          content="취소하기"
+          onClick={() => navigate("./../")}
+          sx={{ mx: "1%" }}
+        />
+        <GeneralButton content="등록하기" onClick={handleRegisterButton} />
+      </Box>
+    </Box>
   );
 };
 
