@@ -59,29 +59,34 @@ const dummycolumns = [
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-09-17
+ *@date 2022-10-03
  *@description Admin Committee 페이지
  *             DataGrid 이용
  */
 
 const Committee = () => {
-  const [data, setData] = useState({ position: "", members: [] });
+  const [members, setMembers] = useState({ members: [] });
+
   const navigate = useNavigate();
+
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
+
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/admin/members/committee");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("구성원 > 운영위원회");
       changeMainMenu(1, 8);
-      axios
-        .get(
-          "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/committee"
-        )
-        .then((response) => {
-          setData(response.data);
-        });
+      getMembers();
     } else {
       navigate("/admin/signin");
     }
@@ -117,7 +122,7 @@ const Committee = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={data.members}
+          rows={members.members}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount

@@ -59,29 +59,32 @@ const dummycolumns = [
 
 /**
  *@author Suin-Jeong suin8@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-03
  *@description Admin Researcher 페이지
  *             DataGrid 이용
  */
 
 const Researcher = () => {
-  const [data, setData] = useState({ position: "", members: [] });
+  const [members, setMembers] = useState({ members: [] });
   const navigate = useNavigate();
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
 
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/admin/members/researcher");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("구성원 > 연구원");
       changeMainMenu(1, 5);
-      axios({
-        method: "get",
-        url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/researcher",
-        responseType: "json",
-      }).then((response) => {
-        setData(response.data);
-      });
+      getMembers();
     } else {
       navigate("/admin/signin");
     }
@@ -117,7 +120,7 @@ const Researcher = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={data.members}
+          rows={members.members}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount
