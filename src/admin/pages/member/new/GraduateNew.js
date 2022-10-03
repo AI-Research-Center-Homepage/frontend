@@ -3,11 +3,13 @@ import { TextField, Button, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 import { changeMainHeaderContext } from "../../../AdminMain";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-03
  *@description 석사 등록하기 페이지
  *             사용자로부터 데이터를 입력받아 등록
  */
@@ -15,6 +17,87 @@ import { changeMainHeaderContext } from "../../../AdminMain";
 const GraduateNew = () => {
   const navigate = useNavigate();
   const { changeMainText } = useContext(changeMainHeaderContext);
+
+  // 멤버 정보 관리 객체
+  const [member, setMember] = useState({
+    name: "",
+    major: "",
+    email: "",
+    image: "https://source.unsplash.com/random",
+    admission: "",
+    loginDto: {
+      loginId: "",
+      loginPw: "",
+      deleted: false,
+    },
+  });
+
+  const nameChange = (event) => {
+    setMember((cur) => {
+      let newName = { ...cur };
+      newName.name = event.target.value;
+      return newName;
+    });
+  };
+  const majorChange = (event) => {
+    setMember((cur) => {
+      let newMajor = { ...cur };
+      newMajor.major = event.target.value;
+      return newMajor;
+    });
+  };
+  const emailChange = (event) => {
+    setMember((cur) => {
+      let newEmail = { ...cur };
+      newEmail.email = event.target.value;
+      return newEmail;
+    });
+  };
+  const admissionChange = (event) => {
+    setMember((cur) => {
+      let newAdmission = { ...cur };
+      newAdmission.admission = event.target.value;
+      return newAdmission;
+    });
+  };
+  const IDChange = (event) => {
+    setMember((cur) => {
+      let newID = { ...cur };
+      newID.loginDto.loginId = event.target.value;
+      return newID;
+    });
+  };
+  const passwordChange = (event) => {
+    setMember((cur) => {
+      let newPassword = { ...cur };
+      newPassword.loginDto.loginPw = event.target.value;
+      return newPassword;
+    });
+  };
+  const imgChange = (event) => {
+    setMember((cur) => {
+      let newImg = { ...cur };
+      newImg.image = event.target.value;
+      return newImg;
+    });
+  };
+
+  // member 정보 post 요청(등록) 함수
+  const postMember = async () => {
+    try {
+      const response = await axios.post(
+        "/api/admin/members/graduate/new",
+        member
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 등록 버튼 핸들러
+  const handleRegisterButton = () => {
+    postMember();
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
@@ -24,71 +107,8 @@ const GraduateNew = () => {
     }
   }, []);
 
-  const [post, setPost] = useState({
-    name: "",
-    major: "",
-    email: "",
-    image: "",
-    admission: "",
-    adminDto: {
-      loginId: "",
-      password: "",
-    },
-  });
-
-  const nameChange = (event) => {
-    setPost((cur) => {
-      let newName = { ...cur };
-      newName.name = event.target.value;
-      return newName;
-    });
-  };
-  const majorChange = (event) => {
-    setPost((cur) => {
-      let newMajor = { ...cur };
-      newMajor.major = event.target.value;
-      return newMajor;
-    });
-  };
-  const emailChange = (event) => {
-    setPost((cur) => {
-      let newEmail = { ...cur };
-      newEmail.email = event.target.value;
-      return newEmail;
-    });
-  };
-  const admissionChange = (event) => {
-    setPost((cur) => {
-      let newAdmission = { ...cur };
-      newAdmission.admission = event.target.value;
-      return newAdmission;
-    });
-  };
-  const IDChange = (event) => {
-    setPost((cur) => {
-      let newID = { ...cur };
-      newID.adminDto.loginId = event.target.value;
-      return newID;
-    });
-  };
-  const passwordChange = (event) => {
-    setPost((cur) => {
-      let newPassword = { ...cur };
-      newPassword.adminDto.password = event.target.value;
-      return newPassword;
-    });
-  };
-  const imgChange = (event) => {
-    setPost((cur) => {
-      let newImg = { ...cur };
-      newImg.image = event.target.value;
-      return newImg;
-    });
-  };
-
   return (
     <div>
-      {/* <form onSubmit={Submit}> */}
       <Grid
         container
         direction="column"
@@ -104,7 +124,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={nameChange}
-            value={post.name}
+            value={member.name}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -112,7 +132,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={majorChange}
-            value={post.major}
+            value={member.major}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -120,7 +140,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={emailChange}
-            value={post.email}
+            value={member.email}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -128,7 +148,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={admissionChange}
-            value={post.admission}
+            value={member.admission}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -136,7 +156,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={IDChange}
-            value={post.adminDto.loginId}
+            value={member.loginDto.loginId}
           />
           <TextField
             sx={{ width: "100%", marginTop: 1 }}
@@ -144,7 +164,7 @@ const GraduateNew = () => {
             multiline
             maxRows={4}
             onChange={passwordChange}
-            value={post.adminDto.password}
+            value={member.loginDto.loginPw}
           />
           <TextField
             disabled
@@ -159,7 +179,7 @@ const GraduateNew = () => {
                 </Button>
               ),
             }}
-            value={post.image}
+            value={member.image}
           />
         </Grid>
       </Grid>
@@ -176,12 +196,16 @@ const GraduateNew = () => {
           >
             취소
           </Button>
-          <Button variant="outlined" sx={{ mr: 3, height: 55 }} type="submit">
+          <Button
+            variant="outlined"
+            sx={{ mr: 3, height: 55 }}
+            type="submit"
+            onClick={handleRegisterButton}
+          >
             등록
           </Button>
         </Grid>
       </Grid>
-      {/* </form> */}
     </div>
   );
 };
