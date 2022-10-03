@@ -22,8 +22,7 @@ export default function Post() {
   useEffect(() => {
     axios
       .get(
-        //"https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/committee2"
-        "/api/committee"
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/list/committee2"
       )
       .then((response) => {
         setCommittee(response.data);
