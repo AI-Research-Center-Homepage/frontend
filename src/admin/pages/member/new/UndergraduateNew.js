@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeMainHeaderContext } from "../../../AdminMain";
-import MemberNew from "../../../components/MemberNew";
+import MemberRegisterForm from "../../../components/MemberRegisterForm";
 
 /**
  *@author Suin-Jeong, suin8@jbnu.ac.kr
@@ -35,7 +35,13 @@ const UndergraduateNew = () => {
     }
   }, []);
 
-  return <MemberNew memberData={member} memberType="undergraduate" />;
+  return (
+    <MemberRegisterForm
+      memberData={member}
+      memberType="undergraduate"
+      pageType="new"
+    />
+  );
 };
 
 export default UndergraduateNew;

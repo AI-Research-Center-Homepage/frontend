@@ -9,10 +9,10 @@ import GeneralButton from "./GeneralButton";
 /**
  *@author LimEunSang, dmstkd2905@naver.com
  *@date 2022-10-04
- *@description 멤버 등록하기 페이지 양식
+ *@description 멤버 자세히보기 페이지 양식
  */
 
-const MemberNew = ({ memberData, memberType }) => {
+const MemberDetail = ({ memberData, memberType }) => {
   const navigate = useNavigate();
 
   // 멤버 정보 관리 객체
@@ -256,15 +256,16 @@ const MemberNew = ({ memberData, memberType }) => {
       />
 
       <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
+        <GeneralButton content="취소하기" onClick={() => navigate("./../")} />
         <GeneralButton
-          content="취소하기"
-          onClick={() => navigate("./../")}
-          sx={{ mr: "1%" }}
+          content="탈퇴하기"
+          onClick={() => {}}
+          sx={{ mx: "1%" }}
         />
-        <GeneralButton content="등록하기" onClick={handleRegisterButton} />
+        <GeneralButton content="수정하기" onClick={handleRegisterButton} />
       </Box>
     </Box>
   );
 };
 
-export default MemberNew;
+export default MemberDetail;
