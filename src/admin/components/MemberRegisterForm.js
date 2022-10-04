@@ -1,7 +1,7 @@
 import { TextField, Button, Box } from "@mui/material";
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import axios from "axios";
 import GeneralButton from "./GeneralButton";
@@ -14,6 +14,7 @@ import GeneralButton from "./GeneralButton";
 
 const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   // 멤버 정보 관리 객체
   const [member, setMember] = useState({
@@ -115,7 +116,9 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
     });
   };
 
-  // member 정보 post 요청(등록) 함수
+  /* 멤버 등록, 수정, 삭제 기능 */
+
+  // member 정보 등록 요청 함수
   const postMember = async () => {
     try {
       const response = await axios.post(
@@ -127,9 +130,37 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
     }
   };
 
+  // member 정보 수정 요청 함수
+  const putMember = async () => {
+    try {
+      const response = await axios.put(`/api/admin/members/${id}`, member);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // member 정보 탈퇴 요청 함수
+  const deleteMember = async () => {
+    try {
+      const response = await axios.delete(`/api/admin/members/?memberId=${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // 등록 버튼 핸들러
   const handleRegisterButton = () => {
     postMember();
+  };
+
+  // 수정 버튼 핸들러
+  const handleModifyButton = () => {
+    putMember();
+  };
+
+  // 탈퇴 버튼 핸들러
+  const handleWithdrawalButton = () => {
+    deleteMember();
   };
 
   // mount
@@ -275,10 +306,10 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
             />
             <GeneralButton
               content="탈퇴하기"
-              onClick={() => {}}
+              onClick={handleWithdrawalButton}
               sx={{ mx: "1%" }}
             />
-            <GeneralButton content="수정하기" onClick={handleRegisterButton} />
+            <GeneralButton content="수정하기" onClick={handleModifyButton} />
           </>
         )}
       </Box>
