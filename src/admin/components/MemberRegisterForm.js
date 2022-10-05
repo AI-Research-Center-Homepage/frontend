@@ -30,21 +30,21 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   });
 
   /* 공통 속성 change handler */
-  const nameChange = (event) => {
+  const handleChangeName = (event) => {
     setMember({
       ...member,
       name: event.target.value,
     });
   };
 
-  const majorChange = (event) => {
+  const handleChangeMajor = (event) => {
     setMember({
       ...member,
       major: event.target.value,
     });
   };
 
-  const emailChange = (event) => {
+  const handleChangeEmail = (event) => {
     setMember({
       ...member,
       email: event.target.value,
@@ -52,21 +52,21 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   };
 
   // (전체 멤버가 가지고 있어야 하는 속성이지만 개발 미흡으로 현재 professor만 가짐)
-  const locationChange = (event) => {
+  const handleChangeLocation = (event) => {
     setMember({
       ...member,
       location: event.target.value,
     });
   };
 
-  const imgChange = (event) => {
+  const handleChangeImg = (event) => {
     setMember({
       ...member,
       image: event.target.value,
     });
   };
 
-  const IDChange = (event) => {
+  const handleChangeID = (event) => {
     setMember((cur) => {
       let newID = { ...cur };
       newID.loginDto.loginId = event.target.value;
@@ -74,7 +74,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
     });
   };
 
-  const passwordChange = (event) => {
+  const handleChangePassword = (event) => {
     setMember((cur) => {
       let newPassword = { ...cur };
       newPassword.loginDto.loginPw = event.target.value;
@@ -85,7 +85,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   /* 개별 속성 change handler */
 
   // professor
-  const doctorateChange = (event) => {
+  const handleChangeDoctorate = (event) => {
     setMember({
       ...member,
       doctorate: event.target.value,
@@ -93,7 +93,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   };
 
   // professor
-  const numberChange = (event) => {
+  const handleChangeNumber = (event) => {
     setMember({
       ...member,
       number: event.target.value,
@@ -101,7 +101,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   };
 
   // graduate, undergraduate
-  const admissionChange = (event) => {
+  const handleChangeAdmission = (event) => {
     setMember({
       ...member,
       admission: event.target.value,
@@ -109,7 +109,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   };
 
   // committee
-  const positionChange = (event) => {
+  const handleChangePosition = (event) => {
     setMember({
       ...member,
       position: event.target.value,
@@ -175,7 +175,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         label="이름"
         multiline
         maxRows={4}
-        onChange={nameChange}
+        onChange={handleChangeName}
         value={member.name}
       />
 
@@ -184,7 +184,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         label="전공"
         multiline
         maxRows={4}
-        onChange={majorChange}
+        onChange={handleChangeMajor}
         value={member.major}
       />
 
@@ -193,7 +193,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         label="이메일"
         multiline
         maxRows={4}
-        onChange={emailChange}
+        onChange={handleChangeEmail}
         value={member.email}
       />
 
@@ -219,7 +219,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
           label="학위"
           multiline
           maxRows={4}
-          onChange={doctorateChange}
+          onChange={handleChangeDoctorate}
           value={member.doctorate}
         />
       )}
@@ -230,7 +230,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
           label="위치"
           multiline
           maxRows={4}
-          onChange={locationChange}
+          onChange={handleChangeLocation}
           value={member.location}
         />
       )}
@@ -241,7 +241,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
           label="전화번호"
           multiline
           maxRows={4}
-          onChange={numberChange}
+          onChange={handleChangeNumber}
           value={member.number}
         />
       )}
@@ -252,7 +252,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
           label="입학년도"
           multiline
           maxRows={4}
-          onChange={admissionChange}
+          onChange={handleChangeAdmission}
           value={member.admission}
         />
       )}
@@ -263,7 +263,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
           label="직책"
           multiline
           maxRows={4}
-          onChange={positionChange}
+          onChange={handleChangePosition}
           value={member.position}
         />
       )}
@@ -273,7 +273,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         label="아이디"
         multiline
         maxRows={4}
-        onChange={IDChange}
+        onChange={handleChangeID}
         value={member.loginDto.loginId}
       />
 
@@ -282,7 +282,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         label="패스워드"
         multiline
         maxRows={4}
-        onChange={passwordChange}
+        onChange={handleChangePassword}
         value={member.loginDto.loginPw}
       />
 
