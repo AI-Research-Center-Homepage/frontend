@@ -7,7 +7,7 @@ import { changeMainHeaderContext } from "../../../AdminMain";
 
 import TitleTextField from "../../../components/TitleTextField";
 import PostEditor from "../../../components/PostEditor";
-import CommonButton from "../../../components/CommonButton";
+import GeneralButton from "../../../components/GeneralButton";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
@@ -80,13 +80,13 @@ const InfoChannelDetail = () => {
       <PostEditor editorRef={editorRef} />
 
       <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
-        <CommonButton content="취소하기" onClick={() => navigate("./../")} />
-        <CommonButton
+        <GeneralButton content="취소하기" onClick={() => navigate("./../")} />
+        <GeneralButton
           content="삭제하기"
           onClick={() => {}} // 백앤드로 삭제 요청 코드
           sx={{ mx: "1%" }}
         />
-        <CommonButton content="수정하기" onClick={handleRegisterButton} />
+        <GeneralButton content="수정하기" onClick={handleRegisterButton} />
       </Box>
     </Box>
   );

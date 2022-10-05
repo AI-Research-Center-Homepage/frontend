@@ -8,21 +8,24 @@ import MemberPost from "../../components/MemberPost";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-07-17
+ *@date 2022-10-03
  *@description 연구원들의 정보를 게시글 형식으로 렌더링하는 페이지
  */
 
 const Researcher = () => {
-  const [researchersData, setResearchersData] = useState({ researcher: [] });
+  const [members, setMembers] = useState({ researcher: [] });
+
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/researcher");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(
-        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/researchers"
-      )
-      .then((response) => {
-        setResearchersData(response.data);
-      });
+    getMembers();
   }, []);
 
   return (
@@ -34,7 +37,7 @@ const Researcher = () => {
       {/* 연구원 정보 */}
       <Container sx={{ width: "80%", my: 6 }}>
         <Grid container spacing={6}>
-          {researchersData.researcher.map((researcher) => (
+          {members.researcher.map((researcher) => (
             <MemberPost post={researcher} key={researcher.id} />
           ))}
         </Grid>

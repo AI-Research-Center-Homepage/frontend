@@ -13,7 +13,7 @@ import MemberPost from "../../components/MemberPost";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-07-17
+ *@date 2022-10-03
  *@description 년도(올해, 작년)를 선택하여
  *             해당하는 년도에 입학한 대학원생을 랜더링
  */
@@ -46,24 +46,28 @@ const getStringYear = (date) => {
 
 const Graduate = () => {
   const [selectedYear, SetSelectedYear] = useState("all");
-  const [graduatesData, setGraduatesData] = useState({ graduate: [] });
+  const [members, setMembers] = useState({ graduate: [] });
 
   let year = getStringYear(new Date());
 
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/graduate");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get(
-        "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/graduates"
-      )
-      .then((response) => {
-        setGraduatesData(response.data);
-      });
+    getMembers();
   }, []);
 
   return (
     <>
       <Header />
       <SubHeader main="구성원" sub="대학원생" />
+
       {/* 년도 선택 버튼 그룹 */}
       <ThemeProvider theme={ButtonTheme}>
         <Stack
@@ -95,14 +99,15 @@ const Graduate = () => {
           </Button>
         </Stack>
       </ThemeProvider>
+
       {/* 대학원생 정보 */}
       <Container sx={{ width: "80%", my: 6 }}>
         <Grid container spacing={6}>
-          {graduatesData.graduate
+          {members.graduate
             .filter((graduate) => {
-              if (selectedYear === "all" || selectedYear === graduate.admission)
-                return true;
-              return false;
+              return (
+                selectedYear === "all" || selectedYear === graduate.admission
+              );
             })
             .map((graduate) => (
               <MemberPost post={graduate} key={graduate.id} />
