@@ -84,12 +84,14 @@ const Header = () => {
   const mainMenuMediaQuery = useMediaQuery("(min-width: 1200px)");
 
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
+  // 상단 메뉴 내려옴 확인
   const [collapseMenuOpen, setCollapseMenuOpen] = useState(false);
+  // 우측 메뉴 펼침 확인
   const [expandedSideMenu, setExpandedSideMenu] = useState(false);
 
   const handleExpanded = (key) => {
     if (expandedSideMenu === key) {
-      setExpandedSideMenu("");
+      setExpandedSideMenu(null);
     } else {
       setExpandedSideMenu(key);
     }
@@ -101,90 +103,15 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  /**
-   *@author Suin-Jeong, suin8@jbnu.ac.kr
-   *@date 2022-05-11
-   *@description 오른쪽 사이드 메뉴
-   *             list를 이용하여 구현
-   */
-
-  // 함수화 시켜서 사용하면 transition 기능이 사라짐
-  // Why?????
-
-  /* 
-  const SideMenu = () => {
-    return (
-      <>
-        <Card
-          sx={{
-            height: "100%",
-            width: "320px",
-            bgcolor: "#0277BD",
-            color: "white",
-            borderRadius: "0",
-          }}
-        >
-          <CardMedia sx={{ ml: "7px", my: "7px" }}>
-            <IconButton onClick={() => navigate("/")}>
-              <Home sx={{ color: "white" }} />
-            </IconButton>
-          </CardMedia>
-
-          <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#0277BD" }}>
-            {mainMenuItems.map(({ key, title, contents }) => (
-              <div key={key}>
-                <ListItemButton onClick={() => handleExpanded(key)}>
-                  <ListItemText primary={title} />
-                </ListItemButton>
-
-                <Collapse
-                  in={key === expandedSideMenu}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  <List
-                    component="div"
-                    disablePadding
-                    sx={{ bgcolor: "white" }}
-                  >
-                    {contents.map(({ subkey, subcontent }) => (
-                      <ListItemButton
-                        sx={{ pl: 4, color: "black" }}
-                        key={subkey}
-                      >
-                        <ListItemText primary={subcontent} />
-                      </ListItemButton>
-                    ))}
-                  </List>
-                </Collapse>
-              </div>
-            ))}
-          </List>
-        </Card>
-      </>
-    );
-  }; 
-  */
-
-  /**
-   *@author Suin-Jeong, suin8@jbnu.ac.kr
-   *@date 2022-05-11
-   *@description 상단 헤더에서 MainMenu 구성부
-   *             onMouse시 collapseMenu가 내려옴
-   */
-
-  const MainMenu = () => {
-    return (
-      <>
-        {mainMenuItems.map(({ title, key }) => (
-          <Grid item xs={2.4} key={key}>
-            <Typography sx={{ fontSize: "20px", color: "black" }}>
-              {title}
-            </Typography>
-          </Grid>
-        ))}
-      </>
-    );
+  const toggleMenu = () => {
+    let subMenuAll = document.getElementById("subMenuAll");
+    if (collapseMenuOpen) {
+      setCollapseMenuOpen(false);
+      subMenuAll.style.height = "0px";
+    } else {
+      setCollapseMenuOpen(true);
+      subMenuAll.style.height = "200px";
+    }
   };
 
   /**
@@ -231,7 +158,7 @@ const Header = () => {
 
           {/* 메뉴, 검색창, 언어 버튼 */}
           <Grid
-            container
+            item
             xs={10}
             sx={{
               alignItems: "center",
@@ -241,13 +168,26 @@ const Header = () => {
             }}
           >
             {/* 메인 메뉴*/}
-            <Grid
-              onMouseEnter={() => setCollapseMenuOpen(true)}
-              container
-              xs={8}
-              sx={{ textAlign: "center" }}
-            >
-              <MainMenu />
+            <Grid item xs={8} sx={{ textAlign: "center", height: "100%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  height: "100%",
+                  alignItems: "center",
+                }}
+                onMouseEnter={() => {
+                  toggleMenu();
+                }}
+              >
+                {mainMenuItems.map(({ title, key }) => (
+                  <Grid item xs={2.4} key={"t" + key}>
+                    <Typography sx={{ fontSize: "20px", color: "black" }}>
+                      {title}
+                    </Typography>
+                  </Grid>
+                ))}
+              </div>
             </Grid>
 
             {/* 검색창 */}
@@ -326,14 +266,13 @@ const Header = () => {
 
                 <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#0277BD" }}>
                   {mainMenuItems.map(({ key, title, contents }) => (
-                    <div key={key}>
+                    <div key={"r" + key}>
                       <ListItemButton
                         sx={{ py: 1.5 }}
                         onClick={() => handleExpanded(key)}
                       >
                         <ListItemText primary={title} />
                       </ListItemButton>
-
                       <Collapse
                         in={key === expandedSideMenu}
                         timeout="auto"
@@ -347,7 +286,7 @@ const Header = () => {
                           {contents.map(({ subkey, subcontent, path }) => (
                             <ListItemButton
                               sx={{ pl: 4, color: "black" }}
-                              key={subkey}
+                              key={"r" + subkey}
                               onClick={() => navigate(`${path}`)}
                             >
                               <ListItemText primary={subcontent} />
@@ -366,45 +305,62 @@ const Header = () => {
       <Divider />
 
       {/* collapse 메뉴 */}
-      <Collapse in={collapseMenuOpen} timeout={500}>
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            height: "200px",
-            zIndex: "5",
-            bgcolor: "#ececec",
-          }}
-          onMouseLeave={() => setCollapseMenuOpen(false)}
-        >
-          <Grid item xs={1} />
-          <Grid container xs={10}>
-            <Grid container xs={8}>
-              {mainMenuItems.map((mainMenuItem) => (
-                <>
-                  <Divider orientation="vertical" />
-                  <Grid item xs>
-                    <Stack sx={{ height: "100%" }}>
-                      {mainMenuItem.contents.map((content) => (
-                        <Button
-                          sx={{ height: "20%", color: "black" }}
-                          onClick={() => navigate(content.path)}
-                        >
-                          <Typography variant="subtitle2">
-                            {content.subcontent}
-                          </Typography>
-                        </Button>
-                      ))}
-                    </Stack>
-                  </Grid>
-                </>
-              ))}
+      <Grid
+        container
+        id="subMenuAll"
+        sx={{
+          display: "flex",
+          height: "0px",
+          zIndex: "5",
+          bgcolor: "#ececec",
+          position: "absolute",
+          overflow: "hidden",
+          transition: "height",
+          transitionDuration: "0.2s",
+          transitionTimingFunction: "linear",
+        }}
+      >
+        <Grid item xs={1} />
+        <Grid item xs={10}>
+          <Grid container sx={{ height: "100%" }}>
+            <Grid item xs={8}>
+              <div
+                style={{ display: "flex", width: "100%", height: "100%" }}
+                id="subMenu"
+                onMouseLeave={() => {
+                  toggleMenu();
+                }}
+              >
+                {mainMenuItems.map((mainMenuItem) => (
+                  <div
+                    style={{ display: "flex", width: "100%", height: "100%" }}
+                    key={"c" + mainMenuItem.key}
+                  >
+                    <Divider orientation="vertical" />
+                    <Grid item xs sx={{ height: "100%" }}>
+                      <Stack sx={{ height: "100%" }}>
+                        {mainMenuItem.contents.map((content) => (
+                          <Button
+                            key={"c" + content.subkey}
+                            sx={{ height: "20%", color: "black" }}
+                            onClick={() => navigate(content.path)}
+                          >
+                            <Typography variant="subtitle2">
+                              {content.subcontent}
+                            </Typography>
+                          </Button>
+                        ))}
+                      </Stack>
+                    </Grid>
+                  </div>
+                ))}
+              </div>
             </Grid>
-            <Divider orientation="vertical" />
           </Grid>
+          <Divider orientation="vertical" />
         </Grid>
-        <Divider />
-      </Collapse>
+      </Grid>
+      <Divider />
     </div>
   );
 };

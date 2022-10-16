@@ -40,7 +40,7 @@ const Home = () => {
       <Header />
       <div>
         {/* text content */}
-        <Grow in="true" timeout={2500}>
+        <Grow in={true} timeout={2500}>
           <Box
             sx={{
               display: "flex",
@@ -73,7 +73,7 @@ const Home = () => {
 
         <ThemeProvider theme={customTheme}>
           {/* menu content  */}
-          <Grow in="true" timeout={2500}>
+          <Grow in={true} timeout={2500}>
             <Box
               sx={{
                 display: "flex",

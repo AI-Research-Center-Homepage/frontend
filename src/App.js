@@ -32,7 +32,7 @@ export const ArticleContext = createContext();
 
 const App = () => {
   return (
-    <ArticleContext.Provider>
+    <ArticleContext.Provider value={{}}>
       <BrowserRouter>
         <Routes>
           {/* 홈 */}
