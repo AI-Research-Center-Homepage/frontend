@@ -8,9 +8,6 @@ import Footer from "../../components/Footer";
 
 import axios from "axios";
 
-// postman url
-const url = "https://42ecb7f8-87bd-492c-85c5-6afd35141b40.mock.pstmn.io";
-
 // 불필요한 Typography 태그의 반복을 막기 위해 별도의 함수 사용
 function ProfPrint({ title, info }) {
   return (
@@ -23,19 +20,26 @@ function ProfPrint({ title, info }) {
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-07-15
+ *@date 2022-10-03
  *@description 참여교수 사진, 이름, 전공, 박사학위, 연구실, 전화번호를 보여줌
  */
 
 export default function Professor() {
   // API로 받아온 정보 저장
-  const [prof, setProf] = useState([]);
+  const [members, setMembers] = useState({ professor: [] });
+
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/professor");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // API로 정보 받기
   useEffect(() => {
-    axios.get(url + "/professor").then((response) => {
-      setProf(response.data.professor);
-    });
+    getMembers();
   }, []);
 
   return (
@@ -44,7 +48,7 @@ export default function Professor() {
       <SubHeader main="구성원" sub="참여교수" />
       <Grid container>
         <Grid item xs={12}>
-          {prof.map((element) => (
+          {members.professor.map((element) => (
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Card
                 sx={{

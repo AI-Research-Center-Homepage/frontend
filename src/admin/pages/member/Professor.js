@@ -1,14 +1,10 @@
-import { DataGrid } from "@mui/x-data-grid";
-import { TextField, Box } from "@mui/material";
-
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
-
+import { DataGrid } from "@mui/x-data-grid";
+import { TextField, Box } from "@mui/material";
 import { changeMainHeaderContext } from "../../AdminMain";
-
-import CommonButton from "../../components/CommonButton";
+import GeneralButton from "../../components/GeneralButton";
 
 const dummycolumns = [
   {
@@ -61,71 +57,34 @@ const dummycolumns = [
   },
 ];
 
-const dummy = {
-  position: "professor",
-  members: [
-    {
-      id: 0,
-      name: "나승훈",
-      major: "인공지능",
-      email: "nash@jbnu.ac.kr",
-    },
-    {
-      id: 1,
-      name: "김성찬",
-      major: "인공지능",
-      email: "s.kim@jbnu.ac.kr",
-    },
-    {
-      id: 2,
-      name: "오일석",
-      major: "컴퓨터비전",
-      email: "isoh@jbnu.ac.kr",
-    },
-    {
-      id: 3,
-      name: "이경순",
-      major: "정보마이닝",
-      email: "selfsolee@jbnu.ac.kr",
-    },
-    {
-      id: 4,
-      name: "이준환",
-      major: "인공지능",
-      email: "chlee@jbnu.ac.kr",
-    },
-  ],
-};
-
 /**
  *@author Suin-Jeong suin8@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-03
  *@description Admin Professor 페이지
  *             DataGrid 이용
  */
 
 const Professor = () => {
-  const [data, setData] = useState({ position: "", members: [] });
+  const [members, setMembers] = useState({ members: [] });
   const navigate = useNavigate();
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
 
-  useEffect(() => {
-    // backend 연결 전 간단한 출력을 위함
-    // 추후 삭제 요망
-    setData(dummy);
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/admin/members/professor");
+      setMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("구성원 > 교수");
       changeMainMenu(1, 4);
-      // axios({
-      //   method: "get",
-      //   url: "https://8d020d2f-f787-45d5-88de-64d4ae1c030c.mock.pstmn.io/members/professor",
-      //   responseType: "json",
-      // }).then((response) => {
-      //   setData(response.data);
-      // });
+      getMembers();
     } else {
       navigate("/admin/signin");
     }
@@ -152,7 +111,7 @@ const Professor = () => {
             mr: "3%",
           }}
         />
-        <CommonButton
+        <GeneralButton
           content="등록하기"
           onClick={() => {
             navigate(`./new`);
@@ -161,7 +120,7 @@ const Professor = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={data.members}
+          rows={members.members}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount

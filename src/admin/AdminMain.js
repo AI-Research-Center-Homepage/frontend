@@ -52,7 +52,7 @@ import ArticleNew from "./pages/news/new/ArticleNew";
 import ArticleDetail from "./pages/news/detail/ArticleDetail";
 import InfochannelNew from "./pages/news/new/InfoChannelNew";
 import InfochannelDetail from "./pages/news/detail/InfoChannelDetail";
-import CommonButton from "./components/CommonButton";
+import GeneralButton from "./components/GeneralButton";
 
 const adminHeaderItems = [
   {
@@ -206,7 +206,7 @@ const AdminMain = () => {
             }}
           >
             <Typography variant="h5">{mainText}</Typography>
-            <CommonButton
+            <GeneralButton
               content="로그아웃"
               sx={{ mr: "3%" }}
               onClick={() => {
