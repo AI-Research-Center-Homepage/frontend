@@ -14,13 +14,11 @@ import {
 } from "@mui/material";
 import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
-
-// mock api URL
-const url = "https://f87d90da-75da-46d6-8ba4-9b4325601a9e.mock.pstmn.io";
+import GeneralButton from "../../components/GeneralButton";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-27
  *@description 연구분야를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
  */
 
@@ -38,42 +36,49 @@ const ResearchField = () => {
     changeMainHeaderContext
   );
 
-  // 제출 기능. state값을 body로 모아서 post를 날린다.
-  // const Submit = (event) => {
-  //   event.preventDefault();
-
-  //   alert(event.target.value);
-
-  //   let body = {
-  //     fieldName: fieldName,
-  //     description: description,
-  //   };
-
-  //   axios
-  //     .post("http://localhost:3000/admin/fields", body)
-  //     .then((res) => console.log(res));
-  // };
-
   // mock api의 데이터를 받는 변수
-  const [fieldData, setFieldData] = useState([]);
+  const [research, setResearch] = useState({ fields: [] });
+
+  const getResearch = async () => {
+    try {
+      const response = await axios.get("/api/admin/fields");
+      setResearch(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dummyFields = {
+    fields: [
+      { id: 1, fieldName: "title1", description: "desc1", used: "url1" },
+      { id: 2, fieldName: "title2", description: "desc2", used: "url2" },
+    ],
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("연구 > 연구분야");
       changeMainMenu(3, 12);
-      axios.get(url + "/fields").then((response) => {
-        setFieldData(response.data.fields);
-      });
+      getResearch();
+
+      setResearch(dummyFields);
     } else {
       navigate("/admin/signin");
     }
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        paddingTop: "3%",
+        paddingBottom: "3%",
+        paddingLeft: "7.5%",
+        paddingRight: "7.5%",
+      }}
+    >
       <Grid container>
         <Grid item xs={12} sx={{ mt: 3 }}>
-          {fieldData.map((element) => (
+          {research.fields.map((element) => (
             <Box>
               <div
                 style={{
@@ -86,7 +91,7 @@ const ResearchField = () => {
                     display: "flex",
                     boxShadow: 5,
                     my: 1,
-                    width: { xs: "70%", md: "60%" },
+                    width: { xs: "100%", md: "80%" },
                     maxHeight: 200,
                     overflowY: "auto",
                   }}
@@ -124,7 +129,6 @@ const ResearchField = () => {
             }}
           >
             {/* 새 연구분야를 등록할 수 있는 TextField. 분야 이름을 작성하는 칸과 설명을 작성하는 칸 */}
-            {/* <form onSubmit={Submit}> */}
             <TextField
               id="outlined-multiline-static"
               label="연구분야"
@@ -132,7 +136,7 @@ const ResearchField = () => {
               onChange={fieldNameChange}
               multiline
               rows={2}
-              sx={{ mt: 2, mb: 3, width: { md: "15%", xs: "25%" } }}
+              sx={{ mt: 2, mb: 3, width: { md: "25%", xs: "35%" } }}
             />
 
             <TextField
@@ -142,17 +146,13 @@ const ResearchField = () => {
               onChange={descriptionChange}
               multiline
               rows={2}
-              sx={{ mt: 2, mb: 3, ml: 2, width: { md: "45%", xs: "40%" } }}
+              sx={{ mt: 2, mb: 3, ml: 2, width: { md: "55%", xs: "50%" } }}
             />
 
-            <Button
-              variant="contained"
-              type="submit"
+            <GeneralButton
+              content="저장"
               sx={{ height: "100%", mt: 4.5, ml: 1, mb: 3 }}
-            >
-              저장
-            </Button>
-            {/* </form> */}
+            />
           </div>
         </Grid>
       </Grid>
