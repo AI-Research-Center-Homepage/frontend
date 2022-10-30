@@ -29,7 +29,7 @@ const ProjectDetail = () => {
     content: "프로젝트내용 내용 내용",
     description: "프로젝트 설명 설명",
     participants: "참여자1, 참여자2, 참여자3",
-    fieldName: "인공지능",
+    fieldName: "연구분야1",
   };
   const [isSetResearch, setIsSetResearch] = useState(false);
 

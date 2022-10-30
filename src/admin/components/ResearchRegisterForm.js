@@ -1,12 +1,15 @@
+import React from "react";
 import {
   TextField,
   Box,
   FormControl,
   InputLabel,
-  Select,
   MenuItem,
-  Chip,
+  OutlinedInput,
+  Select,
+  List,
 } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,6 +27,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const [strMem, setStrMem] = useState("");
   // 멤버 값 따로 저장
   const [members, setMembers] = useState([]);
   // 멤버 값 출력을 위해 문자열로 저장
@@ -54,19 +58,28 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
     { id: 30, fieldName: "연구분야3" },
   ];
 
+  // 멤버를 제외한 핸들러
   const handleChangeInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    if (e.target.name === "members") {
-      setMembers({
-        ...members,
-        value,
-      });
+    setResearch({
+      ...research,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // 멤버 핸들러
+  // 선택되면 값을 추가해주고 이미 선택되어 있으면
+  // filter로 값을 제거하고 클래스와 배경색을 제거
+  const handleChangeMembers = (e) => {
+    const val = e.target.id;
+
+    if (e.target.classList.contains("checked")) {
+      e.target.classList.remove("checked");
+      e.target.style.backgroundColor = "white";
+
+      const mem = members.filter((element) => element !== val);
+      setMembers(mem);
     } else {
-      setResearch({
-        ...research,
-        [name]: value,
-      });
+      setMembers([...members, val]);
     }
   };
 
@@ -123,8 +136,25 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   // mount
   useEffect(() => {
     setResearch(researchData);
-    setMembers(researchData.members);
+    if (pageType === "detail") setMembers(researchData.members);
   }, []);
+
+  // 멤버가 변할 때 실행됨
+  // 클릭된 컴포넌트의 배경색과 클래스명을 변경
+  // 추가로 input value값을 변경하여 시각적으로 표현
+  useEffect(() => {
+    members.map((member) => {
+      const obj = document.getElementById(`${member}`);
+      obj.style.backgroundColor = "#DAF8F7";
+      obj.classList.add("checked");
+      return true;
+    });
+
+    let str = "";
+    members.map((member) => (str += "," + member));
+    str = str.slice(1, str.length);
+    setStrMem(str);
+  }, [members]);
 
   return (
     <Box sx={{ py: "3%", px: "7.5%" }}>
@@ -135,7 +165,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.title}
+          value={research?.title}
           name="title"
         />
       )}
@@ -146,7 +176,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.name}
+          value={research?.name}
           name="name"
         />
       )}
@@ -157,7 +187,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.content}
+          value={research?.content}
           name="content"
         />
       )}
@@ -168,7 +198,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.description}
+          value={research?.description}
           name="description"
         />
       )}
@@ -179,7 +209,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.participants}
+          value={research?.participants}
           name="participants"
         />
       )}
@@ -190,7 +220,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.koName}
+          value={research?.koName}
           name="koName"
         />
       )}
@@ -201,7 +231,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.enName}
+          value={research?.enName}
           name="enName"
         />
       )}
@@ -212,7 +242,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.journal}
+          value={research?.journal}
           name="journal"
         />
       )}
@@ -223,7 +253,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.publishDate}
+          value={research?.publishDate}
           name="publishDate"
         />
       )}
@@ -234,7 +264,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research.url}
+          value={research?.url}
           name="url"
         />
       )}
@@ -244,42 +274,60 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           <Select
             labelId="fieldSelect-label"
             name="fieldName"
-            value={research.fieldName}
+            value={research?.fieldName}
             label="field"
             onChange={handleChangeInput}
             defaultValue=""
           >
-            {dummyField.map((name) => (
-              <MenuItem value={name.fieldName}>{name.fieldName}</MenuItem>
+            {dummyField.map((field) => (
+              <MenuItem key={field.id} value={field.fieldName}>
+                {field.fieldName}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
       )}
       {researchType === "thesis" && (
-        <FormControl fullWidth sx={{ mt: 1 }}>
-          <InputLabel id="fieldSelect-label">참여자</InputLabel>
-          <Select
-            labelId="demo-multiple-chip-label"
-            id="demo-multiple-chip"
-            name="members"
-            value={members}
-            label="field"
-            onChange={handleChangeInput}
-            renderValue={() => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {members.map((value) => {
-                  return <Chip key={value} label={value} />;
-                })}
-              </Box>
-            )}
+        <div>
+          <FormControl fullWidth sx={{ mt: 1 }}>
+            <InputLabel>참여자</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              endAdornment={<ArrowDropDownIcon />}
+              value={strMem}
+              onClick={() => {
+                if (
+                  document.getElementById("memberList").style.visibility ===
+                  "visible"
+                )
+                  document.getElementById("memberList").style.visibility =
+                    "hidden";
+                else
+                  document.getElementById("memberList").style.visibility =
+                    "visible";
+              }}
+            />
+          </FormControl>
+          <List
+            id="memberList"
+            sx={{
+              borderRadius: "4px",
+              boxShadow: "0.5px 0.5px 10px 0.5px grey",
+              visibility: "hidden",
+            }}
           >
             {dummyMembers.map((member) => (
-              <MenuItem key={member.id} value={member.name}>
+              <MenuItem
+                key={member.id}
+                id={member.name}
+                value={member.name}
+                onClick={handleChangeMembers}
+              >
                 {member.name}
               </MenuItem>
             ))}
-          </Select>
-        </FormControl>
+          </List>
+        </div>
       )}
       <Box sx={{ display: "flex", my: "2%", justifyContent: "flex-end" }}>
         {pageType === "new" && (
