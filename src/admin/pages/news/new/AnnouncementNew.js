@@ -20,6 +20,7 @@ const AnnouncementNew = () => {
     content: "",
     author: "관리자",
     imageList: [],
+    attaches: [],
   };
 
   /* useEffect */

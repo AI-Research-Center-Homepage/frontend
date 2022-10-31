@@ -29,6 +29,7 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
     content: "",
     author: "관리자",
     imageList: [],
+    attaches: [],
   });
 
   const [attaches, setAttaches] = useState([]);

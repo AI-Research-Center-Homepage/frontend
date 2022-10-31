@@ -1,5 +1,6 @@
-import { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import { changeMainHeaderContext } from "../../../AdminMain";
 import PostRegisterForm from "../../../components/PostRegisterForm";
 
@@ -12,28 +13,49 @@ import PostRegisterForm from "../../../components/PostRegisterForm";
  */
 
 const AnnouncementDetail = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const { changeMainText } = useContext(changeMainHeaderContext);
 
-  const post = {
+  const [post, setPost] = useState({
     boardName: "Notice",
     title: "",
     content: "",
     author: "관리자",
     imageList: [],
+    attaches: [],
+  });
+
+  // API 통신 완료 후 받아온 데이터를 저장한 객체를 prop 으로 전달하기 위해 선언한 객체
+  // 없으면 결과적으로 post 객체에 데이터가 없는 상태로 화면에 출력됨
+  const [isSetPost, setIsSetPost] = useState(false);
+
+  const getPost = async () => {
+    try {
+      const response = await axios.get(`/api/admin/posts/?id=${id}`);
+      setPost(response.data); // <- 동작 안 함
+      console.log("response.data: " + response.data);
+      setIsSetPost(true);
+      console.log("post: " + post);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   /* useEffect */
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 공지사항 > 상세정보");
+      getPost();
     } else {
       navigate("/admin/signin");
     }
   }, []);
 
   return (
-    <PostRegisterForm postData={post} postType="notice" pageType="detail" />
+    isSetPost && (
+      <PostRegisterForm postData={post} postType="notice" pageType="detail" />
+    )
   );
 };
 
