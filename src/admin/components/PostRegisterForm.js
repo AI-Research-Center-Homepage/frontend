@@ -67,13 +67,13 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
 
   // post 정보 등록 요청 함수
   const postPost = async () => {
-    try {
-      const formData = new FormData();
-      formData.append(
-        "postDto",
-        new Blob([JSON.stringify(post)], { type: "application/json" })
-      );
+    const formData = new FormData();
+    formData.append(
+      "postDto",
+      new Blob([JSON.stringify(post)], { type: "application/json" })
+    );
 
+    try {
       const response = await axios.post(`/api/admin/posts/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -109,7 +109,7 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
       content: editorRef.current?.getInstance().getMarkdown(),
     });
 
-    // console.log(post);
+    console.log(post);
 
     postPost();
   };

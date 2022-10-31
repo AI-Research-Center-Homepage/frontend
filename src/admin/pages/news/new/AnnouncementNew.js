@@ -15,7 +15,7 @@ const AnnouncementNew = () => {
   const { changeMainText } = useContext(changeMainHeaderContext);
 
   const post = {
-    boardName: "announcement",
+    boardName: "Notice",
     title: "",
     content: "",
     author: "관리자",

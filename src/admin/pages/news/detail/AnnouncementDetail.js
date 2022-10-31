@@ -16,18 +16,17 @@ const AnnouncementDetail = () => {
   const { changeMainText } = useContext(changeMainHeaderContext);
 
   const post = {
-    boardName: "announcement",
+    boardName: "Notice",
     title: "",
     content: "",
     author: "관리자",
-    images: [],
-    attaches: [],
+    imageList: [],
   };
 
   /* useEffect */
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
-      changeMainText("소식 > 공지사항 > 신규등록");
+      changeMainText("소식 > 공지사항 > 상세정보");
     } else {
       navigate("/admin/signin");
     }
