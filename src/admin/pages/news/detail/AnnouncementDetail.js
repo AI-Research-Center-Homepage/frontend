@@ -5,7 +5,7 @@ import PostRegisterForm from "../../../components/PostRegisterForm";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-09-29
+ *@date 2022-10-31
  *@description 공지사항 자세히보기 페이지
  *             DB에 저장된 게시물의 내용을 불러오고
  *             편집 모드로 전환

@@ -28,9 +28,10 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
     title: "",
     content: "",
     author: "관리자",
-    images: [],
-    attaches: [],
+    imageList: [],
   });
+
+  const [attaches, setAttaches] = useState([]);
 
   const titleChange = (event) => {
     setPost({
@@ -38,8 +39,6 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
       title: event.target.value,
     });
   };
-
-  const [attaches, setAttaches] = useState([]);
 
   const handleFileUploadButtonClick = (e) => {
     fileInput.current.click();
@@ -69,10 +68,17 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
   // post 정보 등록 요청 함수
   const postPost = async () => {
     try {
-      const response = await axios.post(
-        `/api/admin/posts/${postType}/new`,
-        post
+      const formData = new FormData();
+      formData.append(
+        "postDto",
+        new Blob([JSON.stringify(post)], { type: "application/json" })
       );
+
+      const response = await axios.post(`/api/admin/posts/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -101,7 +107,6 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
     setPost({
       ...post,
       content: editorRef.current?.getInstance().getMarkdown(),
-      attaches: attaches,
     });
 
     // console.log(post);

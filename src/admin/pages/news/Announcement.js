@@ -72,7 +72,7 @@ const dummycolumns = [
  */
 
 const Announcement = () => {
-  const [news, setNews] = useState({ notice: [] });
+  const [news, setNews] = useState([]);
 
   const navigate = useNavigate();
 
@@ -82,9 +82,7 @@ const Announcement = () => {
 
   const getNews = async () => {
     try {
-      const response = await axios.get(
-        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/notice"
-      );
+      const response = await axios.get("/api/admin/posts/notice");
       setNews(response.data);
       // console.log(response.data);
     } catch (error) {
@@ -135,7 +133,7 @@ const Announcement = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={news.notice}
+          rows={news}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount

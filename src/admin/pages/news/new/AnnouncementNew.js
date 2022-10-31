@@ -5,7 +5,7 @@ import PostRegisterForm from "../../../components/PostRegisterForm";
 
 /**
  *@author LimEunSang, dmstkd2905@naver.com
- *@date 2022-09-29
+ *@date 2022-10-31
  *@description 공지사항 등록하기 페이지
  *             사용자로부터 데이터를 입력받아 등록
  */
@@ -19,8 +19,7 @@ const AnnouncementNew = () => {
     title: "",
     content: "",
     author: "관리자",
-    images: [],
-    attaches: [],
+    imageList: [],
   };
 
   /* useEffect */
