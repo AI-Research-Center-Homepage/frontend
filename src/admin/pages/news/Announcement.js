@@ -1,11 +1,11 @@
-import { DataGrid } from "@mui/x-data-grid";
-
-import { Button, TextField, Box } from "@mui/material";
-
 import { useState, useEffect, useContext } from "react";
-import { changeMainHeaderContext } from "../../AdminMain";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { DataGrid } from "@mui/x-data-grid";
+import { Button, TextField, Box } from "@mui/material";
+import { changeMainHeaderContext } from "../../AdminMain";
+
+// postman dummydata url: https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/notice
 
 const dummycolumns = [
   {
@@ -72,23 +72,31 @@ const dummycolumns = [
  */
 
 const Announcement = () => {
-  const [data, setData] = useState({ position: "", notice: [] });
+  const [news, setNews] = useState({ notice: [] });
+
   const navigate = useNavigate();
+
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
+
+  const getNews = async () => {
+    try {
+      const response = await axios.get(
+        "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/notice"
+      );
+      setNews(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("소식 > 공지사항");
       changeMainMenu(2, 10);
-      axios({
-        method: "get",
-        url: "https://97039e2f-9785-4469-a9c2-3b173ce13447.mock.pstmn.io/posts/notice",
-        responseType: "json",
-      }).then((response) => {
-        setData(response.data);
-      });
+      getNews();
     } else {
       navigate("/admin/signin");
     }
@@ -127,7 +135,7 @@ const Announcement = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={data.notice}
+          rows={news.notice}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount
