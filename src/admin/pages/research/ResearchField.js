@@ -122,7 +122,6 @@ const ResearchField = () => {
 
   // 저장버튼을 눌렀을 때 상태에 따라 변경 or 신규등록 실행
   const handleSaveButton = () => {
-    console.log(mode, changeId);
     if (mode === "new") requestPost();
     else if (mode === "change") requestPut();
   };

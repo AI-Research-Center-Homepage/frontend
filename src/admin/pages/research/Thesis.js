@@ -18,28 +18,28 @@ const columns = [
   {
     field: "id",
     headerName: "id",
-    width: 70,
+    flex: 0.5,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "title",
     headerName: "title",
-    width: 300,
+    flex: 2,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "journal",
     headerName: "journal",
-    width: 300,
+    flex: 2,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "publishDate",
     headerName: "publishDate",
-    width: 130,
+    flex: 1.5,
     headerAlign: "center",
     align: "center",
   },
@@ -56,34 +56,17 @@ const Thesis = () => {
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
-  const [research, setResearch] = useState({ theses: [] });
+
+  // 리턴값이 fields라 일단 이걸로 받음
+  const [research, setResearch] = useState({ fields: [] });
 
   const getResearch = async () => {
     try {
       const response = await axios.get("/api/admin/thesis");
-      setResearch(response);
+      setResearch(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const dummyTheses = {
-    theses: [
-      {
-        fieldName: "인공지능",
-        theses: [
-          { id: 1, title: "논문1", journal: "저널1", publishDate: "2022~" },
-          { id: 2, title: "논문2", journal: "저널2", publishDate: "2023~" },
-        ],
-      },
-      {
-        fieldName: "기계학습",
-        theses: [
-          { id: 3, title: "논문3", journal: "저널3", publishDate: "2024~" },
-          { id: 4, title: "논문4", journal: "저널4", publishDate: "2025~" },
-        ],
-      },
-    ],
   };
 
   useEffect(() => {
@@ -91,8 +74,6 @@ const Thesis = () => {
       changeMainText("연구 > 논문");
       changeMainMenu(3, 13);
       getResearch();
-
-      setResearch(dummyTheses);
     } else {
       navigate("/admin/signin");
     }
@@ -137,10 +118,10 @@ const Thesis = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {research.theses &&
-          research.theses.map((data) => (
-            <Grid item xs={6}>
-              <div style={{ height: 300, width: "95%" }}>
+        {research.fields &&
+          research.fields.map((data) => (
+            <Grid item xs={12} sx={{ mb: "8%" }}>
+              <div style={{ height: 300, width: "100%" }}>
                 <TableHead>
                   <TableRow>
                     <TableCell align="center" colSpan={2}>

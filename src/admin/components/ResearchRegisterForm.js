@@ -27,10 +27,10 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // 논문: 멤버 값 출력을 위해 문자열로 저장
   const [strMem, setStrMem] = useState("");
-  // 멤버 값 따로 저장
+  // 논문: 멤버 값 따로 저장
   const [members, setMembers] = useState([]);
-  // 멤버 값 출력을 위해 문자열로 저장
   const [research, setResearch] = useState({
     title: "", // demo, thesis
     content: "", // demo, project
@@ -90,6 +90,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
         `/api/admin/${researchType}/new`,
         research
       );
+      console.log("등록되었습니다!");
+      navigate("../");
     } catch (error) {
       console.log(error);
     }
