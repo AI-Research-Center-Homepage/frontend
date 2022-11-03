@@ -33,17 +33,11 @@ const Demo = () => {
   const getResearch = async () => {
     try {
       const response = await axios.get("/api/admin/demo");
-      setResearch(response);
+      setResearch(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const dummyDemos = {
-    demos: [
-      { id: 1, title: "title1", description: "desc1", url: "url1" },
-      { id: 2, title: "title2", description: "desc2", url: "url2" },
-    ],
   };
 
   useEffect(() => {
@@ -51,8 +45,6 @@ const Demo = () => {
       changeMainText("연구 > 데모");
       changeMainMenu(3, 15);
       getResearch();
-
-      setResearch(dummyDemos);
     } else {
       navigate("/admin/signin");
     }
@@ -119,18 +111,6 @@ const Demo = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-
-                {/* 수정, 삭제 버튼 */}
-                <Stack
-                  spacing={2}
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{ ml: 3 }}
-                >
-                  <Button variant="contained">수정</Button>
-                  <Button variant="outlined">삭제</Button>
-                </Stack>
               </div>
             </Box>
           ))}

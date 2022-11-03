@@ -23,5 +23,11 @@ export default function ThesisNew() {
     }
   });
 
-  return <ResearchRegisterForm researchType="thesis" pageType="new" />;
+  return (
+    <ResearchRegisterForm
+      researchType="thesis"
+      pageType="new"
+      dirType="research"
+    />
+  );
 }

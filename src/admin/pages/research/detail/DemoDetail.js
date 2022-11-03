@@ -17,29 +17,19 @@ const DemoDetail = () => {
   const { changeMainText } = useContext(changeMainHeaderContext);
 
   const [research, setResearch] = useState({
-    name: "",
+    title: "",
     description: "",
     content: "",
     urls: "",
     participants: "",
   });
 
-  const dummy = {
-    title: "데모1",
-    description: "설명1",
-    content: "내용1",
-    url: "링크1",
-    participants: "참여자참여자참여자",
-  };
   const [isSetResearch, setIsSetResearch] = useState(false);
 
   const getResearch = async () => {
     try {
-      // const response = await axios.get(`/api/admin/demo/?demoId=${id}`);
-      // setResearch(response.data);
-
-      // 삭제필
-      setResearch(dummy);
+      const response = await axios.get(`/api/admin/demo/${id}`);
+      setResearch(response.data);
 
       setIsSetResearch(true);
     } catch (error) {

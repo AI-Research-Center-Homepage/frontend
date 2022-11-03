@@ -18,21 +18,21 @@ const columns = [
   {
     field: "id",
     headerName: "id",
-    width: 70,
+    flex: 1,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "title",
     headerName: "title",
-    width: 300,
+    flex: 2,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "description",
     headerName: "description",
-    width: 300,
+    flex: 3,
     headerAlign: "center",
     align: "center",
   },
@@ -46,7 +46,7 @@ const columns = [
 
 export default function Project() {
   const navigate = useNavigate();
-  const [research, setResearch] = useState({ projects: [] });
+  const [research, setResearch] = useState([]);
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
@@ -54,29 +54,10 @@ export default function Project() {
   const getResearch = async () => {
     try {
       const response = await axios.get("/api/admin/project");
-      setResearch(response);
+      setResearch(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const dummyProject = {
-    projects: [
-      {
-        fieldName: "인공지능",
-        projects: [
-          { id: 1, title: "플젝1", description: "설명1" },
-          { id: 2, title: "플젝2", description: "설명2" },
-        ],
-      },
-      {
-        fieldName: "기계학습",
-        projects: [
-          { id: 3, title: "플젝3", description: "설명3" },
-          { id: 4, title: "플젝4", description: "설명4" },
-        ],
-      },
-    ],
   };
 
   useEffect(() => {
@@ -84,7 +65,6 @@ export default function Project() {
       changeMainText("연구 > 프로젝트");
       changeMainMenu(3, 14);
       getResearch();
-      setResearch(dummyProject);
     } else {
       navigate("/admin/signin");
     }
@@ -136,9 +116,9 @@ export default function Project() {
         alignItems="center"
       >
         {research &&
-          research.projects.map((data) => (
-            <Grid item xs={6}>
-              <div style={{ height: 300, width: "95%" }}>
+          research.map((data) => (
+            <Grid item xs={12} sx={{ mb: "8%" }}>
+              <div style={{ height: 300, width: "100%" }}>
                 <TableHead>
                   <TableRow>
                     <TableCell align="center" colSpan={2}>

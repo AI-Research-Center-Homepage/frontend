@@ -27,10 +27,30 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const [allFields, setAllFields] = useState({ fields: [] });
+  const [allMembers, setAllMembers] = useState({ members: [] });
+
+  const getMembers = async () => {
+    try {
+      const response = await axios.get("/api/admin/members/professor");
+      setAllMembers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getFields = async () => {
+    try {
+      const response = await axios.get("/api/admin/fields");
+      setAllFields(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // 논문: 멤버 값 출력을 위해 문자열로 저장
   const [strMem, setStrMem] = useState("");
-  // 논문: 멤버 값 따로 저장
-  const [members, setMembers] = useState([]);
+
   const [research, setResearch] = useState({
     title: "", // demo, thesis
     content: "", // demo, project
@@ -42,21 +62,9 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
     koName: "", // thesis
     enName: "", // thesis
     journal: "", // thesis
-    publishDate: "", // thesis
-    //members: [], // thesis => 멤버 목록을 배열값으로 저장
+    publishDate: new Date().toISOString().slice(0, 19), // thesis
+    members: [], // thesis => 멤버 목록을 배열값으로 저장
   });
-
-  const dummyMembers = [
-    { id: 1, name: "멤버1" },
-    { id: 2, name: "멤버2" },
-    { id: 3, name: "멤버3" },
-  ];
-
-  const dummyField = [
-    { id: 10, fieldName: "연구분야1" },
-    { id: 20, fieldName: "연구분야2" },
-    { id: 30, fieldName: "연구분야3" },
-  ];
 
   // 멤버를 제외한 핸들러
   const handleChangeInput = (e) => {
@@ -67,19 +75,30 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   };
 
   // 멤버 핸들러
-  // 선택되면 값을 추가해주고 이미 선택되어 있으면
-  // filter로 값을 제거하고 클래스와 배경색을 제거
+  // 선택되면 값을 추가
   const handleChangeMembers = (e) => {
-    const val = e.target.id;
-
+    const clickedMemName = e.target.getAttribute("name");
+    const clickedMemId = e.target.value;
     if (e.target.classList.contains("checked")) {
       e.target.classList.remove("checked");
       e.target.style.backgroundColor = "white";
 
-      const mem = members.filter((element) => element !== val);
-      setMembers(mem);
+      const mem = research.members.filter(
+        (element) => element.name !== clickedMemName
+      );
+      setResearch({
+        ...research,
+        members: mem,
+      });
     } else {
-      setMembers([...members, val]);
+      e.target.classList.add("checked");
+      const copy = [...research.members];
+      const size = Object.keys(copy).length;
+      copy[size] = { id: clickedMemId, name: clickedMemName };
+      setResearch({
+        ...research,
+        members: copy,
+      });
     }
   };
 
@@ -90,8 +109,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
         `/api/admin/${researchType}/new`,
         research
       );
-      console.log("등록되었습니다!");
-      navigate("../");
+      alert("등록되었습니다!");
+      navigate(`/admin/research/${researchType}`);
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +123,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
         `/api/admin/${researchType}/?${researchType}Id=${id}`,
         research
       );
+      alert("수정되었습니다!");
+      navigate(`/admin/research/${researchType}`);
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +136,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
       const response = await axios.delete(
         `/api/admin/${researchType}/?${researchType}Id=${id}`
       );
+      alert("삭제되었습니다!");
+      navigate(`/admin/research/${researchType}`);
     } catch (error) {
       console.log(error);
     }
@@ -137,26 +160,23 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
 
   // mount
   useEffect(() => {
-    setResearch(researchData);
-    if (pageType === "detail") setMembers(researchData.members);
+    if (researchType === "project" || researchType === "thesis") getFields();
+    if (researchType === "thesis") getMembers();
+    if (pageType === "detail") setResearch(researchData);
+    console.log(researchData);
   }, []);
 
   // 멤버가 변할 때 실행됨
   // 클릭된 컴포넌트의 배경색과 클래스명을 변경
   // 추가로 input value값을 변경하여 시각적으로 표현
   useEffect(() => {
-    members.map((member) => {
-      const obj = document.getElementById(`${member}`);
-      obj.style.backgroundColor = "#DAF8F7";
-      obj.classList.add("checked");
-      return true;
-    });
-
-    let str = "";
-    members.map((member) => (str += "," + member));
-    str = str.slice(1, str.length);
-    setStrMem(str);
-  }, [members]);
+    if (researchType === "thesis") {
+      let str = "";
+      research.members.map((member) => (str += "," + member.name));
+      str = str.slice(1, str.length);
+      setStrMem(str);
+    }
+  }, [research && research.members]);
 
   return (
     <Box sx={{ py: "3%", px: "7.5%" }}>
@@ -167,7 +187,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.title}
+          value={research.title ?? ""}
           name="title"
         />
       )}
@@ -178,7 +198,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.name}
+          value={research.name ?? ""}
           name="name"
         />
       )}
@@ -189,7 +209,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.content}
+          value={research.content ?? ""}
           name="content"
         />
       )}
@@ -200,7 +220,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.description}
+          value={research.description ?? ""}
           name="description"
         />
       )}
@@ -211,7 +231,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.participants}
+          value={research.participants ?? ""}
           name="participants"
         />
       )}
@@ -222,7 +242,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.koName}
+          value={research.koName ?? ""}
           name="koName"
         />
       )}
@@ -233,7 +253,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.enName}
+          value={research.enName ?? ""}
           name="enName"
         />
       )}
@@ -244,7 +264,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.journal}
+          value={research.journal ?? ""}
           name="journal"
         />
       )}
@@ -252,10 +272,11 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
         <TextField
           sx={{ width: "100%", marginTop: 1 }}
           label="출판일"
+          placeholder="yyyy-mm-ddTHH:mm:ss 형식으로 입력해주세요!"
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.publishDate}
+          value={research.publishDate ?? ""}
           name="publishDate"
         />
       )}
@@ -266,7 +287,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           multiline
           maxRows={4}
           onChange={handleChangeInput}
-          value={research?.url}
+          value={research.url ?? ""}
           name="url"
         />
       )}
@@ -276,13 +297,12 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           <Select
             labelId="fieldSelect-label"
             name="fieldName"
-            value={research?.fieldName}
+            value={research.fieldName ?? ``}
             label="field"
             onChange={handleChangeInput}
-            defaultValue=""
           >
-            {dummyField.map((field) => (
-              <MenuItem key={field.id} value={field.fieldName}>
+            {allFields.fields.map((field) => (
+              <MenuItem id={field.id} key={field.id} value={field.fieldName}>
                 {field.fieldName}
               </MenuItem>
             ))}
@@ -318,11 +338,11 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
               visibility: "hidden",
             }}
           >
-            {dummyMembers.map((member) => (
+            {allMembers.members.map((member) => (
               <MenuItem
                 key={member.id}
-                id={member.name}
-                value={member.name}
+                name={member.name}
+                value={member.id}
                 onClick={handleChangeMembers}
               >
                 {member.name}

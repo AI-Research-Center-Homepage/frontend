@@ -120,7 +120,7 @@ const Thesis = () => {
       >
         {research.fields &&
           research.fields.map((data) => (
-            <Grid item xs={12} sx={{ mb: "8%" }}>
+            <Grid item xs={12} sx={{ mb: "8%" }} key={data.fieldName}>
               <div style={{ height: 300, width: "100%" }}>
                 <TableHead>
                   <TableRow>
