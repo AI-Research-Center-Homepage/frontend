@@ -125,6 +125,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
         `/api/admin/members/${memberType}/new`,
         member
       );
+      navigate(`/admin/members/${memberType}`);
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +135,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   const putMember = async () => {
     try {
       const response = await axios.put(`/api/admin/members/${id}`, member);
+      navigate(`/admin/members/${memberType}`);
     } catch (error) {
       console.log(error);
     }
@@ -143,6 +145,7 @@ const MemberRegisterForm = ({ memberData, memberType, pageType }) => {
   const deleteMember = async () => {
     try {
       const response = await axios.delete(`/api/admin/members/?memberId=${id}`);
+      navigate(`/admin/members/${memberType}`);
     } catch (error) {
       console.log(error);
     }

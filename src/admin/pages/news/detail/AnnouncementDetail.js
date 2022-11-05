@@ -34,9 +34,9 @@ const AnnouncementDetail = () => {
     try {
       const response = await axios.get(`/api/admin/posts/?id=${id}`);
       setPost(response.data); // <- 동작 안 함
-      console.log("response.data: " + response.data);
+      console.log(response.data);
       setIsSetPost(true);
-      console.log("post: " + post);
+      console.log(post);
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +54,11 @@ const AnnouncementDetail = () => {
 
   return (
     isSetPost && (
-      <PostRegisterForm postData={post} postType="notice" pageType="detail" />
+      <PostRegisterForm
+        postData={post}
+        postType="announcement"
+        pageType="detail"
+      />
     )
   );
 };

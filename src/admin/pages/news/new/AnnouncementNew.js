@@ -32,7 +32,9 @@ const AnnouncementNew = () => {
     }
   }, []);
 
-  return <PostRegisterForm postData={post} postType="notice" pageType="new" />;
+  return (
+    <PostRegisterForm postData={post} postType="announcement" pageType="new" />
+  );
 };
 
 export default AnnouncementNew;

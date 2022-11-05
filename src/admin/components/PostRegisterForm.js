@@ -80,6 +80,8 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      navigate(`/admin/news/${postType}`);
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +141,7 @@ const PostRegisterForm = ({ postData, postType, pageType }) => {
       <PostEditor editorRef={editorRef} />
 
       {/* 첨부파일 등록 */}
-      {postType === "notice" && (
+      {postType === "announcement" && (
         <Box sx={{ my: "2%", display: "flex" }}>
           {/* 파일 업로드 버튼 */}
           <Box sx={{ width: "10%" }}>
