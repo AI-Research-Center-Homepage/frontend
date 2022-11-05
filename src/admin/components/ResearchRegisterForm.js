@@ -27,18 +27,26 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // 연구분야 리스트 출력을 위함
   const [allFields, setAllFields] = useState({ fields: [] });
-  const [allMembers, setAllMembers] = useState({ members: [] });
+  // 멤버 카테고리 값 가짐
+  const [memberType, setMemberType] = useState("professor");
+  // 멤버 카테고리 값 기준 불러온 데이터를 가짐
+  const [members, setMembers] = useState({ members: [] });
+  // 논문: 선택된 멤버 값 출력을 위해 문자열로 저장
+  const [strMem, setStrMem] = useState("");
 
+  // 멤버 카테고리 값이 변경되면 해당 값으로 멤버 불러옴
   const getMembers = async () => {
     try {
-      const response = await axios.get("/api/admin/members/professor");
-      setAllMembers(response.data);
+      const response = await axios.get(`/api/admin/members/${memberType}`);
+      setMembers(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // 연구분야 값 가져옴
   const getFields = async () => {
     try {
       const response = await axios.get("/api/admin/fields");
@@ -47,9 +55,6 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
       console.log(error);
     }
   };
-
-  // 논문: 멤버 값 출력을 위해 문자열로 저장
-  const [strMem, setStrMem] = useState("");
 
   const [research, setResearch] = useState({
     title: "", // demo, thesis
@@ -66,6 +71,11 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
     members: [], // thesis => 멤버 목록을 배열값으로 저장
   });
 
+  // 멤버 타입 변경 핸들러
+  const handleMemType = (e) => {
+    setMemberType(e.target.value);
+  };
+
   // 멤버를 제외한 핸들러
   const handleChangeInput = (e) => {
     setResearch({
@@ -75,13 +85,16 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   };
 
   // 멤버 핸들러
-  // 선택되면 값을 추가
+  // 선택되면 checked여부에 따라 값을 넣었다 뺌
+  // 시각적으로 텍스트와 배경색도 바꿈
   const handleChangeMembers = (e) => {
-    const clickedMemName = e.target.getAttribute("name");
+    const clickedMemName = e.target.innerText;
     const clickedMemId = e.target.value;
+
     if (e.target.classList.contains("checked")) {
       e.target.classList.remove("checked");
       e.target.style.backgroundColor = "white";
+      e.target.style.color = "black";
 
       const mem = research.members.filter(
         (element) => element.name !== clickedMemName
@@ -92,6 +105,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
       });
     } else {
       e.target.classList.add("checked");
+      e.target.style.backgroundColor = "#6FADCF";
+      e.target.style.color = "white";
       const copy = [...research.members];
       const size = Object.keys(copy).length;
       copy[size] = { id: clickedMemId, name: clickedMemName };
@@ -158,25 +173,44 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
     deleteResearch();
   };
 
-  // mount
+  // 마운트 시 실행(마운트 되자마자 해당 값이 변경되기 때문)
+  // 연구 타입, 페이지 타입에 따라 동작
   useEffect(() => {
     if (researchType === "project" || researchType === "thesis") getFields();
-    if (researchType === "thesis") getMembers();
     if (pageType === "detail") setResearch(researchData);
-    console.log(researchData);
-  }, []);
+  }, [pageType, researchType, researchData]);
 
   // 멤버가 변할 때 실행됨
-  // 클릭된 컴포넌트의 배경색과 클래스명을 변경
-  // 추가로 input value값을 변경하여 시각적으로 표현
+  // 선택된 멤버 배열을 텍스트로 보여주기 위함
   useEffect(() => {
-    if (researchType === "thesis") {
-      let str = "";
-      research.members.map((member) => (str += "," + member.name));
-      str = str.slice(1, str.length);
-      setStrMem(str);
-    }
-  }, [research && research.members]);
+    let str = "";
+    research.members.map((member) => (str += "," + member.name));
+    str = str.slice(1, str.length);
+    setStrMem(str);
+  }, [research.members]);
+
+  // 멤버 카테고리가 바뀌면 실행됨
+  // 해당 카테고리의 멤버 값을 불러오기 위함
+  useEffect(() => {
+    getMembers();
+  }, [memberType]);
+
+  // 멤버 카테고리가 바뀌어 멤버가 바뀌면 실행됨
+  // 불러온 값을 바탕으로 리스트 세팅을 위함
+  useEffect(() => {
+    members.members.map((element) =>
+      research.members.map((mElement) => {
+        if (mElement.id === element.id) {
+          let elem = document.getElementsByName(element.id)[0];
+          elem.style.backgroundColor = "#6FADCF";
+          elem.style.color = "white";
+          elem.classList.add("checked");
+          return false;
+        }
+        return true;
+      })
+    );
+  }, [members]);
 
   return (
     <Box sx={{ py: "3%", px: "7.5%" }}>
@@ -297,7 +331,7 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           <Select
             labelId="fieldSelect-label"
             name="fieldName"
-            value={research.fieldName ?? ``}
+            value={research.fieldName ?? ""}
             label="field"
             onChange={handleChangeInput}
           >
@@ -311,9 +345,25 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
       )}
       {researchType === "thesis" && (
         <div>
-          <FormControl fullWidth sx={{ mt: 1 }}>
-            <InputLabel>참여자</InputLabel>
+          <FormControl sx={{ width: "20%", mr: "2.5%", mt: 1 }}>
+            <InputLabel id="memCategory-label">참여자 카테고리</InputLabel>
+            <Select
+              labelId="memCategory-label"
+              name="memberType"
+              value={memberType}
+              onChange={handleMemType}
+            >
+              <MenuItem value="professor">교수</MenuItem>
+              <MenuItem value="researcher">연구원</MenuItem>
+              <MenuItem value="graduate">석사</MenuItem>
+              <MenuItem value="undergraduate">학사</MenuItem>
+              <MenuItem value="committee">운영위원회</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ mt: 1, width: "77.5%" }}>
+            <InputLabel id="memLists-label">참여자</InputLabel>
             <OutlinedInput
+              labelId="memLists-label"
               id="outlined-adornment-password"
               endAdornment={<ArrowDropDownIcon />}
               value={strMem}
@@ -333,15 +383,17 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
           <List
             id="memberList"
             sx={{
-              borderRadius: "4px",
               boxShadow: "0.5px 0.5px 10px 0.5px grey",
               visibility: "hidden",
+              width: "77.5%",
+              ml: "22.5%",
+              padding: "0",
             }}
           >
-            {allMembers.members.map((member) => (
+            {members.members.map((member) => (
               <MenuItem
                 key={member.id}
-                name={member.name}
+                name={member.id} // 유일값으로 지정하기 위함
                 value={member.id}
                 onClick={handleChangeMembers}
               >
