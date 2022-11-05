@@ -184,7 +184,8 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   // 선택된 멤버 배열을 텍스트로 보여주기 위함
   useEffect(() => {
     let str = "";
-    research.members.map((member) => (str += "," + member.name));
+    if (research.members)
+      research.members.map((member) => (str += "," + member.name));
     str = str.slice(1, str.length);
     setStrMem(str);
   }, [research.members]);

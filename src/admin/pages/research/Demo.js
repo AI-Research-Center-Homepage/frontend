@@ -7,7 +7,6 @@ import {
   Typography,
   Grid,
   Button,
-  Stack,
   Box,
   CardActionArea,
 } from "@mui/material";
@@ -34,7 +33,6 @@ const Demo = () => {
     try {
       const response = await axios.get("/api/admin/demo");
       setResearch(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
