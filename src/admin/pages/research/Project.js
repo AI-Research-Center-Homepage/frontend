@@ -1,11 +1,9 @@
-import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import {
   Grid,
   TextField,
   Box,
-  Button,
   TableHead,
   TableRow,
   TableCell,
@@ -13,30 +11,28 @@ import {
 import { useEffect, useState, useContext } from "react";
 import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
-
-// mock api url
-const url = "https://a4149427-81af-4b54-9358-9e16682d2eb5.mock.pstmn.io";
+import GeneralButton from "../../components/GeneralButton";
 
 // DataGrid column에 들어가는 요소
 const columns = [
   {
     field: "id",
     headerName: "id",
-    width: 70,
+    flex: 1,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "title",
     headerName: "title",
-    width: 300,
+    flex: 2,
     headerAlign: "center",
     align: "center",
   },
   {
     field: "description",
     headerName: "description",
-    width: 300,
+    flex: 3,
     headerAlign: "center",
     align: "center",
   },
@@ -44,53 +40,71 @@ const columns = [
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-27
  *@description 프로젝트를 조회하는 메인페이지
  */
 
 export default function Project() {
   const navigate = useNavigate();
-  const [projectData, setProjectData] = useState([]);
+  const [research, setResearch] = useState([]);
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
+
+  const getResearch = async () => {
+    try {
+      const response = await axios.get("/api/admin/project");
+      setResearch(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("연구 > 프로젝트");
       changeMainMenu(3, 14);
-      axios.get(url + "/project").then((response) => {
-        setProjectData(response.data.projects);
-      });
+      getResearch();
     } else {
       navigate("/admin/signin");
     }
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        paddingTop: "3%",
+        paddingBottom: "3%",
+        paddingLeft: "7.5%",
+        paddingRight: "7.5%",
+      }}
+    >
       <Box
         width="100%"
         justifyContent="flex-end"
         alignItems="center"
         display="flex"
-        mt={3}
       >
-        {/* 클릭하면 등록창으로 넘어가는 버튼 */}
-        <Button
-          variant="contained"
-          sx={{ mr: 3, height: 55 }}
-          onClick={() => navigate("./new")}
-        >
-          등록하기
-        </Button>
-
         {/* 검색창 */}
         <TextField
-          id="outlined-search"
-          label="Search field"
-          type="search"
-          sx={{ mr: 7, width: "30%" }}
+          id="outlined-basic"
+          label="Search"
+          variant="outlined"
+          sx={{
+            width: "30%",
+            display: "flex",
+            justifyContent: "right",
+            mr: "3%",
+          }}
+        />
+
+        {/* 클릭하면 등록창으로 넘어가는 버튼 */}
+        <GeneralButton
+          content="등록하기"
+          onClick={() => {
+            navigate("./new");
+          }}
+          sx={{ height: "100%" }}
         />
       </Box>
 
@@ -101,10 +115,10 @@ export default function Project() {
         justifyContent="center"
         alignItems="center"
       >
-        {projectData &&
-          projectData.map((data) => (
-            <Grid item xs={6}>
-              <div style={{ height: 300, width: "90%", margin: 40 }}>
+        {research &&
+          research.map((data) => (
+            <Grid item xs={12} sx={{ mb: "8%" }}>
+              <div style={{ height: 300, width: "100%" }}>
                 <TableHead>
                   <TableRow>
                     <TableCell align="center" colSpan={2}>

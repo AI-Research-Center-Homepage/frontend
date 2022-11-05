@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { changeMainHeaderContext } from "../../AdminMain";
@@ -8,44 +7,56 @@ import {
   Typography,
   Grid,
   Button,
-  Stack,
   Box,
-  TextField,
   CardActionArea,
 } from "@mui/material";
 import axios from "axios";
-
-// mock api URL
-const url = "https://7fe4e807-7f98-44a0-8eff-03534b5964f9.mock.pstmn.io";
+import GeneralButton from "../../components/GeneralButton";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-27
  *@description 데모를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
  */
 
 const Demo = () => {
   // mock api의 데이터를 받는 변수
-  const [demoData, setDemoData] = useState([]);
+  const [research, setResearch] = useState({ demos: [] });
+
   const navigate = useNavigate();
+
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
+
+  const getResearch = async () => {
+    try {
+      const response = await axios.get("/api/admin/demo");
+      setResearch(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("연구 > 데모");
       changeMainMenu(3, 15);
-      axios.get(url + "/demo").then((response) => {
-        setDemoData(response.data.demos);
-      });
+      getResearch();
     } else {
       navigate("/admin/signin");
     }
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        paddingTop: "3%",
+        paddingBottom: "3%",
+        paddingLeft: "7.5%",
+        paddingRight: "7.5%",
+      }}
+    >
       <Box
         width="100%"
         justifyContent="flex-end"
@@ -54,23 +65,16 @@ const Demo = () => {
         mt={3}
       >
         {/* 클릭시 등록창으로 넘어가는 버튼 */}
-        <Button
-          variant="contained"
-          sx={{ mr: 3, height: 55 }}
-          onClick={() => navigate("./new")}
-        >
-          등록하기
-        </Button>
-        <TextField
-          id="outlined-search"
-          label="Search field"
-          type="search"
-          sx={{ mr: 7, width: "30%" }}
+        <GeneralButton
+          content="등록하기"
+          onClick={() => {
+            navigate("./new");
+          }}
         />
       </Box>
       <Grid container>
         <Grid item xs={12} sx={{ mt: 3 }}>
-          {demoData.map((element) => (
+          {research.demos.map((element) => (
             <Box>
               <div
                 style={{
@@ -105,18 +109,6 @@ const Demo = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-
-                {/* 수정, 삭제 버튼 */}
-                <Stack
-                  spacing={2}
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{ ml: 3 }}
-                >
-                  <Button variant="contained">수정</Button>
-                  <Button variant="outlined">삭제</Button>
-                </Stack>
               </div>
             </Box>
           ))}

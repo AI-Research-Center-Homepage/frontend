@@ -14,67 +14,155 @@ import {
 } from "@mui/material";
 import { changeMainHeaderContext } from "../../AdminMain";
 import axios from "axios";
-
-// mock api URL
-const url = "https://f87d90da-75da-46d6-8ba4-9b4325601a9e.mock.pstmn.io";
+import GeneralButton from "../../components/GeneralButton";
 
 /**
  *@author Eunyoung-Jo, czne2@jbnu.ac.kr
- *@date 2022-09-17
+ *@date 2022-10-27
  *@description 연구분야를 모두 조회하고 수정, 삭제, 추가하는 기능이 있음
  */
 
 const ResearchField = () => {
-  // 연구분야, 설명 내용 변경을 위한 변수
-  const [description, setDescription] = useState("");
-  const [fieldName, setFieldName] = useState("");
-
-  // 연구분야, 설명 내용 변경을 위한 함수
-  const descriptionChange = ({ target: { value } }) => setDescription(value);
-  const fieldNameChange = ({ target: { value } }) => setFieldName(value);
+  // 수정할 연구분야 id값 가지는 state
+  const [changeId, setChangeId] = useState(-1);
+  // 수정 or 신규등록의 변경 상태를 가지는 state
+  const [mode, setMode] = useState("new");
+  // 연구분야, 설명 내용 변경을 위한 state
+  const [fieldChange, setFieldChange] = useState({
+    fieldName: "",
+    description: "",
+  });
 
   const navigate = useNavigate();
+
   const { changeMainText, changeMainMenu } = useContext(
     changeMainHeaderContext
   );
 
-  // 제출 기능. state값을 body로 모아서 post를 날린다.
-  // const Submit = (event) => {
-  //   event.preventDefault();
-
-  //   alert(event.target.value);
-
-  //   let body = {
-  //     fieldName: fieldName,
-  //     description: description,
-  //   };
-
-  //   axios
-  //     .post("http://localhost:3000/admin/fields", body)
-  //     .then((res) => console.log(res));
-  // };
-
   // mock api의 데이터를 받는 변수
-  const [fieldData, setFieldData] = useState([]);
+  const [research, setResearch] = useState({ fields: [] });
+
+  // 연구분야, 설명 내용 변경을 위한 함수
+  const handleChangeInput = (e) => {
+    setFieldChange({
+      ...fieldChange,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // 연구분야 전체 값을 가져오는 GET 요청
+  const getResearch = async () => {
+    try {
+      const response = await axios.get("/api/admin/fields");
+      setResearch(response.data);
+      setFieldChange({ fieldName: "", description: "" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 연구분야 신규등록 POST 요청
+  const requestPost = async () => {
+    if (!checkValidation()) return;
+    try {
+      const response = await axios.post("/api/admin/fields", fieldChange);
+      alert("성공적으로 등록되었습니다!");
+      getResearch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 연구분야 삭제 DELETE 요청
+  const requestDelete = async (e) => {
+    if (!window.confirm("정말로 삭제하시겠습니까?")) return;
+    try {
+      const response = await axios.delete(
+        `/api/admin/fields?fieldId=${e.target.name}`
+      );
+      alert("정상적으로 삭제되었습니다!");
+      getResearch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 연구분야 변경 PUT 요청
+  const requestPut = async () => {
+    if (!checkValidation()) return;
+    try {
+      const response = await axios.put(
+        `/api/admin/fields?fieldId=${changeId}`,
+        fieldChange
+      );
+      alert("정상적으로 수정되었습니다!");
+      getResearch();
+      setMode("new");
+      setChangeId(-1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 수정 버튼을 눌렀을 때 변경할 분야의 id값과 컨텐츠를 변경 state에 저장
+  const changeField = (e) => {
+    for (let i = 0; i < research.fields.length; i++) {
+      if (research.fields[i].id === parseInt(e.target.name)) {
+        setFieldChange({
+          fieldName: research.fields[i].fieldName,
+          description: research.fields[i].description,
+        });
+        document.getElementsByName("fieldName")[0].focus();
+        setMode("change");
+        setChangeId(e.target.name);
+        break;
+      }
+    }
+  };
+
+  // 저장버튼을 눌렀을 때 상태에 따라 변경 or 신규등록 실행
+  const handleSaveButton = () => {
+    if (mode === "new") requestPost();
+    else if (mode === "change") requestPut();
+  };
+
+  // 변경 or 신규등록 시 빈 값 확인
+  const checkValidation = () => {
+    if (fieldChange.fieldName === "") {
+      alert("연구분야를 입력해주세요");
+      document.getElementById("fieldName").focus();
+      return false;
+    } else if (fieldChange.description === "") {
+      alert("설명을 입력해주세요");
+      document.getElementById("description").focus();
+      return false;
+    }
+    return true;
+  };
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isSignedIn") === "true") {
       changeMainText("연구 > 연구분야");
       changeMainMenu(3, 12);
-      axios.get(url + "/fields").then((response) => {
-        setFieldData(response.data.fields);
-      });
+      getResearch();
     } else {
       navigate("/admin/signin");
     }
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        paddingTop: "3%",
+        paddingBottom: "3%",
+        paddingLeft: "7.5%",
+        paddingRight: "7.5%",
+      }}
+    >
       <Grid container>
         <Grid item xs={12} sx={{ mt: 3 }}>
-          {fieldData.map((element) => (
-            <Box>
+          {research.fields.map((element) => (
+            <Box key={element.id}>
               <div
                 style={{
                   display: "flex",
@@ -86,7 +174,7 @@ const ResearchField = () => {
                     display: "flex",
                     boxShadow: 5,
                     my: 1,
-                    width: { xs: "70%", md: "60%" },
+                    width: { xs: "100%", md: "80%" },
                     maxHeight: 200,
                     overflowY: "auto",
                   }}
@@ -111,8 +199,20 @@ const ResearchField = () => {
                   alignItems="center"
                   sx={{ ml: 3 }}
                 >
-                  <Button variant="contained">수정</Button>
-                  <Button variant="outlined">삭제</Button>
+                  <Button
+                    name={element.id}
+                    variant="contained"
+                    onClick={changeField}
+                  >
+                    수정
+                  </Button>
+                  <Button
+                    name={element.id}
+                    variant="outlined"
+                    onClick={requestDelete}
+                  >
+                    삭제
+                  </Button>
                 </Stack>
               </div>
             </Box>
@@ -124,35 +224,31 @@ const ResearchField = () => {
             }}
           >
             {/* 새 연구분야를 등록할 수 있는 TextField. 분야 이름을 작성하는 칸과 설명을 작성하는 칸 */}
-            {/* <form onSubmit={Submit}> */}
             <TextField
-              id="outlined-multiline-static"
               label="연구분야"
-              value={fieldName}
-              onChange={fieldNameChange}
+              value={fieldChange.fieldName}
+              onChange={handleChangeInput}
               multiline
               rows={2}
-              sx={{ mt: 2, mb: 3, width: { md: "15%", xs: "25%" } }}
+              name="fieldName"
+              sx={{ mt: 2, mb: 3, width: { md: "25%", xs: "35%" } }}
             />
 
             <TextField
-              id="outlined-multiline-static"
               label="설명"
-              value={description}
-              onChange={descriptionChange}
+              value={fieldChange.description}
+              onChange={handleChangeInput}
               multiline
               rows={2}
-              sx={{ mt: 2, mb: 3, ml: 2, width: { md: "45%", xs: "40%" } }}
+              name="description"
+              sx={{ mt: 2, mb: 3, ml: 2, width: { md: "55%", xs: "50%" } }}
             />
 
-            <Button
-              variant="contained"
-              type="submit"
+            <GeneralButton
+              content="저장"
               sx={{ height: "100%", mt: 4.5, ml: 1, mb: 3 }}
-            >
-              저장
-            </Button>
-            {/* </form> */}
+              onClick={handleSaveButton}
+            />
           </div>
         </Grid>
       </Grid>
