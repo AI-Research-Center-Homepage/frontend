@@ -200,7 +200,6 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   // 불러온 값을 바탕으로 리스트 세팅을 위함
   useEffect(() => {
     if (members.length !== 0 && research.members !== undefined) {
-      console.log(members);
       members.members.map((element) =>
         research.members.map((mElement) => {
           if (mElement.id === element.id) {
