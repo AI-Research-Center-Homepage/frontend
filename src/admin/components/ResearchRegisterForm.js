@@ -199,18 +199,20 @@ const ResearchRegisterForm = ({ researchData, researchType, pageType }) => {
   // 멤버 카테고리가 바뀌어 멤버가 바뀌면 실행됨
   // 불러온 값을 바탕으로 리스트 세팅을 위함
   useEffect(() => {
-    members.members.map((element) =>
-      research.members.map((mElement) => {
-        if (mElement.id === element.id) {
-          let elem = document.getElementsByName(element.id)[0];
-          elem.style.backgroundColor = "#6FADCF";
-          elem.style.color = "white";
-          elem.classList.add("checked");
-          return false;
-        }
-        return true;
-      })
-    );
+    if (members.length !== 0 && research.members !== undefined) {
+      members.members.map((element) =>
+        research.members.map((mElement) => {
+          if (mElement.id === element.id) {
+            let elem = document.getElementsByName(element.id)[0];
+            elem.style.backgroundColor = "#6FADCF";
+            elem.style.color = "white";
+            elem.classList.add("checked");
+            return false;
+          }
+          return true;
+        })
+      );
+    }
   }, [members]);
 
   return (
