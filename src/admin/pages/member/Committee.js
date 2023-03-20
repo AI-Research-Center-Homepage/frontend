@@ -73,6 +73,14 @@ const Committee = () => {
     changeMainHeaderContext
   );
 
+  // 검색 content mapping 할 state
+  const [searchContent, setSearchContent] = useState("");
+
+  // 검색 내용으로 멤버를 거르는 함수
+  const filtered = members.members.filter((itemList) =>
+    itemList.name.toUpperCase().includes(searchContent.toUpperCase())
+  );
+
   const getMembers = async () => {
     try {
       const response = await axios.get("/api/admin/members/committee");
@@ -106,6 +114,7 @@ const Committee = () => {
           id="outlined-basic"
           label="Search"
           variant="outlined"
+          onChange={(e) => setSearchContent(e.target.value)}
           sx={{
             width: "20%",
             display: "flex",
@@ -122,7 +131,7 @@ const Committee = () => {
       </Box>
       <div style={{ height: "calc(200px + 40vh)" }}>
         <DataGrid
-          rows={members.members}
+          rows={filtered}
           columns={dummycolumns}
           sortingOrder={["desc", "asc"]}
           hideFooterSelectedRowCount
